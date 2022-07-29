@@ -15,7 +15,7 @@ module.exports = withMT({
         warning: "#a855f7",
         danger: "#dc2626",
         background: "#f8fafc",
-        text: "#0f172a",
+        text: "#475569",
       },
     },
   },

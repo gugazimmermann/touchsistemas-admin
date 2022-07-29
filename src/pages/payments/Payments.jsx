@@ -15,7 +15,7 @@ export default function Payments() {
 		},
 		{
 			evento: 'NodeJS Rulez Pw0ned',
-			plano: 'Avançado',
+			plano: 'Básico',
 			valor: '350,00',
 			status: 'Básico',
 		},
@@ -54,7 +54,7 @@ export default function Payments() {
 
 	return (
 		<>
-			<h2 className="text-primary text-xl p-2">Pagamentos</h2>
+			<h2 className="text-primary text-xl p-2 pt-6">Pagamentos</h2>
 			<div className="overflow-x-auto">
 				<table className="items-center w-full bg-transparent border-collapse">
 					<thead>
@@ -62,7 +62,7 @@ export default function Payments() {
 							{titulos.map((t) => (
 								<th
 									key={t}
-									className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left"
+									className="px-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left"
 								>
 									{t}
 								</th>

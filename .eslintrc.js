@@ -49,6 +49,7 @@ module.exports = {
     "react/prop-types": "off",
     "import/no-extraneous-dependencies": "off",
     "react/jsx-no-bind": "off",
-    "react/jsx-no-constructed-context-values": "off"
+    "react/jsx-no-constructed-context-values": "off",
+    "no-param-reassign": "off"
   },
 };

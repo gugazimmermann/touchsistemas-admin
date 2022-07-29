@@ -14,6 +14,7 @@ const Layout = lazy(() => import('./pages/dashboard/Layout'));
 const Dashboard = lazy(() => import('./pages/dashboard/Dashboard'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
 const Payments = lazy(() => import('./pages/payments/Payments'));
+const NewEvent = lazy(() => import('./pages/events/NewEvent'));
 
 function App() {
 	return (
@@ -31,6 +32,7 @@ function App() {
 						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="/cadastro" element={<Profile />} />
 						<Route path="/pagamentos" element={<Payments />} />
+						<Route path="/novo-evento" element={<NewEvent />} />
 					</Route>
 				</Route>
 				<Route path="*" element={<NotFound />} />

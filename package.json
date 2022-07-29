@@ -41,12 +41,15 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^1.0.8",
+    "@randex/material-ui-multiple-dates-picker": "github:gugazimmermann/material-ui-multiple-dates-picker",
     "aws-amplify": "^4.3.28",
     "boxicons": "^2.1.2",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
+    "react-multi-date-picker": "^3.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"

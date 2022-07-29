@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Auth } from 'aws-amplify';
-import { DataStore } from '@aws-amplify/datastore';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { useCookies } from 'react-cookie';
-import { Alert } from '@material-tailwind/react';
 import { decodeCookie } from '../../utils/cookies';
-import { Client } from '../../models';
+import * as queries from '../../graphql/queries';
 import Nav from './components/Nav';
 
 export default function Layout() {
@@ -19,27 +17,22 @@ export default function Layout() {
 		navigate('/');
 	}
 
-	async function getClient() {
+	async function loadClient() {
 		const clientID = decodeCookie(cookies?.touchsistemas)?.client;
-		const res = await DataStore.query(Client, clientID);
+		const oneClient = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
 		// eslint-disable-next-line no-console
-		console.log(res);
-		setClient(res);
+		console.log(oneClient.data.getClient);
+		setClient(oneClient.data.getClient);
 	}
 
 	useEffect(() => {
-		getClient();
+		loadClient();
 	}, []);
 
 	return (
 		<main className="container mx-auto h-screen bg-white">
 			<Nav client={client} signout={signOut} />
-			{!client?.phone && (
-				<div className="mx-4 my-4">
-					<Alert color="red">Seu Cadastro está incompleto, finalize para utilizar o sistema.</Alert>
-				</div>
-			)}
-			<Outlet context={[client]} />
+			<Outlet context={[client, loadClient]} />
 		</main>
 	);
 }

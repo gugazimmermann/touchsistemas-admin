@@ -10,3 +10,9 @@ package-lock.json
 package.json
 postcss.config.js
 tailwind.config.js
+.graphqlconfig.yml
+.vscode/
+amplify/
+src/aws-exports.js
+src/graphql/
+src/models/

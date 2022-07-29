@@ -29,7 +29,7 @@ export default function ConfirmationCode() {
 		return null;
 	}
 
-	const disabled = () => email === '' || code === ''
+	const disabled = () => email === '' || code === '';
 
 	return (
 		<section className="container h-screen mx-auto bg-white">
@@ -43,13 +43,29 @@ export default function ConfirmationCode() {
 					<Typography className="text-center mb-3">Insira o código de verificação</Typography>
 					<Alert error={error} />
 					<div className="mb-3">
-						<Input value={email} type="email" variant="standard" color="amber" label="Email" onChange={(e) => setEmail(e.target.value)} />
+						<Input
+							value={email}
+							type="email"
+							variant="standard"
+							color="amber"
+							label="Email"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
 					</div>
 					<div className="mb-3">
-						<Input value={code} type="text" variant="standard" color="amber" label="Código de Verificação" onChange={(e) => setCode(e.target.value)} />
+						<Input
+							value={code}
+							type="text"
+							variant="standard"
+							color="amber"
+							label="Código de Verificação"
+							onChange={(e) => setCode(e.target.value)}
+						/>
 					</div>
 					<Button
-						className={`w-full text-white ${disabled() ? 'bg-grey-400 cursor-not-allowed' : 'bg-primary cursor-pointer'}`}
+						className={`w-full text-white ${
+							disabled() ? 'bg-grey-400 cursor-not-allowed' : 'bg-primary cursor-pointer'
+						}`}
 						onClick={() => confirmSignUp()}
 						disabled={disabled()}
 					>

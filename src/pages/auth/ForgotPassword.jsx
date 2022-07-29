@@ -25,7 +25,7 @@ export default function ForgotPassword() {
 		}
 	}
 
-	const disabled = () => email === ''
+	const disabled = () => email === '';
 
 	return (
 		<section className="container h-screen mx-auto bg-white">
@@ -38,10 +38,19 @@ export default function ForgotPassword() {
 					<LogoAuth styles="mb-5 text-primary" />
 					<Alert error={error} />
 					<div className="mb-3">
-						<Input value={email} type="email" variant="standard" color="amber" label="Email" onChange={(e) => setEmail(e.target.value)} />
+						<Input
+							value={email}
+							type="email"
+							variant="standard"
+							color="amber"
+							label="Email"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
 					</div>
 					<Button
-						className={`w-full text-white ${disabled() ? 'bg-grey-400 cursor-not-allowed' : 'bg-primary cursor-pointer'}`}
+						className={`w-full text-white ${
+							disabled() ? 'bg-grey-400 cursor-not-allowed' : 'bg-primary cursor-pointer'
+						}`}
 						onClick={() => sendCode()}
 						disabled={disabled()}
 					>

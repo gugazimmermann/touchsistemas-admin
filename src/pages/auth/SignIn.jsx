@@ -47,7 +47,7 @@ export default function SignIn() {
 		}
 	}
 
-	const disabled = () => email === '' || pwd === ''
+	const disabled = () => email === '' || pwd === '';
 
 	return (
 		<section className="container h-screen mx-auto bg-white">
@@ -60,10 +60,24 @@ export default function SignIn() {
 					<LogoAuth styles="mb-5 text-primary" />
 					<Alert error={error} />
 					<div className="mb-3">
-						<Input value={email} type="email" variant="standard" color="amber" label="Email" onChange={(e) => setEmail(e.target.value)} />
+						<Input
+							value={email}
+							type="email"
+							variant="standard"
+							color="amber"
+							label="Email"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
 					</div>
 					<div className="mb-3">
-						<Input value={pwd} type="password" variant="standard" color="amber" label="Senha" onChange={(e) => setPwd(e.target.value)} />
+						<Input
+							value={pwd}
+							type="password"
+							variant="standard"
+							color="amber"
+							label="Senha"
+							onChange={(e) => setPwd(e.target.value)}
+						/>
 					</div>
 					<div className="flex justify-between items-center">
 						<div className="flex justify-start items-center">
@@ -78,7 +92,9 @@ export default function SignIn() {
 						</Link>
 					</div>
 					<Button
-						className={`w-full text-white ${disabled() ? 'bg-grey-400 cursor-not-allowed' : 'bg-primary cursor-pointer'}`}
+						className={`w-full text-white ${
+							disabled() ? 'bg-grey-400 cursor-not-allowed' : 'bg-primary cursor-pointer'
+						}`}
 						onClick={() => signIn()}
 						disabled={disabled()}
 					>

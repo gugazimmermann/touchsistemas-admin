@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate, useLocation  } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { Input, Typography, Button } from '@material-tailwind/react';
 import SignUpImage from '../../icons/SignUp.svg';
@@ -25,7 +25,7 @@ export default function RedefinePwd() {
 			return null;
 		}
 		try {
-			await Auth.forgotPasswordSubmit(email, code, pwd)
+			await Auth.forgotPasswordSubmit(email, code, pwd);
 			setLoading(false);
 			navigate('/');
 		} catch (err) {
@@ -35,7 +35,7 @@ export default function RedefinePwd() {
 		return null;
 	}
 
-	const disabled = () => email === '' || pwd === '' || repeat === ''
+	const disabled = () => email === '' || pwd === '' || repeat === '';
 
 	return (
 		<section className="container h-screen mx-auto bg-white">
@@ -50,19 +50,49 @@ export default function RedefinePwd() {
 						<p>Ocorreu um erro, tente novamente.</p>
 					</div>
 					<div className="mb-3">
-						<Input value={email} type="email" variant="standard" color="amber" label="Email" onChange={(e) => setEmail(e.target.value)} />
+						<Input
+							value={email}
+							type="email"
+							variant="standard"
+							color="amber"
+							label="Email"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
 					</div>
 					<div className="mb-3">
-						<Input value={code} type="text" variant="standard" color="amber" label="Código" onChange={(e) => setCode(e.target.value)} />
+						<Input
+							value={code}
+							type="text"
+							variant="standard"
+							color="amber"
+							label="Código"
+							onChange={(e) => setCode(e.target.value)}
+						/>
 					</div>
 					<div className="mb-3">
-						<Input value={pwd} type="password" variant="standard" color="amber" label="Nova Senha" onChange={(e) => setPwd(e.target.value)} />
+						<Input
+							value={pwd}
+							type="password"
+							variant="standard"
+							color="amber"
+							label="Nova Senha"
+							onChange={(e) => setPwd(e.target.value)}
+						/>
 					</div>
 					<div className="mb-3">
-						<Input value={repeat} type="password" variant="standard" color="amber" label="Repita a Senha" onChange={(e) => setRepeat(e.target.value)} />
+						<Input
+							value={repeat}
+							type="password"
+							variant="standard"
+							color="amber"
+							label="Repita a Senha"
+							onChange={(e) => setRepeat(e.target.value)}
+						/>
 					</div>
 					<Button
-						className={`w-full text-white ${disabled() ? 'bg-grey-400 cursor-not-allowed' : 'bg-primary cursor-pointer'}`}
+						className={`w-full text-white ${
+							disabled() ? 'bg-grey-400 cursor-not-allowed' : 'bg-primary cursor-pointer'
+						}`}
 						onClick={() => redefine()}
 						disabled={disabled()}
 					>

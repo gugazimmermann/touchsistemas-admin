@@ -11,7 +11,7 @@ export default function LoginSocial() {
 				data-mdb-ripple="true"
 				data-mdb-ripple-color="light"
 			>
-				<i className='bx bxl-google text-2xl mr-2' />
+				<i className="bx bxl-google text-2xl mr-2" />
 				Continue com Gmail
 			</a>
 			<a
@@ -21,7 +21,7 @@ export default function LoginSocial() {
 				data-mdb-ripple="true"
 				data-mdb-ripple-color="light"
 			>
-				<i className='bx bxl-facebook-circle text-2xl mr-2' />
+				<i className="bx bxl-facebook-circle text-2xl mr-2" />
 				Continue com Facebook
 			</a>
 			<a
@@ -31,7 +31,7 @@ export default function LoginSocial() {
 				data-mdb-ripple="true"
 				data-mdb-ripple-color="light"
 			>
-				<i className='bx bxl-twitter text-2xl mr-2' />
+				<i className="bx bxl-twitter text-2xl mr-2" />
 				Continue com Twitter
 			</a>
 		</>

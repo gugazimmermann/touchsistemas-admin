@@ -26,8 +26,12 @@ export default function Nav({ client, signout }) {
 							</Button>
 						</MenuHandler>
 						<MenuList>
-							<MenuItem><Link to="/cadastro">Meu Cadastro</Link></MenuItem>
-							<MenuItem><Link to="/pagamentos">Meus Pagamentos</Link></MenuItem>
+							<MenuItem>
+								<Link to="/cadastro">Meu Cadastro</Link>
+							</MenuItem>
+							<MenuItem>
+								<Link to="/pagamentos">Meus Pagamentos</Link>
+							</MenuItem>
 							<MenuItem onClick={() => signout()}>Sair</MenuItem>
 						</MenuList>
 					</Menu>

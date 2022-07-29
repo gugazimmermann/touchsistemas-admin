@@ -89,40 +89,40 @@ export default function Payments() {
 					</tbody>
 				</table>
 			</div>
-      <h2 className="text-primary text-xl p-2 mt-4">Cartão Cadastrado</h2>
+			<h2 className="text-primary text-xl p-2 mt-4">Cartão Cadastrado</h2>
 			<div className="overflow-x-auto">
 				<table className="items-center w-full bg-transparent border-collapse">
 					<thead>
 						<tr>
-								<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
-									Nome
-								</th>
-                <th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
-									Número
-								</th>
-                <th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
-									Validade
-								</th>
-                <th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
-									Bandeira
-								</th>
+							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+								Nome
+							</th>
+							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+								Número
+							</th>
+							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+								Validade
+							</th>
+							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+								Bandeira
+							</th>
 						</tr>
 					</thead>
 					<tbody>
-							<tr>
-								<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-									JOSE A Z NEGREIROS
-								</th>
-								<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-									1234 ... 5678
-								</th>
-								<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-									10/28
-								</th>
-								<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-									VISA
-								</th>
-							</tr>
+						<tr>
+							<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+								JOSE A Z NEGREIROS
+							</th>
+							<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+								1234 ... 5678
+							</th>
+							<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+								10/28
+							</th>
+							<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+								VISA
+							</th>
+						</tr>
 					</tbody>
 				</table>
 			</div>

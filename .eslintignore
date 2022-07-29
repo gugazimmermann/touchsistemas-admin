@@ -4,4 +4,9 @@
 /public/*
 *.css
 *.svg
-src/models
+.graphqlconfig.yml
+/.vscode/*
+/amplify/*
+/src/aws-exports.js
+/src/graphql/*
+/src/models/*

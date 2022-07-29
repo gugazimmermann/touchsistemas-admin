@@ -1,97 +1,67 @@
 {
-  "version": "1",
-  "cognitoConfig": {
-    "identityPoolName": "touchsistemas",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "touchse122615f",
-    "userPoolName": "touchsistemas",
-    "autoVerifiedAttributes": [
-      "email"
-    ],
-    "mfaConfiguration": "OFF",
-    "mfaTypes": [
-      "SMS Text Message"
-    ],
-    "smsAuthenticationMessage": "Seu código de autorização é: {####}",
-    "smsVerificationMessage": "Seu código de verificação é: {####}",
-    "emailVerificationSubject": "Touch Sistemas - Verificação",
-    "emailVerificationMessage": "Seu código de verificação é: {####}",
-    "defaultPasswordPolicy": true,
-    "passwordPolicyMinLength": "6",
-    "passwordPolicyCharacters": [
-      "Requires Lowercase",
-      "Requires Uppercase",
-      "Requires Numbers"
-    ],
-    "requiredAttributes": [
-      "email"
-    ],
-    "aliasAttributes": [],
-    "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": 30,
-    "userpoolClientWriteAttributes": [
-      "email"
-    ],
-    "userpoolClientReadAttributes": [
-      "email"
-    ],
-    "userpoolClientLambdaRole": "touchse122615f_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
-    "sharedId": "e122615f",
-    "resourceName": "touchsistemas",
-    "authSelections": "identityPoolAndUserPool",
-    "useDefault": "manual",
-    "thirdPartyAuth": false,
-    "usernameAttributes": [
-      "email"
-    ],
-    "userPoolGroups": true,
-    "adminQueries": false,
-    "triggers": {
-      "PostConfirmation": [
-        "add-to-group"
-      ]
-    },
-    "hostedUI": false,
-    "userPoolGroupList": [
-      "clients",
-      "admins"
-    ],
-    "serviceName": "Cognito",
-    "verificationBucketName": "touchsistemasverificationbucket",
-    "usernameCaseSensitive": false,
-    "useEnabledMfas": true,
-    "authRoleArn": {
-      "Fn::GetAtt": [
-        "AuthRole",
-        "Arn"
-      ]
-    },
-    "unauthRoleArn": {
-      "Fn::GetAtt": [
-        "UnauthRole",
-        "Arn"
-      ]
-    },
-    "breakCircularDependency": true,
-    "dependsOn": [
-      {
-        "category": "function",
-        "resourceName": "touchsistemasPostConfirmation",
-        "triggerProvider": "Cognito",
-        "attributes": [
-          "Arn",
-          "Name"
-        ]
-      }
-    ],
-    "permissions": [
-      "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
-    ],
-    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"touchsistemasPostConfirmation\"\n  }\n]",
-    "authProviders": [],
-    "parentStack": {
-      "Ref": "AWS::StackId"
-    }
-  }
+	"version": "1",
+	"cognitoConfig": {
+		"identityPoolName": "touchsistemas",
+		"allowUnauthenticatedIdentities": false,
+		"resourceNameTruncated": "touchse122615f",
+		"userPoolName": "touchsistemas",
+		"autoVerifiedAttributes": ["email"],
+		"mfaConfiguration": "OFF",
+		"mfaTypes": ["SMS Text Message"],
+		"smsAuthenticationMessage": "Seu código de autorização é: {####}",
+		"smsVerificationMessage": "Seu código de verificação é: {####}",
+		"emailVerificationSubject": "Touch Sistemas - Verificação",
+		"emailVerificationMessage": "Seu código de verificação é: {####}",
+		"defaultPasswordPolicy": true,
+		"passwordPolicyMinLength": "6",
+		"passwordPolicyCharacters": ["Requires Lowercase", "Requires Uppercase", "Requires Numbers"],
+		"requiredAttributes": ["email"],
+		"aliasAttributes": [],
+		"userpoolClientGenerateSecret": false,
+		"userpoolClientRefreshTokenValidity": 30,
+		"userpoolClientWriteAttributes": ["email"],
+		"userpoolClientReadAttributes": ["email"],
+		"userpoolClientLambdaRole": "touchse122615f_userpoolclient_lambda_role",
+		"userpoolClientSetAttributes": false,
+		"sharedId": "e122615f",
+		"resourceName": "touchsistemas",
+		"authSelections": "identityPoolAndUserPool",
+		"useDefault": "manual",
+		"thirdPartyAuth": false,
+		"usernameAttributes": ["email"],
+		"userPoolGroups": true,
+		"adminQueries": false,
+		"triggers": {
+			"PostConfirmation": ["add-to-group"]
+		},
+		"hostedUI": false,
+		"userPoolGroupList": ["clients", "admins"],
+		"serviceName": "Cognito",
+		"verificationBucketName": "touchsistemasverificationbucket",
+		"usernameCaseSensitive": false,
+		"useEnabledMfas": true,
+		"authRoleArn": {
+			"Fn::GetAtt": ["AuthRole", "Arn"]
+		},
+		"unauthRoleArn": {
+			"Fn::GetAtt": ["UnauthRole", "Arn"]
+		},
+		"breakCircularDependency": true,
+		"dependsOn": [
+			{
+				"category": "function",
+				"resourceName": "touchsistemasPostConfirmation",
+				"triggerProvider": "Cognito",
+				"attributes": ["Arn", "Name"]
+			}
+		],
+		"permissions": [
+			"{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
+		],
+		"authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"touchsistemasPostConfirmation\"\n  }\n]",
+		"authProviders": [],
+		"parentStack": {
+			"Ref": "AWS::StackId"
+		}
+	}
 }

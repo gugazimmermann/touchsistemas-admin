@@ -1,0 +1,7 @@
+/coverage/*
+/build/*
+/node_modules/*
+/public/*
+*.css
+*.svg
+src/models

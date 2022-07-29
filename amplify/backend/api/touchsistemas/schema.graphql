@@ -1,0 +1,83 @@
+type Owner @model @auth(rules: [{allow: public}, {allow: groups, groups: ["admins"], operations: [read, create, update, delete]}, {allow: groups, groups: ["clients"], operations: [read, update, create]}]) {
+  name: String!
+  phone: String!
+  email: String!
+  clientID: ID! @index(name: "byClient")
+  Client: Client @belongsTo
+}
+
+type Client @model @auth(rules: [{allow: public}, {allow: groups, groups: ["admins"], operations: [read, create, update, delete]}, {allow: groups, groups: ["clients"], operations: [read, update, create]}]) {
+  id: ID!
+  name: String
+  phone: String
+  email: String!
+  website: String
+  zipCode: String
+  state: String
+  city: String
+  street: String
+  number: String
+  Owners: [Owner] @hasMany(indexName: "byClient", fields: ["id"])
+  Events: [Event] @hasMany(indexName: "byClient", fields: ["id"])
+}
+
+type Event @model @auth(rules: [{allow: public}, {allow: groups, groups: ["admins"], operations: [read, create, update, delete]}, {allow: groups, groups: ["clients"], operations: [read, update, create]}]) {
+  id: ID!
+  referralCode: String!
+  plan: String!
+  name: String!
+  website: String
+  email: String
+  zipCode: String!
+  state: String!
+  city: String!
+  street: String
+  number: String
+  description: String
+  dates: [String!]
+  clientID: ID! @index(name: "byClient")
+  Client: Client @belongsTo
+  partnerID: ID! @index(name: "byPartner")
+  Partner: Partner @belongsTo
+  Users: [User] @hasMany(indexName: "byEvent", fields: ["id"])
+}
+
+type Partner @model @auth(rules: [{allow: public}, {allow: groups, groups: ["admins"], operations: [read, create, update, delete]}, {allow: groups, groups: ["clients"], operations: [read, update, create]}]) {
+  id: ID!
+  name: String!
+  contact: String!
+  email: String!
+  phone: String!
+  referralCode: String!
+  zipCode: String!
+  state: String!
+  city: String!
+  street: String
+  Events: [Event] @hasMany(indexName: "byPartner", fields: ["id"])
+  number: String
+}
+
+type User @model @auth(rules: [{allow: public}, {allow: groups, groups: ["admins"], operations: [read, create, update, delete]}, {allow: groups, groups: ["clients"], operations: [read, update, create]}]) {
+  id: ID!
+  phone: String!
+  code: Int!
+  confirmation: String
+  codeUsed: String
+  eventID: ID! @index(name: "byEvent")
+  Event: Event @belongsTo
+  userInfo: UserInfo @hasOne
+}
+
+type UserInfo @model @auth(rules: [{allow: public}, {allow: groups, groups: ["admins"], operations: [read, create, update, delete]}, {allow: groups, groups: ["clients"], operations: [read, update, create]}]) {
+  id: ID!
+  phone: String!
+  name: String!
+  email: String!
+  gender: String!
+  state: String!
+  city: String!
+  birthdate: String!
+  authorization: Boolean!
+  User: User @belongsTo
+}
+ 

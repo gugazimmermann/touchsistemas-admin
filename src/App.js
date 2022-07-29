@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import PublicRoute from './routes/PublicRoute';
+import ProtectedRoute from './routes/ProtectedRoute';
+import Loading from './components/Loading';
+
+const NotFound = lazy(() => import('./pages/not-found/NotFound'));
+const SignIn = lazy(() => import('./pages/auth/SignIn'));
+const ForgotPassword = lazy(() => import('./pages/auth/ForgotPassword'));
+const RedefinePwd = lazy(() => import('./pages/auth/RedefinePwd'));
+const SignUp = lazy(() => import('./pages/auth/SignUp'));
+const ConfirmationCode = lazy(() => import('./pages/auth/ConfirmationCode'));
+const Layout = lazy(() => import('./pages/dashboard/Layout'));
+const Dashboard = lazy(() => import('./pages/dashboard/Dashboard'));
+const Profile = lazy(() => import('./pages/profile/Profile'));
+const Payments = lazy(() => import('./pages/payments/Payments'));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Suspense fallback={<Loading />}>
+			<Routes>
+				<Route element={<PublicRoute />}>
+					<Route path="/" element={<SignIn />} />
+					<Route path="/esqueceu-senha" element={<ForgotPassword />} />
+					<Route path="/redefinir-senha" element={<RedefinePwd />} />
+					<Route path="/cadastrar" element={<SignUp />} />
+					<Route path="/confirmar-cadastro" element={<ConfirmationCode />} />
+				</Route>
+				<Route element={<ProtectedRoute />}>
+					<Route element={<Layout />}>
+						<Route path="/dashboard" element={<Dashboard />} />
+						<Route path="/cadastro" element={<Profile />} />
+						<Route path="/pagamentos" element={<Payments />} />
+					</Route>
+				</Route>
+				<Route path="*" element={<NotFound />} />
+			</Routes>
+		</Suspense>
+	);
 }
 
 export default App;

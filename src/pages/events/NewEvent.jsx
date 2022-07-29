@@ -46,7 +46,7 @@ export default function Profile() {
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [success, setSuccess] = useState(true)
+	const [success, setSuccess] = useState(true);
 	const [formEvent, setFormEvent] = useState(formEventInitialState);
 
 	function handleDatesChange(value) {
@@ -76,8 +76,6 @@ export default function Profile() {
 	}, [formEvent.zipCode]);
 
 	async function addEvent() {
-		console.log(formEvent);
-		console.log(client.id);
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
@@ -108,7 +106,7 @@ export default function Profile() {
 		);
 		loadClient();
 		setFormEvent(formEventInitialState);
-		setSuccess(true)
+		setSuccess(true);
 		setLoading(false);
 		return true;
 	}

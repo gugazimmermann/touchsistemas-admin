@@ -41,7 +41,6 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^1.0.8",
-    "@randex/material-ui-multiple-dates-picker": "github:gugazimmermann/material-ui-multiple-dates-picker",
     "aws-amplify": "^4.3.28",
     "boxicons": "^2.1.2",
     "moment": "^2.29.4",

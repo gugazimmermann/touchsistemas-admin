@@ -1,10 +1,10 @@
-import { Select, Option } from "@material-tailwind/react";
+import { Select, Option } from '@material-tailwind/react';
 
 export default function CountryCode({ initialValue, defaultValue, action }) {
 	return (
 		<Select
-      label="Código do País"
-      variant="standard"
+			label="Código do País"
+			variant="standard"
 			value={initialValue}
 			defaultValue={defaultValue}
 			onChange={() => action()}

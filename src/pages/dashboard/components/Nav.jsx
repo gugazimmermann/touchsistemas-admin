@@ -17,7 +17,7 @@ export default function Nav({ client, signout }) {
 						<Link to="/dashboard">Dashboard</Link>
 					</Button>
 					<Button disabled={!client?.phone} variant="text" color="green" className="text-text">
-					<Link to="/novo-evento">Cadastrar Evento</Link>
+						<Link to="/novo-evento">Cadastrar Evento</Link>
 					</Button>
 					<Button disabled={!client?.phone} variant="text" color="orange" className="text-text">
 						Eventos Passados

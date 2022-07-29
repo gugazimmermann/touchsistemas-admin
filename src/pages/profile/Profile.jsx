@@ -33,7 +33,7 @@ export default function Profile() {
 	const [formOwner, setFormOwner] = useState(formOwnerInitialState);
 
 	async function changeClient() {
-		setErrorMsg('')
+		setErrorMsg('');
 		setError(false);
 		setLoading(true);
 		if (
@@ -44,22 +44,27 @@ export default function Profile() {
 			!formClient.state ||
 			!formClient.street
 		) {
-			setErrorMsg('Preencha todos os dados!')
+			setErrorMsg('Preencha todos os dados!');
 			setError(true);
 			setLoading(false);
 			return null;
 		}
-		await API.graphql({ query: mutations.updateClient, variables: {input: {
-			id: client.id,
-			name: formClient.name,
-			phone: formClient.phone,
-			website: formClient.website,
-			zipCode: formClient.zipCode,
-			city: formClient.city,
-			state: formClient.state,
-			street: formClient.street,
-			number: formClient.number,
-		}}});
+		await API.graphql({
+			query: mutations.updateClient,
+			variables: {
+				input: {
+					id: client.id,
+					name: formClient.name,
+					phone: formClient.phone,
+					website: formClient.website,
+					zipCode: formClient.zipCode,
+					city: formClient.city,
+					state: formClient.state,
+					street: formClient.street,
+					number: formClient.number,
+				},
+			},
+		});
 		loadClient();
 		setFormOwner(formClientInitialState);
 		setLoading(false);
@@ -92,7 +97,7 @@ export default function Profile() {
 				street: address.street,
 			});
 		} catch (err) {
-			setErrorMsg(err)
+			setErrorMsg(err);
 		}
 	};
 
@@ -103,11 +108,11 @@ export default function Profile() {
 	}, [formClient.zipCode]);
 
 	async function addOwner() {
-		setErrorMsg('')
+		setErrorMsg('');
 		setError(false);
 		setLoading(true);
 		if (!formOwner.email || !validateEmail(formOwner.email) || !formOwner.name || !formOwner.phone) {
-			setErrorMsg('Preencha todos os dados!')
+			setErrorMsg('Preencha todos os dados!');
 			setError(true);
 			setLoading(false);
 			return null;

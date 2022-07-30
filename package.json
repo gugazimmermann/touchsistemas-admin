@@ -9,11 +9,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && npx tailwindcss -o build.css --minify",
-    "test": "react-scripts test",
+    "test": "react-scripts test --silent --noStackTrace --colors --coverage --watchAll=false --no-cache --runInBand",
     "eject": "react-scripts eject",
     "lint": "eslint '*/**/*.{js,jsx,css,md,html,json}' --fix",
     "prettier": "prettier . --write",
-    "prepare": "npm run prettier && npm run lint",
+    "prepare": "npm run prettier && npm run lint && npm test",
     "pull": "amplify pull --appId d1ga6nrigsif9l --envName dev",
     "codegen": "rm -rf src/graphql src/models && amplify configure codegen && amplify codegen && amplify codegen models"
   },

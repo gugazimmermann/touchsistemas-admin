@@ -10,3 +10,4 @@
 /src/aws-exports.js
 /src/graphql/*
 /src/models/*
+/resources/*

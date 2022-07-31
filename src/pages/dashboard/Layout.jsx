@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { useCookies } from 'react-cookie';
+import Loading from '../../components/Loading';
 import { decodeCookie } from '../../utils/cookies';
 import * as queries from '../../graphql/queries';
 import Nav from './components/Nav';
@@ -10,6 +11,7 @@ export default function Layout() {
 	const navigate = useNavigate();
 	const [cookies, , removeCookie] = useCookies(['touchsistemas']);
 	const [client, setClient] = useState();
+	const [loading, setLoading] = useState(false);
 
 	async function signOut() {
 		await Auth.signOut();
@@ -18,11 +20,13 @@ export default function Layout() {
 	}
 
 	async function loadClient() {
+		setLoading(true)
 		const clientID = decodeCookie(cookies?.touchsistemas)?.client;
 		const oneClient = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
 		// eslint-disable-next-line no-console
 		console.log(oneClient.data.getClient);
 		setClient(oneClient.data.getClient);
+		setLoading(false)
 	}
 
 	useEffect(() => {
@@ -31,6 +35,7 @@ export default function Layout() {
 
 	return (
 		<main className="container mx-auto h-screen bg-white">
+			{loading && <Loading />}
 			<Nav client={client} signout={signOut} />
 			<Outlet context={[client, loadClient]} />
 		</main>

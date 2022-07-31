@@ -15,6 +15,8 @@ const Dashboard = lazy(() => import('./pages/dashboard/Dashboard'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
 const Payments = lazy(() => import('./pages/payments/Payments'));
 const NewEvent = lazy(() => import('./pages/events/NewEvent'));
+const PastEvents = lazy(() => import('./pages/past-events/PastEvents'));
+const Event = lazy(() => import('./pages/event/Event'));
 
 function App() {
 	return (
@@ -33,6 +35,8 @@ function App() {
 						<Route path="/cadastro" element={<Profile />} />
 						<Route path="/pagamentos" element={<Payments />} />
 						<Route path="/novo-evento" element={<NewEvent />} />
+						<Route path="/eventos-passados" element={<PastEvents />} />
+						<Route path="/evento/:id" element={<Event />} />
 					</Route>
 				</Route>
 				<Route path="*" element={<NotFound />} />

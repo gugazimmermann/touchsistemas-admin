@@ -28,6 +28,31 @@ export const createOwner = /* GraphQL */ `
             phone
             email
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             id
             createdAt
             updatedAt
@@ -54,7 +79,72 @@ export const createOwner = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -106,6 +196,31 @@ export const updateOwner = /* GraphQL */ `
             phone
             email
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             id
             createdAt
             updatedAt
@@ -132,7 +247,72 @@ export const updateOwner = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -184,6 +364,31 @@ export const deleteOwner = /* GraphQL */ `
             phone
             email
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             id
             createdAt
             updatedAt
@@ -210,7 +415,72 @@ export const deleteOwner = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -268,6 +538,48 @@ export const createClient = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -311,6 +623,48 @@ export const createClient = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -329,6 +683,32 @@ export const createClient = /* GraphQL */ `
             state
             city
             street
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             number
             createdAt
             updatedAt
@@ -337,6 +717,59 @@ export const createClient = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
+            items {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             nextToken
             startedAt
           }
@@ -390,6 +823,48 @@ export const updateClient = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -433,6 +908,48 @@ export const updateClient = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -451,6 +968,32 @@ export const updateClient = /* GraphQL */ `
             state
             city
             street
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             number
             createdAt
             updatedAt
@@ -459,6 +1002,59 @@ export const updateClient = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
+            items {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             nextToken
             startedAt
           }
@@ -512,6 +1108,48 @@ export const deleteClient = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -555,6 +1193,48 @@ export const deleteClient = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -573,6 +1253,32 @@ export const deleteClient = /* GraphQL */ `
             state
             city
             street
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             number
             createdAt
             updatedAt
@@ -581,6 +1287,59 @@ export const deleteClient = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
+            items {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             nextToken
             startedAt
           }
@@ -638,6 +1397,31 @@ export const createEvent = /* GraphQL */ `
             phone
             email
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             id
             createdAt
             updatedAt
@@ -664,7 +1448,72 @@ export const createEvent = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -708,7 +1557,72 @@ export const createEvent = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -748,7 +1662,72 @@ export const createEvent = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -765,6 +1744,59 @@ export const createEvent = /* GraphQL */ `
             city
             birthdate
             authorization
+            User {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             createdAt
             updatedAt
             _version
@@ -827,6 +1859,31 @@ export const updateEvent = /* GraphQL */ `
             phone
             email
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             id
             createdAt
             updatedAt
@@ -853,7 +1910,72 @@ export const updateEvent = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -897,7 +2019,72 @@ export const updateEvent = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -937,7 +2124,72 @@ export const updateEvent = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -954,6 +2206,59 @@ export const updateEvent = /* GraphQL */ `
             city
             birthdate
             authorization
+            User {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             createdAt
             updatedAt
             _version
@@ -1016,6 +2321,31 @@ export const deleteEvent = /* GraphQL */ `
             phone
             email
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             id
             createdAt
             updatedAt
@@ -1042,7 +2372,72 @@ export const deleteEvent = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -1086,7 +2481,72 @@ export const deleteEvent = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -1126,7 +2586,72 @@ export const deleteEvent = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -1143,6 +2668,59 @@ export const deleteEvent = /* GraphQL */ `
             city
             birthdate
             authorization
+            User {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             createdAt
             updatedAt
             _version
@@ -1211,6 +2789,48 @@ export const createPartner = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -1229,6 +2849,32 @@ export const createPartner = /* GraphQL */ `
             state
             city
             street
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             number
             createdAt
             updatedAt
@@ -1237,6 +2883,59 @@ export const createPartner = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
+            items {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             nextToken
             startedAt
           }
@@ -1301,6 +3000,48 @@ export const updatePartner = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -1319,6 +3060,32 @@ export const updatePartner = /* GraphQL */ `
             state
             city
             street
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             number
             createdAt
             updatedAt
@@ -1327,6 +3094,59 @@ export const updatePartner = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
+            items {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             nextToken
             startedAt
           }
@@ -1391,6 +3211,48 @@ export const deletePartner = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -1409,6 +3271,32 @@ export const deletePartner = /* GraphQL */ `
             state
             city
             street
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             number
             createdAt
             updatedAt
@@ -1417,6 +3305,59 @@ export const deletePartner = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
+            items {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             nextToken
             startedAt
           }
@@ -1477,10 +3418,100 @@ export const createUser = /* GraphQL */ `
           street
           number
           Owners {
+            items {
+              name
+              phone
+              email
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              id
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             nextToken
             startedAt
           }
           Events {
+            items {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             nextToken
             startedAt
           }
@@ -1503,6 +3534,67 @@ export const createUser = /* GraphQL */ `
           city
           street
           Events {
+            items {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             nextToken
             startedAt
           }
@@ -1521,6 +3613,98 @@ export const createUser = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
+            Event {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            userInfo {
+              id
+              phone
+              name
+              email
+              gender
+              state
+              city
+              birthdate
+              authorization
+              User {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userInfoUserId
+            }
             createdAt
             updatedAt
             _version
@@ -1569,7 +3753,72 @@ export const createUser = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -1586,6 +3835,59 @@ export const createUser = /* GraphQL */ `
             city
             birthdate
             authorization
+            User {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             createdAt
             updatedAt
             _version
@@ -1655,10 +3957,100 @@ export const updateUser = /* GraphQL */ `
           street
           number
           Owners {
+            items {
+              name
+              phone
+              email
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              id
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             nextToken
             startedAt
           }
           Events {
+            items {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             nextToken
             startedAt
           }
@@ -1681,6 +4073,67 @@ export const updateUser = /* GraphQL */ `
           city
           street
           Events {
+            items {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             nextToken
             startedAt
           }
@@ -1699,6 +4152,98 @@ export const updateUser = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
+            Event {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            userInfo {
+              id
+              phone
+              name
+              email
+              gender
+              state
+              city
+              birthdate
+              authorization
+              User {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userInfoUserId
+            }
             createdAt
             updatedAt
             _version
@@ -1747,7 +4292,72 @@ export const updateUser = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -1764,6 +4374,59 @@ export const updateUser = /* GraphQL */ `
             city
             birthdate
             authorization
+            User {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             createdAt
             updatedAt
             _version
@@ -1833,10 +4496,100 @@ export const deleteUser = /* GraphQL */ `
           street
           number
           Owners {
+            items {
+              name
+              phone
+              email
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              id
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             nextToken
             startedAt
           }
           Events {
+            items {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             nextToken
             startedAt
           }
@@ -1859,6 +4612,67 @@ export const deleteUser = /* GraphQL */ `
           city
           street
           Events {
+            items {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             nextToken
             startedAt
           }
@@ -1877,6 +4691,98 @@ export const deleteUser = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
+            Event {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            userInfo {
+              id
+              phone
+              name
+              email
+              gender
+              state
+              city
+              birthdate
+              authorization
+              User {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userInfoUserId
+            }
             createdAt
             updatedAt
             _version
@@ -1925,7 +4831,72 @@ export const deleteUser = /* GraphQL */ `
             description
             dates
             clientID
+            Client {
+              id
+              name
+              phone
+              email
+              website
+              zipCode
+              state
+              city
+              street
+              number
+              Owners {
+                nextToken
+                startedAt
+              }
+              Events {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             partnerID
+            Partner {
+              id
+              name
+              contact
+              email
+              phone
+              referralCode
+              zipCode
+              state
+              city
+              street
+              Events {
+                nextToken
+                startedAt
+              }
+              number
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Users {
+              items {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -1942,6 +4913,59 @@ export const deleteUser = /* GraphQL */ `
             city
             birthdate
             authorization
+            User {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             createdAt
             updatedAt
             _version
@@ -2020,6 +5044,48 @@ export const createUserInfo = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -2038,6 +5104,32 @@ export const createUserInfo = /* GraphQL */ `
             state
             city
             street
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             number
             createdAt
             updatedAt
@@ -2046,6 +5138,59 @@ export const createUserInfo = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
+            items {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             nextToken
             startedAt
           }
@@ -2072,6 +5217,98 @@ export const createUserInfo = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
+            Event {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            userInfo {
+              id
+              phone
+              name
+              email
+              gender
+              state
+              city
+              birthdate
+              authorization
+              User {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userInfoUserId
+            }
             createdAt
             updatedAt
             _version
@@ -2150,6 +5387,48 @@ export const updateUserInfo = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -2168,6 +5447,32 @@ export const updateUserInfo = /* GraphQL */ `
             state
             city
             street
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             number
             createdAt
             updatedAt
@@ -2176,6 +5481,59 @@ export const updateUserInfo = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
+            items {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             nextToken
             startedAt
           }
@@ -2202,6 +5560,98 @@ export const updateUserInfo = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
+            Event {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            userInfo {
+              id
+              phone
+              name
+              email
+              gender
+              state
+              city
+              birthdate
+              authorization
+              User {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userInfoUserId
+            }
             createdAt
             updatedAt
             _version
@@ -2280,6 +5730,48 @@ export const deleteUserInfo = /* GraphQL */ `
             city
             street
             number
+            Owners {
+              items {
+                name
+                phone
+                email
+                clientID
+                id
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             createdAt
             updatedAt
             _version
@@ -2298,6 +5790,32 @@ export const deleteUserInfo = /* GraphQL */ `
             state
             city
             street
+            Events {
+              items {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             number
             createdAt
             updatedAt
@@ -2306,6 +5824,59 @@ export const deleteUserInfo = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
+            items {
+              id
+              phone
+              code
+              confirmation
+              codeUsed
+              eventID
+              Event {
+                id
+                referralCode
+                plan
+                name
+                website
+                email
+                zipCode
+                state
+                city
+                street
+                number
+                description
+                dates
+                clientID
+                partnerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              userInfo {
+                id
+                phone
+                name
+                email
+                gender
+                state
+                city
+                birthdate
+                authorization
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userInfoUserId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userUserInfoId
+            }
             nextToken
             startedAt
           }
@@ -2332,6 +5903,98 @@ export const deleteUserInfo = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
+            Event {
+              id
+              referralCode
+              plan
+              name
+              website
+              email
+              zipCode
+              state
+              city
+              street
+              number
+              description
+              dates
+              clientID
+              Client {
+                id
+                name
+                phone
+                email
+                website
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              partnerID
+              Partner {
+                id
+                name
+                contact
+                email
+                phone
+                referralCode
+                zipCode
+                state
+                city
+                street
+                number
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Users {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            userInfo {
+              id
+              phone
+              name
+              email
+              gender
+              state
+              city
+              birthdate
+              authorization
+              User {
+                id
+                phone
+                code
+                confirmation
+                codeUsed
+                eventID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                userUserInfoId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userInfoUserId
+            }
             createdAt
             updatedAt
             _version

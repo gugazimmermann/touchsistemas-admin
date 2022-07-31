@@ -20,7 +20,7 @@ export default function Nav({ client, signout }) {
 						<Link to="/novo-evento">Cadastrar Evento</Link>
 					</Button>
 					<Button disabled={!client?.phone} variant="text" color="orange" className="text-text">
-						Eventos Passados
+					<Link to="/eventos-passados">Eventos Passados</Link>
 					</Button>
 					<Menu>
 						<MenuHandler>

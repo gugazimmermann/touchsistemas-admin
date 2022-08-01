@@ -212,7 +212,7 @@
                 "cognito-idp:GetGroup"
               ],
               "Resource": [
-                "arn:aws:cognito-idp:us-east-1:494458123866:userpool/us-east-1_Rijp0G1dR"
+                "arn:aws:cognito-idp:us-east-1:494458123866:userpool/us-east-1_EuiCIoV80"
               ],
               "Effect": "Allow"
             }

@@ -72,16 +72,16 @@ export default function Payments() {
 					<tbody>
 						{conteudo.map((c) => (
 							<tr key={`${c.evento}${c.status}`}>
-								<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+								<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 									{c.evento}
 								</th>
-								<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+								<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 									{c.plano}
 								</th>
-								<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+								<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 									R$ {c.valor}
 								</th>
-								<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+								<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 									{statusRow(c.status)}
 								</th>
 							</tr>
@@ -110,16 +110,16 @@ export default function Payments() {
 					</thead>
 					<tbody>
 						<tr>
-							<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+							<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 								JOSE A Z NEGREIROS
 							</th>
-							<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+							<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 								1234 ... 5678
 							</th>
-							<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+							<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 								10/28
 							</th>
-							<th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+							<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 								VISA
 							</th>
 						</tr>

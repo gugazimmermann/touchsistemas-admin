@@ -48,13 +48,13 @@ export default function Event() {
               <tbody>
                 {client.Events.items.map((event) => (
                   <tr key={event.id} onClick={() => handleEvent(event.id)} className="cursor-pointer hover:bg-gray-100">
-                    <th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+                    <th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
                       {event.name}
                     </th>
-                    <th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+                    <th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
                       {`${event.city} / ${event.state}`}
                     </th>
-                    <th className="border-b border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+                    <th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
                       {event.dates.map((d) => `${moment(d).format('DD/MM/YYYY')}`).join(', ').slice(0, -2)}
                     </th>
                   </tr>

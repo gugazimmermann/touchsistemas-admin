@@ -300,13 +300,13 @@ export default function Profile() {
 						<tbody>
 							{client.Owners.items.map((owner) => (
 								<tr key={owner.email}>
-									<th className="border-b text-sm border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+									<th className="border-b text-sm border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 										{owner.name}
 									</th>
-									<th className="border-b text-sm border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+									<th className="border-b text-sm border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 										{owner.phone}
 									</th>
-									<th className="border-b text-sm border-grey-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+									<th className="border-b text-sm border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
 										{owner.email}
 									</th>
 								</tr>

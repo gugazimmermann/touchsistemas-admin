@@ -93,7 +93,7 @@ export default function SignIn() {
 					</div>
 					<Button
 						className={`w-full text-white ${
-							disabled() ? 'bg-grey-400 cursor-not-allowed' : 'bg-primary cursor-pointer'
+							disabled() ? 'bg-gray-500 cursor-not-allowed' : 'bg-primary cursor-pointer'
 						}`}
 						onClick={() => signIn()}
 						disabled={disabled()}

@@ -1,35 +1,35 @@
 {
-	"dev": {
-		"awscloudformation": {
-			"AuthRoleName": "amplify-touchsistemas-dev-162125-authRole",
-			"UnauthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemas-dev-162125-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemas-dev-162125-authRole",
-			"Region": "us-east-1",
-			"DeploymentBucketName": "amplify-touchsistemas-dev-162125-deployment",
-			"UnauthRoleName": "amplify-touchsistemas-dev-162125-unauthRole",
-			"StackName": "amplify-touchsistemas-dev-162125",
-			"StackId": "arn:aws:cloudformation:us-east-1:494458123866:stack/amplify-touchsistemas-dev-162125/7a7e7350-0eaa-11ed-a313-0acfc9d5d249",
-			"AmplifyAppId": "d1ga6nrigsif9l",
-			"AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-touchsistemas-dev-162125-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
-		},
-		"categories": {
-			"auth": {
-				"touchsistemas": {},
-				"userPoolGroups": {}
-			},
-			"function": {
-				"touchsistemasPostConfirmation": {
-					"GROUP": "clients",
-					"deploymentBucketName": "amplify-touchsistemas-dev-162125-deployment",
-					"s3Key": "amplify-builds/touchsistemasPostConfirmation-5076674b7043436f7349-build.zip"
-				}
-			},
-			"storage": {
-				"touchsistemasf85149bc": {
-					"bucketName": "touchsistemas-storage",
-					"region": "us-east-1"
-				}
-			}
-		}
-	}
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-touchsistemas-dev-03618-authRole",
+      "UnauthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemas-dev-03618-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemas-dev-03618-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-touchsistemas-dev-03618-deployment",
+      "UnauthRoleName": "amplify-touchsistemas-dev-03618-unauthRole",
+      "StackName": "amplify-touchsistemas-dev-03618",
+      "StackId": "arn:aws:cloudformation:us-east-1:494458123866:stack/amplify-touchsistemas-dev-03618/1be930c0-114b-11ed-b269-0e9b6db2527b",
+      "AmplifyAppId": "d3nozf61rpgnzd",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-touchsistemas-dev-03618-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "userPoolGroups": {},
+        "touchsistemas": {}
+      },
+      "storage": {
+        "touchsistemasf85149bc": {
+          "bucketName": "touchsistemas-storage",
+          "region": "us-east-1"
+        }
+      },
+      "function": {
+        "touchsistemasPostConfirmation": {
+          "GROUP": "clients",
+          "deploymentBucketName": "amplify-touchsistemas-dev-03618-deployment",
+          "s3Key": "amplify-builds/touchsistemasPostConfirmation-416e4b43534f6f422b33-build.zip"
+        }
+      }
+    }
+  }
 }

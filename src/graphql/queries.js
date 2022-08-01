@@ -25,31 +25,6 @@ export const getOwner = /* GraphQL */ `
             phone
             email
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             id
             createdAt
             updatedAt
@@ -76,72 +51,7 @@ export const getOwner = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -190,100 +100,10 @@ export const listOwners = /* GraphQL */ `
           street
           number
           Owners {
-            items {
-              name
-              phone
-              email
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              id
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
           Events {
-            items {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
@@ -335,100 +155,10 @@ export const syncOwners = /* GraphQL */ `
           street
           number
           Owners {
-            items {
-              name
-              phone
-              email
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              id
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
           Events {
-            items {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
@@ -480,48 +210,6 @@ export const getClient = /* GraphQL */ `
             city
             street
             number
-            Owners {
-              items {
-                name
-                phone
-                email
-                clientID
-                id
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -565,48 +253,6 @@ export const getClient = /* GraphQL */ `
             city
             street
             number
-            Owners {
-              items {
-                name
-                phone
-                email
-                clientID
-                id
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -625,32 +271,6 @@ export const getClient = /* GraphQL */ `
             state
             city
             street
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             number
             createdAt
             updatedAt
@@ -659,59 +279,6 @@ export const getClient = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
-            items {
-              id
-              phone
-              code
-              confirmation
-              codeUsed
-              eventID
-              Event {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              userInfo {
-                id
-                phone
-                name
-                email
-                gender
-                state
-                city
-                birthdate
-                authorization
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userInfoUserId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userUserInfoId
-            }
             nextToken
             startedAt
           }
@@ -756,31 +323,6 @@ export const listClients = /* GraphQL */ `
             phone
             email
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             id
             createdAt
             updatedAt
@@ -807,72 +349,7 @@ export const listClients = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -923,31 +400,6 @@ export const syncClients = /* GraphQL */ `
             phone
             email
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             id
             createdAt
             updatedAt
@@ -974,72 +426,7 @@ export const syncClients = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -1094,31 +481,6 @@ export const getEvent = /* GraphQL */ `
             phone
             email
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             id
             createdAt
             updatedAt
@@ -1145,72 +507,7 @@ export const getEvent = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -1254,72 +551,7 @@ export const getEvent = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -1359,72 +591,7 @@ export const getEvent = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -1441,59 +608,6 @@ export const getEvent = /* GraphQL */ `
             city
             birthdate
             authorization
-            User {
-              id
-              phone
-              code
-              confirmation
-              codeUsed
-              eventID
-              Event {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              userInfo {
-                id
-                phone
-                name
-                email
-                gender
-                state
-                city
-                birthdate
-                authorization
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userInfoUserId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userUserInfoId
-            }
             createdAt
             updatedAt
             _version
@@ -1553,100 +667,10 @@ export const listEvents = /* GraphQL */ `
           street
           number
           Owners {
-            items {
-              name
-              phone
-              email
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              id
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
           Events {
-            items {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
@@ -1669,67 +693,6 @@ export const listEvents = /* GraphQL */ `
           city
           street
           Events {
-            items {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
@@ -1748,98 +711,6 @@ export const listEvents = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
-            Event {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            userInfo {
-              id
-              phone
-              name
-              email
-              gender
-              state
-              city
-              birthdate
-              authorization
-              User {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userInfoUserId
-            }
             createdAt
             updatedAt
             _version
@@ -1901,100 +772,10 @@ export const syncEvents = /* GraphQL */ `
           street
           number
           Owners {
-            items {
-              name
-              phone
-              email
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              id
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
           Events {
-            items {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
@@ -2017,67 +798,6 @@ export const syncEvents = /* GraphQL */ `
           city
           street
           Events {
-            items {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
@@ -2096,98 +816,6 @@ export const syncEvents = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
-            Event {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            userInfo {
-              id
-              phone
-              name
-              email
-              gender
-              state
-              city
-              birthdate
-              authorization
-              User {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userInfoUserId
-            }
             createdAt
             updatedAt
             _version
@@ -2249,48 +877,6 @@ export const getPartner = /* GraphQL */ `
             city
             street
             number
-            Owners {
-              items {
-                name
-                phone
-                email
-                clientID
-                id
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -2309,32 +895,6 @@ export const getPartner = /* GraphQL */ `
             state
             city
             street
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             number
             createdAt
             updatedAt
@@ -2343,59 +903,6 @@ export const getPartner = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
-            items {
-              id
-              phone
-              code
-              confirmation
-              codeUsed
-              eventID
-              Event {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              userInfo {
-                id
-                phone
-                name
-                email
-                gender
-                state
-                city
-                birthdate
-                authorization
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userInfoUserId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userUserInfoId
-            }
             nextToken
             startedAt
           }
@@ -2451,72 +958,7 @@ export const listPartners = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -2578,72 +1020,7 @@ export const syncPartners = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -2701,100 +1078,10 @@ export const getUser = /* GraphQL */ `
           street
           number
           Owners {
-            items {
-              name
-              phone
-              email
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              id
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
           Events {
-            items {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
@@ -2817,67 +1104,6 @@ export const getUser = /* GraphQL */ `
           city
           street
           Events {
-            items {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             nextToken
             startedAt
           }
@@ -2896,98 +1122,6 @@ export const getUser = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
-            Event {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            userInfo {
-              id
-              phone
-              name
-              email
-              gender
-              state
-              city
-              birthdate
-              authorization
-              User {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userInfoUserId
-            }
             createdAt
             updatedAt
             _version
@@ -3036,72 +1170,7 @@ export const getUser = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -3118,59 +1187,6 @@ export const getUser = /* GraphQL */ `
             city
             birthdate
             authorization
-            User {
-              id
-              phone
-              code
-              confirmation
-              codeUsed
-              eventID
-              Event {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              userInfo {
-                id
-                phone
-                name
-                email
-                gender
-                state
-                city
-                birthdate
-                authorization
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userInfoUserId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userUserInfoId
-            }
             createdAt
             updatedAt
             _version
@@ -3241,48 +1257,6 @@ export const listUsers = /* GraphQL */ `
             city
             street
             number
-            Owners {
-              items {
-                name
-                phone
-                email
-                clientID
-                id
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -3301,32 +1275,6 @@ export const listUsers = /* GraphQL */ `
             state
             city
             street
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             number
             createdAt
             updatedAt
@@ -3335,59 +1283,6 @@ export const listUsers = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
-            items {
-              id
-              phone
-              code
-              confirmation
-              codeUsed
-              eventID
-              Event {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              userInfo {
-                id
-                phone
-                name
-                email
-                gender
-                state
-                city
-                birthdate
-                authorization
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userInfoUserId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userUserInfoId
-            }
             nextToken
             startedAt
           }
@@ -3414,98 +1309,6 @@ export const listUsers = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
-            Event {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            userInfo {
-              id
-              phone
-              name
-              email
-              gender
-              state
-              city
-              birthdate
-              authorization
-              User {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userInfoUserId
-            }
             createdAt
             updatedAt
             _version
@@ -3578,48 +1381,6 @@ export const syncUsers = /* GraphQL */ `
             city
             street
             number
-            Owners {
-              items {
-                name
-                phone
-                email
-                clientID
-                id
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -3638,32 +1399,6 @@ export const syncUsers = /* GraphQL */ `
             state
             city
             street
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             number
             createdAt
             updatedAt
@@ -3672,59 +1407,6 @@ export const syncUsers = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
-            items {
-              id
-              phone
-              code
-              confirmation
-              codeUsed
-              eventID
-              Event {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              userInfo {
-                id
-                phone
-                name
-                email
-                gender
-                state
-                city
-                birthdate
-                authorization
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userInfoUserId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userUserInfoId
-            }
             nextToken
             startedAt
           }
@@ -3751,98 +1433,6 @@ export const syncUsers = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
-            Event {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            userInfo {
-              id
-              phone
-              name
-              email
-              gender
-              state
-              city
-              birthdate
-              authorization
-              User {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userInfoUserId
-            }
             createdAt
             updatedAt
             _version
@@ -3914,48 +1504,6 @@ export const getUserInfo = /* GraphQL */ `
             city
             street
             number
-            Owners {
-              items {
-                name
-                phone
-                email
-                clientID
-                id
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -3974,32 +1522,6 @@ export const getUserInfo = /* GraphQL */ `
             state
             city
             street
-            Events {
-              items {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             number
             createdAt
             updatedAt
@@ -4008,59 +1530,6 @@ export const getUserInfo = /* GraphQL */ `
             _lastChangedAt
           }
           Users {
-            items {
-              id
-              phone
-              code
-              confirmation
-              codeUsed
-              eventID
-              Event {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              userInfo {
-                id
-                phone
-                name
-                email
-                gender
-                state
-                city
-                birthdate
-                authorization
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userInfoUserId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userUserInfoId
-            }
             nextToken
             startedAt
           }
@@ -4087,98 +1556,6 @@ export const getUserInfo = /* GraphQL */ `
             confirmation
             codeUsed
             eventID
-            Event {
-              id
-              referralCode
-              plan
-              name
-              website
-              email
-              zipCode
-              state
-              city
-              street
-              number
-              description
-              dates
-              clientID
-              Client {
-                id
-                name
-                phone
-                email
-                website
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              partnerID
-              Partner {
-                id
-                name
-                contact
-                email
-                phone
-                referralCode
-                zipCode
-                state
-                city
-                street
-                number
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              Users {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            userInfo {
-              id
-              phone
-              name
-              email
-              gender
-              state
-              city
-              birthdate
-              authorization
-              User {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userInfoUserId
-            }
             createdAt
             updatedAt
             _version
@@ -4248,72 +1625,7 @@ export const listUserInfos = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -4330,59 +1642,6 @@ export const listUserInfos = /* GraphQL */ `
             city
             birthdate
             authorization
-            User {
-              id
-              phone
-              code
-              confirmation
-              codeUsed
-              eventID
-              Event {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              userInfo {
-                id
-                phone
-                name
-                email
-                gender
-                state
-                city
-                birthdate
-                authorization
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userInfoUserId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userUserInfoId
-            }
             createdAt
             updatedAt
             _version
@@ -4454,72 +1713,7 @@ export const syncUserInfos = /* GraphQL */ `
             description
             dates
             clientID
-            Client {
-              id
-              name
-              phone
-              email
-              website
-              zipCode
-              state
-              city
-              street
-              number
-              Owners {
-                nextToken
-                startedAt
-              }
-              Events {
-                nextToken
-                startedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
             partnerID
-            Partner {
-              id
-              name
-              contact
-              email
-              phone
-              referralCode
-              zipCode
-              state
-              city
-              street
-              Events {
-                nextToken
-                startedAt
-              }
-              number
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Users {
-              items {
-                id
-                phone
-                code
-                confirmation
-                codeUsed
-                eventID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userUserInfoId
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version
@@ -4536,59 +1730,6 @@ export const syncUserInfos = /* GraphQL */ `
             city
             birthdate
             authorization
-            User {
-              id
-              phone
-              code
-              confirmation
-              codeUsed
-              eventID
-              Event {
-                id
-                referralCode
-                plan
-                name
-                website
-                email
-                zipCode
-                state
-                city
-                street
-                number
-                description
-                dates
-                clientID
-                partnerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              userInfo {
-                id
-                phone
-                name
-                email
-                gender
-                state
-                city
-                birthdate
-                authorization
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                userInfoUserId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userUserInfoId
-            }
             createdAt
             updatedAt
             _version

@@ -63,7 +63,6 @@ type Event
 	Client: Client @belongsTo
 	partnerID: ID! @index(name: "byPartner")
 	Partner: Partner @belongsTo
-	Users: [User] @hasMany(indexName: "byEvent", fields: ["id"])
 }
 
 type Partner
@@ -87,44 +86,4 @@ type Partner
 	street: String
 	Events: [Event] @hasMany(indexName: "byPartner", fields: ["id"])
 	number: String
-}
-
-type User
-	@model
-	@auth(
-		rules: [
-			{ allow: public }
-			{ allow: groups, groups: ["admins"], operations: [read, create, update, delete] }
-			{ allow: groups, groups: ["clients"], operations: [read, update, create] }
-		]
-	) {
-	id: ID!
-	phone: String!
-	code: Int!
-	confirmation: String
-	codeUsed: String
-	eventID: ID! @index(name: "byEvent")
-	Event: Event @belongsTo
-	userInfo: UserInfo @hasOne
-}
-
-type UserInfo
-	@model
-	@auth(
-		rules: [
-			{ allow: public }
-			{ allow: groups, groups: ["admins"], operations: [read, create, update, delete] }
-			{ allow: groups, groups: ["clients"], operations: [read, update, create] }
-		]
-	) {
-	id: ID!
-	phone: String!
-	name: String!
-	email: String!
-	gender: String!
-	state: String!
-	city: String!
-	birthdate: String!
-	authorization: Boolean!
-	User: User @belongsTo
 }

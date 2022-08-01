@@ -20,14 +20,6 @@ type PartnerMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type UserInfoMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
 export declare class Owner {
   readonly id: string;
   readonly name: string;
@@ -78,7 +70,6 @@ export declare class Event {
   readonly Client?: Client | null;
   readonly partnerID: string;
   readonly Partner?: Partner | null;
-  readonly Users?: (User | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Event, EventMetaData>);
@@ -102,37 +93,4 @@ export declare class Partner {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Partner, PartnerMetaData>);
   static copyOf(source: Partner, mutator: (draft: MutableModel<Partner, PartnerMetaData>) => MutableModel<Partner, PartnerMetaData> | void): Partner;
-}
-
-export declare class User {
-  readonly id: string;
-  readonly phone: string;
-  readonly code: number;
-  readonly confirmation?: string | null;
-  readonly codeUsed?: string | null;
-  readonly eventID: string;
-  readonly Event?: Event | null;
-  readonly userInfo?: UserInfo | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly userUserInfoId?: string | null;
-  constructor(init: ModelInit<User, UserMetaData>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
-}
-
-export declare class UserInfo {
-  readonly id: string;
-  readonly phone: string;
-  readonly name: string;
-  readonly email: string;
-  readonly gender: string;
-  readonly state: string;
-  readonly city: string;
-  readonly birthdate: string;
-  readonly authorization: boolean;
-  readonly User?: User | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<UserInfo, UserInfoMetaData>);
-  static copyOf(source: UserInfo, mutator: (draft: MutableModel<UserInfo, UserInfoMetaData>) => MutableModel<UserInfo, UserInfoMetaData> | void): UserInfo;
 }

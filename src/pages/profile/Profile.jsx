@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
-import { API, graphqlOperation } from 'aws-amplify';
-import { Button, Input, Alert } from '@material-tailwind/react';
+import { API } from 'aws-amplify';
+import { Button, Input } from '@material-tailwind/react';
 import * as mutations from '../../graphql/mutations';
 import Loading from '../../components/Loading';
-import { validateEmail } from '../../helpers';
-import getAddressFromCEP from '../../helpers/getAddressFromCEP';
+import Alert from '../../components/Alert';
+import Owners from './Owners';
+import { getAddressFromCEP } from '../../helpers';
 
 const formClientInitialState = {
 	name: '',
@@ -18,11 +19,6 @@ const formClientInitialState = {
 	street: '',
 	number: '',
 };
-const formOwnerInitialState = {
-	name: '',
-	phone: '',
-	email: '',
-};
 
 export default function Profile() {
 	const navigate = useNavigate();
@@ -31,9 +27,8 @@ export default function Profile() {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [formClient, setFormClient] = useState(formClientInitialState);
-	const [formOwner, setFormOwner] = useState(formOwnerInitialState);
 
-	async function changeClient() {
+	async function updateClient() {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
@@ -108,40 +103,10 @@ export default function Profile() {
 		}
 	}, [formClient.zipCode]);
 
-	async function addOwner() {
-		setErrorMsg('');
-		setError(false);
-		setLoading(true);
-		if (!formOwner.email || !validateEmail(formOwner.email) || !formOwner.name || !formOwner.phone) {
-			setErrorMsg('Preencha todos os dados!');
-			setError(true);
-			setLoading(false);
-			return null;
-		}
-		await API.graphql(
-			graphqlOperation(mutations.createOwner, {
-				input: {
-					name: formOwner.name,
-					phone: formOwner.phone,
-					email: formOwner.email,
-					clientID: client.id,
-				},
-			})
-		);
-		loadClient();
-		setFormOwner(formOwnerInitialState);
-		setLoading(false);
-		return true;
-	}
-
 	return (
 		<>
 			{loading && <Loading />}
-			{error && (
-				<div className="mx-4 my-4">
-					<Alert color="red">{errorMsg}</Alert>
-				</div>
-			)}
+			{error && <Alert type="danger">{errorMsg}</Alert>}
 			<h2 className="text-primary text-xl p-2 pt-6">Cadastro</h2>
 			<form className="mx-4">
 				<div className="flex flex-wrap">
@@ -236,85 +201,21 @@ export default function Profile() {
 						/>
 					</div>
 					<div className="w-full flex justify-center">
-						<Button size="sm" onClick={() => changeClient()} className="bg-primary">
+						<Button size="sm" onClick={() => updateClient()} className="bg-primary">
 							Atualizar Cadastro
 						</Button>
 					</div>
 				</div>
 			</form>
-			<h3 className="text-primary text-xl p-2">Responsáveis</h3>
-			<form className="mx-4">
-				<div className="flex flex-wrap">
-					<div className="w-full md:w-4/12 pr-4 mb-4">
-						<Input
-							value={formOwner.name || ''}
-							onChange={(e) => setFormOwner({ ...formOwner, name: e.target.value })}
-							type="text"
-							color="orange"
-							variant="standard"
-							label="Nome do Responsável"
-						/>
-					</div>
-					<div className="w-full md:w-4/12 pr-4 mb-4">
-						<Input
-							value={formOwner.phone || ''}
-							onChange={(e) => setFormOwner({ ...formOwner, phone: e.target.value })}
-							type="text"
-							color="orange"
-							variant="standard"
-							label="Telefone"
-						/>
-					</div>
-					<div className="w-full md:w-4/12 mb-4">
-						<Input
-							value={formOwner.email || ''}
-							onChange={(e) => setFormOwner({ ...formOwner, email: e.target.value })}
-							type="email"
-							color="orange"
-							variant="standard"
-							label="Email"
-						/>
-					</div>
-					<div className="w-full flex justify-center">
-						<Button size="sm" onClick={() => addOwner()} className="bg-primary">
-							Adicionar Responsável
-						</Button>
-					</div>
-				</div>
-			</form>
-			{client?.Owners?.items && client?.Owners?.items.length > 0 && (
-				<div className="overflow-x-auto p-4">
-					<table className="items-center w-full bg-transparent border-collapse">
-						<thead>
-							<tr>
-								<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-									Nome do Responsável
-								</th>
-								<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-									Telefone
-								</th>
-								<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-									Email
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							{client.Owners.items.map((owner) => (
-								<tr key={owner.email}>
-									<th className="border-b text-sm border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-										{owner.name}
-									</th>
-									<th className="border-b text-sm border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-										{owner.phone}
-									</th>
-									<th className="border-b text-sm border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-										{owner.email}
-									</th>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
+			{client && (
+				<Owners
+					clientID={client.id}
+					ownersList={client.Owners.items}
+					setError={setError}
+					setErrorMsg={setErrorMsg}
+					setLoading={setLoading}
+					loadClient={loadClient}
+				/>
 			)}
 		</>
 	);

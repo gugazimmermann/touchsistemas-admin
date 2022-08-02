@@ -1,20 +1,23 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { Link, useOutletContext } from 'react-router-dom';
-import { Alert } from '@material-tailwind/react';
+import Alert from '../../components/Alert';
 
 export default function Dashboard() {
 	const [client] = useOutletContext();
+
+	const profileLink = () => (
+		<Link className="pl-2" to="/cadastro">
+		Clique Aqui!
+	</Link>
+	)
+
 	return (
 		<>
-			{!client?.phone && (
-				<div className="mx-4 my-4">
-					<Alert color="red">
-						Seu Cadastro está incompleto, finalize para utilizar o sistema.
-						<Link className="pl-2" to="/cadastro">
-							Clique Aqui!
-						</Link>
-					</Alert>
-				</div>
+			{client && !client?.phone && (
+				<Alert type="danger">Seu Cadastro está incompleto, finalize para utilizar o sistema.{profileLink()}</Alert>
+			)}
+			{client && client.Owners.items.length === 0 && (
+				<Alert type="warning"> Nenhum Resonsável Cadastrado! {profileLink()}</Alert>
 			)}
 		</>
 	);

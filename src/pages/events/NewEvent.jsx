@@ -8,8 +8,7 @@ import moment from 'moment';
 import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 import Loading from '../../components/Loading';
-import { validateEmail } from '../../helpers';
-import getAddressFromCEP from '../../helpers/getAddressFromCEP';
+import { getAddressFromCEP, validateEmail } from '../../helpers';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const months = [

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Navbar, Button, Menu, MenuHandler, MenuList, MenuItem } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import LogoIcon from '../../../icons/LogoIcon';

@@ -4,15 +4,12 @@ import App from '../App';
 
 describe('App tests', () => {
 	it(`should contains ${process.env.REACT_APP_TITLE}`, async () => {
-		await waitFor(() => {
-			render(
-				<MemoryRouter>
-					<App />
-				</MemoryRouter>
-			);
-
+		render(
+			<MemoryRouter>
+				<App />
+			</MemoryRouter>
+		);
 			const { getByText } = within(screen.getByTestId('loading'));
-			expect(getByText('Carregando...')).toBeInTheDocument();
-		});
+			await waitFor(() => { expect(getByText('Aguarde...')).toBeInTheDocument(); });
 	});
 });

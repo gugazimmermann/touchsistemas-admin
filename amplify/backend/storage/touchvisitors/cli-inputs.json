@@ -1,0 +1,26 @@
+{
+  "resourceName": "touchvisitors",
+  "tableName": "touchvisitors",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "eventID",
+    "fieldType": "string"
+  },
+  "gsi": [
+    {
+      "name": "eventIDphone",
+      "partitionKey": {
+        "fieldName": "eventID",
+        "fieldType": "string"
+      },
+      "sortKey": {
+        "fieldName": "phone",
+        "fieldType": "string"
+      }
+    }
+  ],
+  "triggerFunctions": []
+}

@@ -28,5 +28,11 @@ export type AmplifyDependentResourcesAttributes = {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
+    },
+    "storage": {
+        "s3touchsistemasstoragefiles": {
+            "BucketName": "string",
+            "Region": "string"
+        }
     }
 }

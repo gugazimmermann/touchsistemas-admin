@@ -101,5 +101,11 @@
       }
     }
   },
-  "storage": {}
+  "storage": {
+    "s3touchsistemasstoragefiles": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
+  }
 }

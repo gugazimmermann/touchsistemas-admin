@@ -1,0 +1,12 @@
+{
+  "resourceName": "s3touchsistemasstoragefiles",
+  "bucketName": "touchsistemas-storage-files",
+  "policyUUID": "98845e80",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

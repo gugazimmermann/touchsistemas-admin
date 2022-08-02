@@ -7,6 +7,7 @@ export const createOwner = /* GraphQL */ `
     $condition: ModelOwnerConditionInput
   ) {
     createOwner(input: $input, condition: $condition) {
+      id
       name
       phone
       email
@@ -22,44 +23,16 @@ export const createOwner = /* GraphQL */ `
         city
         street
         number
+        complement
         Owners {
-          items {
-            name
-            phone
-            email
-            clientID
-            id
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      id
       createdAt
       updatedAt
     }
@@ -71,6 +44,7 @@ export const updateOwner = /* GraphQL */ `
     $condition: ModelOwnerConditionInput
   ) {
     updateOwner(input: $input, condition: $condition) {
+      id
       name
       phone
       email
@@ -86,44 +60,16 @@ export const updateOwner = /* GraphQL */ `
         city
         street
         number
+        complement
         Owners {
-          items {
-            name
-            phone
-            email
-            clientID
-            id
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      id
       createdAt
       updatedAt
     }
@@ -135,6 +81,7 @@ export const deleteOwner = /* GraphQL */ `
     $condition: ModelOwnerConditionInput
   ) {
     deleteOwner(input: $input, condition: $condition) {
+      id
       name
       phone
       email
@@ -150,44 +97,16 @@ export const deleteOwner = /* GraphQL */ `
         city
         street
         number
+        complement
         Owners {
-          items {
-            name
-            phone
-            email
-            clientID
-            id
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      id
       createdAt
       updatedAt
     }
@@ -209,27 +128,14 @@ export const createClient = /* GraphQL */ `
       city
       street
       number
+      complement
       Owners {
         items {
+          id
           name
           phone
           email
           clientID
-          Client {
-            id
-            name
-            phone
-            email
-            website
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
-          id
           createdAt
           updatedAt
         }
@@ -251,36 +157,7 @@ export const createClient = /* GraphQL */ `
           description
           dates
           clientID
-          Client {
-            id
-            name
-            phone
-            email
-            website
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           partnerID
-          Partner {
-            id
-            name
-            contact
-            email
-            phone
-            referralCode
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           createdAt
           updatedAt
         }
@@ -307,27 +184,14 @@ export const updateClient = /* GraphQL */ `
       city
       street
       number
+      complement
       Owners {
         items {
+          id
           name
           phone
           email
           clientID
-          Client {
-            id
-            name
-            phone
-            email
-            website
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
-          id
           createdAt
           updatedAt
         }
@@ -349,36 +213,7 @@ export const updateClient = /* GraphQL */ `
           description
           dates
           clientID
-          Client {
-            id
-            name
-            phone
-            email
-            website
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           partnerID
-          Partner {
-            id
-            name
-            contact
-            email
-            phone
-            referralCode
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           createdAt
           updatedAt
         }
@@ -405,27 +240,14 @@ export const deleteClient = /* GraphQL */ `
       city
       street
       number
+      complement
       Owners {
         items {
+          id
           name
           phone
           email
           clientID
-          Client {
-            id
-            name
-            phone
-            email
-            website
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
-          id
           createdAt
           updatedAt
         }
@@ -447,36 +269,7 @@ export const deleteClient = /* GraphQL */ `
           description
           dates
           clientID
-          Client {
-            id
-            name
-            phone
-            email
-            website
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           partnerID
-          Partner {
-            id
-            name
-            contact
-            email
-            phone
-            referralCode
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           createdAt
           updatedAt
         }
@@ -518,38 +311,11 @@ export const createEvent = /* GraphQL */ `
         city
         street
         number
+        complement
         Owners {
-          items {
-            name
-            phone
-            email
-            clientID
-            id
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         createdAt
@@ -568,25 +334,6 @@ export const createEvent = /* GraphQL */ `
         city
         street
         Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         number
@@ -629,38 +376,11 @@ export const updateEvent = /* GraphQL */ `
         city
         street
         number
+        complement
         Owners {
-          items {
-            name
-            phone
-            email
-            clientID
-            id
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         createdAt
@@ -679,25 +399,6 @@ export const updateEvent = /* GraphQL */ `
         city
         street
         Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         number
@@ -740,38 +441,11 @@ export const deleteEvent = /* GraphQL */ `
         city
         street
         number
+        complement
         Owners {
-          items {
-            name
-            phone
-            email
-            clientID
-            id
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         createdAt
@@ -790,25 +464,6 @@ export const deleteEvent = /* GraphQL */ `
         city
         street
         Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-          }
           nextToken
         }
         number
@@ -852,36 +507,7 @@ export const createPartner = /* GraphQL */ `
           description
           dates
           clientID
-          Client {
-            id
-            name
-            phone
-            email
-            website
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           partnerID
-          Partner {
-            id
-            name
-            contact
-            email
-            phone
-            referralCode
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           createdAt
           updatedAt
         }
@@ -925,36 +551,7 @@ export const updatePartner = /* GraphQL */ `
           description
           dates
           clientID
-          Client {
-            id
-            name
-            phone
-            email
-            website
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           partnerID
-          Partner {
-            id
-            name
-            contact
-            email
-            phone
-            referralCode
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           createdAt
           updatedAt
         }
@@ -998,36 +595,7 @@ export const deletePartner = /* GraphQL */ `
           description
           dates
           clientID
-          Client {
-            id
-            name
-            phone
-            email
-            website
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           partnerID
-          Partner {
-            id
-            name
-            contact
-            email
-            phone
-            referralCode
-            zipCode
-            state
-            city
-            street
-            number
-            createdAt
-            updatedAt
-          }
           createdAt
           updatedAt
         }

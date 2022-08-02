@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Button, Input, Select, Option } from '@material-tailwind/react';
-import { API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { updateClient } from '../../graphql/mutations';
 import Loading from '../../components/Loading';
 import Alert from '../../components/Alert';
@@ -18,6 +18,7 @@ const initial = {
 	state: '',
 	street: '',
 	number: '',
+	complement: '',
 };
 
 export default function Profile() {
@@ -27,6 +28,7 @@ export default function Profile() {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [formClient, setFormClient] = useState(initial);
+	const [clientLogo, setClientLogo] = useState();
 
 	useEffect(() => {
 		if (client) {
@@ -40,6 +42,7 @@ export default function Profile() {
 				state: client.state,
 				street: client.street,
 				number: client.number,
+				complement: client.complement,
 			});
 		}
 	}, [client]);
@@ -85,9 +88,18 @@ export default function Profile() {
 					state: formClient.state,
 					street: formClient.street,
 					number: formClient.number,
+					complement: formClient.complement,
 				},
 			})
 		);
+		if (clientLogo) {
+			await Storage.put(`logo/${client.id}.${clientLogo.name.split('.').pop()}`, clientLogo, {
+				contentType: clientLogo.type,
+				progressCallback(progress) {
+					console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+				},
+			});
+		}
 		loadClient();
 		navigate('/dashboard');
 		setLoading(false);
@@ -102,12 +114,12 @@ export default function Profile() {
 		setFormClient({ ...formClient, zipCode: normalizeCEP(value) });
 	}
 
-	const getAddress = async () => {
+	async function getAddress() {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
 		try {
-			const address = await getAddressFromCEP(formClient.zipCode.replace(/\D/g,''));
+			const address = await getAddressFromCEP(formClient.zipCode.replace(/\D/g, ''));
 			setFormClient({
 				...formClient,
 				state: address.state,
@@ -118,14 +130,50 @@ export default function Profile() {
 			setErrorMsg(err.message);
 			setError(true);
 		}
-		setLoading(false)
-	};
+		setLoading(false);
+	}
 
 	useEffect(() => {
 		if (formClient?.zipCode?.length === 10) {
 			getAddress();
 		}
 	}, [formClient.zipCode]);
+
+	function handleFile(e) {
+		setErrorMsg('');
+		setError(false);
+		if (e.target.files && e.target.files.length) {
+			const file = e.target.files[0];
+			if (file.size > 500 * 1024) {
+				setErrorMsg('Imagem pode ter no máximo 1mb!');
+				setError(true);
+				setLoading(false);
+				return null;
+			}
+			const acceptedTypes = ['image/png', 'image/jpeg'];
+			if (!acceptedTypes.includes(file.type)) {
+				setErrorMsg('Imagem deve ser PNG ou JPG!');
+				setError(true);
+				setLoading(false);
+				return null;
+			}
+			const acceptedExtensions = ['jpg', 'jpeg', 'png'];
+			if (!acceptedExtensions.includes(file.name.split('.').pop())) {
+				setErrorMsg('Imagem deve ser PNG ou JPG!');
+				setError(true);
+				setLoading(false);
+				return null;
+			}
+			setErrorMsg('');
+			setError(false);
+			setLoading(false);
+			setClientLogo(file);
+		}
+		setErrorMsg('');
+		setError(false);
+		setLoading(false);
+		return null;
+	}
 
 	return (
 		<>
@@ -231,7 +279,7 @@ export default function Profile() {
 							<Option value="TO">Tocantins</Option>
 						</Select>
 					</div>
-					<div className="w-full md:w-8/12 pr-4 mb-4">
+					<div className="w-full md:w-6/12 pr-4 mb-4">
 						<Input
 							value={formClient.street || ''}
 							onChange={(e) => setFormClient({ ...formClient, street: e.target.value })}
@@ -241,7 +289,7 @@ export default function Profile() {
 							label="Rua"
 						/>
 					</div>
-					<div className="w-full md:w-4/12 mb-4">
+					<div className="w-full md:w-3/12 pr-4 mb-4">
 						<Input
 							value={formClient.number || ''}
 							onChange={(e) => setFormClient({ ...formClient, number: e.target.value })}
@@ -249,6 +297,26 @@ export default function Profile() {
 							color="orange"
 							variant="standard"
 							label="Número"
+						/>
+					</div>
+					<div className="w-full md:w-3/12 mb-4">
+						<Input
+							value={formClient.complement || ''}
+							onChange={(e) => setFormClient({ ...formClient, complement: e.target.value })}
+							type="text"
+							color="orange"
+							variant="standard"
+							label="Complemento"
+						/>
+					</div>
+					<div className="w-full mb-4">
+						<Input
+							onChange={(e) => handleFile(e)}
+							type="file"
+							color="orange"
+							variant="standard"
+							label="Logo"
+							accept=".jpg,.jpeg,.png,image/png,image/jpeg"
 						/>
 					</div>
 					<div className="w-full flex justify-center">

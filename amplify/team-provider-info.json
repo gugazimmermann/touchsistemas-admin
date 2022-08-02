@@ -1,28 +1,20 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-touchsistemas-dev-03618-authRole",
-      "UnauthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemas-dev-03618-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemas-dev-03618-authRole",
+      "AuthRoleName": "amplify-touchsistemasadmin-dev-184442-authRole",
+      "UnauthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemasadmin-dev-184442-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemasadmin-dev-184442-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-touchsistemas-dev-03618-deployment",
-      "UnauthRoleName": "amplify-touchsistemas-dev-03618-unauthRole",
-      "StackName": "amplify-touchsistemas-dev-03618",
-      "StackId": "arn:aws:cloudformation:us-east-1:494458123866:stack/amplify-touchsistemas-dev-03618/1be930c0-114b-11ed-b269-0e9b6db2527b",
-      "AmplifyAppId": "d3nozf61rpgnzd",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-touchsistemas-dev-03618-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+      "DeploymentBucketName": "amplify-touchsistemasadmin-dev-184442-deployment",
+      "UnauthRoleName": "amplify-touchsistemasadmin-dev-184442-unauthRole",
+      "StackName": "amplify-touchsistemasadmin-dev-184442",
+      "StackId": "arn:aws:cloudformation:us-east-1:494458123866:stack/amplify-touchsistemasadmin-dev-184442/529429b0-12ac-11ed-8530-0e8d6118be6f",
+      "AmplifyAppId": "d3gdaytpbykri4"
     },
     "categories": {
       "auth": {
-        "userPoolGroups": {},
-        "touchsistemas": {}
-      },
-      "function": {
-        "touchsistemasPostConfirmation": {
-          "GROUP": "clients",
-          "deploymentBucketName": "amplify-touchsistemas-dev-03618-deployment",
-          "s3Key": "amplify-builds/touchsistemasPostConfirmation-416e4b43534f6f422b33-build.zip"
-        }
+        "touchsistemasadmin": {},
+        "true": {}
       }
     }
   }

@@ -1,9 +1,26 @@
-import { Navbar, Button, Menu, MenuHandler, MenuList, MenuItem } from '@material-tailwind/react';
+/* eslint-disable no-unused-vars */
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Navbar, Button, Menu, MenuHandler, MenuList, MenuItem } from '@material-tailwind/react';
+import { Storage } from 'aws-amplify';
 import LogoIcon from '../../../icons/LogoIcon';
 import AvatarIcon from '../../../icons/AvatarIcon';
 
 export default function Nav({ client, signout }) {
+	const [url, setUrl] = useState();
+
+	async function logo() {
+		const list = await Storage.list(`logo/${client.id}.png`);
+		if (list?.length) {
+			const getUrl = await Storage.get(list[0].key);
+			setUrl(getUrl);
+		}
+	}
+
+	useEffect(() => {
+		if (client) logo();
+	}, [client]);
+
 	return (
 		<Navbar className="mx-auto rounded-none px-0 py-0 pl-6">
 			<div className="container flex flex-row items-center justify-between p-0">
@@ -24,7 +41,7 @@ export default function Nav({ client, signout }) {
 					<Menu>
 						<MenuHandler>
 							<Button variant="text" color="orange">
-								<AvatarIcon styles="h-8 w-8 text-primary" />
+								{url ? <img alt="client logo" src={url} className="h-8 w-8 rounded" /> : <AvatarIcon styles="h-8 w-8 text-primary" />}
 							</Button>
 						</MenuHandler>
 						<MenuList>

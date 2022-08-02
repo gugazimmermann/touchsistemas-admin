@@ -1,0 +1,59 @@
+type Owner @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String! @index(name: "byName", queryField: "ownerByName")
+  phone: String!
+  email: String!
+  clientID: ID! @index(name: "byClient")
+  Client: Client @belongsTo
+}
+
+type Client @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String @index(name: "byName", queryField: "clientByName")
+  phone: String
+  email: String! @index(name: "byEmail", queryField: "clientByEmail")
+  website: String
+  zipCode: String
+  state: String
+  city: String
+  street: String
+  number: String
+  complement: String
+  Owners: [Owner] @hasMany(indexName: "byClient", fields: ["id"])
+  Events: [Event] @hasMany(indexName: "byClient", fields: ["id"])
+}
+
+type Event @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  referralCode: String!
+  plan: String!
+  name: String! @index(name: "byName", queryField: "eventByName")
+  website: String
+  email: String
+  zipCode: String!
+  state: String!
+  city: String!
+  street: String
+  number: String
+  description: String
+  dates: [String!]
+  clientID: ID! @index(name: "byClient")
+  Client: Client @belongsTo
+  partnerID: ID @index(name: "byPartner")
+  Partner: Partner @belongsTo
+}
+
+type Partner @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String!
+  contact: String!
+  email: String!
+  phone: String!
+  referralCode: String! @index(name: "byReferralCode", queryField: "eventByReferralCode")
+  zipCode: String!
+  state: String!
+  city: String!
+  street: String
+  Events: [Event] @hasMany(indexName: "byPartner", fields: ["id"])
+  number: String
+}

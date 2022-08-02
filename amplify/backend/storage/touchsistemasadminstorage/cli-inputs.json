@@ -1,0 +1,16 @@
+{
+  "resourceName": "touchsistemasadminstorage",
+  "policyUUID": "b5b315da",
+  "bucketName": "touchsistemasadminstorage",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

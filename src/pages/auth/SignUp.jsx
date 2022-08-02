@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Auth } from 'aws-amplify';
-import { DataStore } from '@aws-amplify/datastore';
 import { Input, Typography, Button } from '@material-tailwind/react';
-import { Client } from '../../models';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
+import { createClient } from '../../graphql/mutations';
 import SignUpImage from '../../icons/SignUp.svg';
 import LogoAuth from '../../components/LogoAuth';
 import Loading from '../../components/Loading';
@@ -26,7 +25,7 @@ export default function SignUp() {
 		}
 		try {
 			await Auth.signUp({ username: email, password: pwd, attributes: { email } });
-			await DataStore.save(new Client({ email }));
+			await API.graphql(graphqlOperation(createClient, {input:  { email }}));
 			setLoading(false);
 			navigate('/confirmar-cadastro', { state: { email } });
 		} catch (err) {

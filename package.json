@@ -14,7 +14,7 @@
     "lint": "eslint '*/**/*.{js,jsx,css,md,html,json}' --fix",
     "prettier": "prettier . --write",
     "prepare": "npm run prettier && npm run lint && npm test",
-    "pull": "amplify pull --appId d3nozf61rpgnzd --envName dev",
+    "pull": "amplify pull --appId d3gdaytpbykri4 --envName dev",
     "codegen": "rm -rf src/graphql src/models && amplify configure codegen && amplify codegen && amplify codegen models"
   },
   "engines": {

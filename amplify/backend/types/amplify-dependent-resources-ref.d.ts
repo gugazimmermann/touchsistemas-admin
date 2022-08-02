@@ -1,10 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "auth": {
-        "userPoolGroups": {
-            "clientsGroupRole": "string",
-            "adminsGroupRole": "string"
-        },
-        "touchsistemas": {
+        "touchsistemasadmin": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -14,23 +10,15 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientID": "string"
         }
     },
-    "function": {
-        "touchsistemasPostConfirmation": {
-            "Name": "string",
-            "Arn": "string",
-            "LambdaExecutionRole": "string",
-            "Region": "string"
-        }
-    },
     "api": {
-        "touchsistemas": {
+        "touchsistemasadmin": {
             "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
     },
     "storage": {
-        "s3touchsistemasstoragefiles": {
+        "touchsistemasadminstorage": {
             "BucketName": "string",
             "Region": "string"
         }

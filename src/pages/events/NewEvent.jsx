@@ -5,6 +5,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { Button, Input, Alert, Select, Option } from '@material-tailwind/react';
 import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
+import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 import Loading from '../../components/Loading';
 import { validateEmail } from '../../helpers';
@@ -46,7 +47,7 @@ export default function Profile() {
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [success, setSuccess] = useState(true);
+	const [success, setSuccess] = useState(false);
 	const [formEvent, setFormEvent] = useState(formEventInitialState);
 
 	function handleDatesChange(value) {
@@ -85,6 +86,13 @@ export default function Profile() {
 			setLoading(false);
 			return null;
 		}
+		let partnerID = null;
+		if (formEvent.referralCode) {
+			const allPartners = await API.graphql({ query: queries.listPartners });
+			const partner = allPartners.data.listPartners.items.find((p) => p.referralCode === formEvent.referralCode);
+			partnerID = partner.id;
+		}
+
 		await API.graphql(
 			graphqlOperation(mutations.createEvent, {
 				input: {
@@ -101,6 +109,7 @@ export default function Profile() {
 					description: formEvent.description,
 					dates: formEvent.dates,
 					clientID: client.id,
+					partnerID,
 				},
 			})
 		);

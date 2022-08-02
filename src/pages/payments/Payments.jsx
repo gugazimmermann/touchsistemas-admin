@@ -1,56 +1,54 @@
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from 'react';
+import moment from 'moment';
+import { useOutletContext } from 'react-router-dom';
+
 export default function Payments() {
-	const titulos = ['Evento', 'Plano', 'Valor', 'Status'];
-	const conteudo = [
-		{
-			evento: 'Argon Design System',
-			plano: 'Pró',
-			valor: '750,00',
-			status: 'aguardando',
-		},
-		{
-			evento: 'Black Dashboard Sketch',
-			plano: 'Avançado',
-			valor: '500,00',
-			status: 'aprovado',
-		},
-		{
-			evento: 'NodeJS Rulez Pw0ned',
-			plano: 'Básico',
-			valor: '350,00',
-			status: 'Básico',
-		},
-		{
-			evento: 'NodeJS Rulez Pw0ned',
-			plano: 'Básico',
-			valor: '350,00',
-			status: 'falha',
-		},
-	];
+	const [client] = useOutletContext();
+	const [payments, setPayments] = useState();
+	const [cardOwner, setCardOwner] = useState();
+
+	const planName = (plan) => {
+		if (plan === 'basic' || plan === 'Básico') return 'Básico';
+		if (plan === 'advanced' || plan === 'Avançado') return 'Avançado';
+		return 'Pró';
+	};
+
+	const planValue = (plan) => {
+		if (plan === 'basic' || plan === 'Básico') return '500,00';
+		if (plan === 'advanced' || plan === 'Avançado') return '800,00';
+		return '1.500,00';
+	};
 
 	const statusRow = (tipo) => {
-		if (tipo === 'aguardando') {
-			return (
-				<div className="flex flex-row items-center">
-					<i className="bx bxs-hourglass text-primary text-lg mr-2" />
-					<p>Aguardando</p>
-				</div>
-			);
-		}
-		if (tipo === 'falha') {
-			return (
-				<div className="flex flex-row items-center">
-					<i className="bx bx-x-circle text-danger text-xl mr-2" />
-					<p>Não Aprovado</p>
-				</div>
-			);
-		}
-		return (
-			<div className="flex flex-row items-center">
-				<i className="bx bx-check-circle text-secondary text-xl mr-2" />
-				<p>Efetuado</p>
-			</div>
-		);
+		if (tipo === 'aguardando') return <i className="bx bxs-hourglass text-primary text-lg mr-2" />;
+		if (tipo === 'falha') return <i className="bx bx-x-circle text-danger text-xl mr-2" />;
+		return <i className="bx bx-check-circle text-secondary text-xl mr-2" />;
 	};
+
+	useEffect(() => {
+		if (client) {
+			setCardOwner(client.Owners.items[0].name);
+			const eventsWithLastDay = client.Events.items.map((i) => ({
+				...i,
+				lastDay: i.dates.sort((a, b) => moment(b) - moment(a))[0],
+			}));
+			const orderEvents = eventsWithLastDay.sort((a, b) => moment(b.lastDay) - moment(a.lastDay));
+			const eventsPayments = [];
+			orderEvents.forEach((event) => {
+				eventsPayments.push({
+					evento: event.name,
+					plano: planName(event.plan),
+					data: moment(event.lastDay).add(1, 'day').format('DD/MM/YY'),
+					valor: planValue(event.plan),
+					status: 'paid',
+				});
+			});
+			setPayments(eventsPayments);
+		}
+	}, [client]);
+
+	const titulos = ['Evento', 'Plano', 'Data', 'Valor', 'Status'];
 
 	return (
 		<>
@@ -62,7 +60,7 @@ export default function Payments() {
 							{titulos.map((t) => (
 								<th
 									key={t}
-									className="px-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left"
+									className="px-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal"
 								>
 									{t}
 								</th>
@@ -70,22 +68,26 @@ export default function Payments() {
 						</tr>
 					</thead>
 					<tbody>
-						{conteudo.map((c) => (
-							<tr key={`${c.evento}${c.status}`}>
-								<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-									{c.evento}
-								</th>
-								<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-									{c.plano}
-								</th>
-								<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-									R$ {c.valor}
-								</th>
-								<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-									{statusRow(c.status)}
-								</th>
-							</tr>
-						))}
+						{payments &&
+							payments.map((c) => (
+								<tr key={`${c.evento}${c.status}`}>
+									<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
+										{c.evento}
+									</th>
+									<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
+										{c.plano}
+									</th>
+									<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
+										{c.data}
+									</th>
+									<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
+										R$ {c.valor}
+									</th>
+									<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
+										{statusRow(c.status)}
+									</th>
+								</tr>
+							))}
 					</tbody>
 				</table>
 			</div>
@@ -94,32 +96,32 @@ export default function Payments() {
 				<table className="items-center w-full bg-transparent border-collapse">
 					<thead>
 						<tr>
-							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+							<th className="px-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
 								Nome
 							</th>
-							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+							<th className="px-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
 								Número
 							</th>
-							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+							<th className="px-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
 								Validade
 							</th>
-							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+							<th className="px-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
 								Bandeira
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-								JOSE A Z NEGREIROS
+							<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
+								{cardOwner}
 							</th>
-							<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+							<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
 								1234 ... 5678
 							</th>
-							<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+							<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
 								10/28
 							</th>
-							<th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
+							<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
 								VISA
 							</th>
 						</tr>

@@ -68,7 +68,7 @@ export declare class Event {
   readonly dates?: string[] | null;
   readonly clientID: string;
   readonly Client?: Client | null;
-  readonly partnerID: string;
+  readonly partnerID?: string | null;
   readonly Partner?: Partner | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

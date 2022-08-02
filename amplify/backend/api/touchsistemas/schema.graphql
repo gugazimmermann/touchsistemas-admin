@@ -61,7 +61,7 @@ type Event
 	dates: [String!]
 	clientID: ID! @index(name: "byClient")
 	Client: Client @belongsTo
-	partnerID: ID! @index(name: "byPartner")
+	partnerID: ID @index(name: "byPartner")
 	Partner: Partner @belongsTo
 }
 

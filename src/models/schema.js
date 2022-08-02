@@ -418,7 +418,7 @@ export const schema = {
                     "name": "partnerID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "Partner": {
@@ -687,5 +687,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "dad16fddf37d55c4e935a4625d748264"
+    "version": "03d3b3ff952b430efbce53ed4a87c1a9"
 };

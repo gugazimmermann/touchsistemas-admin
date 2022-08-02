@@ -20,13 +20,13 @@ export default function Layout() {
 	}
 
 	async function loadClient() {
-		setLoading(true)
+		setLoading(true);
 		const clientID = decodeCookie(cookies?.touchsistemas)?.client;
 		const oneClient = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
 		// eslint-disable-next-line no-console
 		console.log(oneClient.data.getClient);
 		setClient(oneClient.data.getClient);
-		setLoading(false)
+		setLoading(false);
 	}
 
 	useEffect(() => {

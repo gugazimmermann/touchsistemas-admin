@@ -12,13 +12,11 @@ Amplify.configure(awsExports);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<CookiesProvider>
-				<ThemeProvider>
-					<App />
-				</ThemeProvider>
-			</CookiesProvider>
-		</BrowserRouter>
-	</React.StrictMode>
+	<BrowserRouter>
+		<CookiesProvider>
+			<ThemeProvider>
+				<App />
+			</ThemeProvider>
+		</CookiesProvider>
+	</BrowserRouter>
 );

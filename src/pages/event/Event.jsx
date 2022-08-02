@@ -12,11 +12,11 @@ export default function Event() {
 	const [event, setEvent] = useState();
 
 	async function getEvent(id) {
-    setLoading(true)
+		setLoading(true);
 		const oneEvent = await API.graphql(graphqlOperation(queries.getEvent, { id }));
-    console.log(oneEvent.data.getEvent)
+		console.log(oneEvent.data.getEvent);
 		setEvent(oneEvent.data.getEvent);
-    setLoading(false)
+		setLoading(false);
 	}
 
 	useEffect(() => {

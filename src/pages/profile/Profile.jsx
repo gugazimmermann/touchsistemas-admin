@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import { API, graphqlOperation } from 'aws-amplify';
 import { Button, Input, Alert } from '@material-tailwind/react';
 import * as mutations from '../../graphql/mutations';
@@ -25,6 +25,7 @@ const formOwnerInitialState = {
 };
 
 export default function Profile() {
+	const navigate = useNavigate();
 	const [client, loadClient] = useOutletContext();
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
@@ -66,7 +67,7 @@ export default function Profile() {
 			},
 		});
 		loadClient();
-		setFormOwner(formClientInitialState);
+		navigate('/dashboard');
 		setLoading(false);
 		return true;
 	}
@@ -151,7 +152,7 @@ export default function Profile() {
 							type="text"
 							color="orange"
 							variant="standard"
-							label="Nome"
+							label="Nome da Empresa"
 						/>
 					</div>
 					<div className="w-full md:w-6/12 mb-4">
@@ -241,7 +242,7 @@ export default function Profile() {
 					</div>
 				</div>
 			</form>
-			<h3 className="text-primary text-xl p-2">Proprietário</h3>
+			<h3 className="text-primary text-xl p-2">Responsáveis</h3>
 			<form className="mx-4">
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-4/12 pr-4 mb-4">
@@ -251,7 +252,7 @@ export default function Profile() {
 							type="text"
 							color="orange"
 							variant="standard"
-							label="Nome"
+							label="Nome do Responsável"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 pr-4 mb-4">
@@ -276,7 +277,7 @@ export default function Profile() {
 					</div>
 					<div className="w-full flex justify-center">
 						<Button size="sm" onClick={() => addOwner()} className="bg-primary">
-							Adicionar Proprietário
+							Adicionar Responsável
 						</Button>
 					</div>
 				</div>
@@ -286,13 +287,13 @@ export default function Profile() {
 					<table className="items-center w-full bg-transparent border-collapse">
 						<thead>
 							<tr>
-								<th className="px-2 text-sm font-normal text-primary border-b border-solid border-primary whitespace-nowrap text-left">
-									Nome
+								<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
+									Nome do Responsável
 								</th>
-								<th className="px-2 text-sm font-normal text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+								<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
 									Telefone
 								</th>
-								<th className="px-2 text-sm font-normal text-primary border-b border-solid border-primary whitespace-nowrap text-left">
+								<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
 									Email
 								</th>
 							</tr>

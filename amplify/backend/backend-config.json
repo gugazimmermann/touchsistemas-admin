@@ -101,16 +101,5 @@
       }
     }
   },
-  "storage": {
-    "touchsistemasf85149bc": {
-      "service": "S3",
-      "serviceType": "imported",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
-    },
-    "touchvisitors": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
-    }
-  }
+  "storage": {}
 }

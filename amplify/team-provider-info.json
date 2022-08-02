@@ -17,12 +17,6 @@
         "userPoolGroups": {},
         "touchsistemas": {}
       },
-      "storage": {
-        "touchsistemasf85149bc": {
-          "bucketName": "touchsistemas-storage",
-          "region": "us-east-1"
-        }
-      },
       "function": {
         "touchsistemasPostConfirmation": {
           "GROUP": "clients",

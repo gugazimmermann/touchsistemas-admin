@@ -1,0 +1,115 @@
+[
+  {
+    "question": "Como conheceu nosso evento?",
+    "type": "single",
+    "answers": [
+      "Amigos",
+      "Cartaz",
+      "Rádio",
+      "Internet",
+      "Outros"
+    ]
+  },
+  {
+    "question": "Foi fácil arrumar estacionamento?",
+    "type": "single",
+    "answers": [
+      "Sim",
+      "Não"
+    ]
+  },
+  {
+    "question": "O que achou da localização?",
+    "type": "single",
+    "answers": [
+      "Ruim",
+      "Boa",
+      "Ótima"
+    ]
+  },
+  {
+    "question": "Trouxe alguma criança (menor de 18) junto?",
+    "type": "single",
+    "answers": [
+      "Sim",
+      "Não"
+    ]
+  },
+  {
+    "question": "Visitou nosso evento por?",
+    "type": "multiple",
+    "answers": [
+      "Gosto do Rogério",
+      "Cerveja",
+      "Bandas",
+      "Food Trucks",
+      "Eventos",
+      "Visistar os Stands",
+      "Outros motivos"
+    ]
+  },
+  {
+    "question": "Quais estilos de cervejas são seus preferidos?",
+    "type": "multiple",
+    "answers": [
+      "Pilsen",
+      "Lager",
+      "Bock",
+      "Pale Ale",
+      "IPA",
+      "APA",
+      "Stout",
+      "Belgian",
+      "Saison",
+      "Sour",
+      "Rauchbier"
+    ]
+  },
+  {
+    "question": "Quais cervejarias experimentou?",
+    "type": "multiple",
+    "answers": [
+      "Bodebrown",
+      "Lohn",
+      "Lass Berg",
+      "Barra Sul",
+      "Green Coast",
+      "Notorious",
+      "Alles Blau",
+      "Cervejaria Blumenau",
+      "Itajahy",
+      "Sour",
+      "Rauchbier"
+    ]
+  },
+  {
+    "question": "Quais bandas mais gostou?",
+    "type": "multiple",
+    "answers": [
+      "Guess Rock",
+      "Max Way",
+      "Vintage Cult",
+      "Hot Rats",
+      "Fields Rock",
+      "The Headcutters",
+      "Hillbilly Rawhide",
+      "Stone Jokers",
+      "Universus",
+      "Children of the Beast",
+      "Rauchbier"
+    ]
+  },
+  {
+    "question": "Quais os FoodTruck que provou?",
+    "type": "multiple",
+    "answers": [
+      "Pizza",
+      "Mexicano",
+      "Hamburguer",
+      "Sorvete",
+      "Comida Alemã",
+      "Comida Arabe",
+      "Sorvete"
+    ]
+  }
+]

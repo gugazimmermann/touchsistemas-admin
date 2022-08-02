@@ -25,7 +25,7 @@ function Visitantes(id) {
 const genders = ['male', 'male', 'male', 'male', 'female', 'female', 'female', 'female', 'LGBTQIA+', 'LGBTQIA+'];
 
 (async () => {
-	let visitors = [];
+	const visitors = [];
 	for (const event of beerhouse) {
 		const visitantesPorCidade = Visitantes(event.id);
 		for (const date of event.date) {

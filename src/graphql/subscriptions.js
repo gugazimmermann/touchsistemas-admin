@@ -28,12 +28,8 @@ export const onCreateOwner = /* GraphQL */ `
             id
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         Events {
           items {
@@ -54,25 +50,15 @@ export const onCreateOwner = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       id
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -103,12 +89,8 @@ export const onUpdateOwner = /* GraphQL */ `
             id
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         Events {
           items {
@@ -129,25 +111,15 @@ export const onUpdateOwner = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       id
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -178,12 +150,8 @@ export const onDeleteOwner = /* GraphQL */ `
             id
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         Events {
           items {
@@ -204,25 +172,15 @@ export const onDeleteOwner = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       id
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -258,19 +216,12 @@ export const onCreateClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           id
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       Events {
         items {
@@ -301,9 +252,6 @@ export const onCreateClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           partnerID
           Partner {
@@ -320,24 +268,14 @@ export const onCreateClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -373,19 +311,12 @@ export const onUpdateClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           id
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       Events {
         items {
@@ -416,9 +347,6 @@ export const onUpdateClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           partnerID
           Partner {
@@ -435,24 +363,14 @@ export const onUpdateClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -488,19 +406,12 @@ export const onDeleteClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           id
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       Events {
         items {
@@ -531,9 +442,6 @@ export const onDeleteClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           partnerID
           Partner {
@@ -550,24 +458,14 @@ export const onDeleteClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -608,12 +506,8 @@ export const onCreateEvent = /* GraphQL */ `
             id
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         Events {
           items {
@@ -634,18 +528,11 @@ export const onCreateEvent = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       partnerID
       Partner {
@@ -678,25 +565,15 @@ export const onCreateEvent = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         number
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -737,12 +614,8 @@ export const onUpdateEvent = /* GraphQL */ `
             id
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         Events {
           items {
@@ -763,18 +636,11 @@ export const onUpdateEvent = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       partnerID
       Partner {
@@ -807,25 +673,15 @@ export const onUpdateEvent = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         number
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -866,12 +722,8 @@ export const onDeleteEvent = /* GraphQL */ `
             id
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         Events {
           items {
@@ -892,18 +744,11 @@ export const onDeleteEvent = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       partnerID
       Partner {
@@ -936,25 +781,15 @@ export const onDeleteEvent = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         number
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1000,9 +835,6 @@ export const onCreatePartner = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           partnerID
           Partner {
@@ -1019,25 +851,15 @@ export const onCreatePartner = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       number
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1083,9 +905,6 @@ export const onUpdatePartner = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           partnerID
           Partner {
@@ -1102,25 +921,15 @@ export const onUpdatePartner = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       number
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1166,9 +975,6 @@ export const onDeletePartner = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           partnerID
           Partner {
@@ -1185,25 +991,15 @@ export const onDeletePartner = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       number
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

@@ -28,12 +28,8 @@ export const getOwner = /* GraphQL */ `
             id
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         Events {
           items {
@@ -54,25 +50,15 @@ export const getOwner = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       id
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -101,82 +87,18 @@ export const listOwners = /* GraphQL */ `
           number
           Owners {
             nextToken
-            startedAt
           }
           Events {
             nextToken
-            startedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         id
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncOwners = /* GraphQL */ `
-  query SyncOwners(
-    $filter: ModelOwnerFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncOwners(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        name
-        phone
-        email
-        clientID
-        Client {
-          id
-          name
-          phone
-          email
-          website
-          zipCode
-          state
-          city
-          street
-          number
-          Owners {
-            nextToken
-            startedAt
-          }
-          Events {
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -212,19 +134,12 @@ export const getClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           id
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       Events {
         items {
@@ -255,9 +170,6 @@ export const getClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           partnerID
           Partner {
@@ -274,24 +186,14 @@ export const getClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -322,12 +224,8 @@ export const listClients = /* GraphQL */ `
             id
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         Events {
           items {
@@ -348,98 +246,13 @@ export const listClients = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncClients = /* GraphQL */ `
-  query SyncClients(
-    $filter: ModelClientFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncClients(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        phone
-        email
-        website
-        zipCode
-        state
-        city
-        street
-        number
-        Owners {
-          items {
-            name
-            phone
-            email
-            clientID
-            id
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -480,12 +293,8 @@ export const getEvent = /* GraphQL */ `
             id
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         Events {
           items {
@@ -506,18 +315,11 @@ export const getEvent = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       partnerID
       Partner {
@@ -550,25 +352,15 @@ export const getEvent = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         number
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -607,17 +399,12 @@ export const listEvents = /* GraphQL */ `
           number
           Owners {
             nextToken
-            startedAt
           }
           Events {
             nextToken
-            startedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         partnerID
         Partner {
@@ -633,110 +420,15 @@ export const listEvents = /* GraphQL */ `
           street
           Events {
             nextToken
-            startedAt
           }
           number
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncEvents = /* GraphQL */ `
-  query SyncEvents(
-    $filter: ModelEventFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncEvents(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        referralCode
-        plan
-        name
-        website
-        email
-        zipCode
-        state
-        city
-        street
-        number
-        description
-        dates
-        clientID
-        Client {
-          id
-          name
-          phone
-          email
-          website
-          zipCode
-          state
-          city
-          street
-          number
-          Owners {
-            nextToken
-            startedAt
-          }
-          Events {
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        partnerID
-        Partner {
-          id
-          name
-          contact
-          email
-          phone
-          referralCode
-          zipCode
-          state
-          city
-          street
-          Events {
-            nextToken
-            startedAt
-          }
-          number
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -782,9 +474,6 @@ export const getPartner = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           partnerID
           Partner {
@@ -801,25 +490,15 @@ export const getPartner = /* GraphQL */ `
             number
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       number
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -860,84 +539,14 @@ export const listPartners = /* GraphQL */ `
             partnerID
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         number
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncPartners = /* GraphQL */ `
-  query SyncPartners(
-    $filter: ModelPartnerFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPartners(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        contact
-        email
-        phone
-        referralCode
-        zipCode
-        state
-        city
-        street
-        Events {
-          items {
-            id
-            referralCode
-            plan
-            name
-            website
-            email
-            zipCode
-            state
-            city
-            street
-            number
-            description
-            dates
-            clientID
-            partnerID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        number
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;

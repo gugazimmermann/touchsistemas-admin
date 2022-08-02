@@ -1,27 +1,23 @@
 {
-	"version": 1,
-	"serviceConfiguration": {
-		"apiName": "touchsistemas",
-		"serviceName": "AppSync",
-		"gqlSchemaPath": "/tmp/amplify-34dd1cc0-7438-497a-bd58-17af0b1e49b4/amplify/backend/api/touchsistemas/schema.graphql",
-		"defaultAuthType": {
-			"mode": "API_KEY",
-			"keyDescription": "api key description",
-			"expirationTime": 30
-		},
-		"conflictResolution": {
-			"defaultResolutionStrategy": {
-				"type": "AUTOMERGE"
-			}
-		},
-		"additionalAuthTypes": [
-			{
-				"mode": "AWS_IAM"
-			},
-			{
-				"mode": "AMAZON_COGNITO_USER_POOLS",
-				"cognitoUserPoolId": "authtouchsistemas"
-			}
-		]
-	}
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "touchsistemas",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/home/guga/touchsistemas.com.br/touchsistemas-admin/amplify/backend/api/touchsistemas/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "keyDescription": "api key description",
+      "expirationTime": 30
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      },
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authtouchsistemas"
+      }
+    ]
+  }
 }

@@ -177,7 +177,7 @@ export default function NewEvent() {
 		);
 		if (eventLogo) {
 			await Storage.put(`logo/${newEvent.data.createEvent.id}.${eventLogo.name.split('.').pop()}`, eventLogo, {
-				contentType: eventLogo.type
+				contentType: eventLogo.type,
 			});
 		}
 		loadClient();
@@ -241,7 +241,7 @@ export default function NewEvent() {
 						/>
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
-					<select
+						<select
 							value={formEvent.state || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, state: e.target.value })}
 							placeholder="Estado"

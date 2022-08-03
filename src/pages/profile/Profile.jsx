@@ -185,7 +185,7 @@ export default function Profile() {
 							value={formClient.name || ''}
 							onChange={(e) => setFormClient({ ...formClient, name: e.target.value })}
 							type="text"
-							label="Nome da Empresa"
+							placeholder="Nome da Empresa"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
@@ -194,7 +194,7 @@ export default function Profile() {
 							value={formClient.phone || ''}
 							onChange={(e) => handleChangePhone(e.target.value)}
 							type="text"
-							label="Telefone"
+							placeholder="Telefone"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
@@ -202,7 +202,7 @@ export default function Profile() {
 						<input
 							value={formClient.email || ''}
 							type="text"
-							label="Email"
+							placeholder="Email"
 							disabled
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
@@ -212,7 +212,7 @@ export default function Profile() {
 							value={formClient.website || ''}
 							onChange={(e) => setFormClient({ ...formClient, website: e.target.value })}
 							type="text"
-							label="WebSite"
+							placeholder="WebSite"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
@@ -221,7 +221,7 @@ export default function Profile() {
 							value={formClient.zipCode || ''}
 							onChange={(e) => handleChangeCEP(e.target.value)}
 							type="text"
-							label="CEP"
+							placeholder="CEP"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
@@ -230,7 +230,7 @@ export default function Profile() {
 							value={formClient.city || ''}
 							onChange={(e) => setFormClient({ ...formClient, city: e.target.value })}
 							type="text"
-							label="Cidade"
+							placeholder="Cidade"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
@@ -238,9 +238,10 @@ export default function Profile() {
 						<select
 							value={formClient.state || ''}
 							onChange={(e) => setFormClient({ ...formClient, state: e.target.value })}
-							label="Estado"
+							placeholder="Estado"
 							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						>
+							<option value="">Selecione</option>
 							<option value="AC">Acre</option>
 							<option value="AL">Alagoas</option>
 							<option value="AP">Amapá</option>
@@ -275,7 +276,7 @@ export default function Profile() {
 							value={formClient.street || ''}
 							onChange={(e) => setFormClient({ ...formClient, street: e.target.value })}
 							type="text"
-							label="Rua"
+							placeholder="Rua"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
@@ -284,7 +285,7 @@ export default function Profile() {
 							value={formClient.number || ''}
 							onChange={(e) => setFormClient({ ...formClient, number: e.target.value })}
 							type="text"
-							label="Número"
+							placeholder="Número"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
@@ -293,7 +294,7 @@ export default function Profile() {
 							value={formClient.complement || ''}
 							onChange={(e) => setFormClient({ ...formClient, complement: e.target.value })}
 							type="text"
-							label="Complemento"
+							placeholder="Complemento"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
@@ -301,7 +302,7 @@ export default function Profile() {
 						<input
 							onChange={(e) => handleFile(e)}
 							type="file"
-							label="Logo"
+							placeholder="Logo"
 							accept=".jpg,.jpeg,.png,image/png,image/jpeg"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>

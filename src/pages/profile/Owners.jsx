@@ -107,8 +107,8 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 							else setSelected({ ...selected, name: e.target.value });
 						}}
 						type="text"
-						label="Nome do Responsável"
-						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						placeholder="Nome do Responsável"
+						className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
 				<div className="w-full md:w-4/12 pr-4 mb-4">
@@ -116,8 +116,8 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 						value={!update ? owner?.phone : selected?.phone[0] === '+' ? selected?.phone.slice(4) : selected?.phone}
 						onChange={(e) => handleChangePhone(e.target.value)}
 						type="text"
-						label="Telefone"
-						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						placeholder="Telefone"
+						className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
 				<div className="w-full md:w-4/12 mb-4">
@@ -129,7 +129,8 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 						}}
 						type="email"
 						color="orange"
-						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						placeholder='Email'
+						className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
 				<div className="w-full flex justify-center">

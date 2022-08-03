@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { API, graphqlOperation } from 'aws-amplify';
-import { Button, Input, Alert, Select, Option } from '@material-tailwind/react';
 import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
 import { partnerByReferralCode } from '../../../graphql/queries';
 import { createEvent } from '../../../graphql/mutations';
 import Loading from '../../../components/Loading';
+import Alert from '../../../components/Alert';
 import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../../helpers';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -147,97 +147,81 @@ export default function NewEvent() {
 	return (
 		<>
 			{loading && <Loading />}
-			{error && (
-				<div className="mx-4 my-4">
-					<Alert color="red">{errorMsg}</Alert>
-				</div>
-			)}
-			{success && (
-				<div className="mx-4 my-4">
-					<Alert color="green">Evento Cadastrado com Sucesso</Alert>
-				</div>
-			)}
+			{error && <Alert type="danger">{errorMsg}</Alert>}
+			{success && <Alert type="success">Evento Cadastrado com Sucesso</Alert>}
 			<h2 className="text-primary text-xl p-2 pt-6">Novo Evento</h2>
 			<form className="mx-4">
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-4/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formEvent.name || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, name: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
-							label="Nome *"
+							placeholder="Nome *"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formEvent.website || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, website: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
-							label="WebSite"
+							placeholder="WebSite"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
-						<Input
+						<input
 							value={formEvent.email || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, email: e.target.value })}
-							type="text"
-							color="orange"
-							variant="standard"
-							label="Email"
+							type="email"
+							placeholder="Email"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formEvent.zipCode || ''}
 							onChange={(e) => handleChangeCEP(e.target.value)}
 							type="text"
-							color="orange"
-							variant="standard"
-							label="CEP *"
+							placeholder="CEP *"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formEvent.city || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, city: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
-							label="Cidade *"
+							placeholder="Cidade *"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
-						<Input
+						<input
 							value={formEvent.state || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, state: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
-							label="Estado *"
+							placeholder="Estado *"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-8/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formEvent.street || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, street: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
-							label="Rua"
+							placeholder="Rua"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formEvent.number || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, number: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
-							label="Número"
+							placeholder="Número"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full mb-10">
@@ -259,31 +243,34 @@ export default function NewEvent() {
 						/>
 					</div>
 					<div className="w-full md:w-6/12 pr-4 mb-4">
-						<Select
+						<select
 							onChange={(e) => setFormEvent({ ...formEvent, plan: e })}
-							color="orange"
-							variant="standard"
-							label="Selecione o Plano *"
+							placeholder="Selecione o Plano *"
+							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						>
-							<Option value="Básico">Básico</Option>
-							<Option value="Avançado">Avançado</Option>
-							<Option value="Pró">Pró</Option>
-						</Select>
+							<option value="">Selecione</option>
+							<option value="Básico">Básico - R$ 500,00</option>
+							<option value="Avançado">Avançado - R$ 800,00</option>
+							<option value="Pró">Pró - R$ 1.500,00</option>
+						</select>
 					</div>
 					<div className="w-full md:w-6/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formEvent.referralCode || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, referralCode: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
-							label="Código de Referência"
+							placeholder="Código de Referência"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full flex justify-center">
-						<Button size="sm" onClick={() => handleAdd()} className="bg-primary">
+						<button 
+						type='button'
+						onClick={() => handleAdd()} 
+						className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out"
+						>
 							Adicionar Novo Evento
-						</Button>
+						</button>
 					</div>
 				</div>
 			</form>

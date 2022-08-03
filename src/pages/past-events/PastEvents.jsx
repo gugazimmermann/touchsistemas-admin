@@ -1,9 +1,10 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import GoogleMapReact from 'google-map-react';
-import { Avatar } from '@material-tailwind/react';
+import { Storage } from 'aws-amplify';
 
 function Marker({ color }) {
 	return <i className={`bx bxs-map text-2xl ${color}`} />;
@@ -24,17 +25,25 @@ export default function PastEvents() {
 		navigate(`/evento/${id}`);
 	}
 
-	useEffect(() => {
-		if (client) {
-			const showEvents = [];
-			const eventsWithLastDay = client.Events.items.map((i) => ({
-				...i,
-				lastDay: i.dates.sort((a, b) => moment(b) - moment(a))[0],
-			}));
-			const orderEvents = eventsWithLastDay.sort((a, b) => moment(b.lastDay) - moment(a.lastDay));
-			orderEvents.forEach((e) => moment(e.lastDay) < moment() && showEvents.push(e));
-			setEvents(showEvents);
+	async function orderEvents() {
+		const showEvents = [];
+		const eventsWithLastDay = client.Events.items.map((i) => ({
+			...i,
+			lastDay: i.dates.sort((a, b) => moment(b) - moment(a))[0],
+		}));
+		const sortEvents = eventsWithLastDay.sort((a, b) => moment(b.lastDay) - moment(a.lastDay));
+		for (const e of sortEvents) {
+			if (moment(e.lastDay, 'YYYY-MM-DD').unix() < moment(Date.now()).unix()) {
+				const list = await Storage.list(`logo/${e.id}.png`);
+				if (list?.length) e.avatar = await Storage.get(list[0].key);
+				showEvents.push(e)
+			}
 		}
+		setEvents(showEvents);
+	}
+
+	useEffect(() => {
+		if (client) orderEvents()
 	}, [client]);
 
 	return (
@@ -63,12 +72,8 @@ export default function PastEvents() {
 							{events &&
 								events.map((event) => (
 									<tr key={event.id} onClick={() => handleEvent(event.id)} className="cursor-pointer hover:bg-gray-100">
-										<th className="border-b border-gray-200 align-middle">
-											<Avatar
-												src={`https://touchsistemas-storage.s3.amazonaws.com/public/${event.id}.png`}
-												alt={event.name}
-												size="sm"
-											/>
+										<th className="border-b border-gray-200 align-middle px-2 text-center w-14">
+											<img src={event.avatar} alt={event.name} className="h-10 w-10 rounded" />
 										</th>
 										<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
 											{event.name}

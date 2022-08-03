@@ -25,7 +25,7 @@ export default function SignUp() {
 		}
 		try {
 			await Auth.signUp({ username: email, password: pwd, attributes: { email } });
-			await API.graphql(graphqlOperation(createClient, {input:  { email }}));
+			await API.graphql(graphqlOperation(createClient, { input: { email } }));
 			setLoading(false);
 			navigate('/confirmar-cadastro', { state: { email } });
 		} catch (err) {

@@ -9,7 +9,9 @@ describe('App tests', () => {
 				<App />
 			</MemoryRouter>
 		);
-			const { getByText } = within(screen.getByTestId('loading'));
-			await waitFor(() => { expect(getByText('Aguarde...')).toBeInTheDocument(); });
+		const { getByText } = within(screen.getByTestId('loading'));
+		await waitFor(() => {
+			expect(getByText('Aguarde...')).toBeInTheDocument();
+		});
 	});
 });

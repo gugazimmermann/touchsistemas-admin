@@ -25,9 +25,37 @@ export const createOwner = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -62,9 +90,37 @@ export const updateOwner = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -99,9 +155,37 @@ export const deleteOwner = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -136,6 +220,21 @@ export const createClient = /* GraphQL */ `
           phone
           email
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -157,7 +256,37 @@ export const createClient = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -192,6 +321,21 @@ export const updateClient = /* GraphQL */ `
           phone
           email
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -213,7 +357,37 @@ export const updateClient = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -248,6 +422,21 @@ export const deleteClient = /* GraphQL */ `
           phone
           email
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -269,7 +458,37 @@ export const deleteClient = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -313,9 +532,37 @@ export const createEvent = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -334,6 +581,25 @@ export const createEvent = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -378,9 +644,37 @@ export const updateEvent = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -399,6 +693,25 @@ export const updateEvent = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -443,9 +756,37 @@ export const deleteEvent = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -464,6 +805,25 @@ export const deleteEvent = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -507,7 +867,37 @@ export const createPartner = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -551,7 +941,37 @@ export const updatePartner = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -595,7 +1015,37 @@ export const deletePartner = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }

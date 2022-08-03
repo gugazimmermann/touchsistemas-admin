@@ -31,7 +31,9 @@ export default function SignIn() {
 			else await Auth.forgetDevice();
 
 			const client = await API.graphql(graphqlOperation(clientByEmail, { email }));
-			const encodedContent = encodeCookie(JSON.stringify({ uuid: auth.username, email, client: client.data.clientByEmail.items[0].id }));
+			const encodedContent = encodeCookie(
+				JSON.stringify({ uuid: auth.username, email, client: client.data.clientByEmail.items[0].id })
+			);
 			const date = new Date();
 			date.setDate(date.getDate() + 365);
 			setCookie('touchsistemas', encodedContent, { expires: date, path: '/' });

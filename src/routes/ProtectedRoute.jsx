@@ -9,11 +9,11 @@ export default function ProtectedRoute() {
 	const seeUser = async () => {
 		try {
 			await Auth.currentAuthenticatedUser();
-			return true
+			return true;
 		} catch (err) {
 			return false;
 		}
-	}
+	};
 
 	if (!decodeCookie(cookies?.touchsistemas)?.client || !seeUser()) {
 		return <Navigate to="/" replace />;

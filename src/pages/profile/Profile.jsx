@@ -96,6 +96,7 @@ export default function Profile() {
 			await Storage.put(`logo/${client.id}.${clientLogo.name.split('.').pop()}`, clientLogo, {
 				contentType: clientLogo.type,
 				progressCallback(progress) {
+					// eslint-disable-next-line no-console
 					console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
 				},
 			});
@@ -134,9 +135,7 @@ export default function Profile() {
 	}
 
 	useEffect(() => {
-		if (formClient?.zipCode?.length === 10) {
-			getAddress();
-		}
+		if (formClient?.zipCode?.length === 10) getAddress();
 	}, [formClient.zipCode]);
 
 	function handleFile(e) {

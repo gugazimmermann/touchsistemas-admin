@@ -22,9 +22,37 @@ export const getOwner = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -60,6 +88,12 @@ export const listOwners = /* GraphQL */ `
           street
           number
           complement
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -91,6 +125,21 @@ export const getClient = /* GraphQL */ `
           phone
           email
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -112,7 +161,37 @@ export const getClient = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -143,9 +222,37 @@ export const listClients = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -185,9 +292,37 @@ export const getEvent = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -206,6 +341,25 @@ export const getEvent = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -251,6 +405,12 @@ export const listEvents = /* GraphQL */ `
           street
           number
           complement
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -266,6 +426,9 @@ export const listEvents = /* GraphQL */ `
           state
           city
           street
+          Events {
+            nextToken
+          }
           number
           createdAt
           updatedAt
@@ -306,7 +469,37 @@ export const getPartner = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -337,6 +530,25 @@ export const listPartners = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -380,6 +592,12 @@ export const ownerByName = /* GraphQL */ `
           street
           number
           complement
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -418,9 +636,37 @@ export const clientByName = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -458,9 +704,37 @@ export const clientByEmail = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -512,6 +786,12 @@ export const eventByName = /* GraphQL */ `
           street
           number
           complement
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -527,6 +807,9 @@ export const eventByName = /* GraphQL */ `
           state
           city
           street
+          Events {
+            nextToken
+          }
           number
           createdAt
           updatedAt
@@ -538,15 +821,15 @@ export const eventByName = /* GraphQL */ `
     }
   }
 `;
-export const eventByReferralCode = /* GraphQL */ `
-  query EventByReferralCode(
+export const partnerByReferralCode = /* GraphQL */ `
+  query PartnerByReferralCode(
     $referralCode: String!
     $sortDirection: ModelSortDirection
     $filter: ModelPartnerFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    eventByReferralCode(
+    partnerByReferralCode(
       referralCode: $referralCode
       sortDirection: $sortDirection
       filter: $filter
@@ -565,6 +848,25 @@ export const eventByReferralCode = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number

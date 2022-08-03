@@ -14,8 +14,13 @@ export default function Layout() {
 	const [loading, setLoading] = useState(false);
 
 	async function signOut() {
-		await Auth.signOut();
-		await Auth.forgetDevice();
+		try {
+			await Auth.signOut();
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			console.log(error);
+		}
+
 		removeCookie('touchsistemas');
 		navigate('/');
 	}

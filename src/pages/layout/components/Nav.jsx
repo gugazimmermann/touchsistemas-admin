@@ -41,7 +41,11 @@ export default function Nav({ client, signout }) {
 					<Menu>
 						<MenuHandler>
 							<Button variant="text" color="orange">
-								{url ? <img alt="client logo" src={url} className="h-8 w-8 rounded" /> : <AvatarIcon styles="h-8 w-8 text-primary" />}
+								{url ? (
+									<img alt="client logo" src={url} className="h-8 w-8 rounded" />
+								) : (
+									<AvatarIcon styles="h-8 w-8 text-primary" />
+								)}
 							</Button>
 						</MenuHandler>
 						<MenuList>

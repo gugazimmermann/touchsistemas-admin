@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { API, graphqlOperation } from 'aws-amplify';
 import { Button, Input, Alert, Select, Option } from '@material-tailwind/react';
 import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
-import * as queries from '../../graphql/queries';
-import * as mutations from '../../graphql/mutations';
+import { partnerByReferralCode } from '../../graphql/queries';
+import { createEvent } from '../../graphql/mutations';
 import Loading from '../../components/Loading';
-import { getAddressFromCEP, validateEmail } from '../../helpers';
+import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const months = [
@@ -26,7 +25,7 @@ const months = [
 	'Dezembro',
 ];
 
-const formEventInitialState = {
+const initial = {
 	referralCode: '',
 	plan: '',
 	name: '',
@@ -47,7 +46,7 @@ export default function Profile() {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
-	const [formEvent, setFormEvent] = useState(formEventInitialState);
+	const [formEvent, setFormEvent] = useState(initial);
 
 	function handleDatesChange(value) {
 		const dates = value.toString().split(',');
@@ -55,9 +54,16 @@ export default function Profile() {
 		setFormEvent({ ...formEvent, dates: fomartedDates });
 	}
 
-	const getAddress = async () => {
+	function handleChangeCEP(value) {
+		setFormEvent({ ...formEvent, zipCode: normalizeCEP(value) });
+	}
+
+	async function getAddress() {
+		setErrorMsg('');
+		setError(false);
+		setLoading(true);
 		try {
-			const address = await getAddressFromCEP(formEvent.zipCode);
+			const address = await getAddressFromCEP(formEvent.zipCode.replace(/\D/g, ''));
 			setFormEvent({
 				...formEvent,
 				state: address.state,
@@ -65,17 +71,17 @@ export default function Profile() {
 				street: address.street,
 			});
 		} catch (err) {
-			setErrorMsg(err);
+			setErrorMsg(err.message);
+			setError(true);
 		}
-	};
+		setLoading(false);
+	}
 
 	useEffect(() => {
-		if (formEvent?.zipCode?.length === 10) {
-			getAddress();
-		}
+		if (formEvent?.zipCode?.length === 10) getAddress();
 	}, [formEvent.zipCode]);
 
-	async function addEvent() {
+	async function handleAdd() {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
@@ -85,15 +91,34 @@ export default function Profile() {
 			setLoading(false);
 			return null;
 		}
+		if (formEvent.email && !validateEmail(formEvent.email)) {
+			setErrorMsg('Email inválido!');
+			setError(true);
+			setLoading(false);
+			return null;
+		}
+		if (formEvent.zipCode.length < 10) {
+			setErrorMsg('CEP inválido!');
+			setError(true);
+			setLoading(false);
+			return null;
+		}
 		let partnerID = null;
 		if (formEvent.referralCode) {
-			const allPartners = await API.graphql({ query: queries.listPartners });
-			const partner = allPartners.data.listPartners.items.find((p) => p.referralCode === formEvent.referralCode);
-			partnerID = partner.id;
+			const getPartner = await API.graphql(
+				graphqlOperation(partnerByReferralCode, { referralCode: formEvent.referralCode })
+			);
+			if (!getPartner?.data?.partnerByReferralCode?.items && !getPartner?.data?.partnerByReferralCode?.items.length) {
+				setErrorMsg('Parceiro não encontrado!');
+				setError(true);
+				setLoading(false);
+				return null;
+			}
+			partnerID = getPartner.data.partnerByReferralCode.items[0].id;
 		}
 
 		await API.graphql(
-			graphqlOperation(mutations.createEvent, {
+			graphqlOperation(createEvent, {
 				input: {
 					referralCode: formEvent.referralCode,
 					plan: formEvent.plan,
@@ -113,7 +138,7 @@ export default function Profile() {
 			})
 		);
 		loadClient();
-		setFormEvent(formEventInitialState);
+		setFormEvent(initial);
 		setSuccess(true);
 		setLoading(false);
 		return true;
@@ -168,7 +193,7 @@ export default function Profile() {
 					<div className="w-full md:w-4/12 pr-4 mb-4">
 						<Input
 							value={formEvent.zipCode || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, zipCode: e.target.value })}
+							onChange={(e) => handleChangeCEP(e.target.value)}
 							type="text"
 							color="orange"
 							variant="standard"
@@ -256,7 +281,7 @@ export default function Profile() {
 						/>
 					</div>
 					<div className="w-full flex justify-center">
-						<Button size="sm" onClick={() => addEvent()} className="bg-primary">
+						<Button size="sm" onClick={() => handleAdd()} className="bg-primary">
 							Adicionar Novo Evento
 						</Button>
 					</div>

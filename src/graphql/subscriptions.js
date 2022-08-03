@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateOwner = /* GraphQL */ `
-  subscription OnCreateOwner {
-    onCreateOwner {
+  subscription OnCreateOwner($filter: ModelSubscriptionOwnerFilterInput) {
+    onCreateOwner(filter: $filter) {
       id
       name
       phone
@@ -22,9 +22,37 @@ export const onCreateOwner = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -36,8 +64,8 @@ export const onCreateOwner = /* GraphQL */ `
   }
 `;
 export const onUpdateOwner = /* GraphQL */ `
-  subscription OnUpdateOwner {
-    onUpdateOwner {
+  subscription OnUpdateOwner($filter: ModelSubscriptionOwnerFilterInput) {
+    onUpdateOwner(filter: $filter) {
       id
       name
       phone
@@ -56,9 +84,37 @@ export const onUpdateOwner = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -70,8 +126,8 @@ export const onUpdateOwner = /* GraphQL */ `
   }
 `;
 export const onDeleteOwner = /* GraphQL */ `
-  subscription OnDeleteOwner {
-    onDeleteOwner {
+  subscription OnDeleteOwner($filter: ModelSubscriptionOwnerFilterInput) {
+    onDeleteOwner(filter: $filter) {
       id
       name
       phone
@@ -90,9 +146,37 @@ export const onDeleteOwner = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -104,8 +188,8 @@ export const onDeleteOwner = /* GraphQL */ `
   }
 `;
 export const onCreateClient = /* GraphQL */ `
-  subscription OnCreateClient {
-    onCreateClient {
+  subscription OnCreateClient($filter: ModelSubscriptionClientFilterInput) {
+    onCreateClient(filter: $filter) {
       id
       name
       phone
@@ -124,6 +208,21 @@ export const onCreateClient = /* GraphQL */ `
           phone
           email
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -145,7 +244,37 @@ export const onCreateClient = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -157,8 +286,8 @@ export const onCreateClient = /* GraphQL */ `
   }
 `;
 export const onUpdateClient = /* GraphQL */ `
-  subscription OnUpdateClient {
-    onUpdateClient {
+  subscription OnUpdateClient($filter: ModelSubscriptionClientFilterInput) {
+    onUpdateClient(filter: $filter) {
       id
       name
       phone
@@ -177,6 +306,21 @@ export const onUpdateClient = /* GraphQL */ `
           phone
           email
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -198,7 +342,37 @@ export const onUpdateClient = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -210,8 +384,8 @@ export const onUpdateClient = /* GraphQL */ `
   }
 `;
 export const onDeleteClient = /* GraphQL */ `
-  subscription OnDeleteClient {
-    onDeleteClient {
+  subscription OnDeleteClient($filter: ModelSubscriptionClientFilterInput) {
+    onDeleteClient(filter: $filter) {
       id
       name
       phone
@@ -230,6 +404,21 @@ export const onDeleteClient = /* GraphQL */ `
           phone
           email
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -251,7 +440,37 @@ export const onDeleteClient = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -263,8 +482,8 @@ export const onDeleteClient = /* GraphQL */ `
   }
 `;
 export const onCreateEvent = /* GraphQL */ `
-  subscription OnCreateEvent {
-    onCreateEvent {
+  subscription OnCreateEvent($filter: ModelSubscriptionEventFilterInput) {
+    onCreateEvent(filter: $filter) {
       id
       referralCode
       plan
@@ -292,9 +511,37 @@ export const onCreateEvent = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -313,6 +560,25 @@ export const onCreateEvent = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -325,8 +591,8 @@ export const onCreateEvent = /* GraphQL */ `
   }
 `;
 export const onUpdateEvent = /* GraphQL */ `
-  subscription OnUpdateEvent {
-    onUpdateEvent {
+  subscription OnUpdateEvent($filter: ModelSubscriptionEventFilterInput) {
+    onUpdateEvent(filter: $filter) {
       id
       referralCode
       plan
@@ -354,9 +620,37 @@ export const onUpdateEvent = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -375,6 +669,25 @@ export const onUpdateEvent = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -387,8 +700,8 @@ export const onUpdateEvent = /* GraphQL */ `
   }
 `;
 export const onDeleteEvent = /* GraphQL */ `
-  subscription OnDeleteEvent {
-    onDeleteEvent {
+  subscription OnDeleteEvent($filter: ModelSubscriptionEventFilterInput) {
+    onDeleteEvent(filter: $filter) {
       id
       referralCode
       plan
@@ -416,9 +729,37 @@ export const onDeleteEvent = /* GraphQL */ `
         number
         complement
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -437,6 +778,25 @@ export const onDeleteEvent = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -449,8 +809,8 @@ export const onDeleteEvent = /* GraphQL */ `
   }
 `;
 export const onCreatePartner = /* GraphQL */ `
-  subscription OnCreatePartner {
-    onCreatePartner {
+  subscription OnCreatePartner($filter: ModelSubscriptionPartnerFilterInput) {
+    onCreatePartner(filter: $filter) {
       id
       name
       contact
@@ -477,7 +837,37 @@ export const onCreatePartner = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -490,8 +880,8 @@ export const onCreatePartner = /* GraphQL */ `
   }
 `;
 export const onUpdatePartner = /* GraphQL */ `
-  subscription OnUpdatePartner {
-    onUpdatePartner {
+  subscription OnUpdatePartner($filter: ModelSubscriptionPartnerFilterInput) {
+    onUpdatePartner(filter: $filter) {
       id
       name
       contact
@@ -518,7 +908,37 @@ export const onUpdatePartner = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -531,8 +951,8 @@ export const onUpdatePartner = /* GraphQL */ `
   }
 `;
 export const onDeletePartner = /* GraphQL */ `
-  subscription OnDeletePartner {
-    onDeletePartner {
+  subscription OnDeletePartner($filter: ModelSubscriptionPartnerFilterInput) {
+    onDeletePartner(filter: $filter) {
       id
       name
       contact
@@ -559,7 +979,37 @@ export const onDeletePartner = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }

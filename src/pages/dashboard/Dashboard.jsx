@@ -7,9 +7,9 @@ export default function Dashboard() {
 
 	const profileLink = () => (
 		<Link className="pl-2" to="/cadastro">
-		Clique Aqui!
-	</Link>
-	)
+			Clique Aqui!
+		</Link>
+	);
 
 	return (
 		<>

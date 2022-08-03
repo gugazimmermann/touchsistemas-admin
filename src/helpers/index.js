@@ -21,7 +21,7 @@ export function normalizeCEP(cep) {
 	if (cvLength < 3) return currentValue;
 	if (cvLength < 7) return `${currentValue.slice(0, 2)}.${currentValue.slice(2)}`;
 	return `${currentValue.slice(0, 2)}.${currentValue.slice(2, 5)}-${currentValue.slice(5, 8)}`;
-};
+}
 
 export async function getAddressFromCEP(zipCode) {
 	let cleanCep = '';
@@ -48,4 +48,4 @@ export function normalizePhone(phone) {
 	if (cvLength < 3) return currentValue;
 	if (cvLength < 7) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2)}`;
 	return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 7)}-${currentValue.slice(7, 11)}`;
-};
+}

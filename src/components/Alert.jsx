@@ -5,7 +5,7 @@ export default function Alert({ type, children }) {
 		if (t === 'danger') return 'red';
 		if (t === 'warning') return 'orange';
 		if (t === 'info') return 'blue';
-    if (t === 'success') return 'green';
+		if (t === 'success') return 'green';
 		return 'green';
 	};
 	return (

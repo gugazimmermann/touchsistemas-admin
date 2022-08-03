@@ -14,7 +14,6 @@ export default function Event() {
 	async function getEvent(id) {
 		setLoading(true);
 		const oneEvent = await API.graphql(graphqlOperation(queries.getEvent, { id }));
-		console.log(oneEvent.data.getEvent);
 		setEvent(oneEvent.data.getEvent);
 		setLoading(false);
 	}

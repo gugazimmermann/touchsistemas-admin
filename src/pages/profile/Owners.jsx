@@ -71,7 +71,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 			})
 		);
 		loadClient();
-		setUpdate(false)
+		setUpdate(false);
 		setOwner(initial);
 		setLoading(false);
 	}

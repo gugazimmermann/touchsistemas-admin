@@ -1,3 +1,8 @@
+type EventsMap {
+  number: Int,
+  url: String
+}
+
 type Owner @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String! @index(name: "byName", queryField: "ownerByName")
@@ -19,6 +24,7 @@ type Client @model @auth(rules: [{ allow: public }]) {
   street: String
   number: String
   complement: String
+  eventsMap: EventsMap
   Owners: [Owner] @hasMany(indexName: "byClient", fields: ["id"])
   Events: [Event] @hasMany(indexName: "byClient", fields: ["id"])
 }

@@ -33,8 +33,8 @@ function App() {
 					<Route element={<Layout />}>
 						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="/cadastro" element={<Profile />} />
-						<Route path="/pagamentos" element={<Payments />} />
-						<Route path="/novo-evento" element={<NewEvent />} />
+						<Route path="/cadastro/pagamentos" element={<Payments />} />
+						<Route path="/evento-novo" element={<NewEvent />} />
 						<Route path="/eventos-passados" element={<PastEvents />} />
 						<Route path="/evento/:id" element={<Event />} />
 					</Route>

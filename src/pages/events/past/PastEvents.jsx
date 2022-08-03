@@ -34,8 +34,9 @@ export default function PastEvents() {
 		const sortEvents = eventsWithLastDay.sort((a, b) => moment(b.lastDay) - moment(a.lastDay));
 		for (const e of sortEvents) {
 			if (moment(e.lastDay, 'YYYY-MM-DD').unix() < moment(Date.now()).unix()) {
-				const list = await Storage.list(`logo/${e.id}.png`);
-				if (list?.length) e.avatar = await Storage.get(list[0].key);
+				const list = await Storage.list(`logo/${e.id}`);
+				if (list?.length) e.image = await Storage.get(list[0].key);
+				console.log(e)
 				showEvents.push(e);
 			}
 		}
@@ -73,7 +74,9 @@ export default function PastEvents() {
 								events.map((event) => (
 									<tr key={event.id} onClick={() => handleEvent(event.id)} className="cursor-pointer hover:bg-gray-100">
 										<th className="border-b border-gray-200 align-middle px-2 text-center w-14">
-											<img src={event.avatar} alt={event.name} className="h-10 w-10 rounded" />
+											{event.image && (
+												<img src={event.image} alt={event.name} className="h-10 w-10 rounded" />
+											)}
 										</th>
 										<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
 											{event.name}

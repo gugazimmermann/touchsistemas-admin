@@ -129,7 +129,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 						}}
 						type="email"
 						color="orange"
-						placeholder='Email'
+						placeholder="Email"
 						className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>

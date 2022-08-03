@@ -12,7 +12,7 @@ export default function App() {
 			<input name={cookies.name} onChange={(e) => onChange(e.target.value)} />
 			{cookies.name && <h1>Hello {cookies.name}!</h1>}
 			<i className="bx bx-search-alt-2" />
-			<button type='button'>Button</button>
+			<button type="button">Button</button>
 		</div>
 	);
 }

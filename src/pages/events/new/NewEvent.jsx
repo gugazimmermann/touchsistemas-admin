@@ -264,10 +264,10 @@ export default function NewEvent() {
 						/>
 					</div>
 					<div className="w-full flex justify-center">
-						<button 
-						type='button'
-						onClick={() => handleAdd()} 
-						className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out"
+						<button
+							type="button"
+							onClick={() => handleAdd()}
+							className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out"
 						>
 							Adicionar Novo Evento
 						</button>

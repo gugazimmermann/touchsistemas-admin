@@ -36,14 +36,14 @@ export default function PastEvents() {
 			if (moment(e.lastDay, 'YYYY-MM-DD').unix() < moment(Date.now()).unix()) {
 				const list = await Storage.list(`logo/${e.id}.png`);
 				if (list?.length) e.avatar = await Storage.get(list[0].key);
-				showEvents.push(e)
+				showEvents.push(e);
 			}
 		}
 		setEvents(showEvents);
 	}
 
 	useEffect(() => {
-		if (client) orderEvents()
+		if (client) orderEvents();
 	}, [client]);
 
 	return (

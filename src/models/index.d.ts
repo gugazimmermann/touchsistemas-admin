@@ -2,7 +2,11 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-
+export declare class EventsMap {
+  readonly number?: number | null;
+  readonly url?: string | null;
+  constructor(init: ModelInit<EventsMap>);
+}
 
 type OwnerMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -45,6 +49,7 @@ export declare class Client {
   readonly street?: string | null;
   readonly number?: string | null;
   readonly complement?: string | null;
+  readonly eventsMap?: EventsMap | null;
   readonly Owners?: (Owner | null)[] | null;
   readonly Events?: (Event | null)[] | null;
   readonly createdAt?: string | null;

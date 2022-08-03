@@ -21,6 +21,10 @@ export const onCreateOwner = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -84,6 +88,10 @@ export const onUpdateOwner = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -147,6 +155,10 @@ export const onDeleteOwner = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -204,6 +216,10 @@ export const onCreateClient = /* GraphQL */ `
       street
       number
       complement
+      eventsMap {
+        number
+        url
+      }
       Owners {
         items {
           id
@@ -303,6 +319,10 @@ export const onUpdateClient = /* GraphQL */ `
       street
       number
       complement
+      eventsMap {
+        number
+        url
+      }
       Owners {
         items {
           id
@@ -402,6 +422,10 @@ export const onDeleteClient = /* GraphQL */ `
       street
       number
       complement
+      eventsMap {
+        number
+        url
+      }
       Owners {
         items {
           id
@@ -517,6 +541,10 @@ export const onCreateEvent = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -629,6 +657,10 @@ export const onUpdateEvent = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -741,6 +773,10 @@ export const onDeleteEvent = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id

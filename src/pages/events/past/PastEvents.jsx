@@ -1,25 +1,16 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import GoogleMapReact from 'google-map-react';
 import { Storage } from 'aws-amplify';
-
-function Marker({ color }) {
-	return <i className={`bx bxs-map text-2xl ${color}`} />;
-}
 
 export default function PastEvents() {
 	const navigate = useNavigate();
 	const [client] = useOutletContext();
 	const [events, setEvents] = useState();
-	const markers = [
-		{ id: '1', lat: -26.909844, lng: -48.660676 },
-		{ id: '2', lat: -26.9284598, lng: -48.6876947 },
-		{ id: '3', lat: -26.9348291, lng: -48.6298295 },
-		{ id: '4', lat: -26.9093656, lng: -48.6550187 },
-	];
+	const [map, setMap] = useState();
 
 	function handleEvent(id) {
 		navigate(`/eventos/${id}`);
@@ -45,6 +36,44 @@ export default function PastEvents() {
 	useEffect(() => {
 		if (client) orderEvents();
 	}, [client]);
+
+	async function createMap() {
+		const clientAddress = encodeURIComponent(
+			`${client.street}, ${client.number} - ${client.city} - ${client.state}, ${client.zipCode}`
+		);
+		const clientMarker = `markers=color:0xf59e0b%7Clabel:${client.name[0]}%7C${clientAddress}`;
+		const eventMarkers = [];
+		events.forEach((e) => {
+			const eventAddress = encodeURIComponent(`${e.street}, ${e.number} - ${e.city} - ${e.state}, ${e.zipCode}`);
+			const eventMarker = `&markers=color:0xa855f7%7Clabel:${e.name[0]}%7C${eventAddress}`;
+			eventMarkers.push(eventMarker);
+		});
+		const mapURL = `https://maps.googleapis.com/maps/api/staticmap?center=${clientAddress}&zoom=${11}&size=1280x1280&scale=2&${clientMarker}${eventMarkers.join(
+			''
+		)}&key=${process.env.REACT_APP_API_KEY}`;
+		const res = await fetch(mapURL);
+		const blob = await res.blob();
+		const file = new File([blob], `events_${client.id}.png`);
+		await Storage.put(`maps/events_${client.id}.png`, file, {
+			contentType: 'image/png',
+		});
+	}
+
+	async function handleMap() {
+		const mapsList = await Storage.list(`maps/events_${client.id}`);
+		if (mapsList.length === 0) {
+			await createMap();
+		} else {
+			const getUrl = await Storage.get(mapsList[0].key);
+			setMap(getUrl);
+		}
+	}
+
+	useEffect(() => {
+		if (events) {
+			handleMap();
+		}
+	}, [events]);
 
 	return (
 		<>
@@ -90,22 +119,11 @@ export default function PastEvents() {
 					)}
 				</table>
 			</div>
-			<div className="h-96 w-full">
-				<GoogleMapReact
-					bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
-					defaultCenter={markers[0]}
-					defaultZoom={12}
-				>
-					{markers.map((marker, i) => (
-						<Marker
-							key={marker.id}
-							lat={marker.lat}
-							lng={marker.lng}
-							color={`${i === 0 ? 'text-primary' : 'text-warning'}`}
-						/>
-					))}
-				</GoogleMapReact>
-			</div>
+			{map && (
+				<div className="mt-4 flex justify-center">
+					<img alt="map" className="w-7/12" src={map} />
+				</div>
+			)}
 		</>
 	);
 }

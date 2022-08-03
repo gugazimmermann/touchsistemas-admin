@@ -24,6 +24,10 @@ export const createOwner = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -90,6 +94,10 @@ export const updateOwner = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -156,6 +164,10 @@ export const deleteOwner = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -216,6 +228,10 @@ export const createClient = /* GraphQL */ `
       street
       number
       complement
+      eventsMap {
+        number
+        url
+      }
       Owners {
         items {
           id
@@ -318,6 +334,10 @@ export const updateClient = /* GraphQL */ `
       street
       number
       complement
+      eventsMap {
+        number
+        url
+      }
       Owners {
         items {
           id
@@ -420,6 +440,10 @@ export const deleteClient = /* GraphQL */ `
       street
       number
       complement
+      eventsMap {
+        number
+        url
+      }
       Owners {
         items {
           id
@@ -538,6 +562,10 @@ export const createEvent = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -653,6 +681,10 @@ export const updateEvent = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -768,6 +800,10 @@ export const deleteEvent = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id

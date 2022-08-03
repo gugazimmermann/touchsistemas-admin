@@ -21,6 +21,10 @@ export const getOwner = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -89,6 +93,10 @@ export const listOwners = /* GraphQL */ `
           street
           number
           complement
+          eventsMap {
+            number
+            url
+          }
           Owners {
             nextToken
           }
@@ -119,6 +127,10 @@ export const getClient = /* GraphQL */ `
       street
       number
       complement
+      eventsMap {
+        number
+        url
+      }
       Owners {
         items {
           id
@@ -223,6 +235,10 @@ export const listClients = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -295,6 +311,10 @@ export const getEvent = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -412,6 +432,10 @@ export const listEvents = /* GraphQL */ `
           street
           number
           complement
+          eventsMap {
+            number
+            url
+          }
           Owners {
             nextToken
           }
@@ -601,6 +625,10 @@ export const ownerByName = /* GraphQL */ `
           street
           number
           complement
+          eventsMap {
+            number
+            url
+          }
           Owners {
             nextToken
           }
@@ -644,6 +672,10 @@ export const clientByName = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -713,6 +745,10 @@ export const clientByEmail = /* GraphQL */ `
         street
         number
         complement
+        eventsMap {
+          number
+          url
+        }
         Owners {
           items {
             id
@@ -798,6 +834,10 @@ export const eventByName = /* GraphQL */ `
           street
           number
           complement
+          eventsMap {
+            number
+            url
+          }
           Owners {
             nextToken
           }

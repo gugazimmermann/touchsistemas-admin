@@ -192,6 +192,15 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "eventsMap": {
+                    "name": "eventsMap",
+                    "isArray": false,
+                    "type": {
+                        "nonModel": "EventsMap"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "Owners": {
                     "name": "Owners",
                     "isArray": true,
@@ -642,6 +651,26 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {},
-    "version": "49d508e33c9bfd97dc560e8d365c5e96"
+    "nonModels": {
+        "EventsMap": {
+            "name": "EventsMap",
+            "fields": {
+                "number": {
+                    "name": "number",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "url": {
+                    "name": "url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        }
+    },
+    "version": "e5a9bfec501356581b3c53c78dfe9e53"
 };

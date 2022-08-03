@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
-import { Button, Input, Select, Option } from '@material-tailwind/react';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { updateClient } from '../../graphql/mutations';
 import Loading from '../../components/Loading';
@@ -182,146 +181,139 @@ export default function Profile() {
 			<form className="mx-4">
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-6/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formClient.name || ''}
 							onChange={(e) => setFormClient({ ...formClient, name: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
 							label="Nome da Empresa"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-6/12 mb-4">
-						<Input
+						<input
 							value={formClient.phone || ''}
 							onChange={(e) => handleChangePhone(e.target.value)}
 							type="text"
-							color="orange"
-							variant="standard"
 							label="Telefone"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-6/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formClient.email || ''}
 							type="text"
-							color="orange"
-							variant="standard"
 							label="Email"
 							disabled
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-6/12 mb-4">
-						<Input
+						<input
 							value={formClient.website || ''}
 							onChange={(e) => setFormClient({ ...formClient, website: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
 							label="WebSite"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formClient.zipCode || ''}
 							onChange={(e) => handleChangeCEP(e.target.value)}
 							type="text"
-							color="orange"
-							variant="standard"
 							label="CEP"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formClient.city || ''}
 							onChange={(e) => setFormClient({ ...formClient, city: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
 							label="Cidade"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
-						<Select
+						<select
 							value={formClient.state || ''}
 							onChange={(e) => setFormClient({ ...formClient, state: e.target.value })}
-							color="orange"
-							variant="standard"
 							label="Estado"
+							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						>
-							<Option value="AC">Acre</Option>
-							<Option value="AL">Alagoas</Option>
-							<Option value="AP">Amapá</Option>
-							<Option value="AM">Amazonas</Option>
-							<Option value="BA">Bahia</Option>
-							<Option value="CE">Ceará</Option>
-							<Option value="DF">Distrito Federal</Option>
-							<Option value="ES">Espírito Santo</Option>
-							<Option value="GO">Goiás</Option>
-							<Option value="MA">Maranhão</Option>
-							<Option value="MT">Mato Grosso</Option>
-							<Option value="MS">Mato Grosso do Sul</Option>
-							<Option value="MG">Minas Gerais</Option>
-							<Option value="PA">Pará</Option>
-							<Option value="PB">Paraíba</Option>
-							<Option value="PR">Paraná</Option>
-							<Option value="PE">Pernambuco</Option>
-							<Option value="PI">Piauí</Option>
-							<Option value="RJ">Rio de Janeiro</Option>
-							<Option value="RN">Rio Grande do Norte</Option>
-							<Option value="RS">Rio Grande do Sul</Option>
-							<Option value="RO">Rondônia</Option>
-							<Option value="RR">Roraima</Option>
-							<Option value="SC">Santa Catarina</Option>
-							<Option value="SP">São Paulo</Option>
-							<Option value="SE">Sergipe</Option>
-							<Option value="TO">Tocantins</Option>
-						</Select>
+							<option value="AC">Acre</option>
+							<option value="AL">Alagoas</option>
+							<option value="AP">Amapá</option>
+							<option value="AM">Amazonas</option>
+							<option value="BA">Bahia</option>
+							<option value="CE">Ceará</option>
+							<option value="DF">Distrito Federal</option>
+							<option value="ES">Espírito Santo</option>
+							<option value="GO">Goiás</option>
+							<option value="MA">Maranhão</option>
+							<option value="MT">Mato Grosso</option>
+							<option value="MS">Mato Grosso do Sul</option>
+							<option value="MG">Minas Gerais</option>
+							<option value="PA">Pará</option>
+							<option value="PB">Paraíba</option>
+							<option value="PR">Paraná</option>
+							<option value="PE">Pernambuco</option>
+							<option value="PI">Piauí</option>
+							<option value="RJ">Rio de Janeiro</option>
+							<option value="RN">Rio Grande do Norte</option>
+							<option value="RS">Rio Grande do Sul</option>
+							<option value="RO">Rondônia</option>
+							<option value="RR">Roraima</option>
+							<option value="SC">Santa Catarina</option>
+							<option value="SP">São Paulo</option>
+							<option value="SE">Sergipe</option>
+							<option value="TO">Tocantins</option>
+						</select>
 					</div>
 					<div className="w-full md:w-6/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formClient.street || ''}
 							onChange={(e) => setFormClient({ ...formClient, street: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
 							label="Rua"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-3/12 pr-4 mb-4">
-						<Input
+						<input
 							value={formClient.number || ''}
 							onChange={(e) => setFormClient({ ...formClient, number: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
 							label="Número"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-3/12 mb-4">
-						<Input
+						<input
 							value={formClient.complement || ''}
 							onChange={(e) => setFormClient({ ...formClient, complement: e.target.value })}
 							type="text"
-							color="orange"
-							variant="standard"
 							label="Complemento"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full mb-4">
-						<Input
+						<input
 							onChange={(e) => handleFile(e)}
 							type="file"
-							color="orange"
-							variant="standard"
 							label="Logo"
 							accept=".jpg,.jpeg,.png,image/png,image/jpeg"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full flex justify-center">
-						<Button size="sm" onClick={() => handleUpdate()} className="bg-primary">
+						<button
+							type="button"
+							onClick={() => handleUpdate()}
+							className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out"
+						>
 							Atualizar Cadastro
-						</Button>
+						</button>
 					</div>
 				</div>
 			</form>

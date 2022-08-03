@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Button, Input } from '@material-tailwind/react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createOwner, updateOwner, deleteOwner } from '../../graphql/mutations';
 import { normalizePhone, validateEmail } from '../../helpers';
-import Dialog from '../../components/Dialog';
+import ConfirmationDialog from '../../components/ConfirmationDialog';
 
 const initial = { name: '', phone: '', email: '' };
 
@@ -101,30 +100,28 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 		return (
 			<form className="flex flex-wrap mx-4">
 				<div className="w-full md:w-4/12 pr-4 mb-4">
-					<Input
+					<input
 						value={!update ? owner?.name : selected?.name}
 						onChange={(e) => {
 							if (!update) setOwner({ ...owner, name: e.target.value });
 							else setSelected({ ...selected, name: e.target.value });
 						}}
 						type="text"
-						color="orange"
-						variant="standard"
 						label="Nome do Responsável"
+						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
 				<div className="w-full md:w-4/12 pr-4 mb-4">
-					<Input
+					<input
 						value={!update ? owner?.phone : selected?.phone[0] === '+' ? selected?.phone.slice(4) : selected?.phone}
 						onChange={(e) => handleChangePhone(e.target.value)}
 						type="text"
-						color="orange"
-						variant="standard"
 						label="Telefone"
+						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
 				<div className="w-full md:w-4/12 mb-4">
-					<Input
+					<input
 						value={!update ? owner?.email : selected?.email}
 						onChange={(e) => {
 							if (!update) setOwner({ ...owner, email: e.target.value });
@@ -132,21 +129,22 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 						}}
 						type="email"
 						color="orange"
-						variant="standard"
-						label="Email"
+						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
 				<div className="w-full flex justify-center">
-					<Button
-						size="sm"
+					<button
+						type="button"
 						onClick={() => {
 							if (!update) handleAdd();
 							else handleUpdate();
 						}}
-						className={!update ? 'bg-primary' : 'bg-warning'}
+						className={`${
+							!update ? 'bg-primary' : 'bg-warning'
+						} px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out`}
 					>
 						{!update ? 'Adicionar' : 'Atualizar'} Responsável
-					</Button>
+					</button>
 				</div>
 			</form>
 		);
@@ -217,16 +215,15 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	function renderDeleteDialog() {
 		return (
-			<Dialog
+			<ConfirmationDialog
 				open={confirmDelete}
 				setOpen={setConfirmDelete}
 				handleConfirm={handleDelete}
-				title="Remover Responsável"
 				cancelText="Cancelar"
 				confirmText="Remover"
 			>
 				Deseja remover o responsável {selected?.name}?
-			</Dialog>
+			</ConfirmationDialog>
 		);
 	}
 

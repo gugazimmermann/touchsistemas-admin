@@ -14,7 +14,7 @@ export default function LoginSocial() {
 				<i className="bx bxl-google text-2xl mr-2" />
 				Continue com Gmail
 			</a>
-			<a
+			{/* <a
 				className="px-7 py-1 bg-blue-800 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
 				href="#!"
 				role="button"
@@ -33,7 +33,7 @@ export default function LoginSocial() {
 			>
 				<i className="bx bxl-twitter text-2xl mr-2" />
 				Continue com Twitter
-			</a>
+			</a> */}
 		</>
 	);
 }

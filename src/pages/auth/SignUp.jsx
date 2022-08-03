@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Input, Typography, Button } from '@material-tailwind/react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { createClient } from '../../graphql/mutations';
 import SignUpImage from '../../icons/SignUp.svg';
 import LogoAuth from '../../components/LogoAuth';
 import Loading from '../../components/Loading';
+import Alert from './components/Alert';
 
 export default function SignUp() {
 	const navigate = useNavigate();
@@ -38,65 +38,64 @@ export default function SignUp() {
 	const disabled = () => email === '' || pwd === '' || repeat === '';
 
 	return (
-		<section className="container h-screen mx-auto bg-white">
+		<section className="h-screen container mx-auto bg-white">
 			{loading && <Loading />}
-			<div className="flex flex-col sm:flex-row justify-start sm:justify-evenly items-center flex-wrap h-full">
-				<div className="w-3/4 my-8 sm:w-2/5">
-					<img src={SignUpImage} alt="SignUp" />
+			<div className="container h-full">
+				<div className="h-full flex flex-col-reverse md:flex-row items-center justify-around">
+					<div className="w-10/12 md:w-6/12 lg:w-4/12 md:mb-0">
+						<img src={SignUpImage} alt="SignUp" className="w-full" />
+					</div>
+					<div className="w-10/12 md:w-5/12 lg:w-4/12">
+						<LogoAuth styles="mb-5 text-primary" />
+						<Alert error={error} />
+						<form>
+							<div className="mb-4">
+								<input
+									type="email"
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+									className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+									placeholder="Email"
+								/>
+							</div>
+							<div className="mb-4">
+								<input
+									type="password"
+									value={pwd}
+									onChange={(e) => setPwd(e.target.value)}
+									className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+									placeholder="Senha"
+								/>
+							</div>
+							<div className="mb-4">
+								<input
+									type="password"
+									value={repeat}
+									onChange={(e) => setRepeat(e.target.value)}
+									className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+									placeholder="Repita a Senha"
+								/>
+							</div>
+							<button
+								type="button"
+								onClick={() => signUp()}
+								disabled={disabled()}
+								className={`${
+									disabled()
+										? 'bg-gray-600 cursor-not-allowed'
+										: 'bg-primary cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg'
+								} inline-block px-2 py-2 text-white font-medium uppercase rounded shadow-md transition duration-150 ease-in-out w-full`}
+							>
+								Cadastrar
+							</button>
+							<div className="w-full text-center mt-6">
+								<Link to="/" className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out">
+									Voltar para Entrar
+								</Link>
+							</div>
+						</form>
+					</div>
 				</div>
-				<form className="w-3/4 sm:w-1/4">
-					<LogoAuth styles="mb-5 text-primary" />
-					<div className={`text-danger my-2 text-center ${!error && 'hidden'}`}>
-						<p>Ocorreu um erro, tente novamente.</p>
-					</div>
-					<div className="mb-3">
-						<Input
-							value={email}
-							type="email"
-							variant="standard"
-							color="amber"
-							label="Email"
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</div>
-					<div className="mb-3">
-						<Input
-							value={pwd}
-							type="password"
-							variant="standard"
-							color="amber"
-							label="Senha"
-							onChange={(e) => setPwd(e.target.value)}
-						/>
-					</div>
-					<div className="mb-3">
-						<Input
-							value={repeat}
-							type="password"
-							variant="standard"
-							color="amber"
-							label="Repita a Senha"
-							onChange={(e) => setRepeat(e.target.value)}
-						/>
-					</div>
-					<Button
-						className={`w-full text-white ${
-							disabled() ? 'bg-gray-500 cursor-not-allowed' : 'bg-primary cursor-pointer'
-						}`}
-						onClick={() => signUp()}
-						disabled={disabled()}
-					>
-						Cadastrar
-					</Button>
-					<div className="mt-4 flex justify-center">
-						<Link
-							to="/"
-							className="text-primary hover:text-secondary focus:text-secondary active:text-blue-800 duration-200 transition ease-in-out"
-						>
-							<Typography variant="lead">Voltar para Entrar</Typography>
-						</Link>
-					</div>
-				</form>
 			</div>
 		</section>
 	);

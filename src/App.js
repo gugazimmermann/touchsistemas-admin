@@ -26,7 +26,7 @@ function App() {
 					<Route path="/" element={<SignIn />} />
 					<Route path="/esqueceu-senha" element={<ForgotPassword />} />
 					<Route path="/redefinir-senha" element={<RedefinePwd />} />
-					<Route path="/cadastrar" element={<SignUp />} />
+					<Route path="/novo-cadastro" element={<SignUp />} />
 					<Route path="/confirmar-cadastro" element={<ConfirmationCode />} />
 				</Route>
 				<Route element={<ProtectedRoute />}>

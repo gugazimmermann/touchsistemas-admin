@@ -54,7 +54,7 @@ export default function SignUp() {
 									type="email"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
-									className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+									className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 									placeholder="Email"
 								/>
 							</div>
@@ -63,7 +63,7 @@ export default function SignUp() {
 									type="password"
 									value={pwd}
 									onChange={(e) => setPwd(e.target.value)}
-									className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+									className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 									placeholder="Senha"
 								/>
 							</div>
@@ -72,7 +72,7 @@ export default function SignUp() {
 									type="password"
 									value={repeat}
 									onChange={(e) => setRepeat(e.target.value)}
-									className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+									className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 									placeholder="Repita a Senha"
 								/>
 							</div>

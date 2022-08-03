@@ -47,7 +47,7 @@ export default function ConfirmationCode() {
 									type="email"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
-									className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+									className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 									placeholder="Email"
 								/>
 							</div>
@@ -56,7 +56,7 @@ export default function ConfirmationCode() {
 									type="text"
 									value={code}
 									onChange={(e) => setCode(e.target.value)}
-									className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+									className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 									placeholder="Código de Verificação"
 								/>
 							</div>

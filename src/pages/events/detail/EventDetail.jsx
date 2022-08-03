@@ -1,66 +1,93 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../../graphql/queries';
+import moment from 'moment';
+import { Storage, API, graphqlOperation } from 'aws-amplify';
+import { getEvent, partnerByReferralCode } from '../../../graphql/queries';
 import Loading from '../../../components/Loading';
 
 export default function EventDetail() {
 	const params = useParams();
 	const [loading, setLoading] = useState(false);
 	const [event, setEvent] = useState();
+	const [logo, setLogo] = useState();
+	const [map, setMap] = useState();
 
-	async function getEvent(id) {
+	async function handleLogo() {
+		const list = await Storage.list(`logo/${event.id}`);
+		if (list?.length) {
+			const getUrl = await Storage.get(list[0].key);
+			setLogo(getUrl);
+		}
+	}
+
+	async function handleMap() {
+		const list = await Storage.list(`maps/${event.id}`);
+		if (list?.length) {
+			const getUrl = await Storage.get(list[0].key);
+			setMap(getUrl);
+		}
+	}
+
+	async function handleGetEvent(id) {
 		setLoading(true);
-		const oneEvent = await API.graphql(graphqlOperation(queries.getEvent, { id }));
-		setEvent(oneEvent.data.getEvent);
+		const { data } = await API.graphql(graphqlOperation(getEvent, { id }));
+		const eventDetails = data.getEvent;
+		if (eventDetails.referralCode) {
+			const partnerDetails = await API.graphql(
+				graphqlOperation(partnerByReferralCode, { referralCode: eventDetails.referralCode })
+			);
+			const partner = partnerDetails.data.partnerByReferralCode.items[0];
+			eventDetails.partner = partner;
+		}
+		setEvent(eventDetails);
 		setLoading(false);
 	}
 
 	useEffect(() => {
-		if (params.id) getEvent(params.id);
+		if (event) {
+			handleLogo();
+			handleMap();
+		}
+	}, [event]);
+
+	useEffect(() => {
+		if (params.id) handleGetEvent(params.id);
 	}, [params]);
 
 	return (
 		<>
 			{loading && <Loading />}
 			{!loading && event && (
-				<>
-					<h2 className="text-primary text-xl p-2 mt-4">{event.name}</h2>
-					<div className="overflow-x-auto">
-						<table className="items-center w-full bg-transparent border-collapse">
-							<thead>
-								<tr>
-									<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
-										Nome
-									</th>
-									<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
-										Localização
-									</th>
-									<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-left">
-										Data
-									</th>
-								</tr>
-							</thead>
-							{/* {client && client.Events && client.Events?.items.length > 0 && (
-              <tbody>
-                {client.Events.items.map((event) => (
-                  <tr key={event.id} onClick={() => handleEvent(event.id)} className="cursor-pointer hover:bg-gray-100">
-                    <th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-                      {event.name}
-                    </th>
-                    <th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-                      {`${event.city} / ${event.state}`}
-                    </th>
-                    <th className="border-b border-gray-200 align-middle font-light whitespace-nowrap px-2 py-4 text-left">
-                      {event.dates.map((d) => `${moment(d).format('DD/MM/YYYY')}`).join(', ').slice(0, -2)}
-                    </th>
-                  </tr>
-                ))}
-              </tbody>
-            )} */}
-						</table>
+				<div className="mx-8">
+					<h2 className="text-primary text-xl py-6">
+						{event.name} | {event.dates.map((d) => `${moment(d).format('DD/MM/YY')}`).join(', ')}
+					</h2>
+
+					<div className="w-full md:w-8/12 flex flex-wrap p-4">
+						{event.website && <div className="w-full mb-4">{event.website}</div>}
+						{event.email && <div className="w-full mb-4">{event.email}</div>}
+						<div className="w-full mb-4">
+							{event.street}, {event.number}, {event.city} / {event.state} - {event.zipCode}
+						</div>
+						<div className="w-full mb-4">{event.complement}</div>
+						<div className="w-full mb-4">Plano: {event.plan}</div>
+						<div className="w-full mb-4">
+							Parceiro: {event.partner.name} | {event.partner.referralCode}
+						</div>
 					</div>
-				</>
+					<div className="w-full flex flex-wrap justify-evenly">
+						{logo && (
+							<div className="w-full md:w-4/12">
+								<img alt="logo" src={logo} />
+							</div>
+						)}
+						{map && (
+							<div className="w-full md:w-4/12">
+								<img alt="map" src={map} />
+							</div>
+						)}
+					</div>
+				</div>
 			)}
 		</>
 	);

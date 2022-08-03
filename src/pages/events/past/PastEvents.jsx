@@ -22,7 +22,7 @@ export default function PastEvents() {
 	];
 
 	function handleEvent(id) {
-		navigate(`/evento/${id}`);
+		navigate(`/eventos/${id}`);
 	}
 
 	async function orderEvents() {

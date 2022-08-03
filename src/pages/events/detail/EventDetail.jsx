@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import Loading from '../../components/Loading';
+import * as queries from '../../../graphql/queries';
+import Loading from '../../../components/Loading';
 
-export default function Event() {
+export default function EventDetail() {
 	const params = useParams();
 	const [loading, setLoading] = useState(false);
 	const [event, setEvent] = useState();

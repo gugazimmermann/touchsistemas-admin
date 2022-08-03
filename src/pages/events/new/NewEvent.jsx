@@ -4,10 +4,10 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { Button, Input, Alert, Select, Option } from '@material-tailwind/react';
 import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
-import { partnerByReferralCode } from '../../graphql/queries';
-import { createEvent } from '../../graphql/mutations';
-import Loading from '../../components/Loading';
-import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers';
+import { partnerByReferralCode } from '../../../graphql/queries';
+import { createEvent } from '../../../graphql/mutations';
+import Loading from '../../../components/Loading';
+import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../../helpers';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const months = [
@@ -40,7 +40,7 @@ const initial = {
 	dates: '',
 };
 
-export default function Profile() {
+export default function NewEvent() {
 	const [client, loadClient] = useOutletContext();
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');

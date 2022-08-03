@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import Loading from '../../components/Loading';
 import { decodeCookie } from '../../utils/cookies';
 import * as queries from '../../graphql/queries';
-import Nav from './components/Nav';
+import Nav from './nav/Nav';
 
 export default function Layout() {
 	const navigate = useNavigate();

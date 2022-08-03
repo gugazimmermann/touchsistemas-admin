@@ -13,10 +13,10 @@ const ConfirmationCode = lazy(() => import('./pages/auth/ConfirmationCode'));
 const Layout = lazy(() => import('./pages/layout/Layout'));
 const Dashboard = lazy(() => import('./pages/dashboard/Dashboard'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
-const Payments = lazy(() => import('./pages/payments/Payments'));
-const NewEvent = lazy(() => import('./pages/events/NewEvent'));
-const PastEvents = lazy(() => import('./pages/past-events/PastEvents'));
-const Event = lazy(() => import('./pages/event/Event'));
+const Payments = lazy(() => import('./pages/profile/payments/Payments'));
+const NewEvent = lazy(() => import('./pages/events/new/NewEvent'));
+const PastEvents = lazy(() => import('./pages/events/past/PastEvents'));
+const Event = lazy(() => import('./pages/events/detail/EventDetail'));
 
 function App() {
 	return (
@@ -34,9 +34,9 @@ function App() {
 						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="/cadastro" element={<Profile />} />
 						<Route path="/cadastro/pagamentos" element={<Payments />} />
-						<Route path="/evento-novo" element={<NewEvent />} />
-						<Route path="/eventos-passados" element={<PastEvents />} />
-						<Route path="/evento/:id" element={<Event />} />
+						<Route path="/eventos/novo" element={<NewEvent />} />
+						<Route path="/eventos/passados" element={<PastEvents />} />
+						<Route path="/eventos/:id" element={<Event />} />
 					</Route>
 				</Route>
 				<Route path="*" element={<NotFound />} />

@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { API, graphqlOperation } from 'aws-amplify';
+import { Storage, API, graphqlOperation } from 'aws-amplify';
 import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
 import { partnerByReferralCode } from '../../../graphql/queries';
@@ -119,6 +120,51 @@ export default function NewEvent() {
 		return null;
 	}
 
+	async function graphCreateEvent(partnerID) {
+		const { data } = await API.graphql(
+			graphqlOperation(createEvent, {
+				input: {
+					referralCode: formEvent.referralCode || null,
+					plan: formEvent.plan,
+					name: formEvent.name,
+					website: formEvent.website,
+					email: formEvent.email,
+					zipCode: formEvent.zipCode,
+					state: formEvent.state,
+					city: formEvent.city,
+					street: formEvent.street,
+					number: formEvent.number,
+					complement: formEvent.complement,
+					description: formEvent.description,
+					dates: formEvent.dates,
+					clientID: client.id,
+					partnerID,
+				},
+			})
+		);
+		return data.createEvent;
+	}
+
+	async function addEventMap(newEvent) {
+		const eventAddress = encodeURIComponent(
+			`${newEvent.street}, ${newEvent.number} - ${newEvent.city} - ${newEvent.state}, ${newEvent.zipCode}`
+		);
+		const eventMarker = `markers=color:0xf59e0b%7Clabel:${newEvent.name[0]}%7C${eventAddress}`;
+		const mapURL = `https://maps.googleapis.com/maps/api/staticmap?center=${eventAddress}&zoom=17&size=1280x1280&scale=2&${eventMarker}&key=${process.env.REACT_APP_API_KEY}`;
+		const res = await fetch(mapURL);
+		const blob = await res.blob();
+		const file = new File([blob], `${newEvent.id}.png`);
+		await Storage.put(`maps/${newEvent.id}.png`, file, {
+			contentType: 'image/png',
+		});
+	}
+
+	async function addEventLogo(newEvent) {
+		await Storage.put(`logo/${newEvent.id}.${eventLogo.name.split('.').pop()}`, eventLogo, {
+			contentType: eventLogo.type,
+		});
+	}
+
 	async function handleAdd() {
 		setErrorMsg('');
 		setError(false);
@@ -154,32 +200,10 @@ export default function NewEvent() {
 			}
 			partnerID = getPartner.data.partnerByReferralCode.items[0].id;
 		}
-		const newEvent = await API.graphql(
-			graphqlOperation(createEvent, {
-				input: {
-					referralCode: formEvent.referralCode || null,
-					plan: formEvent.plan,
-					name: formEvent.name,
-					website: formEvent.website,
-					email: formEvent.email,
-					zipCode: formEvent.zipCode,
-					state: formEvent.state,
-					city: formEvent.city,
-					street: formEvent.street,
-					number: formEvent.number,
-					complement: formEvent.complement,
-					description: formEvent.description,
-					dates: formEvent.dates,
-					clientID: client.id,
-					partnerID,
-				},
-			})
-		);
-		if (eventLogo) {
-			await Storage.put(`logo/${newEvent.data.createEvent.id}.${eventLogo.name.split('.').pop()}`, eventLogo, {
-				contentType: eventLogo.type,
-			});
-		}
+		const newEvent = await graphCreateEvent(partnerID);
+		if (eventLogo) await addEventLogo(newEvent);
+		await addEventMap(newEvent);
+
 		loadClient();
 		setFormEvent(initial);
 		setSuccess(true);

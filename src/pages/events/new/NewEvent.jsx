@@ -36,6 +36,7 @@ const initial = {
 	city: '',
 	street: '',
 	number: '',
+	complement: '',
 	description: '',
 	dates: '',
 };
@@ -47,6 +48,7 @@ export default function NewEvent() {
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
 	const [formEvent, setFormEvent] = useState(initial);
+	const [eventLogo, setEventLogo] = useState();
 
 	function handleDatesChange(value) {
 		const dates = value.toString().split(',');
@@ -81,6 +83,42 @@ export default function NewEvent() {
 		if (formEvent?.zipCode?.length === 10) getAddress();
 	}, [formEvent.zipCode]);
 
+	function handleFile(e) {
+		setErrorMsg('');
+		setError(false);
+		if (e.target.files && e.target.files.length) {
+			const file = e.target.files[0];
+			if (file.size > 500 * 1024) {
+				setErrorMsg('Imagem pode ter no máximo 1mb!');
+				setError(true);
+				setLoading(false);
+				return null;
+			}
+			const acceptedTypes = ['image/png', 'image/jpeg'];
+			if (!acceptedTypes.includes(file.type)) {
+				setErrorMsg('Imagem deve ser PNG ou JPG!');
+				setError(true);
+				setLoading(false);
+				return null;
+			}
+			const acceptedExtensions = ['jpg', 'jpeg', 'png'];
+			if (!acceptedExtensions.includes(file.name.split('.').pop())) {
+				setErrorMsg('Imagem deve ser PNG ou JPG!');
+				setError(true);
+				setLoading(false);
+				return null;
+			}
+			setErrorMsg('');
+			setError(false);
+			setLoading(false);
+			setEventLogo(file);
+		}
+		setErrorMsg('');
+		setError(false);
+		setLoading(false);
+		return null;
+	}
+
 	async function handleAdd() {
 		setErrorMsg('');
 		setError(false);
@@ -108,7 +146,7 @@ export default function NewEvent() {
 			const getPartner = await API.graphql(
 				graphqlOperation(partnerByReferralCode, { referralCode: formEvent.referralCode })
 			);
-			if (!getPartner?.data?.partnerByReferralCode?.items && !getPartner?.data?.partnerByReferralCode?.items.length) {
+			if (getPartner?.data?.partnerByReferralCode?.items.length <= 0) {
 				setErrorMsg('Parceiro não encontrado!');
 				setError(true);
 				setLoading(false);
@@ -116,11 +154,10 @@ export default function NewEvent() {
 			}
 			partnerID = getPartner.data.partnerByReferralCode.items[0].id;
 		}
-
-		await API.graphql(
+		const newEvent = await API.graphql(
 			graphqlOperation(createEvent, {
 				input: {
-					referralCode: formEvent.referralCode,
+					referralCode: formEvent.referralCode || null,
 					plan: formEvent.plan,
 					name: formEvent.name,
 					website: formEvent.website,
@@ -130,6 +167,7 @@ export default function NewEvent() {
 					city: formEvent.city,
 					street: formEvent.street,
 					number: formEvent.number,
+					complement: formEvent.complement,
 					description: formEvent.description,
 					dates: formEvent.dates,
 					clientID: client.id,
@@ -137,6 +175,11 @@ export default function NewEvent() {
 				},
 			})
 		);
+		if (eventLogo) {
+			await Storage.put(`logo/${newEvent.data.createEvent.id}.${eventLogo.name.split('.').pop()}`, eventLogo, {
+				contentType: eventLogo.type
+			});
+		}
 		loadClient();
 		setFormEvent(initial);
 		setSuccess(true);
@@ -198,15 +241,43 @@ export default function NewEvent() {
 						/>
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
-						<input
+					<select
 							value={formEvent.state || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, state: e.target.value })}
-							type="text"
-							placeholder="Estado *"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-						/>
+							placeholder="Estado"
+							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						>
+							<option value="">Selecione</option>
+							<option value="AC">Acre</option>
+							<option value="AL">Alagoas</option>
+							<option value="AP">Amapá</option>
+							<option value="AM">Amazonas</option>
+							<option value="BA">Bahia</option>
+							<option value="CE">Ceará</option>
+							<option value="DF">Distrito Federal</option>
+							<option value="ES">Espírito Santo</option>
+							<option value="GO">Goiás</option>
+							<option value="MA">Maranhão</option>
+							<option value="MT">Mato Grosso</option>
+							<option value="MS">Mato Grosso do Sul</option>
+							<option value="MG">Minas Gerais</option>
+							<option value="PA">Pará</option>
+							<option value="PB">Paraíba</option>
+							<option value="PR">Paraná</option>
+							<option value="PE">Pernambuco</option>
+							<option value="PI">Piauí</option>
+							<option value="RJ">Rio de Janeiro</option>
+							<option value="RN">Rio Grande do Norte</option>
+							<option value="RS">Rio Grande do Sul</option>
+							<option value="RO">Rondônia</option>
+							<option value="RR">Roraima</option>
+							<option value="SC">Santa Catarina</option>
+							<option value="SP">São Paulo</option>
+							<option value="SE">Sergipe</option>
+							<option value="TO">Tocantins</option>
+						</select>
 					</div>
-					<div className="w-full md:w-8/12 pr-4 mb-4">
+					<div className="w-full md:w-6/12 pr-4 mb-4">
 						<input
 							value={formEvent.street || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, street: e.target.value })}
@@ -215,7 +286,7 @@ export default function NewEvent() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-4/12 pr-4 mb-4">
+					<div className="w-full md:w-3/12 pr-4 mb-4">
 						<input
 							value={formEvent.number || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, number: e.target.value })}
@@ -224,7 +295,16 @@ export default function NewEvent() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full mb-10">
+					<div className="w-full md:w-3/12 mb-4">
+						<input
+							value={formEvent.complement || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, complement: e.target.value })}
+							type="text"
+							placeholder="Complemento"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						/>
+					</div>
+					<div className="w-full mb-4">
 						<DatePicker
 							onChange={handleDatesChange}
 							format="DD/MM/YYYY"
@@ -233,33 +313,41 @@ export default function NewEvent() {
 							months={months}
 							minDate={new Date()}
 							style={{
-								position: 'absolute',
-								border: 'none',
-								borderBottom: '1px solid #b0bec5',
-								borderRadius: 0,
-								width: '75%',
+								border: '1px solid #d1d5db',
+								borderRadius: '4px',
+								padding: '8px',
+								height: '40px',
 							}}
-							placeholder="Datas"
+							placeholder="Datas *"
 						/>
 					</div>
 					<div className="w-full md:w-6/12 pr-4 mb-4">
 						<select
-							onChange={(e) => setFormEvent({ ...formEvent, plan: e })}
+							onChange={(e) => setFormEvent({ ...formEvent, plan: e.target.value })}
 							placeholder="Selecione o Plano *"
 							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						>
-							<option value="">Selecione</option>
+							<option value="">Selecione *</option>
 							<option value="Básico">Básico - R$ 500,00</option>
 							<option value="Avançado">Avançado - R$ 800,00</option>
 							<option value="Pró">Pró - R$ 1.500,00</option>
 						</select>
 					</div>
-					<div className="w-full md:w-6/12 pr-4 mb-4">
+					<div className="w-full md:w-6/12 mb-4">
 						<input
 							value={formEvent.referralCode || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, referralCode: e.target.value })}
 							type="text"
 							placeholder="Código de Referência"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						/>
+					</div>
+					<div className="w-full mb-4">
+						<input
+							onChange={(e) => handleFile(e)}
+							type="file"
+							placeholder="Logo"
+							accept=".jpg,.jpeg,.png,image/png,image/jpeg"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>

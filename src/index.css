@@ -9,3 +9,10 @@ html {
 	color: #475569;
 	font-family: 'Quicksand', sans-serif;
 }
+
+.rmdp-container {
+	width: 100% !important;
+}
+.rmdp-input {
+	width: 100% !important;
+}

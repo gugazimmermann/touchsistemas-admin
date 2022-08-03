@@ -49,6 +49,7 @@ export const createOwner = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -114,6 +115,7 @@ export const updateOwner = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -179,6 +181,7 @@ export const deleteOwner = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -253,6 +256,7 @@ export const createClient = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -354,6 +358,7 @@ export const updateClient = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -455,6 +460,7 @@ export const deleteClient = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -516,6 +522,7 @@ export const createEvent = /* GraphQL */ `
       city
       street
       number
+      complement
       description
       dates
       clientID
@@ -556,6 +563,7 @@ export const createEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -593,6 +601,7 @@ export const createEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -628,6 +637,7 @@ export const updateEvent = /* GraphQL */ `
       city
       street
       number
+      complement
       description
       dates
       clientID
@@ -668,6 +678,7 @@ export const updateEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -705,6 +716,7 @@ export const updateEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -740,6 +752,7 @@ export const deleteEvent = /* GraphQL */ `
       city
       street
       number
+      complement
       description
       dates
       clientID
@@ -780,6 +793,7 @@ export const deleteEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -817,6 +831,7 @@ export const deleteEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -864,6 +879,7 @@ export const createPartner = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -938,6 +954,7 @@ export const updatePartner = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -1012,6 +1029,7 @@ export const deletePartner = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID

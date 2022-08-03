@@ -126,14 +126,14 @@ export const schema = {
                     "name": "name",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "phone": {
                     "name": "phone",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "email": {
@@ -154,21 +154,21 @@ export const schema = {
                     "name": "zipCode",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "state": {
                     "name": "state",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "city": {
                     "name": "city",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "street": {
@@ -296,7 +296,7 @@ export const schema = {
                     "name": "referralCode",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "plan": {
@@ -362,6 +362,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "complement": {
+                    "name": "complement",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "description": {
                     "name": "description",
                     "isArray": false,
@@ -375,7 +382,7 @@ export const schema = {
                     "type": "String",
                     "isRequired": true,
                     "attributes": [],
-                    "isArrayNullable": true
+                    "isArrayNullable": false
                 },
                 "clientID": {
                     "name": "clientID",
@@ -636,5 +643,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "46cdf23cc781401bad8fcfc6e5de6a76"
+    "version": "49d508e33c9bfd97dc560e8d365c5e96"
 };

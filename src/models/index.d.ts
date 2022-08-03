@@ -35,13 +35,13 @@ export declare class Owner {
 
 export declare class Client {
   readonly id: string;
-  readonly name?: string | null;
-  readonly phone?: string | null;
+  readonly name: string;
+  readonly phone: string;
   readonly email: string;
   readonly website?: string | null;
-  readonly zipCode?: string | null;
-  readonly state?: string | null;
-  readonly city?: string | null;
+  readonly zipCode: string;
+  readonly state: string;
+  readonly city: string;
   readonly street?: string | null;
   readonly number?: string | null;
   readonly complement?: string | null;
@@ -55,7 +55,7 @@ export declare class Client {
 
 export declare class Event {
   readonly id: string;
-  readonly referralCode: string;
+  readonly referralCode?: string | null;
   readonly plan: string;
   readonly name: string;
   readonly website?: string | null;
@@ -65,8 +65,9 @@ export declare class Event {
   readonly city: string;
   readonly street?: string | null;
   readonly number?: string | null;
+  readonly complement?: string | null;
   readonly description?: string | null;
-  readonly dates?: string[] | null;
+  readonly dates: string[];
   readonly clientID: string;
   readonly Client?: Client | null;
   readonly partnerID?: string | null;

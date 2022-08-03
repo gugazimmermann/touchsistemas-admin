@@ -46,6 +46,7 @@ export const onCreateOwner = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -108,6 +109,7 @@ export const onUpdateOwner = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -170,6 +172,7 @@ export const onDeleteOwner = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -241,6 +244,7 @@ export const onCreateClient = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -339,6 +343,7 @@ export const onUpdateClient = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -437,6 +442,7 @@ export const onDeleteClient = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -495,6 +501,7 @@ export const onCreateEvent = /* GraphQL */ `
       city
       street
       number
+      complement
       description
       dates
       clientID
@@ -535,6 +542,7 @@ export const onCreateEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -572,6 +580,7 @@ export const onCreateEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -604,6 +613,7 @@ export const onUpdateEvent = /* GraphQL */ `
       city
       street
       number
+      complement
       description
       dates
       clientID
@@ -644,6 +654,7 @@ export const onUpdateEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -681,6 +692,7 @@ export const onUpdateEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -713,6 +725,7 @@ export const onDeleteEvent = /* GraphQL */ `
       city
       street
       number
+      complement
       description
       dates
       clientID
@@ -753,6 +766,7 @@ export const onDeleteEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -790,6 +804,7 @@ export const onDeleteEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -834,6 +849,7 @@ export const onCreatePartner = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -905,6 +921,7 @@ export const onUpdatePartner = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -976,6 +993,7 @@ export const onDeletePartner = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID

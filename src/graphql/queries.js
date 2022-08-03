@@ -46,6 +46,7 @@ export const getOwner = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -158,6 +159,7 @@ export const getClient = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -246,6 +248,7 @@ export const listClients = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -276,6 +279,7 @@ export const getEvent = /* GraphQL */ `
       city
       street
       number
+      complement
       description
       dates
       clientID
@@ -316,6 +320,7 @@ export const getEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -353,6 +358,7 @@ export const getEvent = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -390,6 +396,7 @@ export const listEvents = /* GraphQL */ `
         city
         street
         number
+        complement
         description
         dates
         clientID
@@ -466,6 +473,7 @@ export const getPartner = /* GraphQL */ `
           city
           street
           number
+          complement
           description
           dates
           clientID
@@ -542,6 +550,7 @@ export const listPartners = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -660,6 +669,7 @@ export const clientByName = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -728,6 +738,7 @@ export const clientByEmail = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID
@@ -771,6 +782,7 @@ export const eventByName = /* GraphQL */ `
         city
         street
         number
+        complement
         description
         dates
         clientID
@@ -860,6 +872,7 @@ export const partnerByReferralCode = /* GraphQL */ `
             city
             street
             number
+            complement
             description
             dates
             clientID

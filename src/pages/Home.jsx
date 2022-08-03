@@ -1,5 +1,4 @@
 import { useCookies } from 'react-cookie';
-import { Button } from '@material-tailwind/react';
 
 export default function App() {
 	const [cookies, setCookie] = useCookies(['name']);
@@ -13,7 +12,7 @@ export default function App() {
 			<input name={cookies.name} onChange={(e) => onChange(e.target.value)} />
 			{cookies.name && <h1>Hello {cookies.name}!</h1>}
 			<i className="bx bx-search-alt-2" />
-			<Button>Button</Button>
+			<button type='button'>Button</button>
 		</div>
 	);
 }

@@ -41,7 +41,6 @@
     ]
   },
   "dependencies": {
-    "@material-tailwind/react": "^1.0.8",
     "aws-amplify": "^4.3.28",
     "boxicons": "^2.1.2",
     "google-map-react": "^2.2.0",

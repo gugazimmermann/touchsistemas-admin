@@ -21,10 +21,7 @@ export const onCreateOwner = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -88,10 +85,7 @@ export const onUpdateOwner = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -155,10 +149,7 @@ export const onDeleteOwner = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -216,10 +207,7 @@ export const onCreateClient = /* GraphQL */ `
       street
       number
       complement
-      eventsMap {
-        number
-        url
-      }
+      eventsMap
       Owners {
         items {
           id
@@ -239,6 +227,7 @@ export const onCreateClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -276,6 +265,7 @@ export const onCreateClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -319,10 +309,7 @@ export const onUpdateClient = /* GraphQL */ `
       street
       number
       complement
-      eventsMap {
-        number
-        url
-      }
+      eventsMap
       Owners {
         items {
           id
@@ -342,6 +329,7 @@ export const onUpdateClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -379,6 +367,7 @@ export const onUpdateClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -422,10 +411,7 @@ export const onDeleteClient = /* GraphQL */ `
       street
       number
       complement
-      eventsMap {
-        number
-        url
-      }
+      eventsMap
       Owners {
         items {
           id
@@ -445,6 +431,7 @@ export const onDeleteClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -482,6 +469,7 @@ export const onDeleteClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -541,10 +529,7 @@ export const onCreateEvent = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -657,10 +642,7 @@ export const onUpdateEvent = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -773,10 +755,7 @@ export const onDeleteEvent = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -901,6 +880,7 @@ export const onCreatePartner = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -973,6 +953,7 @@ export const onUpdatePartner = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -1045,6 +1026,7 @@ export const onDeletePartner = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }

@@ -1,14 +1,14 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import { Storage } from 'aws-amplify';
+import { Storage, API, graphqlOperation } from 'aws-amplify';
+import { updateClient } from '../../../graphql/mutations';
 
 export default function PastEvents() {
 	const navigate = useNavigate();
-	const [client] = useOutletContext();
+	const [client, loadClient] = useOutletContext();
 	const [events, setEvents] = useState();
 	const [map, setMap] = useState();
 
@@ -57,13 +57,21 @@ export default function PastEvents() {
 		await Storage.put(`maps/events_${client.id}.png`, file, {
 			contentType: 'image/png',
 		});
+		await API.graphql(
+			graphqlOperation(updateClient, {
+				input: {
+					id: client.id,
+					eventsMap: events.length,
+				},
+			})
+		);
+		loadClient()
 	}
 
 	async function handleMap() {
+		if (!client.eventsMap || client.eventsMap !== events.length) await createMap();
 		const mapsList = await Storage.list(`maps/events_${client.id}`);
-		if (mapsList.length === 0) {
-			await createMap();
-		} else {
+		if (mapsList.length !== 0) {
 			const getUrl = await Storage.get(mapsList[0].key);
 			setMap(getUrl);
 		}

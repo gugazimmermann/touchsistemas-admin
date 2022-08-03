@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';

@@ -24,10 +24,7 @@ export const createOwner = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -94,10 +91,7 @@ export const updateOwner = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -164,10 +158,7 @@ export const deleteOwner = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -228,10 +219,7 @@ export const createClient = /* GraphQL */ `
       street
       number
       complement
-      eventsMap {
-        number
-        url
-      }
+      eventsMap
       Owners {
         items {
           id
@@ -251,6 +239,7 @@ export const createClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -288,6 +277,7 @@ export const createClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -334,10 +324,7 @@ export const updateClient = /* GraphQL */ `
       street
       number
       complement
-      eventsMap {
-        number
-        url
-      }
+      eventsMap
       Owners {
         items {
           id
@@ -357,6 +344,7 @@ export const updateClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -394,6 +382,7 @@ export const updateClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -440,10 +429,7 @@ export const deleteClient = /* GraphQL */ `
       street
       number
       complement
-      eventsMap {
-        number
-        url
-      }
+      eventsMap
       Owners {
         items {
           id
@@ -463,6 +449,7 @@ export const deleteClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -500,6 +487,7 @@ export const deleteClient = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -562,10 +550,7 @@ export const createEvent = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -681,10 +666,7 @@ export const updateEvent = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -800,10 +782,7 @@ export const deleteEvent = /* GraphQL */ `
         street
         number
         complement
-        eventsMap {
-          number
-          url
-        }
+        eventsMap
         Owners {
           items {
             id
@@ -931,6 +910,7 @@ export const createPartner = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -1006,6 +986,7 @@ export const updatePartner = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }
@@ -1081,6 +1062,7 @@ export const deletePartner = /* GraphQL */ `
             street
             number
             complement
+            eventsMap
             createdAt
             updatedAt
           }

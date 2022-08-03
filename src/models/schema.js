@@ -195,9 +195,7 @@ export const schema = {
                 "eventsMap": {
                     "name": "eventsMap",
                     "isArray": false,
-                    "type": {
-                        "nonModel": "EventsMap"
-                    },
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -651,26 +649,6 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {
-        "EventsMap": {
-            "name": "EventsMap",
-            "fields": {
-                "number": {
-                    "name": "number",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "url": {
-                    "name": "url",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            }
-        }
-    },
-    "version": "e5a9bfec501356581b3c53c78dfe9e53"
+    "nonModels": {},
+    "version": "91583ebf4f998a6324e3303873badde3"
 };

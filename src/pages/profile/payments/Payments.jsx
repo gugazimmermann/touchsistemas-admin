@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useOutletContext } from 'react-router-dom';

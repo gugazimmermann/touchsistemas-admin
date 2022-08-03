@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export default function ConfirmationDialog({ open, setOpen, handleConfirm, icon, cancelText, confirmText, children }) {
 	return (
 		<div

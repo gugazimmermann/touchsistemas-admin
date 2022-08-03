@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import moment from 'moment';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../../graphql/queries';
 import Loading from '../../../components/Loading';

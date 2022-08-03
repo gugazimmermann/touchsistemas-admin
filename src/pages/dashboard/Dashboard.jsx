@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { Link, useOutletContext } from 'react-router-dom';
 import Alert from '../../components/Alert';
 

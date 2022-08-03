@@ -11,7 +11,7 @@ export default function Nav({ client, signout }) {
 	const [url, setUrl] = useState();
 
 	async function logo() {
-		const list = await Storage.list(`logo/${client.id}.png`);
+		const list = await Storage.list(`logo/${client.id}`);
 		if (list?.length) {
 			const getUrl = await Storage.get(list[0].key);
 			setUrl(getUrl);

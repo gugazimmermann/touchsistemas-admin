@@ -31,10 +31,6 @@ export default function PastEvents() {
 		setLoading(false);
 	}
 
-	useEffect(() => {
-		if (client) orderEvents();
-	}, [client]);
-
 	async function createMap() {
 		setLoading(true);
 		const clientAddress = encodeURIComponent(
@@ -80,10 +76,12 @@ export default function PastEvents() {
 	}
 
 	useEffect(() => {
-		if (events) {
-			handleMap();
-		}
+		if (events) handleMap();
 	}, [events]);
+
+	useEffect(() => {
+		if (client) orderEvents();
+	}, [client]);
 
 	return (
 		<>

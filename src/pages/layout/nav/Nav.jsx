@@ -51,7 +51,7 @@ export default function Nav({ client, signout }) {
 					<i className="bx bx-menu text-3xl" />
 				</button>
 
-				<div className={`${isMenuOpen ? 'flex pb-4' : 'hidden'}w-full md:w-auto flex-col md:flex md:flex-row `}>
+				<div className={`${isMenuOpen ? 'flex pb-4' : 'hidden'} w-full md:w-auto flex-col md:flex md:flex-row `}>
 					<ul className="md:flex flex-row list-style-none pr-2 ">
 						<li className="p-2 text-center md:text-base">
 							<Link to="/dashboard">Dashboard</Link>

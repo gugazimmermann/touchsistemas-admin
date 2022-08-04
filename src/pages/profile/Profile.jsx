@@ -177,10 +177,10 @@ export default function Profile() {
 		<>
 			{loading && <Loading />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
-			<h2 className="text-primary text-xl p-2 pt-6">Cadastro</h2>
-			<form className="mx-4">
+			<h2 className="text-primary text-xl pb-4">Cadastro</h2>
+			<form>
 				<div className="flex flex-wrap">
-					<div className="w-full md:w-6/12 pr-4 mb-4">
+					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<input
 							value={formClient.name || ''}
 							onChange={(e) => setFormClient({ ...formClient, name: e.target.value })}
@@ -198,7 +198,7 @@ export default function Profile() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-6/12 pr-4 mb-4">
+					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<input
 							value={formClient.email || ''}
 							type="text"
@@ -216,7 +216,7 @@ export default function Profile() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-4/12 pr-4 mb-4">
+					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
 							value={formClient.zipCode || ''}
 							onChange={(e) => handleChangeCEP(e.target.value)}
@@ -225,7 +225,7 @@ export default function Profile() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-4/12 pr-4 mb-4">
+					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
 							value={formClient.city || ''}
 							onChange={(e) => setFormClient({ ...formClient, city: e.target.value })}
@@ -271,7 +271,7 @@ export default function Profile() {
 							<option value="TO">Tocantins</option>
 						</select>
 					</div>
-					<div className="w-full md:w-6/12 pr-4 mb-4">
+					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<input
 							value={formClient.street || ''}
 							onChange={(e) => setFormClient({ ...formClient, street: e.target.value })}
@@ -280,7 +280,7 @@ export default function Profile() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-3/12 pr-4 mb-4">
+					<div className="w-full md:w-3/12 sm:pr-4 mb-4">
 						<input
 							value={formClient.number || ''}
 							onChange={(e) => setFormClient({ ...formClient, number: e.target.value })}

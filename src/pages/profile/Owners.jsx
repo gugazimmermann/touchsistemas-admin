@@ -98,8 +98,8 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	function renderForm() {
 		return (
-			<form className="flex flex-wrap mx-4">
-				<div className="w-full md:w-4/12 pr-4 mb-4">
+			<form className="flex flex-wrap mb-4">
+				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
 						value={!update ? owner?.name : selected?.name}
 						onChange={(e) => {
@@ -111,7 +111,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 						className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
-				<div className="w-full md:w-4/12 pr-4 mb-4">
+				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
 						value={!update ? owner?.phone : selected?.phone[0] === '+' ? selected?.phone.slice(4) : selected?.phone}
 						onChange={(e) => handleChangePhone(e.target.value)}
@@ -153,7 +153,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	function renderTable() {
 		return (
-			<div className="overflow-x-auto p-4">
+			<div className="overflow-x-auto">
 				<table className="items-center w-full bg-transparent border-collapse">
 					<thead>
 						<tr>
@@ -230,7 +230,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	return (
 		<>
-			<h3 className={`text-primary text-xl p-2 ${!update ? 'text-primary' : 'text-warning'}`}>
+			<h3 className={`text-primary text-xl py-4 ${!update ? 'text-primary' : 'text-warning'}`}>
 				{!update ? 'Adicionar' : 'Atualizar'} Responsável
 			</h3>
 			{renderForm()}

@@ -33,8 +33,8 @@ export default function Nav({ client, signout }) {
 	}, [isAvatarOpen, setAvatarOpen]);
 
 	return (
-		<nav className="flex flex-wrap items-center justify-between md:py-2 shadow-md">
-			<div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+		<nav className="flex flex-wrap items-center justify-between">
+			<div className="container-fluid w-full flex flex-wrap items-center justify-between px-6 py-2 shadow-md z-10">
 				<Link to="/dashboard" className="flex flex-row items-center text-primary ">
 					<LogoIcon styles="h-8 w-8" />
 					<p className="text-2xl">{process.env.REACT_APP_TITLE}</p>
@@ -51,8 +51,8 @@ export default function Nav({ client, signout }) {
 					<i className="bx bx-menu text-3xl" />
 				</button>
 
-				<div className={`${isMenuOpen ? 'flex pb-4' : 'hidden'} w-full md:w-auto flex-col md:flex md:flex-row `}>
-					<ul className="md:flex flex-row list-style-none">
+				<div className={`${isMenuOpen ? 'flex pb-4' : 'hidden'}w-full md:w-auto flex-col md:flex md:flex-row `}>
+					<ul className="md:flex flex-row list-style-none pr-2 ">
 						<li className="p-2 text-center md:text-base">
 							<Link to="/dashboard">Dashboard</Link>
 						</li>
@@ -65,14 +65,14 @@ export default function Nav({ client, signout }) {
 					</ul>
 
 					<div className="flex justify-evenly">
-						<Link to="/" className="mr-4 flex items-center" role="button" aria-expanded="false">
+						{/* <Link to="/dashboard" className="mr-4 flex items-center" role="button" aria-expanded="false">
 							<i className="bx bxs-message-check text-2xl" />
 							<span className="text-white bg-secondary absolute rounded-full text-xs -mt-8 ml-3 py-0 px-1.5">1250</span>
 						</Link>
-						<Link to="/" className="mr-4 flex items-center" role="button" aria-expanded="false">
+						<Link to="/dashboard" className="mr-4 flex items-center" role="button" aria-expanded="false">
 							<i className="bx bxs-bell text-2xl" />
 							<span className="text-white bg-warning absolute rounded-full text-xs -mt-8 ml-3 py-0 px-1.5">1</span>
-						</Link>
+						</Link> */}
 						<div className="relative pt-1">
 							<button
 								type="button"
@@ -86,7 +86,7 @@ export default function Nav({ client, signout }) {
 								) : (
 									<AvatarIcon styles="h-8 w-8 text-primary" />
 								)}
-								<span className="text-white bg-danger absolute rounded-full text-xs -mt-10 ml-3 py-0 px-1.5">1</span>
+								{/* <span className="text-white bg-danger absolute rounded-full text-xs -mt-10 ml-3 py-0 px-1.5">1</span> */}
 							</button>
 							<ul
 								ref={avatarMenuRef}

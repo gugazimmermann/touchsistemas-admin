@@ -38,10 +38,12 @@ export default function Layout() {
 	}, []);
 
 	return (
-		<main className="container mx-auto h-screen bg-white">
+		<main className="container mx-auto h-screen max-w-screen-lg bg-white">
 			{loading && <Loading />}
 			<Nav client={client} signout={signOut} />
-			<Outlet context={[client, loadClient]} />
+			<div className="p-4 bg-white">
+				<Outlet context={[client, loadClient]} />
+			</div>
 		</main>
 	);
 }

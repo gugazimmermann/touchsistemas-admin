@@ -1,25 +1,19 @@
-/* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import moment from 'moment';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { updateClient } from '../../../graphql/mutations';
 import Loading from '../../../components/Loading';
 
 export default function PastEvents() {
-	const navigate = useNavigate();
 	const [client, loadClient] = useOutletContext();
 	const [loading, setLoading] = useState(false);
 	const [events, setEvents] = useState();
 	const [map, setMap] = useState();
 
-	function handleEvent(id) {
-		navigate(`/eventos/${id}`);
-	}
-
 	async function orderEvents() {
-		setLoading(true)
+		setLoading(true);
 		const showEvents = [];
 		const eventsWithLastDay = client.Events.items.map((i) => ({
 			...i,
@@ -34,7 +28,7 @@ export default function PastEvents() {
 			}
 		}
 		setEvents(showEvents);
-		setLoading(false)
+		setLoading(false);
 	}
 
 	useEffect(() => {
@@ -42,7 +36,7 @@ export default function PastEvents() {
 	}, [client]);
 
 	async function createMap() {
-		setLoading(true)
+		setLoading(true);
 		const clientAddress = encodeURIComponent(
 			`${client.street}, ${client.number} - ${client.city} - ${client.state}, ${client.zipCode}`
 		);
@@ -70,19 +64,19 @@ export default function PastEvents() {
 				},
 			})
 		);
-		loadClient()
-		setLoading(false)
+		loadClient();
+		setLoading(false);
 	}
 
 	async function handleMap() {
-		setLoading(true)
+		setLoading(true);
 		if (!client.eventsMap || client.eventsMap !== events.length) await createMap();
 		const mapsList = await Storage.list(`maps/events_${client.id}`);
 		if (mapsList.length !== 0) {
 			const getUrl = await Storage.get(mapsList[0].key);
 			setMap(getUrl);
 		}
-		setLoading(false)
+		setLoading(false);
 	}
 
 	useEffect(() => {
@@ -94,53 +88,41 @@ export default function PastEvents() {
 	return (
 		<>
 			{loading && <Loading />}
-			<h2 className="text-primary text-xl p-2 mt-4">Eventos Passados</h2>
-			<div className="overflow-x-auto">
-				<table className="items-center w-full bg-transparent border-collapse">
-					<thead>
-						<tr>
-							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-sm font-normal text-left">
-								Logo
-							</th>
-							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-sm font-normal text-left">
-								Nome
-							</th>
-							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-sm font-normal text-left">
-								Localização
-							</th>
-							<th className="px-2 text-primary border-b border-solid border-primary whitespace-nowrap text-sm font-normal text-left">
-								Data
-							</th>
-						</tr>
-					</thead>
-					{client && client.Events && client.Events?.items.length > 0 && (
-						<tbody>
-							{events &&
-								events.map((event) => (
-									<tr key={event.id} onClick={() => handleEvent(event.id)} className="cursor-pointer hover:bg-gray-100">
-										<th className="border-b border-gray-200 align-middle px-2 text-center w-14">
-											{event.image && <img src={event.image} alt={event.name} className="h-10 w-10 rounded" />}
-										</th>
-										<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
-											{event.name}
-										</th>
-										<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
-											{`${event.city} / ${event.state}`}
-										</th>
-										<th className="border-b border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
-											{event.dates.map((d) => `${moment(d).format('DD/MM/YY')}`).join(', ')}
-										</th>
-									</tr>
-								))}
-						</tbody>
-					)}
-				</table>
+			<h2 className="text-primary text-xl pb-4">Eventos Passados</h2>
+			<div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 lg:gap-x-8">
+				{events &&
+					events.map((event) => (
+						<Link to={`/eventos/${event.id}`} key={event.id} className="group">
+							<div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden lg:aspect-w-7 lg:aspect-h-8">
+								{event.image ? (
+									<img
+										src={event.image}
+										alt={event.name}
+										className="w-full h-full object-center object-cover group-hover:opacity-75"
+									/>
+								) : (
+									<img
+										src="/image-placeholder.png"
+										alt={event.name}
+										className="w-full h-full object-center object-cover opacity-10  group-hover:opacity-5"
+									/>
+								)}
+							</div>
+							<h3 className="mt-4">{event.name}</h3>
+							<p className="mt-1 text-sm">
+								{`${event.city} / ${event.state}`} |{' '}
+								{event.dates.map((d) => `${moment(d).format('DD/MM/YY')}`).join(', ')}
+							</p>
+						</Link>
+					))}
+				{map && (
+					<a href={map} target="_blank" className="group" rel="noreferrer">
+						<div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden lg:aspect-w-7 lg:aspect-h-8">
+							<img alt="map" src={map} className="w-full h-full object-center object-cover" />
+						</div>
+					</a>
+				)}
 			</div>
-			{map && (
-				<div className="mt-4 flex justify-center">
-					<img alt="map" className="w-7/12" src={map} />
-				</div>
-			)}
 		</>
 	);
 }

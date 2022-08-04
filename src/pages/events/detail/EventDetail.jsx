@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { getEvent, partnersByReferralCode } from '../../../graphql/queries';
 import Loading from '../../../components/Loading';
+import Alert from '../../../components/Alert';
 
 export default function EventDetail() {
 	const params = useParams();
+	const location = useLocation();
+	const [success] = useState(location?.state?.success || null);
 	const [loading, setLoading] = useState(false);
 	const [event, setEvent] = useState();
 	const [logo, setLogo] = useState();
@@ -54,38 +57,77 @@ export default function EventDetail() {
 		if (params.id) handleGetEvent(params.id);
 	}, [params]);
 
+	function formatAddress(o) {
+		let address = o.street;
+		if (o.number) address += `, ${o.number}`;
+		if (o.complement) address += ` (${o.complement}}`;
+		address += ` - ${o.city} / ${o.state} | ${o.zipCode}`;
+		return address;
+	}
+
 	return (
 		<>
 			{loading && <Loading />}
+			{success && <Alert type="success">Evento Cadastrado com Sucesso</Alert>}
 			{!loading && event && (
-				<div className="mx-8">
-					<h2 className="text-primary text-xl py-6">
-						{event.name} | {event.dates.map((d) => `${moment(d).format('DD/MM/YY')}`).join(', ')}
-					</h2>
-
-					<div className="w-full md:w-8/12 flex flex-wrap p-4">
-						{event.website && <div className="w-full mb-4">{event.website}</div>}
-						{event.email && <div className="w-full mb-4">{event.email}</div>}
-						<div className="w-full mb-4">
-							{event.street}, {event.number}, {event.city} / {event.state} - {event.zipCode}
-						</div>
-						<div className="w-full mb-4">{event.complement}</div>
-						<div className="w-full mb-4">Plano: {event.plan}</div>
-						<div className="w-full mb-4">
-							Parceiro: {event.partner.name} | {event.partner.referralCode}
+				<div className="bg-white shadow-md overflow-hidden rounded-lg">
+					<div className="flex align-middle px-4 py-5">
+						{logo && (
+							<div className="w-3/12 sm:w-2/12 md:w-1/12">
+								<img alt="logo" className="object-scale-down w-full rounded-md" src={logo} />
+							</div>
+						)}
+						<div className={`${logo ? 'w-9/12 sm:w-10/12 md:w-11/12' : 'w-full'} pl-2 flex flex-col justify-center`}>
+							<h3 className="text-lg leading-6 font-bold">{event.name}</h3>
+							<p className="mt-1 max-w-2xl text-sm sm:text-base">
+								{event.dates.map((d) => `${moment(d).format('DD/MM/YYYY')}`).join(', ')}
+							</p>
 						</div>
 					</div>
-					<div className="w-full flex flex-wrap justify-evenly">
-						{logo && (
-							<div className="w-full md:w-4/12">
-								<img alt="logo" src={logo} />
+					<div className="border-t">
+						<dl>
+							{event.website && (
+								<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+									<dt className="text-sm font-medium sm:col-span-2">WebSite</dt>
+									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.website}</dd>
+								</div>
+							)}
+							{event.email && (
+								<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+									<dt className="text-sm font-medium sm:col-span-2">Email</dt>
+									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.email}</dd>
+								</div>
+							)}
+							<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+								<dt className="text-sm font-medium sm:col-span-2">Endereço</dt>
+								<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{formatAddress(event)}</dd>
 							</div>
-						)}
-						{map && (
-							<div className="w-full md:w-4/12">
-								<img alt="map" src={map} />
+							<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+								<dt className="text-sm font-medium sm:col-span-2">Plano</dt>
+								<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.plan}</dd>
 							</div>
-						)}
+							{event.partner && (
+								<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+									<dt className="text-sm font-medium sm:col-span-2">Parceiro</dt>
+									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{`${event.partner.name} | ${event.partner.referralCode}`}</dd>
+								</div>
+							)}
+							{event.description && (
+								<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+									<dt className="text-sm font-medium sm:col-span-2">Descrição</dt>
+									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.plan}</dd>
+								</div>
+							)}
+							{map && (
+								<div className="px-4 py-4 flex justify-center">
+									<div className="bg-white overflow-hidden rounded-lg w-full sm:w-6/12 lg:w-4/12">
+										<a href={map} target="_blank" className="group" rel="noreferrer">
+											<img alt="map" src={map} />
+										</a>
+									</div>
+								</div>
+							)}
+						</dl>
 					</div>
 				</div>
 			)}

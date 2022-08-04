@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
@@ -42,11 +42,11 @@ const initial = {
 };
 
 export default function NewEvent() {
+	const navigate = useNavigate();
 	const [client, loadClient] = useOutletContext();
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [success, setSuccess] = useState(false);
 	const [formEvent, setFormEvent] = useState(initial);
 	const [eventLogo, setEventLogo] = useState();
 
@@ -202,11 +202,10 @@ export default function NewEvent() {
 		const newEvent = await graphCreateEvent(partnerID);
 		if (eventLogo) await addEventLogo(newEvent);
 		await addEventMap(newEvent);
-
 		loadClient();
 		setFormEvent(initial);
-		setSuccess(true);
 		setLoading(false);
+		navigate(`/eventos/${newEvent.id}`, { state: { success: true } });
 		return true;
 	}
 
@@ -214,11 +213,10 @@ export default function NewEvent() {
 		<>
 			{loading && <Loading />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
-			{success && <Alert type="success">Evento Cadastrado com Sucesso</Alert>}
-			<h2 className="text-primary text-xl p-2 pt-6">Novo Evento</h2>
-			<form className="mx-4">
+			<h2 className="text-primary text-xl pb-4">Novo Evento</h2>
+			<form>
 				<div className="flex flex-wrap">
-					<div className="w-full md:w-4/12 pr-4 mb-4">
+					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
 							value={formEvent.name || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, name: e.target.value })}
@@ -227,7 +225,7 @@ export default function NewEvent() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-4/12 pr-4 mb-4">
+					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
 							value={formEvent.website || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, website: e.target.value })}
@@ -245,7 +243,7 @@ export default function NewEvent() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-4/12 pr-4 mb-4">
+					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
 							value={formEvent.zipCode || ''}
 							onChange={(e) => handleChangeCEP(e.target.value)}
@@ -254,7 +252,7 @@ export default function NewEvent() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-4/12 pr-4 mb-4">
+					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
 							value={formEvent.city || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, city: e.target.value })}
@@ -300,7 +298,7 @@ export default function NewEvent() {
 							<option value="TO">Tocantins</option>
 						</select>
 					</div>
-					<div className="w-full md:w-6/12 pr-4 mb-4">
+					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<input
 							value={formEvent.street || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, street: e.target.value })}
@@ -309,7 +307,7 @@ export default function NewEvent() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-3/12 pr-4 mb-4">
+					<div className="w-full md:w-3/12 sm:pr-4 mb-4">
 						<input
 							value={formEvent.number || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, number: e.target.value })}
@@ -344,7 +342,7 @@ export default function NewEvent() {
 							placeholder="Datas *"
 						/>
 					</div>
-					<div className="w-full md:w-6/12 pr-4 mb-4">
+					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<select
 							onChange={(e) => setFormEvent({ ...formEvent, plan: e.target.value })}
 							placeholder="Selecione o Plano *"

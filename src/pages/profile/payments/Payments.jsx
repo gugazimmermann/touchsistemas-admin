@@ -51,7 +51,7 @@ export default function Payments() {
 
 	return (
 		<>
-			<h2 className="text-primary text-xl p-2 pt-6">Pagamentos</h2>
+			<h2 className="text-primary text-xl pb-4">Pagamentos</h2>
 			<div className="overflow-x-auto">
 				<table className="items-center w-full bg-transparent border-collapse">
 					<thead>
@@ -90,7 +90,7 @@ export default function Payments() {
 					</tbody>
 				</table>
 			</div>
-			<h2 className="text-primary text-xl p-2 mt-4">Cartão Cadastrado</h2>
+			<h2 className="text-primary text-xl py-4">Cartão Cadastrado</h2>
 			<div className="overflow-x-auto">
 				<table className="items-center w-full bg-transparent border-collapse">
 					<thead>

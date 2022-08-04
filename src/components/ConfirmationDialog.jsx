@@ -3,11 +3,11 @@ export default function ConfirmationDialog({ open, setOpen, handleConfirm, icon,
 		<div
 			className={`${
 				open ? 'fixed' : 'hidden'
-			} overflow-y-auto overflow-x-hidden top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full bg-black bg-opacity-75`}
+			} overflow-y-auto overflow-x-hidden top-0 right-0 left-0 z-50 inset-0 h-full bg-black bg-opacity-50`}
 		>
 			<div className="flex justify-center items-center w-full h-full">
-				<div className="relative w-full max-w-md h-full md:h-auto">
-					<div className="relative bg-white rounded-lg shado">
+				<div className="relative w-full max-w-md md:h-auto">
+					<div className="relative bg-white mx-4 sm:mx-0 rounded-lg shadow">
 						<button type="button" className="absolute top-1 right-1" onClick={() => setOpen(!open)}>
 							<i className="bx bx-x text-2xl" />
 							<span className="sr-only">Close modal</span>

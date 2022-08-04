@@ -78,16 +78,6 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byName",
-                        "queryField": "ownerByName",
-                        "fields": [
-                            "name"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
                         "name": "byClient",
                         "fields": [
                             "clientID"
@@ -254,18 +244,8 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byName",
-                        "queryField": "clientByName",
-                        "fields": [
-                            "name"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
                         "name": "byEmail",
-                        "queryField": "clientByEmail",
+                        "queryField": "clientsByEmail",
                         "fields": [
                             "email"
                         ]
@@ -431,6 +411,34 @@ export const schema = {
                         "targetName": "partnerEventsId"
                     }
                 },
+                "Surveys": {
+                    "name": "Surveys",
+                    "isArray": true,
+                    "type": {
+                        "model": "Survey"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "EventID"
+                    }
+                },
+                "Visitors": {
+                    "name": "Visitors",
+                    "isArray": true,
+                    "type": {
+                        "model": "Visitor"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "EventID"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -458,17 +466,8 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byName",
-                        "queryField": "eventByName",
-                        "fields": [
-                            "name"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
                         "name": "byClient",
+                        "queryField": "eventsByClientID",
                         "fields": [
                             "clientID"
                         ]
@@ -478,6 +477,7 @@ export const schema = {
                     "type": "key",
                     "properties": {
                         "name": "byPartner",
+                        "queryField": "eventsByPartnerID",
                         "fields": [
                             "partnerID"
                         ]
@@ -623,7 +623,7 @@ export const schema = {
                     "type": "key",
                     "properties": {
                         "name": "byReferralCode",
-                        "queryField": "partnerByReferralCode",
+                        "queryField": "partnersByReferralCode",
                         "fields": [
                             "referralCode"
                         ]
@@ -646,9 +646,334 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "Survey": {
+            "name": "Survey",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "order": {
+                    "name": "order",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "question": {
+                    "name": "question",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": {
+                        "enum": "SurveyTypes"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "answers": {
+                    "name": "answers",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "EventID": {
+                    "name": "EventID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Event": {
+                    "name": "Event",
+                    "isArray": false,
+                    "type": {
+                        "model": "Event"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "eventSurveysId"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Surveys",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byQuestion",
+                        "queryField": "surveysByQuestion",
+                        "fields": [
+                            "question"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byEvent",
+                        "queryField": "surveysByEventID",
+                        "fields": [
+                            "EventID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Visitor": {
+            "name": "Visitor",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "eventDay": {
+                    "name": "eventDay",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "phone": {
+                    "name": "phone",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "code": {
+                    "name": "code",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "confirmation": {
+                    "name": "confirmation",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "codeUsed": {
+                    "name": "codeUsed",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "authorization": {
+                    "name": "authorization",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "gender": {
+                    "name": "gender",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "state": {
+                    "name": "state",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "city": {
+                    "name": "city",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "birthdate": {
+                    "name": "birthdate",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "surveyAnswers": {
+                    "name": "surveyAnswers",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "EventID": {
+                    "name": "EventID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Event": {
+                    "name": "Event",
+                    "isArray": false,
+                    "type": {
+                        "model": "Event"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "eventVisitorsId"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Visitors",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byEventDayAndEventID",
+                        "queryField": "visitorsByEventDayAndEventID",
+                        "fields": [
+                            "eventDay",
+                            "EventID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byConfirmationAndEventID",
+                        "queryField": "visitorsByConfirmationAndEventID",
+                        "fields": [
+                            "confirmation",
+                            "EventID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byEvent",
+                        "queryField": "visitorsByEventID",
+                        "fields": [
+                            "EventID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     },
-    "enums": {},
+    "enums": {
+        "SurveyTypes": {
+            "name": "SurveyTypes",
+            "values": [
+                "SINGLE",
+                "MULTIPLE"
+            ]
+        }
+    },
     "nonModels": {},
-    "version": "91583ebf4f998a6324e3303873badde3"
+    "version": "91988c10b7e2778aad6395b95e030a6b"
 };

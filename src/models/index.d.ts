@@ -1,6 +1,9 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
-
+export enum SurveyTypes {
+  SINGLE = "SINGLE",
+  MULTIPLE = "MULTIPLE"
+}
 
 
 
@@ -17,6 +20,14 @@ type EventMetaData = {
 }
 
 type PartnerMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type SurveyMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type VisitorMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -73,6 +84,8 @@ export declare class Event {
   readonly Client?: Client | null;
   readonly partnerID?: string | null;
   readonly Partner?: Partner | null;
+  readonly Surveys?: (Survey | null)[] | null;
+  readonly Visitors?: (Visitor | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Event, EventMetaData>);
@@ -96,4 +109,41 @@ export declare class Partner {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Partner, PartnerMetaData>);
   static copyOf(source: Partner, mutator: (draft: MutableModel<Partner, PartnerMetaData>) => MutableModel<Partner, PartnerMetaData> | void): Partner;
+}
+
+export declare class Survey {
+  readonly id: string;
+  readonly order: number;
+  readonly question: string;
+  readonly type: SurveyTypes | keyof typeof SurveyTypes;
+  readonly answers: string;
+  readonly EventID: string;
+  readonly Event?: Event | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Survey, SurveyMetaData>);
+  static copyOf(source: Survey, mutator: (draft: MutableModel<Survey, SurveyMetaData>) => MutableModel<Survey, SurveyMetaData> | void): Survey;
+}
+
+export declare class Visitor {
+  readonly id: string;
+  readonly eventDay: string;
+  readonly phone: string;
+  readonly code: number;
+  readonly confirmation?: string | null;
+  readonly codeUsed?: string | null;
+  readonly authorization?: boolean | null;
+  readonly name?: string | null;
+  readonly email?: string | null;
+  readonly gender?: string | null;
+  readonly state?: string | null;
+  readonly city?: string | null;
+  readonly birthdate?: string | null;
+  readonly surveyAnswers: string;
+  readonly EventID: string;
+  readonly Event?: Event | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Visitor, VisitorMetaData>);
+  static copyOf(source: Visitor, mutator: (draft: MutableModel<Visitor, VisitorMetaData>) => MutableModel<Visitor, VisitorMetaData> | void): Visitor;
 }

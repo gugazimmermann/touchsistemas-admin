@@ -297,6 +297,12 @@ export const createClient = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -402,6 +408,12 @@ export const updateClient = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -506,6 +518,12 @@ export const deleteClient = /* GraphQL */ `
             number
             createdAt
             updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
           }
           createdAt
           updatedAt
@@ -628,6 +646,81 @@ export const createEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      Surveys {
+        items {
+          id
+          order
+          question
+          type
+          answers
+          EventID
+          Event {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      Visitors {
+        items {
+          id
+          eventDay
+          phone
+          code
+          confirmation
+          codeUsed
+          authorization
+          name
+          email
+          gender
+          state
+          city
+          birthdate
+          surveyAnswers
+          EventID
+          Event {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -743,6 +836,81 @@ export const updateEvent = /* GraphQL */ `
         number
         createdAt
         updatedAt
+      }
+      Surveys {
+        items {
+          id
+          order
+          question
+          type
+          answers
+          EventID
+          Event {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      Visitors {
+        items {
+          id
+          eventDay
+          phone
+          code
+          confirmation
+          codeUsed
+          authorization
+          name
+          email
+          gender
+          state
+          city
+          birthdate
+          surveyAnswers
+          EventID
+          Event {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt
@@ -860,6 +1028,81 @@ export const deleteEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      Surveys {
+        items {
+          id
+          order
+          question
+          type
+          answers
+          EventID
+          Event {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      Visitors {
+        items {
+          id
+          eventDay
+          phone
+          code
+          confirmation
+          codeUsed
+          authorization
+          name
+          email
+          gender
+          state
+          city
+          birthdate
+          surveyAnswers
+          EventID
+          Event {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -929,6 +1172,12 @@ export const createPartner = /* GraphQL */ `
             number
             createdAt
             updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
           }
           createdAt
           updatedAt
@@ -1006,6 +1255,12 @@ export const updatePartner = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1082,12 +1337,717 @@ export const deletePartner = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         nextToken
       }
       number
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSurvey = /* GraphQL */ `
+  mutation CreateSurvey(
+    $input: CreateSurveyInput!
+    $condition: ModelSurveyConditionInput
+  ) {
+    createSurvey(input: $input, condition: $condition) {
+      id
+      order
+      question
+      type
+      answers
+      EventID
+      Event {
+        id
+        referralCode
+        plan
+        name
+        website
+        email
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        description
+        dates
+        clientID
+        Client {
+          id
+          name
+          phone
+          email
+          website
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        partnerID
+        Partner {
+          id
+          name
+          contact
+          email
+          phone
+          referralCode
+          zipCode
+          state
+          city
+          street
+          Events {
+            nextToken
+          }
+          number
+          createdAt
+          updatedAt
+        }
+        Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSurvey = /* GraphQL */ `
+  mutation UpdateSurvey(
+    $input: UpdateSurveyInput!
+    $condition: ModelSurveyConditionInput
+  ) {
+    updateSurvey(input: $input, condition: $condition) {
+      id
+      order
+      question
+      type
+      answers
+      EventID
+      Event {
+        id
+        referralCode
+        plan
+        name
+        website
+        email
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        description
+        dates
+        clientID
+        Client {
+          id
+          name
+          phone
+          email
+          website
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        partnerID
+        Partner {
+          id
+          name
+          contact
+          email
+          phone
+          referralCode
+          zipCode
+          state
+          city
+          street
+          Events {
+            nextToken
+          }
+          number
+          createdAt
+          updatedAt
+        }
+        Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSurvey = /* GraphQL */ `
+  mutation DeleteSurvey(
+    $input: DeleteSurveyInput!
+    $condition: ModelSurveyConditionInput
+  ) {
+    deleteSurvey(input: $input, condition: $condition) {
+      id
+      order
+      question
+      type
+      answers
+      EventID
+      Event {
+        id
+        referralCode
+        plan
+        name
+        website
+        email
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        description
+        dates
+        clientID
+        Client {
+          id
+          name
+          phone
+          email
+          website
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        partnerID
+        Partner {
+          id
+          name
+          contact
+          email
+          phone
+          referralCode
+          zipCode
+          state
+          city
+          street
+          Events {
+            nextToken
+          }
+          number
+          createdAt
+          updatedAt
+        }
+        Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createVisitor = /* GraphQL */ `
+  mutation CreateVisitor(
+    $input: CreateVisitorInput!
+    $condition: ModelVisitorConditionInput
+  ) {
+    createVisitor(input: $input, condition: $condition) {
+      id
+      eventDay
+      phone
+      code
+      confirmation
+      codeUsed
+      authorization
+      name
+      email
+      gender
+      state
+      city
+      birthdate
+      surveyAnswers
+      EventID
+      Event {
+        id
+        referralCode
+        plan
+        name
+        website
+        email
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        description
+        dates
+        clientID
+        Client {
+          id
+          name
+          phone
+          email
+          website
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        partnerID
+        Partner {
+          id
+          name
+          contact
+          email
+          phone
+          referralCode
+          zipCode
+          state
+          city
+          street
+          Events {
+            nextToken
+          }
+          number
+          createdAt
+          updatedAt
+        }
+        Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateVisitor = /* GraphQL */ `
+  mutation UpdateVisitor(
+    $input: UpdateVisitorInput!
+    $condition: ModelVisitorConditionInput
+  ) {
+    updateVisitor(input: $input, condition: $condition) {
+      id
+      eventDay
+      phone
+      code
+      confirmation
+      codeUsed
+      authorization
+      name
+      email
+      gender
+      state
+      city
+      birthdate
+      surveyAnswers
+      EventID
+      Event {
+        id
+        referralCode
+        plan
+        name
+        website
+        email
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        description
+        dates
+        clientID
+        Client {
+          id
+          name
+          phone
+          email
+          website
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        partnerID
+        Partner {
+          id
+          name
+          contact
+          email
+          phone
+          referralCode
+          zipCode
+          state
+          city
+          street
+          Events {
+            nextToken
+          }
+          number
+          createdAt
+          updatedAt
+        }
+        Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteVisitor = /* GraphQL */ `
+  mutation DeleteVisitor(
+    $input: DeleteVisitorInput!
+    $condition: ModelVisitorConditionInput
+  ) {
+    deleteVisitor(input: $input, condition: $condition) {
+      id
+      eventDay
+      phone
+      code
+      confirmation
+      codeUsed
+      authorization
+      name
+      email
+      gender
+      state
+      city
+      birthdate
+      surveyAnswers
+      EventID
+      Event {
+        id
+        referralCode
+        plan
+        name
+        website
+        email
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        description
+        dates
+        clientID
+        Client {
+          id
+          name
+          phone
+          email
+          website
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        partnerID
+        Partner {
+          id
+          name
+          contact
+          email
+          phone
+          referralCode
+          zipCode
+          state
+          city
+          street
+          Events {
+            nextToken
+          }
+          number
+          createdAt
+          updatedAt
+        }
+        Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

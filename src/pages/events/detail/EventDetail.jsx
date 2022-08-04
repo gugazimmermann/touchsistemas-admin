@@ -129,7 +129,7 @@ export default function EventDetail() {
 	}
 
 	function handleDashboard() {
-		if (visitors) navigate(`/dashboard/${event.id}`, { state: { visitors } });
+		if (visitors) navigate(`/dashboard/${event.id}`, { state: { event, visitors } });
 	}
 
 	useEffect(() => {
@@ -158,7 +158,7 @@ export default function EventDetail() {
 			{success && <Alert type="success">Evento Cadastrado com Sucesso</Alert>}
 			{!loading && event && (
 				<div className="bg-white shadow-md overflow-hidden rounded-lg">
-					<div className="flex flex-col sm:flex-row justify-center items-center align-middle px-4 py-5">
+					<div className="flex flex-col sm:flex-row justify-center items-center align-middle p-2">
 						{logo && (
 							<div className="w-3/12 mb-2 sm:mb-0 sm:w-2/12 md:w-1/12">
 								<img alt="logo" className="object-scale-down w-full rounded-md" src={logo} />

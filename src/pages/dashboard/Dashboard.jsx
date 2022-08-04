@@ -1,7 +1,7 @@
 import { Link, useOutletContext } from 'react-router-dom';
 import Alert from '../../components/Alert';
 
-export default function Dashboard() {
+export default function DashboardEvent() {
 	const [client] = useOutletContext();
 
 	const profileLink = () => (

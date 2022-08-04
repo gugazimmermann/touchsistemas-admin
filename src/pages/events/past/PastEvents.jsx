@@ -5,10 +5,12 @@ import { useOutletContext, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { updateClient } from '../../../graphql/mutations';
+import Loading from '../../../components/Loading';
 
 export default function PastEvents() {
 	const navigate = useNavigate();
 	const [client, loadClient] = useOutletContext();
+	const [loading, setLoading] = useState(false);
 	const [events, setEvents] = useState();
 	const [map, setMap] = useState();
 
@@ -17,6 +19,7 @@ export default function PastEvents() {
 	}
 
 	async function orderEvents() {
+		setLoading(true)
 		const showEvents = [];
 		const eventsWithLastDay = client.Events.items.map((i) => ({
 			...i,
@@ -31,6 +34,7 @@ export default function PastEvents() {
 			}
 		}
 		setEvents(showEvents);
+		setLoading(false)
 	}
 
 	useEffect(() => {
@@ -38,6 +42,7 @@ export default function PastEvents() {
 	}, [client]);
 
 	async function createMap() {
+		setLoading(true)
 		const clientAddress = encodeURIComponent(
 			`${client.street}, ${client.number} - ${client.city} - ${client.state}, ${client.zipCode}`
 		);
@@ -66,15 +71,18 @@ export default function PastEvents() {
 			})
 		);
 		loadClient()
+		setLoading(false)
 	}
 
 	async function handleMap() {
+		setLoading(true)
 		if (!client.eventsMap || client.eventsMap !== events.length) await createMap();
 		const mapsList = await Storage.list(`maps/events_${client.id}`);
 		if (mapsList.length !== 0) {
 			const getUrl = await Storage.get(mapsList[0].key);
 			setMap(getUrl);
 		}
+		setLoading(false)
 	}
 
 	useEffect(() => {
@@ -85,6 +93,7 @@ export default function PastEvents() {
 
 	return (
 		<>
+			{loading && <Loading />}
 			<h2 className="text-primary text-xl p-2 mt-4">Eventos Passados</h2>
 			<div className="overflow-x-auto">
 				<table className="items-center w-full bg-transparent border-collapse">

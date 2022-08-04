@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
-import { partnerByReferralCode } from '../../../graphql/queries';
+import { partnersByReferralCode } from '../../../graphql/queries';
 import { createEvent } from '../../../graphql/mutations';
 import Loading from '../../../components/Loading';
 import Alert from '../../../components/Alert';
@@ -189,15 +189,15 @@ export default function NewEvent() {
 		let partnerID = null;
 		if (formEvent.referralCode) {
 			const getPartner = await API.graphql(
-				graphqlOperation(partnerByReferralCode, { referralCode: formEvent.referralCode })
+				graphqlOperation(partnersByReferralCode, { referralCode: formEvent.referralCode })
 			);
-			if (getPartner?.data?.partnerByReferralCode?.items.length <= 0) {
+			if (getPartner?.data?.partnersByReferralCode?.items.length <= 0) {
 				setErrorMsg('Parceiro não encontrado!');
 				setError(true);
 				setLoading(false);
 				return null;
 			}
-			partnerID = getPartner.data.partnerByReferralCode.items[0].id;
+			partnerID = getPartner.data.partnersByReferralCode.items[0].id;
 		}
 		const newEvent = await graphCreateEvent(partnerID);
 		if (eventLogo) await addEventLogo(newEvent);

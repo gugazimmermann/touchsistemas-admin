@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
-import { clientByEmail } from '../../graphql/queries';
+import { clientsByEmail } from '../../graphql/queries';
 import { encodeCookie } from '../../utils/cookies';
 import SignInImage from '../../icons/SignIn.svg';
 import LogoAuth from '../../components/LogoAuth';
@@ -28,9 +28,9 @@ export default function SignIn() {
 			if (auth.challengeName === 'NEW_PASSWORD_REQUIRED') await Auth.completeNewPassword(auth, pwd);
 			if (remember) await Auth.rememberDevice();
 			else await Auth.forgetDevice();
-			const client = await API.graphql(graphqlOperation(clientByEmail, { email }));
+			const client = await API.graphql(graphqlOperation(clientsByEmail, { email }));
 			const encodedContent = encodeCookie(
-				JSON.stringify({ uuid: auth.username, email, client: client.data.clientByEmail.items[0].id })
+				JSON.stringify({ uuid: auth.username, email, client: client.data.clientsByEmail.items[0].id })
 			);
 			const date = new Date();
 			date.setDate(date.getDate() + 365);

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { getEvent, partnerByReferralCode } from '../../../graphql/queries';
+import { getEvent, partnersByReferralCode } from '../../../graphql/queries';
 import Loading from '../../../components/Loading';
 
 export default function EventDetail() {
@@ -34,9 +34,9 @@ export default function EventDetail() {
 		const eventDetails = data.getEvent;
 		if (eventDetails.referralCode) {
 			const partnerDetails = await API.graphql(
-				graphqlOperation(partnerByReferralCode, { referralCode: eventDetails.referralCode })
+				graphqlOperation(partnersByReferralCode, { referralCode: eventDetails.referralCode })
 			);
-			const partner = partnerDetails.data.partnerByReferralCode.items[0];
+			const partner = partnerDetails.data.partnersByReferralCode.items[0];
 			eventDetails.partner = partner;
 		}
 		setEvent(eventDetails);

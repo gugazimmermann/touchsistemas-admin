@@ -867,7 +867,7 @@ export const schema = {
                     "name": "surveyAnswers",
                     "isArray": false,
                     "type": "AWSJSON",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "EventID": {
@@ -975,5 +975,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "91988c10b7e2778aad6395b95e030a6b"
+    "version": "65ca511a9d877ea0a1e8d83a32fb3827"
 };

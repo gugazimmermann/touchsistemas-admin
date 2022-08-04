@@ -139,7 +139,7 @@ export declare class Visitor {
   readonly state?: string | null;
   readonly city?: string | null;
   readonly birthdate?: string | null;
-  readonly surveyAnswers: string;
+  readonly surveyAnswers?: string | null;
   readonly EventID: string;
   readonly Event?: Event | null;
   readonly createdAt?: string | null;

@@ -86,7 +86,7 @@ type Visitor @model @auth(rules: [{ allow: public }]) {
 	state: String
 	city: String
 	birthdate: String
-	surveyAnswers: AWSJSON!
+	surveyAnswers: AWSJSON
 	EventID: ID! @index(name: "byEvent", queryField: "visitorsByEventID")
 	Event: Event @belongsTo
 }

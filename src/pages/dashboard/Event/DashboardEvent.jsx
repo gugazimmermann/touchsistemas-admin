@@ -1,13 +1,31 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-sequences */
 import { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import moment from 'moment';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Chart } from 'react-google-charts';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { getEvent, visitorsByEventID } from '../../../graphql/queries';
+import slugify from 'slugify';
+import { getEvent, visitorsByEventID, surveysByEventID } from '../../../graphql/queries';
 import Loading from '../../../components/Loading';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+const colors = [
+	'#f97316',
+	'#22c55e',
+	'#a855f7',
+	'#3b82f6',
+	'#ef4444',
+	'#c2410c',
+	'#15803d',
+	'#7e22ce',
+	'#1d4ed8',
+	'#b91c1c',
+	'#9a3412',
+	'#14532d',
+	'#581c87',
+	'#1e3a8a',
+	'#7f1d1d',
+];
 
 export default function Dashboard() {
 	const params = useParams();
@@ -18,45 +36,27 @@ export default function Dashboard() {
 	const [logo, setLogo] = useState();
 	const [survey, setSurvey] = useState();
 
-	function handleSurvey(data) {
-		console.log(data[1])
-		console.log(JSON.parse(data[1].surveyAnswers))
-		const groupBy = (key) => data.reduce(
-			(result, item) => ({
-				...result,
-				[item[key]]: [
-					...(result[item[key]] || []),
-					item,
-				],
-			}), 
-			{},
-		);
-		const byGender = groupBy('gender');
-		delete byGender.null;
-		const byGenderLabel = [...new Set(Object.keys(byGender))]
-		const byGenderData = byGenderLabel.map(l => byGender[l].length)
-
-		const bySex = {
-			labels: byGenderLabel,
-			datasets: [
-				{
-					label: 'Visitantes Por Sexo',
-					data: byGenderData,
-					backgroundColor: [
-						'rgba(54, 162, 235, 0.2)',
-						'rgba(255, 99, 132, 0.2)',
-						'rgba(153, 102, 255, 0.2)',
-					],
-					borderColor: [
-						'rgba(54, 162, 235, 1)',
-						'rgba(255, 99, 132, 1)',
-						'rgba(153, 102, 255, 1)',
-					],
-					borderWidth: 1,
-				},
-			],
-		};
-		setSurvey({ bySex })
+	async function handleSurvey(data, id) {
+		let {
+			data: {
+				surveysByEventID: { items: surveyQuestions },
+			},
+		} = await API.graphql(graphqlOperation(surveysByEventID, { EventID: id }));
+		surveyQuestions = surveyQuestions.map((q) => ({ question: q.question, type: q.type }));
+		const validSurvey = data.map((d) => JSON.parse(d.surveyAnswers)).filter((n) => n);
+		const questions = [];
+		surveyQuestions.forEach((q) => {
+			let questionsAnswers = [];
+			validSurvey.forEach((v) => {
+				const findAnswers = v.find((qa) => qa.question === q.question);
+				questionsAnswers.push(findAnswers.answer[0]);
+			});
+			questionsAnswers = questionsAnswers.reduce((cnt, cur) => ((cnt[cur] = cnt[cur] + 1 || 1), cnt), {});
+			questionsAnswers = [...new Set(Object.entries(questionsAnswers))];
+			questionsAnswers.unshift(['Type', 'Respostas']);
+			questions.push({ type: q.type, title: q.question, data: questionsAnswers });
+		});
+		setSurvey({ questions });
 	}
 
 	async function handleVisitors(id) {
@@ -79,11 +79,19 @@ export default function Dashboard() {
 			} while (token);
 			visitorsData = totalVisitors;
 		} else {
-			visitorsData = location.state.visitors
+			visitorsData = location.state.visitors;
 		}
-		handleSurvey(visitorsData)
+		await handleSurvey(visitorsData, id);
 		setVisitors(visitorsData);
 		setLoading(false);
+	}
+
+	async function handleLogo(id) {
+		const list = await Storage.list(`logo/${id}`);
+		if (list?.length) {
+			const getUrl = await Storage.get(list[0].key);
+			setLogo(getUrl);
+		}
 	}
 
 	async function handleGetEvent(id) {
@@ -93,29 +101,16 @@ export default function Dashboard() {
 			const getEventData = await API.graphql(graphqlOperation(getEvent, { id }));
 			eventData = getEventData.data.getEvent;
 		} else {
-			eventData = location.state.event
+			eventData = location.state.event;
 		}
+		handleLogo(eventData.id);
+		handleVisitors(eventData.id);
 		setEvent(eventData);
 		setLoading(false);
 	}
 
-	async function handleLogo() {
-		const list = await Storage.list(`logo/${event.id}`);
-		if (list?.length) {
-			const getUrl = await Storage.get(list[0].key);
-			setLogo(getUrl);
-		}
-	}
-
 	useEffect(() => {
-		if (event) handleLogo();
-	}, [event]);
-
-	useEffect(() => {
-		if (params.id) {
-			handleGetEvent(params.id);
-			handleVisitors(params.id);
-		}
+		if (params.id) handleGetEvent(params.id);
 	}, [params]);
 
 	return (
@@ -142,22 +137,48 @@ export default function Dashboard() {
 							</div>
 						</div>
 					</div>
-					{survey && (
-						<div className="grid grid-cols-4 gap-4">
-							<div>
-								<Pie data={survey.bySex} />
-							</div>
-							<div>
-								<Pie data={survey.bySex} />
-							</div>
-							<div>
-								<Pie data={survey.bySex} />
-							</div>
-							<div>
-								<Pie data={survey.bySex} />
-							</div>
-						</div>
-					)}
+					<div className="w-full flex flex-row flex-wrap">
+						{survey &&
+							survey.questions.map((q) => (
+								<div key={slugify(q.title)} className="w-6/12 p-2">
+									<h3 className="my-6 text-center font-bold">{q.title}</h3>
+									{q.type === 'SINGLE' ? (
+										<Chart
+											chartType="PieChart"
+											data={q.data}
+											options={{
+												chartArea: { width: '100%', height: (q.data.length > 4) ? '100%' : '80%' },
+												colors,
+												legend: {
+													position: (q.data.length > 4) ? 'labeled' : 'top',
+													alignment: 'center',
+													textStyle: { fontSize: 14 },
+												},
+												pieSliceTextStyle: { fontSize: 14 },
+												is3D: true,
+												pieSliceText: 'percentage',
+											}}
+											width="100%"
+										/>
+									) : (
+										<Chart
+											chartType="BarChart"
+											data={q.data}
+											options={{
+												chartArea: { width: '100%', height: '100%' },
+												colors,
+												legend: {position: 'none'},
+												titlePosition: 'in', axisTitlesPosition: 'in',
+												hAxis: {textPosition: 'in'}, vAxis: {textPosition: 'in'},
+												bar: { groupWidth: '90%' },
+											}}
+											isStacked
+											width="100%"
+										/>
+									)}
+								</div>
+							))}
+					</div>
 				</>
 			)}
 		</>

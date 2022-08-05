@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-sequences */
 import { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { Chart } from 'react-google-charts';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
@@ -113,72 +113,89 @@ export default function Dashboard() {
 		if (params.id) handleGetEvent(params.id);
 	}, [params]);
 
+	function renderEventTitle() {
+		return (
+			<div className="bg-white shadow-md overflow-hidden rounded-lg">
+				<Link to={`/eventos/${event.id}`} className="flex flex-col sm:flex-row justify-center items-center align-middle p-2">
+					{logo && (
+						<div className="w-3/12 mb-2 sm:mb-0 sm:w-2/12 md:w-1/12">
+							<img alt="logo" className="object-scale-down w-full rounded-md" src={logo} />
+						</div>
+					)}
+					<div
+						className={`${
+							logo ? 'w-full sm:w-8/12 md:w-9/12' : 'w-10/12 md:w-11/12'
+						} mb-2 sm:mb-0 text-center sm:text-left sm:pl-2 flex flex-col justify-center`}
+					>
+						<h3 className="text-lg leading-6 font-bold">{event.name}</h3>
+						<p className="mt-1 max-w-2xl text-sm sm:text-base">
+							{event.dates.map((d) => `${moment(d).format('DD/MM/YYYY')}`).join(', ')}
+						</p>
+					</div>
+				</Link>
+			</div>
+		);
+	}
+
+	function renderEventSurvey() {
+		return (
+			<>
+				<h2 className="text-primary text-xl pt-4">Pesquisa do Evento</h2>
+				<div className="w-full flex flex-row flex-wrap">
+					{survey &&
+						survey.questions.map((q) => (
+							<div key={slugify(q.title)} className="w-6/12 p-2">
+								<h3 className="text-center font-bold mb-2">{q.title}</h3>
+								{q.type === 'SINGLE' ? (
+									<Chart
+										chartType="PieChart"
+										data={q.data}
+										options={{
+											chartArea: { width: '100%', height: q.data.length > 4 ? '100%' : '80%' },
+											colors,
+											legend: {
+												position: q.data.length > 4 ? 'labeled' : 'top',
+												alignment: 'center',
+												textStyle: { fontSize: 14 },
+											},
+											pieSliceTextStyle: { fontSize: 14 },
+											is3D: true,
+											pieSliceText: 'percentage',
+										}}
+										width="100%"
+									/>
+								) : (
+									<Chart
+										chartType="BarChart"
+										data={q.data}
+										options={{
+											chartArea: { width: '100%', height: '100%' },
+											colors,
+											legend: { position: 'none' },
+											titlePosition: 'in',
+											axisTitlesPosition: 'in',
+											hAxis: { textPosition: 'in' },
+											vAxis: { textPosition: 'in' },
+											bar: { groupWidth: '90%' },
+										}}
+										isStacked
+										width="100%"
+									/>
+								)}
+							</div>
+						))}
+				</div>
+			</>
+		);
+	}
+
 	return (
 		<>
 			{loading && <Loading />}
 			{event && visitors && (
 				<>
-					<div className="bg-white shadow-md overflow-hidden rounded-lg">
-						<div className="flex flex-col sm:flex-row justify-center items-center align-middle p-2">
-							{logo && (
-								<div className="w-3/12 mb-2 sm:mb-0 sm:w-2/12 md:w-1/12">
-									<img alt="logo" className="object-scale-down w-full rounded-md" src={logo} />
-								</div>
-							)}
-							<div
-								className={`${
-									logo ? 'w-full sm:w-8/12 md:w-9/12' : 'w-10/12 md:w-11/12'
-								} mb-2 sm:mb-0 text-center sm:text-left sm:pl-2 flex flex-col justify-center`}
-							>
-								<h3 className="text-lg leading-6 font-bold">{event.name}</h3>
-								<p className="mt-1 max-w-2xl text-sm sm:text-base">
-									{event.dates.map((d) => `${moment(d).format('DD/MM/YYYY')}`).join(', ')}
-								</p>
-							</div>
-						</div>
-					</div>
-					<div className="w-full flex flex-row flex-wrap">
-						{survey &&
-							survey.questions.map((q) => (
-								<div key={slugify(q.title)} className="w-6/12 p-2">
-									<h3 className="my-6 text-center font-bold">{q.title}</h3>
-									{q.type === 'SINGLE' ? (
-										<Chart
-											chartType="PieChart"
-											data={q.data}
-											options={{
-												chartArea: { width: '100%', height: (q.data.length > 4) ? '100%' : '80%' },
-												colors,
-												legend: {
-													position: (q.data.length > 4) ? 'labeled' : 'top',
-													alignment: 'center',
-													textStyle: { fontSize: 14 },
-												},
-												pieSliceTextStyle: { fontSize: 14 },
-												is3D: true,
-												pieSliceText: 'percentage',
-											}}
-											width="100%"
-										/>
-									) : (
-										<Chart
-											chartType="BarChart"
-											data={q.data}
-											options={{
-												chartArea: { width: '100%', height: '100%' },
-												colors,
-												legend: {position: 'none'},
-												titlePosition: 'in', axisTitlesPosition: 'in',
-												hAxis: {textPosition: 'in'}, vAxis: {textPosition: 'in'},
-												bar: { groupWidth: '90%' },
-											}}
-											isStacked
-											width="100%"
-										/>
-									)}
-								</div>
-							))}
-					</div>
+					{renderEventTitle()}
+					{renderEventSurvey()}
 				</>
 			)}
 		</>

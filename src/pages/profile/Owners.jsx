@@ -154,7 +154,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 	function renderTable() {
 		return (
 			<div className="overflow-x-auto">
-				<table className="items-center w-full bg-transparent border-collapse">
+				<table className="items-center w-full bg-white shadow border-collapse mb-4">
 					<thead>
 						<tr>
 							<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">

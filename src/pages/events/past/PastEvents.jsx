@@ -1,10 +1,14 @@
 /* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import moment from 'moment';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { updateClient } from '../../../graphql/mutations';
 import Loading from '../../../components/Loading';
+import Grid from '../../../components/Grid';
+import EventCard from '../../../components/EventCards';
+import MapCard from '../../../components/MapCard';
+import Title from '../../../components/Title';
 
 export default function PastEvents() {
 	const [client, loadClient] = useOutletContext();
@@ -86,41 +90,11 @@ export default function PastEvents() {
 	return (
 		<>
 			{loading && <Loading />}
-			<h2 className="text-primary text-xl pb-4">Eventos Passados</h2>
-			<div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 lg:gap-x-8">
-				{events &&
-					events.map((event) => (
-						<Link to={`/eventos/${event.id}`} key={event.id} className="group">
-							<div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden lg:aspect-w-7 lg:aspect-h-8">
-								{event.image ? (
-									<img
-										src={event.image}
-										alt={event.name}
-										className="w-full h-full object-center object-cover group-hover:opacity-75"
-									/>
-								) : (
-									<img
-										src="/image-placeholder.png"
-										alt={event.name}
-										className="w-full h-full object-center object-cover opacity-10  group-hover:opacity-5"
-									/>
-								)}
-							</div>
-							<h3 className="mt-4">{event.name}</h3>
-							<p className="mt-1 text-sm">
-								{`${event.city} / ${event.state}`} |{' '}
-								{event.dates.map((d) => `${moment(d).format('DD/MM/YY')}`).join(', ')}
-							</p>
-						</Link>
-					))}
-				{map && (
-					<a href={map} target="_blank" className="group" rel="noreferrer">
-						<div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden lg:aspect-w-7 lg:aspect-h-8">
-							<img alt="map" src={map} className="w-full h-full object-center object-cover" />
-						</div>
-					</a>
-				)}
-			</div>
+			<Title text="Eventos Passados" />
+			<Grid>
+				{events && events.map((event) => <EventCard key={event.id} event={event} />)}
+				{map && <MapCard map={map} />}
+			</Grid>
 		</>
 	);
 }

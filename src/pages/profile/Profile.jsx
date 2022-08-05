@@ -6,6 +6,7 @@ import Loading from '../../components/Loading';
 import Alert from '../../components/Alert';
 import Owners from './Owners';
 import { getAddressFromCEP, normalizeCEP, normalizePhone } from '../../helpers';
+import Title from '../../components/Title';
 
 const initial = {
 	name: '',
@@ -177,7 +178,7 @@ export default function Profile() {
 		<>
 			{loading && <Loading />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
-			<h2 className="text-primary text-xl pb-4">Cadastro</h2>
+			<Title text="Cadastro" />
 			<form>
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-6/12 sm:pr-4 mb-4">

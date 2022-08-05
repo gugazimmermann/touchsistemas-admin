@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function validateEmail(email) {
 	const re =
 		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,4 +50,16 @@ export function normalizePhone(phone) {
 	if (cvLength < 3) return currentValue;
 	if (cvLength < 7) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2)}`;
 	return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 7)}-${currentValue.slice(7, 11)}`;
+}
+
+export function orderEventsByLastDay(events, sort = 'DESC') {
+	const eventsWithLastDay = events.map((i) => ({
+		...i,
+		lastDay: i.dates.sort((a, b) => moment(b) - moment(a))[0],
+	}));
+	const orderEvents =
+		sort === 'ASC'
+			? eventsWithLastDay.sort((a, b) => moment(a.lastDay) - moment(b.lastDay))
+			: eventsWithLastDay.sort((a, b) => moment(b.lastDay) - moment(a.lastDay));
+	return orderEvents;
 }

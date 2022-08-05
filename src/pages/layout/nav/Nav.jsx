@@ -57,7 +57,7 @@ export default function Nav({ client, signout }) {
 							<Link to="/dashboard">Dashboard</Link>
 						</li>
 						<li className="p-2 text-center md:text-base">
-							<Link to="/eventos/novo">Cadastrar Evento</Link>
+							<Link to="/eventos/novo">Novo Evento</Link>
 						</li>
 						<li className="p-2 text-center md:text-base">
 							<Link to="/eventos/passados">Eventos Passados</Link>

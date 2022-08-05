@@ -8,6 +8,7 @@ import { createEvent } from '../../../graphql/mutations';
 import Loading from '../../../components/Loading';
 import Alert from '../../../components/Alert';
 import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../../helpers';
+import Title from '../../../components/Title';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const months = [
@@ -213,7 +214,7 @@ export default function NewEvent() {
 		<>
 			{loading && <Loading />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
-			<h2 className="text-primary text-xl pb-4">Novo Evento</h2>
+			<Title text="Novo Evento" />
 			<form>
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">

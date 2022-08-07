@@ -1,0 +1,97 @@
+type Owner @model @auth(rules: [{ allow: public }]) {
+	id: ID!
+	name: String!
+	phone: String!
+	email: String!
+	clientID: ID! @index(name: "byClient")
+	Client: Client @belongsTo
+}
+
+type Client @model @auth(rules: [{ allow: public }]) {
+	id: ID!
+	name: String
+	phone: String
+	email: String! @index(name: "byEmail", queryField: "clientsByEmail")
+	website: String
+	zipCode: String
+	state: String
+	city: String
+	street: String
+	number: String
+	complement: String
+	eventsMap: Int
+	Owners: [Owner] @hasMany(indexName: "byClient", fields: ["id"])
+	Events: [Event] @hasMany(indexName: "byClient", fields: ["id"])
+}
+
+type Event @model @auth(rules: [{ allow: public }]) {
+	id: ID!
+	referralCode: String
+	plan: String!
+	name: String!
+	website: String
+	email: String
+	zipCode: String!
+	state: String!
+	city: String!
+	street: String
+	number: String
+	complement: String
+	description: String
+	dates: [String!]!
+	clientID: ID! @index(name: "byClient", queryField: "eventsByClientID")
+	Client: Client @belongsTo
+	partnerID: ID @index(name: "byPartner", queryField: "eventsByPartnerID")
+	Partner: Partner @belongsTo
+	Surveys: [Survey] @hasMany(indexName: "byEvent", fields: ["id"])
+	Visitors: [Visitor] @hasMany(indexName: "byEvent", fields: ["id"])
+}
+
+type Partner @model @auth(rules: [{ allow: public }]) {
+	id: ID!
+	name: String!
+	contact: String!
+	email: String!
+	phone: String!
+	referralCode: String! @index(name: "byReferralCode", queryField: "partnersByReferralCode")
+	zipCode: String!
+	state: String!
+	city: String!
+	street: String
+	Events: [Event] @hasMany(indexName: "byPartner", fields: ["id"])
+	number: String
+}
+
+type Survey @model @auth(rules: [{ allow: public }]) {
+	id: ID!
+	order: Int!
+	question: String! @index(name: "byQuestion", queryField: "surveysByQuestion")
+	type: SurveyTypes!
+	answers: AWSJSON!
+	EventID: ID! @index(name: "byEvent", queryField: "surveysByEventID")
+	Event: Event @belongsTo
+}
+
+type Visitor @model @auth(rules: [{ allow: public }]) {
+	id: ID!
+	eventDay: String! @index(name: "byEventDayAndEventID", sortKeyFields: ["EventID"], queryField: "visitorsByEventDayAndEventID")
+	phone: String!
+	code: Int!
+	confirmation: String @index(name: "byConfirmationAndEventID", sortKeyFields: ["EventID"], queryField: "visitorsByConfirmationAndEventID")
+	codeUsed: String
+	authorization: Boolean
+	name: String
+	email: String
+	gender: String
+	state: String
+	city: String
+	birthdate: String
+	surveyAnswers: AWSJSON
+	EventID: ID! @index(name: "byEvent", queryField: "visitorsByEventID")
+	Event: Event @belongsTo
+}
+
+enum SurveyTypes {
+	SINGLE
+	MULTIPLE
+}

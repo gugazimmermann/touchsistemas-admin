@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-touchsistemasadmin-dev-180243-authRole",
+      "UnauthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemasadmin-dev-180243-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemasadmin-dev-180243-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
+      "UnauthRoleName": "amplify-touchsistemasadmin-dev-180243-unauthRole",
+      "StackName": "amplify-touchsistemasadmin-dev-180243",
+      "StackId": "arn:aws:cloudformation:us-east-1:494458123866:stack/amplify-touchsistemasadmin-dev-180243/48e68070-1694-11ed-ba4a-12b25f9572b3",
+      "AmplifyAppId": "d35h9ooc2idrby"
+    },
+    "categories": {
+      "auth": {
+        "touchsistemasadmin": {}
+      }
+    }
+  }
+}

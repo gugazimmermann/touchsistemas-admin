@@ -3,7 +3,7 @@ import { useOutletContext, useNavigate } from 'react-router-dom';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { updateClient } from '../../graphql/mutations';
 import { getAddressFromCEP, normalizeCEP, normalizePhone } from '../../helpers';
-import {Loading, Alert, Title} from '../../components';
+import { Loading, Alert, Title } from '../../components';
 import Owners from './Owners';
 
 const initial = {

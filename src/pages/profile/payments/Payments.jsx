@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useOutletContext } from 'react-router-dom';
-import {Title} from '../../../components';
+import { Title } from '../../../components';
 import { orderEventsByLastDay } from '../../../helpers';
 
 export default function Payments() {

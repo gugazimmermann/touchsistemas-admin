@@ -45,7 +45,7 @@ export default function PastEvents() {
 				<Alert type="warning"> Nenhum Resonsável Cadastrado! {profileLink()}</Alert>
 			)}
 			{loading && <Loading />}
-			{(events && events.length > 0) && (
+			{events && events.length > 0 && (
 				<>
 					<Title text="Próximos Eventos" />
 					<Grid>

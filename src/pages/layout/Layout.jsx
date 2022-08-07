@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
-import {Loading} from '../../components';
+import { Loading } from '../../components';
 import { decodeCookie } from '../../helpers/cookies';
 import Nav from './nav/Nav';
 

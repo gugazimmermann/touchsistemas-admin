@@ -7,7 +7,7 @@ import { Chart } from 'react-google-charts';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import slugify from 'slugify';
 import { getEvent, visitorsByEventID, surveysByEventID } from '../../../graphql/queries';
-import {Loading} from '../../../components';
+import { Loading } from '../../../components';
 
 const colors = [
 	'#f97316',
@@ -116,7 +116,10 @@ export default function Dashboard() {
 	function renderEventTitle() {
 		return (
 			<div className="bg-white shadow-md overflow-hidden rounded-lg">
-				<Link to={`/eventos/${event.id}`} className="flex flex-col sm:flex-row justify-center items-center align-middle p-2">
+				<Link
+					to={`/eventos/${event.id}`}
+					className="flex flex-col sm:flex-row justify-center items-center align-middle p-2"
+				>
 					{logo && (
 						<div className="w-3/12 mb-2 sm:mb-0 sm:w-2/12 md:w-1/12">
 							<img alt="logo" className="object-scale-down w-full rounded-md" src={logo} />

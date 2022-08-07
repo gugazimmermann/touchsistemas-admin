@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 import moment from 'moment';
 import { Storage } from 'aws-amplify';
-import {Alert, Loading, Grid, EventCard, Title} from '../../components';
+import { Alert, Loading, Grid, EventCard, Title } from '../../components';
 import { orderEventsByLastDay } from '../../helpers';
 
 export default function PastEvents() {
@@ -20,10 +20,9 @@ export default function PastEvents() {
 	async function orderEvents() {
 		setLoading(true);
 		const showEvents = [];
-		const sortEvents = orderEventsByLastDay(client.Events.items)
+		const sortEvents = orderEventsByLastDay(client.Events.items);
 		for (const e of sortEvents) {
-			console.log(e.lastDay)
-			if (moment(e.lastDay, 'YYYY-MM-DD').unix() >= moment(Date.now()).add(1, 'day').unix()) {
+			if (moment(e.lastDay, 'YYYY-MM-DD').unix() >= moment(Date.now()).unix()) {
 				const list = await Storage.list(`logo/${e.id}`);
 				if (list?.length) e.image = await Storage.get(list[0].key);
 				showEvents.push(e);
@@ -46,10 +45,16 @@ export default function PastEvents() {
 				<Alert type="warning"> Nenhum Resonsável Cadastrado! {profileLink()}</Alert>
 			)}
 			{loading && <Loading />}
-			<Title text="Próximos Eventos" />
-			<Grid>
-				{events && events.map((event) => <EventCard key={event.id} event={event} />)}
-			</Grid>
+			{(events.length > 0) && (
+				<>
+					<Title text="Próximos Eventos" />
+					<Grid>
+						{events.map((event) => (
+							<EventCard key={event.id} event={event} />
+						))}
+					</Grid>
+				</>
+			)}
 		</>
 	);
 }

@@ -5,10 +5,8 @@ import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
 import { partnersByReferralCode } from '../../../graphql/queries';
 import { createEvent } from '../../../graphql/mutations';
-import Loading from '../../../components/Loading';
-import Alert from '../../../components/Alert';
+import {Loading, Alert, Title} from '../../../components';
 import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../../helpers';
-import Title from '../../../components/Title';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const months = [

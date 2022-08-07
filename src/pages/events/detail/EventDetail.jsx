@@ -7,8 +7,7 @@ import slugify from 'slugify';
 import { CSVLink } from 'react-csv';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../../graphql/queries';
-import Loading from '../../../components/Loading';
-import Alert from '../../../components/Alert';
+import {Loading, Alert} from '../../../components';
 
 function LoadingIcon() {
 	return (

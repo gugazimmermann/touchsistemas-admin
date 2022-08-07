@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { clientsByEmail } from '../../graphql/queries';
-import { encodeCookie } from '../../utils/cookies';
+import { encodeCookie } from '../../helpers/cookies';
 import SignInImage from '../../icons/SignIn.svg';
 import LogoAuth from '../../components/LogoAuth';
 import Loading from '../../components/Loading';

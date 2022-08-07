@@ -2,11 +2,9 @@ import { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { updateClient } from '../../graphql/mutations';
-import Loading from '../../components/Loading';
-import Alert from '../../components/Alert';
-import Owners from './Owners';
 import { getAddressFromCEP, normalizeCEP, normalizePhone } from '../../helpers';
-import Title from '../../components/Title';
+import {Loading, Alert, Title} from '../../components';
+import Owners from './Owners';
 
 const initial = {
 	name: '',

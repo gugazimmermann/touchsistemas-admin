@@ -7,7 +7,7 @@ import { Chart } from 'react-google-charts';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import slugify from 'slugify';
 import { getEvent, visitorsByEventID, surveysByEventID } from '../../../graphql/queries';
-import Loading from '../../../components/Loading';
+import {Loading} from '../../../components';
 
 const colors = [
 	'#f97316',

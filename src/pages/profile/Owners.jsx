@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createOwner, updateOwner, deleteOwner } from '../../graphql/mutations';
 import { normalizePhone, validateEmail } from '../../helpers';
-import ConfirmationDialog from '../../components/ConfirmationDialog';
+import {ConfirmationDialog} from '../../components';
 
 const initial = { name: '', phone: '', email: '' };
 

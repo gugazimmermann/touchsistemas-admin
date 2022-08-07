@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PublicRoute from './routes/PublicRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
-import Loading from './components/Loading';
+import { Loading } from './components';
 
 const NotFound = lazy(() => import('./pages/not-found/NotFound'));
 const SignIn = lazy(() => import('./pages/auth/SignIn'));

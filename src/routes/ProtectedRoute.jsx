@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { useCookies } from 'react-cookie';
-import { decodeCookie } from '../utils/cookies';
+import { decodeCookie } from '../helpers/cookies';
 
 export default function ProtectedRoute() {
 	const [cookies] = useCookies(['touchsistemas']);

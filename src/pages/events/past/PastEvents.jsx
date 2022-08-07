@@ -4,11 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import moment from 'moment';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { updateClient } from '../../../graphql/mutations';
-import Loading from '../../../components/Loading';
-import Grid from '../../../components/Grid';
-import EventCard from '../../../components/EventCards';
-import MapCard from '../../../components/MapCard';
-import Title from '../../../components/Title';
+import { Loading, Grid, EventCard, MapCard, Title } from '../../../components';
 
 export default function PastEvents() {
 	const [client, loadClient] = useOutletContext();

@@ -59,9 +59,6 @@ export default function Nav({ client, signout }) {
 						<li className="p-2 text-center md:text-base">
 							<Link to="/eventos/novo">Novo Evento</Link>
 						</li>
-						<li className="p-2 text-center md:text-base">
-							<Link to="/eventos/passados">Eventos Passados</Link>
-						</li>
 					</ul>
 
 					<div className="flex justify-evenly">

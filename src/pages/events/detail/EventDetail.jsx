@@ -168,7 +168,7 @@ export default function EventDetail() {
 						} w-full md:w-1/12 flex flex-col justify-center items-center text-secondary`}
 					>
 						<i className="bx bxs-pie-chart-alt-2 text-5xl" />
-						<h2 className="text-lg leading-6 font-bold">Dashboard</h2>
+						<h2 className="text-lg leading-6 font-bold">Relatório</h2>
 					</div>
 				) : (
 					<a

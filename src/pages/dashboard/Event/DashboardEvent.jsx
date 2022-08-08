@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-sequences */
 import { useEffect, useState } from 'react';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { Chart } from 'react-google-charts';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
@@ -30,6 +30,7 @@ const colors = [
 export default function Dashboard() {
 	const params = useParams();
 	const location = useLocation();
+	const navigate = useNavigate();
 	const [loading, setLoading] = useState(false);
 	const [event, setEvent] = useState();
 	const [visitors, setVisitors] = useState();
@@ -37,11 +38,7 @@ export default function Dashboard() {
 	const [survey, setSurvey] = useState();
 
 	async function handleSurvey(data, id) {
-		let {
-			data: {
-				surveysByEventID: { items: surveyQuestions },
-			},
-		} = await API.graphql(graphqlOperation(surveysByEventID, { EventID: id }));
+		let { data: { surveysByEventID: { items: surveyQuestions } } } = await API.graphql(graphqlOperation(surveysByEventID, { EventID: id }));
 		surveyQuestions = surveyQuestions.map((q) => ({ question: q.question, type: q.type }));
 		const validSurvey = data.map((d) => JSON.parse(d.surveyAnswers)).filter((n) => n);
 		const questions = [];
@@ -99,7 +96,11 @@ export default function Dashboard() {
 		setLoading(true);
 		if (!location?.state?.event) {
 			const getEventData = await API.graphql(graphqlOperation(getEvent, { id }));
-			eventData = getEventData.data.getEvent;
+			if (getEventData.data.getEvent) {
+				eventData = getEventData.data.getEvent;
+			} else {
+				navigate('/dashboard');
+			}
 		} else {
 			eventData = location.state.event;
 		}
@@ -127,7 +128,7 @@ export default function Dashboard() {
 					)}
 					<div
 						className={`${
-							logo ? 'w-full sm:w-8/12 md:w-9/12' : 'w-10/12 md:w-11/12'
+							logo ? 'w-full sm:w-8/12 md:w-11/12' : 'w-full'
 						} mb-2 sm:mb-0 text-center sm:text-left sm:pl-2 flex flex-col justify-center`}
 					>
 						<h3 className="text-lg leading-6 font-bold">{event.name}</h3>
@@ -143,12 +144,12 @@ export default function Dashboard() {
 	function renderEventSurvey() {
 		return (
 			<>
-				<h2 className="text-primary text-xl pt-4">Pesquisa do Evento</h2>
+				<h2 className="text-primary text-xl pt-4 mb-4">Pesquisa do Evento</h2>
 				<div className="w-full flex flex-row flex-wrap">
 					{survey &&
 						survey.questions.map((q) => (
-							<div key={slugify(q.title)} className="w-6/12 p-2">
-								<h3 className="text-center font-bold mb-2">{q.title}</h3>
+							<div key={slugify(q.title)} className="w-6/12 p-2 mb-4">
+								<h3 className="text-center font-bold mb-4">{q.title}</h3>
 								{q.type === 'SINGLE' ? (
 									<Chart
 										chartType="PieChart"

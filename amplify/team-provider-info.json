@@ -18,7 +18,11 @@
       "function": {
         "touchsistemasGetEventByID": {
           "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
-          "s3Key": "amplify-builds/touchsistemasGetEventByID-446b79704a57484b5a31-build.zip"
+          "s3Key": "amplify-builds/touchsistemasGetEventByID-545930443231306a4471-build.zip"
+        },
+        "tochsistemasGetEventLogoByID": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
+          "s3Key": "amplify-builds/tochsistemasGetEventLogoByID-42487a594a6266686433-build.zip"
         }
       }
     }

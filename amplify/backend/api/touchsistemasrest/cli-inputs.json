@@ -7,6 +7,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/events/logo/{id}": {
+      "name": "/events/logo/{id}",
+      "lambdaFunction": "tochsistemasGetEventLogoByID",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

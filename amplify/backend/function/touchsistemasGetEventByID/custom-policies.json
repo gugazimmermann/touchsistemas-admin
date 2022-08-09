@@ -1,0 +1,14 @@
+[
+  {
+    "Action": [
+      "dynamodb:DescribeTable",
+      "dynamodb:GetItem",
+      "dynamodb:Query"
+    ],
+    "Resource": [
+      "arn:aws:dynamodb:us-east-1:494458123866:table/Event-a64kvxkngzajfngtzfr54kamkq-dev",
+      "arn:aws:dynamodb:us-east-1:494458123866:table/Event-a64kvxkngzajfngtzfr54kamkq-dev/index/*"
+    ],
+    "Effect": "Allow"
+  }
+]

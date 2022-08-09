@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "touchsistemasadmin": {}
+      },
+      "function": {
+        "touchsistemasGetEventByID": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
+          "s3Key": "amplify-builds/touchsistemasGetEventByID-446b79704a57484b5a31-build.zip"
+        }
       }
     }
   }

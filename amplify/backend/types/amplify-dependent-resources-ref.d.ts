@@ -26,24 +26,16 @@ export type AmplifyDependentResourcesAttributes = {
         "touchsistemasadmin": {
             "BucketName": "string",
             "Region": "string"
-        },
-        "testetable": {
-            "Name": "string",
-            "Arn": "string",
-            "StreamArn": "string",
-            "PartitionKeyName": "string",
-            "PartitionKeyType": "string",
-            "Region": "string"
         }
     },
     "function": {
-        "touchsistemasGetEventByID": {
+        "tochsistemasGetEventLogoByID": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "tochsistemasGetEventLogoByID": {
+        "touchsistemasGetEventByID": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",

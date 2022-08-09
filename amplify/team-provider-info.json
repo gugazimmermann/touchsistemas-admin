@@ -16,13 +16,13 @@
         "touchsistemasadmin": {}
       },
       "function": {
-        "touchsistemasGetEventByID": {
-          "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
-          "s3Key": "amplify-builds/touchsistemasGetEventByID-545930443231306a4471-build.zip"
-        },
         "tochsistemasGetEventLogoByID": {
           "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
           "s3Key": "amplify-builds/tochsistemasGetEventLogoByID-42487a594a6266686433-build.zip"
+        },
+        "touchsistemasGetEventByID": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
+          "s3Key": "amplify-builds/touchsistemasGetEventByID-46474c61667231356653-build.zip"
         }
       }
     }

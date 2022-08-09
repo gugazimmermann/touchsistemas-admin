@@ -56,7 +56,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "touchsistemasGetEventByID",
+          "resourceName": "tochsistemasGetEventLogoByID",
           "attributes": [
             "Name",
             "Arn"
@@ -64,7 +64,7 @@
         },
         {
           "category": "function",
-          "resourceName": "tochsistemasGetEventLogoByID",
+          "resourceName": "touchsistemasGetEventByID",
           "attributes": [
             "Name",
             "Arn"
@@ -78,32 +78,9 @@
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
-    },
-    "testetable": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
     }
   },
   "function": {
-    "touchsistemasGetEventByID": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "storage",
-          "resourceName": "testetable",
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "attributeEnvMap": {
-            "Name": "TABLE_NAME",
-            "Arn": "TABLE_ARN"
-          }
-        }
-      ]
-    },
     "tochsistemasGetEventLogoByID": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -114,6 +91,20 @@
           "resourceName": "touchsistemasadmin",
           "attributes": [
             "BucketName"
+          ]
+        }
+      ]
+    },
+    "touchsistemasGetEventByID": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "touchsistemasadmin",
+          "attributes": [
+            "GraphQLAPIIdOutput"
           ]
         }
       ]

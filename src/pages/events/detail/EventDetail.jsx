@@ -26,7 +26,7 @@ export default function EventDetail() {
 
 	async function generateQRCode() {
 		try {
-			const url = await QRCode.toDataURL(`https://eventos.touchsistemas.com.br/${params.id}`, { width: 3840 });
+			const url = await QRCode.toDataURL(`${process.env.REACT_APP_EVENTS_URL}${params.id}`, { width: 3840 });
 			setQr(url);
 		} catch (error) {
 			// eslint-disable-next-line no-console

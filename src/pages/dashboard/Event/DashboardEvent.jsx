@@ -64,7 +64,7 @@ export default function Dashboard() {
 			let token = null;
 			do {
 				const getVisitors = await API.graphql(
-					graphqlOperation(visitorsByEventID, { EventID: id, limit: 250, nextToken: token })
+					graphqlOperation(visitorsByEventID, { EventID: id, limit: 1000, nextToken: token })
 				);
 				if (getVisitors?.data?.visitorsByEventID?.items) {
 					getVisitors.data.visitorsByEventID.items.forEach((v) => totalVisitors.push(v));

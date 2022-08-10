@@ -44,7 +44,7 @@ exports.handler = async (event) => {
 				'Access-Control-Allow-Origin': '*',
 				'Access-Control-Allow-Headers': '*',
 			},
-			body: JSON.stringify(response),
+			body: JSON.stringify({ path: response}),
 		};
 	} else {
 		throw new Error('NO ID');

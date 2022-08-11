@@ -18,11 +18,19 @@
       "function": {
         "tochsistemasGetEventLogoByID": {
           "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
-          "s3Key": "amplify-builds/tochsistemasGetEventLogoByID-3262412f50302f435851-build.zip"
+          "s3Key": "amplify-builds/tochsistemasGetEventLogoByID-6843455935432b564348-build.zip"
         },
         "touchsistemasGetEventByID": {
           "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
-          "s3Key": "amplify-builds/touchsistemasGetEventByID-46474c61667231356653-build.zip"
+          "s3Key": "amplify-builds/touchsistemasGetEventByID-386442416241556a7644-build.zip"
+        },
+        "touchsistemasEventsAddPhoneToVisitor": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
+          "s3Key": "amplify-builds/touchsistemasEventsAddPhoneToVisitor-6474775331425a647478-build.zip"
+        },
+        "touchsistemasEventSendSMSToVisitor": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-180243-deployment",
+          "s3Key": "amplify-builds/touchsistemasEventSendSMSToVisitor-72322b4e445877673967-build.zip"
         }
       }
     }

@@ -196,24 +196,26 @@ export default function EventDetail() {
 						<dt className="text-sm font-medium sm:col-span-2">Total Cadastros</dt>
 						<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">
 							{event?.visitorsInfo ? (
-								<>
-									<span>
-										{`${event.visitorsInfo.confirmation} / ${event.visitorsInfo.total} (${(
-											(event.visitorsInfo.confirmation * 100) /
-											event.visitorsInfo.total
-										).toFixed(1)}%)`}
-									</span>
-									{data && (
-										<CSVLink
-											data={data}
-											headers={headers}
-											filename={slugify(event.name, { lower: true })}
-											className="ml-2 px-2 py-1 bg-primary text-white rounded"
-										>
-											Exportar Dados
-										</CSVLink>
-									)}
-								</>
+								event.visitorsInfo?.total > 0 && (
+									<>
+										<span>
+											{`${event.visitorsInfo.confirmation} / ${event.visitorsInfo.total} (${(
+												(event.visitorsInfo.confirmation * 100) /
+												event.visitorsInfo.total
+											).toFixed(1)}%)`}
+										</span>
+										{data && (
+											<CSVLink
+												data={data}
+												headers={headers}
+												filename={slugify(event.name, { lower: true })}
+												className="ml-2 px-2 py-1 bg-primary text-white rounded"
+											>
+												Exportar Dados
+											</CSVLink>
+										)}
+									</>
+								)
 							) : (
 								<LoadingIcon />
 							)}
@@ -223,6 +225,7 @@ export default function EventDetail() {
 						<dt className="text-sm font-medium sm:col-span-2">Itens Retirados</dt>
 						<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">
 							{event?.visitorsInfo ? (
+								event.visitorsInfo?.total > 0 &&
 								`${event.visitorsInfo.codeUsed} (${(
 									(event.visitorsInfo.codeUsed * 100) /
 									event.visitorsInfo.confirmation
@@ -236,6 +239,7 @@ export default function EventDetail() {
 						<dt className="text-sm font-medium sm:col-span-2">Pesquisas Respondidas</dt>
 						<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">
 							{event?.visitorsInfo ? (
+								event.visitorsInfo?.total > 0 &&
 								`${event.visitorsInfo.surveysAnswered} (${(
 									(event.visitorsInfo.surveysAnswered * 100) /
 									event.visitorsInfo.confirmation
@@ -249,6 +253,7 @@ export default function EventDetail() {
 						<dt className="text-sm font-medium sm:col-span-2">Pesquisas Completas</dt>
 						<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">
 							{event?.visitorsInfo ? (
+								event.visitorsInfo?.total > 0 &&
 								`${event.visitorsInfo.surveysPersonalData} (${(
 									(event.visitorsInfo.surveysPersonalData * 100) /
 									event.visitorsInfo.confirmation

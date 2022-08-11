@@ -23,9 +23,38 @@ export const getOwner = /* GraphQL */ `
         complement
         eventsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -62,6 +91,12 @@ export const listOwners = /* GraphQL */ `
           number
           complement
           eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -94,6 +129,22 @@ export const getClient = /* GraphQL */ `
           phone
           email
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -116,7 +167,44 @@ export const getClient = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -148,9 +236,108 @@ export const listClients = /* GraphQL */ `
         complement
         eventsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const clientsByEmail = /* GraphQL */ `
+  query ClientsByEmail(
+    $email: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelClientFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    clientsByEmail(
+      email: $email
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        phone
+        email
+        website
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        eventsMap
+        Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -192,9 +379,38 @@ export const getEvent = /* GraphQL */ `
         complement
         eventsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -213,6 +429,26 @@ export const getEvent = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -227,6 +463,26 @@ export const getEvent = /* GraphQL */ `
           type
           answers
           EventID
+          Event {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -249,6 +505,26 @@ export const getEvent = /* GraphQL */ `
           birthdate
           surveyAnswers
           EventID
+          Event {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -295,6 +571,12 @@ export const listEvents = /* GraphQL */ `
           number
           complement
           eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -310,14 +592,274 @@ export const listEvents = /* GraphQL */ `
           state
           city
           street
+          Events {
+            nextToken
+          }
           number
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const eventsByClientID = /* GraphQL */ `
+  query EventsByClientID(
+    $clientID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    eventsByClientID(
+      clientID: $clientID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        referralCode
+        plan
+        name
+        website
+        email
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        description
+        dates
+        clientID
+        Client {
+          id
+          name
+          phone
+          email
+          website
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        partnerID
+        Partner {
+          id
+          name
+          contact
+          email
+          phone
+          referralCode
+          zipCode
+          state
+          city
+          street
+          Events {
+            nextToken
+          }
+          number
+          createdAt
+          updatedAt
+        }
+        Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const eventsByPartnerID = /* GraphQL */ `
+  query EventsByPartnerID(
+    $partnerID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    eventsByPartnerID(
+      partnerID: $partnerID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        referralCode
+        plan
+        name
+        website
+        email
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        description
+        dates
+        clientID
+        Client {
+          id
+          name
+          phone
+          email
+          website
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        partnerID
+        Partner {
+          id
+          name
+          contact
+          email
+          phone
+          referralCode
+          zipCode
+          state
+          city
+          street
+          Events {
+            nextToken
+          }
+          number
+          createdAt
+          updatedAt
+        }
+        Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -357,7 +899,44 @@ export const getPartner = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -388,6 +967,83 @@ export const listPartners = /* GraphQL */ `
         city
         street
         Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        number
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const partnersByReferralCode = /* GraphQL */ `
+  query PartnersByReferralCode(
+    $referralCode: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPartnerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    partnersByReferralCode(
+      referralCode: $referralCode
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        contact
+        email
+        phone
+        referralCode
+        zipCode
+        state
+        city
+        street
+        Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         number
@@ -436,6 +1092,12 @@ export const getSurvey = /* GraphQL */ `
           number
           complement
           eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -451,14 +1113,46 @@ export const getSurvey = /* GraphQL */ `
           state
           city
           street
+          Events {
+            nextToken
+          }
           number
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -499,7 +1193,216 @@ export const listSurveys = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const surveysByQuestion = /* GraphQL */ `
+  query SurveysByQuestion(
+    $question: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelSurveyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    surveysByQuestion(
+      question: $question
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        order
+        question
+        type
+        answers
+        EventID
+        Event {
+          id
+          referralCode
+          plan
+          name
+          website
+          email
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          description
+          dates
+          clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
+          partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const surveysByEventID = /* GraphQL */ `
+  query SurveysByEventID(
+    $EventID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelSurveyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    surveysByEventID(
+      EventID: $EventID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        order
+        question
+        type
+        answers
+        EventID
+        Event {
+          id
+          referralCode
+          plan
+          name
+          website
+          email
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          description
+          dates
+          clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
+          partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -557,6 +1460,12 @@ export const getVisitor = /* GraphQL */ `
           number
           complement
           eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -572,14 +1481,46 @@ export const getVisitor = /* GraphQL */ `
           state
           city
           street
+          Events {
+            nextToken
+          }
           number
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -629,335 +1570,44 @@ export const listVisitors = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
           partnerID
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const clientsByEmail = /* GraphQL */ `
-  query ClientsByEmail(
-    $email: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelClientFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    clientsByEmail(
-      email: $email
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        phone
-        email
-        website
-        zipCode
-        state
-        city
-        street
-        number
-        complement
-        eventsMap
-        Owners {
-          nextToken
-        }
-        Events {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const eventsByClientID = /* GraphQL */ `
-  query EventsByClientID(
-    $clientID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelEventFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    eventsByClientID(
-      clientID: $clientID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        referralCode
-        plan
-        name
-        website
-        email
-        zipCode
-        state
-        city
-        street
-        number
-        complement
-        description
-        dates
-        clientID
-        Client {
-          id
-          name
-          phone
-          email
-          website
-          zipCode
-          state
-          city
-          street
-          number
-          complement
-          eventsMap
-          createdAt
-          updatedAt
-        }
-        partnerID
-        Partner {
-          id
-          name
-          contact
-          email
-          phone
-          referralCode
-          zipCode
-          state
-          city
-          street
-          number
-          createdAt
-          updatedAt
-        }
-        Surveys {
-          nextToken
-        }
-        Visitors {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const eventsByPartnerID = /* GraphQL */ `
-  query EventsByPartnerID(
-    $partnerID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelEventFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    eventsByPartnerID(
-      partnerID: $partnerID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        referralCode
-        plan
-        name
-        website
-        email
-        zipCode
-        state
-        city
-        street
-        number
-        complement
-        description
-        dates
-        clientID
-        Client {
-          id
-          name
-          phone
-          email
-          website
-          zipCode
-          state
-          city
-          street
-          number
-          complement
-          eventsMap
-          createdAt
-          updatedAt
-        }
-        partnerID
-        Partner {
-          id
-          name
-          contact
-          email
-          phone
-          referralCode
-          zipCode
-          state
-          city
-          street
-          number
-          createdAt
-          updatedAt
-        }
-        Surveys {
-          nextToken
-        }
-        Visitors {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const partnersByReferralCode = /* GraphQL */ `
-  query PartnersByReferralCode(
-    $referralCode: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelPartnerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    partnersByReferralCode(
-      referralCode: $referralCode
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        contact
-        email
-        phone
-        referralCode
-        zipCode
-        state
-        city
-        street
-        Events {
-          nextToken
-        }
-        number
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const surveysByQuestion = /* GraphQL */ `
-  query SurveysByQuestion(
-    $question: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelSurveyFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    surveysByQuestion(
-      question: $question
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        order
-        question
-        type
-        answers
-        EventID
-        Event {
-          id
-          referralCode
-          plan
-          name
-          website
-          email
-          zipCode
-          state
-          city
-          street
-          number
-          complement
-          description
-          dates
-          clientID
-          partnerID
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const surveysByEventID = /* GraphQL */ `
-  query SurveysByEventID(
-    $EventID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelSurveyFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    surveysByEventID(
-      EventID: $EventID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        order
-        question
-        type
-        answers
-        EventID
-        Event {
-          id
-          referralCode
-          plan
-          name
-          website
-          email
-          zipCode
-          state
-          city
-          street
-          number
-          complement
-          description
-          dates
-          clientID
-          partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1017,7 +1667,44 @@ export const visitorsByEventDayAndEventID = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1077,7 +1764,44 @@ export const visitorsByConfirmationAndEventID = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1135,7 +1859,44 @@ export const visitorsByEventID = /* GraphQL */ `
           description
           dates
           clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
           partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
         }

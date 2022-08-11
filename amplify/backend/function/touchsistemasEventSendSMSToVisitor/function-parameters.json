@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "api": {
+      "touchsistemasadmin": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "storage": {
+      "Event:@model(appsync)": [
+        "read"
+      ],
+      "Visitor:@model(appsync)": [
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

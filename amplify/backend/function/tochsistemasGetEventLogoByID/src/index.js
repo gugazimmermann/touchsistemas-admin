@@ -7,7 +7,7 @@ Amplify Params - DO NOT EDIT */
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 const client = new S3Client({ region: process.env.REGION });
 const BUCKET_NAME = process.env.STORAGE_TOUCHSISTEMASADMIN_BUCKETNAME;
 
@@ -17,7 +17,7 @@ async function find(objectKey) {
 	return objectKey;
 }
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
 	const id = event?.pathParameters?.id ? event.pathParameters.id : event?.id ? event.id : null;
 	console.log(`ID: ${id}`);
 	if (id) {
@@ -44,7 +44,7 @@ exports.handler = async (event) => {
 				'Access-Control-Allow-Origin': '*',
 				'Access-Control-Allow-Headers': '*',
 			},
-			body: JSON.stringify({ path: response}),
+			body: JSON.stringify({ path: response }),
 		};
 	} else {
 		throw new Error('NO ID');

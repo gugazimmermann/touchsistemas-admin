@@ -19,7 +19,7 @@ export default function EventCard({ event }) {
 			<div className="p-4 text-center">
 				<h3>{name}</h3>
 				<p className="text-sm">
-					{`${city} / ${state}`} | {dates.map((d) => `${moment(d).format('DD/MM/YY')}`).join(', ')}
+					{`${city} - ${state}`} | {dates.map((d) => `${moment(d).format('DD/MM/YY')}`).join(', ')}
 				</p>
 			</div>
 		</Link>

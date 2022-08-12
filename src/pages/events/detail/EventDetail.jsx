@@ -7,7 +7,7 @@ import slugify from 'slugify';
 import { CSVLink } from 'react-csv';
 import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../../graphql/queries';
+// import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../../graphql/queries';
 import { Loading, Alert, LoadingIcon } from '../../../components';
 
 export default function EventDetail() {

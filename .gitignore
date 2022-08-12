@@ -11,6 +11,7 @@
 # production
 /build
 .env
+/amplify_copy
 
 # misc
 .DS_Store

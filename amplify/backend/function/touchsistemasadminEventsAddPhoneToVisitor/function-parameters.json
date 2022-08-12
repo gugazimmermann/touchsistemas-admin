@@ -1,0 +1,23 @@
+{
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "touchsistemasadmintouchsistemasadminLambdaLayer",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ],
+  "permissions": {
+    "storage": {
+      "Event:@model(appsync)": [
+        "read"
+      ]
+    },
+    "api": {
+      "touchsistemasadminGraphQlApi": [
+        "Mutation"
+      ]
+    }
+  }
+}

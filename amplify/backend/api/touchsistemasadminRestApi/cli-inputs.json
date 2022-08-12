@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "paths": {
+    "/events/{id}": {
+      "name": "/events/{id}",
+      "lambdaFunction": "touchsistemasadminEventsGetEventByID",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/events/logo/{id}": {
+      "name": "/events/logo/{id}",
+      "lambdaFunction": "touchsistemasadminEventsGetLogoByEventID",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/events/visitors": {
+      "name": "/events/visitors",
+      "lambdaFunction": "touchsistemasadminEventsAddPhoneToVisitor",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

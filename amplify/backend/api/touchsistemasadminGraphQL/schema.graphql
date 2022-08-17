@@ -1,8 +1,8 @@
 type Owner @model @auth(rules: [{ allow: public }]) {
 	id: ID!
 	name: String!
-	phone: String!
-	email: String!
+	phone: AWSPhone!
+	email: AWSEmail!
 	clientID: ID! @index(name: "byClient")
 	Client: Client @belongsTo
 }
@@ -10,11 +10,11 @@ type Owner @model @auth(rules: [{ allow: public }]) {
 type Client @model @auth(rules: [{ allow: public }]) {
 	id: ID!
 	name: String
-	phone: String
-	email: String! @index(name: "byEmail", queryField: "clientsByEmail")
-	website: String
+	phone: AWSPhone
+	email: AWSEmail! @index(name: "byEmail", queryField: "clientsByEmail")
+	website: AWSURL
 	zipCode: String
-	state: String
+	state: String @index(name: "byState", queryField: "clientsByState")
 	city: String
 	street: String
 	number: String
@@ -29,16 +29,16 @@ type Event @model @auth(rules: [{ allow: public }]) {
 	referralCode: String
 	plan: String!
 	name: String!
-	website: String
-	email: String
+	website: AWSURL
+	email: AWSEmail
 	zipCode: String!
-	state: String!
+	state: String! @index(name: "byState", queryField: "eventsByState")
 	city: String!
 	street: String
 	number: String
 	complement: String
 	description: String
-	dates: [String!]!
+	dates: [AWSDate!]!
 	gift: Boolean
 	giftDescription: String
 	prizeDraw: Boolean
@@ -55,11 +55,11 @@ type Partner @model @auth(rules: [{ allow: public }]) {
 	id: ID!
 	name: String!
 	contact: String!
-	email: String!
-	phone: String!
+	email: AWSEmail!
+	phone: AWSPhone!
 	referralCode: String! @index(name: "byReferralCode", queryField: "partnersByReferralCode")
 	zipCode: String!
-	state: String!
+	state: String! @index(name: "byState", queryField: "partnersByState")
 	city: String!
 	street: String
 	Events: [Event] @hasMany(indexName: "byPartner", fields: ["id"])
@@ -78,20 +78,20 @@ type Survey @model @auth(rules: [{ allow: public }]) {
 
 type Visitor @model @auth(rules: [{ allow: public }]) {
 	id: ID!
-	eventDay: String! @index(name: "byEventDayAndEventID", sortKeyFields: ["EventID"], queryField: "visitorsByEventDayAndEventID")
-	phone: String!
+	eventDay: AWSDate! @index(name: "byEventDayAndEventID", sortKeyFields: ["EventID"], queryField: "visitorsByEventDayAndEventID")
+	phone: AWSPhone!
 	code: Int!
-	confirmation: String @index(name: "byConfirmationAndEventID", sortKeyFields: ["EventID"], queryField: "visitorsByConfirmationAndEventID")
-	codeUsed: String
+	confirmation: AWSDateTime @index(name: "byConfirmationAndEventID", sortKeyFields: ["EventID"], queryField: "visitorsByConfirmationAndEventID")
+	codeUsed: AWSDateTime
 	authorization: Boolean
 	name: String
-	email: String
+	email: AWSEmail
 	gender: String
 	maritalStatus: Boolean
-	disabledPerson: Boolean
+	disabledPerson: String
 	state: String
 	city: String
-	birthdate: String
+	birthdate: AWSDate
 	surveyAnswers: AWSJSON
 	EventID: ID! @index(name: "byEvent", queryField: "visitorsByEventID")
 	Event: Event @belongsTo

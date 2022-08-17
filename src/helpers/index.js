@@ -52,6 +52,16 @@ export function normalizePhone(phone) {
 	return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 7)}-${currentValue.slice(7, 11)}`;
 }
 
+export function normalizePhoneToShow(phone) {
+	if (!phone) return phone;
+	const currentValue = phone.replace(/[^\d]/g, '').slice(2);
+
+	const cvLength = currentValue.length;
+	if (cvLength < 3) return currentValue;
+	if (cvLength < 7) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2)}`;
+	return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 7)}-${currentValue.slice(7, 11)}`;
+}
+
 export function orderEventsByLastDay(events, sort = 'DESC') {
 	const eventsWithLastDay = events.map((i) => ({
 		...i,

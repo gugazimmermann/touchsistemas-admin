@@ -291,7 +291,7 @@ export const listClients = /* GraphQL */ `
 `;
 export const clientsByEmail = /* GraphQL */ `
   query ClientsByEmail(
-    $email: String!
+    $email: AWSEmail!
     $sortDirection: ModelSortDirection
     $filter: ModelClientFilterInput
     $limit: Int
@@ -299,6 +299,80 @@ export const clientsByEmail = /* GraphQL */ `
   ) {
     clientsByEmail(
       email: $email
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        phone
+        email
+        website
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        eventsMap
+        Owners {
+          items {
+            id
+            name
+            phone
+            email
+            clientID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const clientsByState = /* GraphQL */ `
+  query ClientsByState(
+    $state: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelClientFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    clientsByState(
+      state: $state
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -580,6 +654,126 @@ export const listEvents = /* GraphQL */ `
     $nextToken: String
   ) {
     listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        referralCode
+        plan
+        name
+        website
+        email
+        zipCode
+        state
+        city
+        street
+        number
+        complement
+        description
+        dates
+        gift
+        giftDescription
+        prizeDraw
+        prizeDrawDescription
+        clientID
+        Client {
+          id
+          name
+          phone
+          email
+          website
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          eventsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        partnerID
+        Partner {
+          id
+          name
+          contact
+          email
+          phone
+          referralCode
+          zipCode
+          state
+          city
+          street
+          Events {
+            nextToken
+          }
+          number
+          createdAt
+          updatedAt
+        }
+        Surveys {
+          items {
+            id
+            order
+            question
+            type
+            answers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        Visitors {
+          items {
+            id
+            eventDay
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const eventsByState = /* GraphQL */ `
+  query EventsByState(
+    $state: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    eventsByState(
+      state: $state
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         referralCode
@@ -1071,6 +1265,67 @@ export const partnersByReferralCode = /* GraphQL */ `
   ) {
     partnersByReferralCode(
       referralCode: $referralCode
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        contact
+        email
+        phone
+        referralCode
+        zipCode
+        state
+        city
+        street
+        Events {
+          items {
+            id
+            referralCode
+            plan
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            clientID
+            partnerID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        number
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const partnersByState = /* GraphQL */ `
+  query PartnersByState(
+    $state: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPartnerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    partnersByState(
+      state: $state
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -1720,7 +1975,7 @@ export const listVisitors = /* GraphQL */ `
 `;
 export const visitorsByEventDayAndEventID = /* GraphQL */ `
   query VisitorsByEventDayAndEventID(
-    $eventDay: String!
+    $eventDay: AWSDate!
     $EventID: ModelIDKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelVisitorFilterInput
@@ -1823,7 +2078,7 @@ export const visitorsByEventDayAndEventID = /* GraphQL */ `
 `;
 export const visitorsByConfirmationAndEventID = /* GraphQL */ `
   query VisitorsByConfirmationAndEventID(
-    $confirmation: String!
+    $confirmation: AWSDateTime!
     $EventID: ModelIDKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelVisitorFilterInput

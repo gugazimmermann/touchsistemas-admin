@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { updateClient } from '../../graphql/mutations';
-import { getAddressFromCEP, normalizeCEP, normalizePhone } from '../../helpers';
+import { getAddressFromCEP, normalizeCEP, normalizePhone, normalizePhoneToShow } from '../../helpers';
 import { Loading, Alert, Title } from '../../components';
 import Owners from './Owners';
 
@@ -32,7 +32,7 @@ export default function Profile() {
 		if (client) {
 			setFormClient({
 				name: client.name,
-				phone: client.phone,
+				phone: normalizePhoneToShow(client.phone),
 				email: client.email,
 				website: client.website,
 				zipCode: client.zipCode,
@@ -79,7 +79,7 @@ export default function Profile() {
 				input: {
 					id: client.id,
 					name: formClient.name,
-					phone: formClient.phone,
+					phone: `+55${formClient.phone.replace(/[^\d]/g, '')}`,
 					website: formClient.website,
 					zipCode: formClient.zipCode,
 					city: formClient.city,

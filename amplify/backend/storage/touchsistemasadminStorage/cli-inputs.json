@@ -1,6 +1,6 @@
 {
   "resourceName": "touchsistemasadminStorage",
-  "policyUUID": "28359b28",
+  "policyUUID": "335a0644",
   "bucketName": "touchsistemasadminstoragebucket",
   "storageAccess": "authAndGuest",
   "guestAccess": [

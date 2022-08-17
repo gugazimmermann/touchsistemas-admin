@@ -9,7 +9,7 @@ import { orderEventsByLastDay } from '../../helpers';
 export default function Events() {
 	const [client, loadClient] = useOutletContext();
 	const [loading, setLoading] = useState(false);
-	const [events, setEvents] = useState();
+	const [events, setEvents] = useState([]);
 	const [map, setMap] = useState();
 
 	async function createMap(e) {
@@ -57,16 +57,16 @@ export default function Events() {
 	async function orderEvents() {
 		setLoading(true);
 		const showEvents = [];
-		if (client.Events.items) {
+		if (client.Events.items.length) {
 			const sortEvents = orderEventsByLastDay(client.Events.items);
 			for (const e of sortEvents) {
 				const list = await Storage.list(`logo/${e.id}`);
 				if (list?.length) e.image = await Storage.get(list[0].key);
 				showEvents.push(e);
 			}
+			setEvents(showEvents);
+			await handleMap(showEvents);
 		}
-		setEvents(showEvents);
-		await handleMap(showEvents);
 		setLoading(false);
 	}
 
@@ -74,14 +74,17 @@ export default function Events() {
 		if (client) orderEvents();
 	}, [client]);
 
-	return (
-		<>
-			{loading && <Loading />}
-			<Title text="Eventos" />
-			<Grid>
-				{events && events.map((event) => <EventCard key={event.id} event={event} />)}
-				{map && <MapCard map={map} />}
-			</Grid>
-		</>
-	);
+	if (loading) return <Loading />;
+	if (events.length)
+		return (
+			<>
+				<Title text="Eventos" />
+				<Grid>
+					{events.map((event) => (
+						<EventCard key={event.id} event={event} />
+					))}
+					{map && <MapCard map={map} />}
+				</Grid>
+			</>
+		);
 }

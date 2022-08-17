@@ -20,14 +20,14 @@ export const schema = {
                 "phone": {
                     "name": "phone",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSPhone",
                     "isRequired": true,
                     "attributes": []
                 },
                 "email": {
                     "name": "email",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSEmail",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -122,21 +122,21 @@ export const schema = {
                 "phone": {
                     "name": "phone",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSPhone",
                     "isRequired": false,
                     "attributes": []
                 },
                 "email": {
                     "name": "email",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSEmail",
                     "isRequired": true,
                     "attributes": []
                 },
                 "website": {
                     "name": "website",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -252,6 +252,16 @@ export const schema = {
                     }
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "byState",
+                        "queryField": "clientsByState",
+                        "fields": [
+                            "state"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -303,14 +313,14 @@ export const schema = {
                 "website": {
                     "name": "website",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
                 },
                 "email": {
                     "name": "email",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSEmail",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -366,7 +376,7 @@ export const schema = {
                 "dates": {
                     "name": "dates",
                     "isArray": true,
-                    "type": "String",
+                    "type": "AWSDate",
                     "isRequired": true,
                     "attributes": [],
                     "isArrayNullable": false
@@ -494,6 +504,16 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
+                        "name": "byState",
+                        "queryField": "eventsByState",
+                        "fields": [
+                            "state"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
                         "name": "byClient",
                         "queryField": "eventsByClientID",
                         "fields": [
@@ -556,14 +576,14 @@ export const schema = {
                 "email": {
                     "name": "email",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSEmail",
                     "isRequired": true,
                     "attributes": []
                 },
                 "phone": {
                     "name": "phone",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSPhone",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -654,6 +674,16 @@ export const schema = {
                         "queryField": "partnersByReferralCode",
                         "fields": [
                             "referralCode"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byState",
+                        "queryField": "partnersByState",
+                        "fields": [
+                            "state"
                         ]
                     }
                 },
@@ -810,14 +840,14 @@ export const schema = {
                 "eventDay": {
                     "name": "eventDay",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSDate",
                     "isRequired": true,
                     "attributes": []
                 },
                 "phone": {
                     "name": "phone",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSPhone",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -831,14 +861,14 @@ export const schema = {
                 "confirmation": {
                     "name": "confirmation",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
                 },
                 "codeUsed": {
                     "name": "codeUsed",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -859,7 +889,7 @@ export const schema = {
                 "email": {
                     "name": "email",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSEmail",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -880,7 +910,7 @@ export const schema = {
                 "disabledPerson": {
                     "name": "disabledPerson",
                     "isArray": false,
-                    "type": "Boolean",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -901,7 +931,7 @@ export const schema = {
                 "birthdate": {
                     "name": "birthdate",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSDate",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -1017,5 +1047,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "8e397c99af503b110a28d5cd52ae8d62"
+    "version": "e2ee7f452c9cf390012a6bfd26267f4f"
 };

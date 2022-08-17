@@ -1,8 +1,3 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-else-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable consistent-return */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-sequences */
 import { useEffect, useState } from 'react';
@@ -11,7 +6,7 @@ import moment from 'moment';
 import { Chart } from 'react-google-charts';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import slugify from 'slugify';
-// import { getEvent, visitorsByEventID, surveysByEventID } from '../../../graphql/queries';
+import { getEvent, visitorsByEventID, surveysByEventID } from '../../../graphql/queries';
 import { Loading } from '../../../components';
 
 const colors = [
@@ -69,7 +64,8 @@ export default function Dashboard() {
 					range: `Até ${r}`,
 					qtd: byAgeRange.map((d) => d < r).filter((d) => d).length,
 				};
-			} else if (!range[i + 1]) {
+			}
+			if (!range[i + 1]) {
 				return {
 					range: `Mais de ${r}`,
 					qtd: byAgeRange.map((d) => d >= r).filter((d) => d).length,
@@ -89,9 +85,29 @@ export default function Dashboard() {
 		};
 	}
 
+	function handleByMaritalStatus(visitorsSurvey) {
+		let byMaritalStatus = [
+			{
+				range: `Solteiro`,
+				qtd: visitorsSurvey.filter((d) => d.maritalStatus !== true).length,
+			},
+			{
+				range: `Casado`,
+				qtd: visitorsSurvey.filter((d) => d.maritalStatus === true).length,
+			},
+		];
+		byMaritalStatus = byMaritalStatus.map((a) => [a.range, a.qtd]);
+		byMaritalStatus.unshift(['Type', 'Respostas']);
+		return {
+			chartType: 'PieChart',
+			title: 'Por Estado Civil',
+			data: byMaritalStatus,
+		};
+	}
+
 	function handleByHour(visitorsSurvey) {
 		let range = ['9:00', '12:00', '15:00', '18:00', '21:00', '00:00'];
-		range = range.map(r => moment(r, 'HH:mm'));
+		range = range.map((r) => moment(r, 'HH:mm'));
 		const codeUsed = visitorsSurvey.map((d) => d.codeUsed).filter((n) => moment(n).isValid());
 		let byHour = codeUsed.map((d) => `${d.hours()}:${d.minutes()}`).map((d) => moment(d, 'HH:mm'));
 		byHour.sort();
@@ -99,17 +115,18 @@ export default function Dashboard() {
 			if (!range[i + 1]) {
 				return {
 					range: `Após ${r.format('HH')}`,
-					qtd: byHour.map((d) => d >= r && d < range[0]).filter(n => n).length,
+					qtd: byHour.map((d) => d >= r && d < range[0]).filter((n) => n).length,
 				};
-			} else if (range[i+1].format('HH:mm') === '00:00') {
+			}
+			if (range[i + 1].format('HH:mm') === '00:00') {
 				return {
-					range: `Entre ${r.format('HH')} e ${range[i+1].format('HH')}`,
-					qtd: byHour.map((d) => d >= r).filter(n => n).length,
+					range: `Entre ${r.format('HH')} e ${range[i + 1].format('HH')}`,
+					qtd: byHour.map((d) => d >= r).filter((n) => n).length,
 				};
 			}
 			return {
-				range: `Entre ${r.format('HH')} e ${range[i+1].format('HH')}`,
-				qtd: byHour.map((d) => d >= r && d < range[i+1]).filter(n => n).length,
+				range: `Entre ${r.format('HH')} e ${range[i + 1].format('HH')}`,
+				qtd: byHour.map((d) => d >= r && d < range[i + 1]).filter((n) => n).length,
 			};
 		});
 		byHour = byHour.map((a) => [a.range, a.qtd]);
@@ -152,19 +169,30 @@ export default function Dashboard() {
 
 	async function handleVisitorsData(data, eventData) {
 		const visitorsDataArray = [];
-		const visitorsSurvey = data.map((d) => ({
-			createdAt: moment(d.createdAt),
-			codeUsed: d.birthdate ? moment(d.codeUsed) : null,
-			birthdate: d.birthdate ? moment(d.birthdate) : null,
-			city: d.city,
-			gender: d.gender,
-			state: d.state,
-		}));
-		console.log(visitorsSurvey)
+		const visitorsSurvey = data
+			.map((d) => {
+				if (d.name) {
+					return {
+						createdAt: moment(d.createdAt),
+						codeUsed: d.birthdate ? moment(d.codeUsed) : null,
+						birthdate: d.birthdate ? moment(d.birthdate) : null,
+						city: d.city,
+						gender: d.gender,
+						state: d.state,
+						maritalStatus: d.maritalStatus,
+						disabledPerson: d.disabledPerson,
+					};
+				}
+				return null;
+			})
+			.filter((d) => d);
 		const byGender = handleByGender(visitorsSurvey);
 		visitorsDataArray.push(byGender);
 		const byAgeRange = handleByAgeRange(visitorsSurvey, eventData);
 		visitorsDataArray.push(byAgeRange);
+		const byMaritalStatus = handleByMaritalStatus(visitorsSurvey);
+		visitorsDataArray.push(byMaritalStatus);
+		// TODO: fix disabled person in DB and update
 		const byHour = handleByHour(visitorsSurvey);
 		visitorsDataArray.push(byHour);
 		const byState = handleByState(visitorsSurvey);
@@ -180,6 +208,7 @@ export default function Dashboard() {
 				surveysByEventID: { items: surveyQuestions },
 			},
 		} = await API.graphql(graphqlOperation(surveysByEventID, { EventID: eventData.id }));
+		surveyQuestions.sort((a, b) => a.order - b.order);
 		surveyQuestions = surveyQuestions.map((q) => ({ question: q.question, type: q.type }));
 		const validSurvey = data.map((d) => JSON.parse(d.surveyAnswers)).filter((n) => n);
 		const questions = [];
@@ -294,10 +323,10 @@ export default function Dashboard() {
 										chartType="PieChart"
 										data={d.data}
 										options={{
-											chartArea: { width: '100%', height: d.data.length > 4 ? '100%' : '80%' },
+											chartArea: { width: '100%', height: '100%' },
 											colors,
 											legend: {
-												position: d.data.length > 4 ? 'labeled' : 'top',
+												position: 'labeled',
 												alignment: 'center',
 												textStyle: { fontSize: 14 },
 											},

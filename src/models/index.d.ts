@@ -141,7 +141,7 @@ export declare class Visitor {
   readonly email?: string | null;
   readonly gender?: string | null;
   readonly maritalStatus?: boolean | null;
-  readonly disabledPerson?: boolean | null;
+  readonly disabledPerson?: string | null;
   readonly state?: string | null;
   readonly city?: string | null;
   readonly birthdate?: string | null;

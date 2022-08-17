@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -7,7 +5,7 @@ import slugify from 'slugify';
 import { CSVLink } from 'react-csv';
 import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-// import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../../graphql/queries';
+import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../../graphql/queries';
 import { Loading, Alert, LoadingIcon } from '../../../components';
 
 export default function EventDetail() {
@@ -115,7 +113,7 @@ export default function EventDetail() {
 			dates.sort();
 			dates.reverse();
 			if (moment(dates[0], 'YYYY-MM-DD').unix() <= moment().unix()) {
-				eventData.pastEvent = true;
+				eventData.eventOver = true;
 				handleVisitors(eventData);
 			} else {
 				generateQRCode();
@@ -135,7 +133,7 @@ export default function EventDetail() {
 	function formatAddress(o) {
 		let address = o.street;
 		if (o.number) address += `, ${o.number}`;
-		if (o.complement) address += ` (${o.complement}}`;
+		if (o.complement) address += ` (${o.complement})`;
 		address += ` - ${o.city} / ${o.state} | ${o.zipCode}`;
 		return address;
 	}
@@ -144,127 +142,166 @@ export default function EventDetail() {
 		if (params.id) handleGetEvent(params.id);
 	}, [params]);
 
-	function renderHeader() {
+	function renderRegistrationsCard() {
 		return (
-			<div className="flex flex-col sm:flex-row justify-center items-center align-middle p-2 ">
-				{logo && (
-					<div className="w-3/12 mb-2 sm:mb-0 sm:w-2/12 md:w-1/12">
-						<img alt="logo" className="object-scale-down w-full rounded-md" src={logo} />
+			<div className="mt-4">
+				<div className="relative bg-white py-2 px-4 rounded-lg shadow-md">
+					<div className="text-white flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-emerald-500 right-4 -top-4">
+						<i className="bx bxs-user" />
 					</div>
-				)}
-				<div
-					className={`${
-						logo ? 'w-full sm:w-8/12 md:w-9/12' : 'w-10/12 md:w-11/12'
-					} mb-2 sm:mb-0 text-center sm:text-left sm:pl-2 flex flex-col justify-center`}
-				>
-					<h3 className="text-lg leading-6 font-bold">{event.name}</h3>
-					<p className="mt-1 max-w-2xl text-sm sm:text-base">
-						{event.dates.map((d) => `${moment(d).format('DD/MM/YYYY')}`).join(', ')}
-					</p>
+					<div>
+						<p className="text-xl font-bold">Cadastros</p>
+						<div className="border-t-2 mb-2" />
+						<div className="flex justify-between">
+							<div className="w-full text-center">
+								<p>Total</p>
+								<p>{event.visitorsInfo.total}</p>
+							</div>
+							<div className="w-full text-center">
+								<p>Confirmados</p>
+								<p>{event.visitorsInfo.confirmation}</p>
+							</div>
+							<div className="w-full flex justify-center items-end">
+								<p>{((event.visitorsInfo.confirmation * 100) / event.visitorsInfo.total).toFixed(1)}%</p>
+							</div>
+						</div>
+					</div>
 				</div>
-				{event?.pastEvent ? (
-					<div
-						onClick={() => handleDashboard()}
-						className={`${
-							event?.visitorsInfo?.total && 'cursor-pointer'
-						} w-full md:w-1/12 flex flex-col justify-center items-center text-secondary`}
-					>
-						<i className="bx bxs-pie-chart-alt-2 text-5xl" />
-						<h2 className="text-lg leading-6 font-bold">Relatório</h2>
-					</div>
-				) : (
-					<a
-						href={qr}
-						download={`${slugify(event.name, { lower: true })}.png`}
-						className={`${
-							event?.visitorsInfo?.total && 'cursor-pointer'
-						} w-full md:w-1/12 flex flex-col justify-center items-center text-secondary`}
-					>
-						<img src={qr} alt="qr code" />
-						<h2 className="text-lg leading-6 font-bold">QR-Code</h2>
-					</a>
-				)}
 			</div>
 		);
 	}
 
-	function renderSurveyInfo() {
+	function renderWithdrawnItemsCard() {
 		return (
-			event.pastEvent && (
-				<>
-					<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
-						<dt className="text-sm font-medium sm:col-span-2">Total Cadastros</dt>
-						<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">
-							{event?.visitorsInfo ? (
-								event.visitorsInfo?.total > 0 && (
-									<>
-										<span>
-											{`${event.visitorsInfo.confirmation} / ${event.visitorsInfo.total} (${(
-												(event.visitorsInfo.confirmation * 100) /
-												event.visitorsInfo.total
-											).toFixed(1)}%)`}
-										</span>
-										{data && (
-											<CSVLink
-												data={data}
-												headers={headers}
-												filename={slugify(event.name, { lower: true })}
-												className="ml-2 px-2 py-1 bg-primary text-white rounded"
-											>
-												Exportar Dados
-											</CSVLink>
-										)}
-									</>
-								)
-							) : (
-								<LoadingIcon />
-							)}
-						</dd>
+			<div className="mt-4">
+				<div className="relative bg-white py-2 px-4 rounded-lg shadow-md">
+					<div className="text-white flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-sky-500 right-4 -top-4">
+						<i className="bx bxs-gift" />
 					</div>
-					<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
-						<dt className="text-sm font-medium sm:col-span-2">Itens Retirados</dt>
-						<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">
-							{event?.visitorsInfo ? (
-								event.visitorsInfo?.total > 0 &&
-								`${event.visitorsInfo.codeUsed} (${(
-									(event.visitorsInfo.codeUsed * 100) /
-									event.visitorsInfo.confirmation
-								).toFixed(1)}%)`
-							) : (
-								<LoadingIcon />
-							)}
-						</dd>
+					<div>
+						<p className="text-xl font-bold">Itens Retirados</p>
+						<div className="border-t-2 mb-2" />
+						<div className="flex justify-between">
+							<div className="w-full text-center">
+								<p>Total</p>
+								<p>{event.visitorsInfo.codeUsed}</p>
+							</div>
+							<div className="w-full flex justify-center items-end">
+								<p>{((event.visitorsInfo.codeUsed * 100) / event.visitorsInfo.confirmation).toFixed(1)}%</p>
+							</div>
+						</div>
 					</div>
-					<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
-						<dt className="text-sm font-medium sm:col-span-2">Pesquisas Respondidas</dt>
-						<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">
-							{event?.visitorsInfo ? (
-								event.visitorsInfo?.total > 0 &&
-								`${event.visitorsInfo.surveysAnswered} (${(
-									(event.visitorsInfo.surveysAnswered * 100) /
-									event.visitorsInfo.confirmation
-								).toFixed(1)}%)`
-							) : (
-								<LoadingIcon />
-							)}
-						</dd>
+				</div>
+			</div>
+		);
+	}
+
+	function renderSurveysAnsweredCard() {
+		return (
+			<div className="mt-4">
+				<div className="relative bg-white py-2 px-4 rounded-lg shadow-md">
+					<div className="text-white flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-fuchsia-500 right-4 -top-4">
+						<i className="bx bxs-select-multiple" />
 					</div>
-					<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
-						<dt className="text-sm font-medium sm:col-span-2">Pesquisas Completas</dt>
-						<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">
-							{event?.visitorsInfo ? (
-								event.visitorsInfo?.total > 0 &&
-								`${event.visitorsInfo.surveysPersonalData} (${(
-									(event.visitorsInfo.surveysPersonalData * 100) /
-									event.visitorsInfo.confirmation
-								).toFixed(1)}%)`
-							) : (
-								<LoadingIcon />
-							)}
-						</dd>
+					<div>
+						<p className="text-xl font-bold">Pesquisas Respondidas</p>
+						<div className="border-t-2 mb-2" />
+						<div className="flex justify-between">
+							<div className="w-full text-center">
+								<p>Total</p>
+								<p>{event.visitorsInfo.surveysAnswered}</p>
+							</div>
+							<div className="w-full flex justify-center items-end">
+								<p>{((event.visitorsInfo.surveysAnswered * 100) / event.visitorsInfo.confirmation).toFixed(1)}%</p>
+							</div>
+						</div>
 					</div>
-				</>
-			)
+				</div>
+			</div>
+		);
+	}
+
+	function renderCompleteSurveysCard() {
+		return (
+			<div className="mt-4">
+				<div className="relative bg-white py-2 px-4 rounded-lg shadow-md">
+					<div className="text-white flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-violet-500 right-4 -top-4">
+						<i className="bx bxs-bar-chart-square" />
+					</div>
+					<div>
+						<p className="text-xl font-bold">Pesquisas Completas</p>
+						<div className="border-t-2 mb-2" />
+						<div className="flex justify-between">
+							<div className="w-full text-center">
+								<p>Total</p>
+								<p>{event.visitorsInfo.surveysPersonalData}</p>
+							</div>
+							<div className="w-full flex justify-center items-end">
+								<p>
+									{((event.visitorsInfo.surveysPersonalData * 100) / event.visitorsInfo.surveysAnswered).toFixed(1)}%
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	function renderCards() {
+		if (event?.visitorsInfo && event.visitorsInfo?.total > 0) {
+			return (
+				<div className="w-full md:w-6/12 grid sm:grid-cols-2 gap-4 md:p-4">
+					{renderRegistrationsCard()}
+					{renderWithdrawnItemsCard()}
+					{renderSurveysAnsweredCard()}
+					{renderCompleteSurveysCard()}
+				</div>
+			);
+		}
+		return (
+			<div className="w-full md:w-6/12 flex justify-center align-middle items-center">
+				<LoadingIcon />
+			</div>
+		);
+	}
+
+	function renderDashboardCard() {
+		return (
+			<div
+				role="presentation"
+				onClick={() => handleDashboard()}
+				className={`${
+					event?.visitorsInfo?.total && 'cursor-pointer'
+				} w-full p-1 flex flex-col justify-center items-center text-secondary`}
+			>
+				<i className="bx bxs-pie-chart-alt-2 text-9xl" />
+				<h2 className="text-lg font-bold">Relatório</h2>
+			</div>
+		);
+	}
+
+	function renderQRCodeCard() {
+		return (
+			<a
+				href={qr}
+				download={`${slugify(event.name, { lower: true })}.png`}
+				className={`${
+					event?.visitorsInfo?.total && 'cursor-pointer'
+				} w-full flex flex-col justify-center items-center text-secondary`}
+			>
+				<img src={qr} alt="qr code" />
+				<h2 className="text-lg font-bold text-center">QR-Code Download</h2>
+			</a>
+		);
+	}
+
+	function renderWinnerCard() {
+		return (
+			<div className="bg-white shadow-md overflow-hidden rounded-lg p-1 sm:w-6/12 md:w-full flex flex-col items-center align-middle">
+				<i className="bx bxs-trophy text-primary text-5xl" />
+				<h2 className="text-lg text-primary font-bold">Ganhador(a) do Sorteio</h2>
+			</div>
 		);
 	}
 
@@ -273,55 +310,83 @@ export default function EventDetail() {
 			{loading && <Loading />}
 			{success && <Alert type="success">Evento Cadastrado com Sucesso</Alert>}
 			{!loading && event && (
-				<div className="bg-white shadow-md overflow-hidden rounded-lg">
-					{renderHeader()}
-					<div className="border-t">
-						<dl>
-							{renderSurveyInfo()}
+				<>
+					<div className={`flex flex-col md:flex-row ${!event.eventOver && 'justify-between'}`}>
+						<div className="w-full md:w-3/12">
+							<div className="bg-white shadow-md overflow-hidden rounded-lg mb-4">
+								{logo ? (
+									<img src={logo} alt="logo" className="object-scale-down w-full rounded-t-md" />
+								) : (
+									<img
+										src="/image-placeholder.png"
+										alt="logo"
+										className="object-scale-down w-full rounded-t-md opacity-10  group-hover:opacity-5"
+									/>
+								)}
+								<div className="my-2 text-center">
+									<h3 className="font-bold">{event.name}</h3>
+									<p className="mt-1 text-sm">
+										{event.dates.map((d) => `${moment(d).format('DD/MM/YYYY')}`).join(', ')}
+									</p>
+								</div>
+							</div>
+						</div>
+						{event.eventOver && renderCards()}
+						<div className="w-full md:w-3/12 mt-4 flex flex-rowv md:flex-col">
+							<div className="bg-white shadow-md overflow-hidden rounded-lg mb-2 sm:w-6/12 md:w-full sm:mr-4">
+								{event.eventOver ? renderDashboardCard() : renderQRCodeCard()}
+							</div>
+							{event.eventOver && data && (
+								<CSVLink
+									data={data}
+									headers={headers}
+									filename={slugify(event.name, { lower: true })}
+									className="px-2 py-1 bg-secondary text-white rounded-lg mb-2 shadow-md text-center font-bold"
+								>
+									<i className="bx bxs-download" /> Exportar Dados
+								</CSVLink>
+							)}
+							{event.eventOver && renderWinnerCard()}
+						</div>
+					</div>
+					<div className="shadow-md rounded-lg flex flex-row">
+						<dl className='flex-1'>
 							{event.website && (
-								<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+								<div className="p-4 border-b sm:grid sm:grid-cols-12">
 									<dt className="text-sm font-medium sm:col-span-2">WebSite</dt>
 									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.website}</dd>
 								</div>
 							)}
 							{event.email && (
-								<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+								<div className="p-4 border-b sm:grid sm:grid-cols-12">
 									<dt className="text-sm font-medium sm:col-span-2">Email</dt>
 									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.email}</dd>
 								</div>
 							)}
-							<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+							<div className="p-4 border-b sm:grid sm:grid-cols-12">
 								<dt className="text-sm font-medium sm:col-span-2">Endereço</dt>
 								<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{formatAddress(event)}</dd>
 							</div>
-							<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
+							<div className="p-4 border-b sm:grid sm:grid-cols-12">
 								<dt className="text-sm font-medium sm:col-span-2">Plano</dt>
 								<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.plan}</dd>
+								{event.partner && (
+									<>
+										<dt className="text-sm font-medium sm:col-span-2">Parceiro</dt>
+										<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{`${event.partner.name} | ${event.partner.referralCode}`}</dd>
+									</>
+								)}
 							</div>
-							{event.partner && (
-								<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
-									<dt className="text-sm font-medium sm:col-span-2">Parceiro</dt>
-									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{`${event.partner.name} | ${event.partner.referralCode}`}</dd>
-								</div>
-							)}
-							{event.description && (
-								<div className="px-4 py-4 border-b sm:grid sm:grid-cols-12">
-									<dt className="text-sm font-medium sm:col-span-2">Descrição</dt>
-									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.plan}</dd>
-								</div>
-							)}
-							{map && (
-								<div className="px-4 py-4 flex justify-center">
-									<div className="bg-white overflow-hidden rounded-lg w-full sm:w-6/12 lg:w-4/12">
-										<a href={map} target="_blank" className="group" rel="noreferrer">
-											<img alt="map" src={map} />
-										</a>
-									</div>
-								</div>
-							)}
 						</dl>
+						{map && (
+							<div className="px-4 py-4 flex-1 justify-center">
+									<a href={map} target="_blank" rel="noreferrer">
+										<img alt="map" src={map} className="rounded-lg" />
+									</a>
+							</div>
+						)}
 					</div>
-				</div>
+				</>
 			)}
 		</>
 	);

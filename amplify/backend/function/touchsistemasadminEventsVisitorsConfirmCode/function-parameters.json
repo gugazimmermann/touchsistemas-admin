@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "api": {
+      "touchsistemasadminGraphQL": [
+        "Mutation"
+      ]
+    },
+    "storage": {
+      "Event:@model(appsync)": [
+        "read"
+      ],
+      "Visitor:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "touchsistemasadmintouchsistemasadminLambdaLayer",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ]
+}

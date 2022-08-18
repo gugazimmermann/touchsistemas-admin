@@ -14,6 +14,38 @@
     "categories": {
       "auth": {
         "touchsistemasadminAuth": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2dv7t7we3p1lx",
+          "type": "cicd"
+        }
+      },
+      "function": {
+        "touchsistemasadminEventsGetByID": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-115403-deployment",
+          "s3Key": "amplify-builds/touchsistemasadminEventsGetByID-6b6e7a42464944445338-build.zip"
+        },
+        "touchsistemasadmintouchsistemasadminLambdaLayer": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-115403-deployment",
+          "s3Key": "amplify-builds/touchsistemasadmintouchsistemasadminLambdaLayer-LambdaLayerVersionf1330e3c-build.zip"
+        },
+        "touchsistemasadminEventsGetLogoByID": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-115403-deployment",
+          "s3Key": "amplify-builds/touchsistemasadminEventsGetLogoByID-694442477a4735704f49-build.zip"
+        },
+        "touchsistemasadminEventsVisitorsSetPhone": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-115403-deployment",
+          "s3Key": "amplify-builds/touchsistemasadminEventsVisitorsSetPhone-6c6b7054616a75613241-build.zip"
+        },
+        "touchsistemasadminEventsVisitorsConfirmCode": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-115403-deployment",
+          "s3Key": "amplify-builds/touchsistemasadminEventsVisitorsConfirmCode-6236584d556c2f41756b-build.zip"
+        },
+        "touchsistemasadminEventsVisitorsPoDGetByPhone": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-115403-deployment",
+          "s3Key": "amplify-builds/touchsistemasadminEventsVisitorsPoDGetByPhone-30466b61354c686d2b4d-build.zip"
+        }
       }
     }
   }

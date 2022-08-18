@@ -2076,6 +2076,109 @@ export const visitorsByEventDayAndEventID = /* GraphQL */ `
     }
   }
 `;
+export const visitorsByPhoneAndEventID = /* GraphQL */ `
+  query VisitorsByPhoneAndEventID(
+    $phone: AWSPhone!
+    $EventID: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelVisitorFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    visitorsByPhoneAndEventID(
+      phone: $phone
+      EventID: $EventID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        eventDay
+        phone
+        code
+        confirmation
+        codeUsed
+        authorization
+        name
+        email
+        gender
+        maritalStatus
+        disabledPerson
+        state
+        city
+        birthdate
+        surveyAnswers
+        EventID
+        Event {
+          id
+          referralCode
+          plan
+          name
+          website
+          email
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          description
+          dates
+          gift
+          giftDescription
+          prizeDraw
+          prizeDrawDescription
+          clientID
+          Client {
+            id
+            name
+            phone
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            createdAt
+            updatedAt
+          }
+          partnerID
+          Partner {
+            id
+            name
+            contact
+            email
+            phone
+            referralCode
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const visitorsByConfirmationAndEventID = /* GraphQL */ `
   query VisitorsByConfirmationAndEventID(
     $confirmation: AWSDateTime!

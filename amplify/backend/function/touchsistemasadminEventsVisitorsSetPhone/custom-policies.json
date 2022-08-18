@@ -1,0 +1,6 @@
+[
+  {
+    "Action": ["SNS:Publish"],
+    "Resource": ["*"]
+  }
+]

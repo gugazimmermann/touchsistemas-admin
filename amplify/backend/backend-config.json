@@ -67,6 +67,52 @@
           ]
         }
       }
+    },
+    "touchsistemasadminRestApi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadminEventsGetByID",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadminEventsGetLogoByID",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadminEventsVisitorsSetPhone",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadminEventsVisitorsConfirmCode",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadminEventsVisitorsPoDGetByPhone",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "storage": {
@@ -74,6 +120,129 @@
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd",
+      "lastPushTimeStamp": "2022-08-17T16:57:53.942Z"
+    }
+  },
+  "function": {
+    "touchsistemasadmintouchsistemasadminLambdaLayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    },
+    "touchsistemasadminEventsGetByID": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "touchsistemasadminGraphQL",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadmintouchsistemasadminLambdaLayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "touchsistemasadminEventsGetLogoByID": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "touchsistemasadminStorage",
+          "attributes": [
+            "BucketName"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadmintouchsistemasadminLambdaLayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "touchsistemasadminEventsVisitorsSetPhone": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "touchsistemasadminGraphQL",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadmintouchsistemasadminLambdaLayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "touchsistemasadminEventsVisitorsConfirmCode": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "touchsistemasadminGraphQL",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadmintouchsistemasadminLambdaLayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "touchsistemasadminEventsVisitorsPoDGetByPhone": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "touchsistemasadminGraphQL",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadmintouchsistemasadminLambdaLayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
     }
   }
 }

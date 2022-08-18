@@ -1,0 +1,11 @@
+{
+  "name": "touchsistemasadmineventsvisitorssetphone",
+  "type": "module",
+  "version": "2.0.0",
+  "description": "Set Visitor Phone to Event",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.92"
+  }
+}

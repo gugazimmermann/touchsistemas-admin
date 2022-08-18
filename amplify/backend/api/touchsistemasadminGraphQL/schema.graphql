@@ -79,7 +79,7 @@ type Survey @model @auth(rules: [{ allow: public }]) {
 type Visitor @model @auth(rules: [{ allow: public }]) {
 	id: ID!
 	eventDay: AWSDate! @index(name: "byEventDayAndEventID", sortKeyFields: ["EventID"], queryField: "visitorsByEventDayAndEventID")
-	phone: AWSPhone!
+	phone: AWSPhone! @index(name: "byPhoneAndEventID", sortKeyFields: ["EventID"], queryField: "visitorsByPhoneAndEventID")
 	code: Int!
 	confirmation: AWSDateTime @index(name: "byConfirmationAndEventID", sortKeyFields: ["EventID"], queryField: "visitorsByConfirmationAndEventID")
 	codeUsed: AWSDateTime

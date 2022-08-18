@@ -1,14 +1,24 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { updateClient } from '../../graphql/mutations';
-import { getAddressFromCEP, normalizeCEP, normalizePhone, normalizePhoneToShow } from '../../helpers';
+import {
+	getAddressFromCEP,
+	normalizeCEP,
+	normalizeDocument,
+	normalizePhone,
+	normalizePhoneToShow,
+} from '../../helpers';
 import { Loading, Alert, Title } from '../../components';
 import Owners from './Owners';
 
 const initial = {
 	name: '',
 	phone: '',
+	docType: '',
+	document: '',
 	email: '',
 	website: '',
 	zipCode: '',
@@ -22,6 +32,7 @@ const initial = {
 export default function Profile() {
 	const navigate = useNavigate();
 	const [client, loadClient] = useOutletContext();
+	const [docTypes, setDocTypes] = useState([]);
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -33,9 +44,11 @@ export default function Profile() {
 			setFormClient({
 				name: client.name,
 				phone: normalizePhoneToShow(client.phone),
+				docType: client.doctype,
+				document: normalizeDocument(client.doctype, client.document),
 				email: client.email,
 				website: client.website,
-				zipCode: client.zipCode,
+				zipCode: normalizeCEP(client.zipCode),
 				city: client.city,
 				state: client.state,
 				street: client.street,
@@ -52,6 +65,8 @@ export default function Profile() {
 		if (
 			!formClient.name ||
 			!formClient.phone ||
+			!formClient.docType ||
+			!formClient.document ||
 			!formClient.zipCode ||
 			!formClient.city ||
 			!formClient.state ||
@@ -74,22 +89,59 @@ export default function Profile() {
 			setLoading(false);
 			return null;
 		}
-		await API.graphql(
-			graphqlOperation(updateClient, {
-				input: {
-					id: client.id,
-					name: formClient.name,
-					phone: `+55${formClient.phone.replace(/[^\d]/g, '')}`,
-					website: formClient.website,
-					zipCode: formClient.zipCode,
-					city: formClient.city,
-					state: formClient.state,
-					street: formClient.street,
-					number: formClient.number,
-					complement: formClient.complement,
-				},
-			})
-		);
+		// await API.graphql(
+		// 	graphqlOperation(updateClient, {
+		// 		input: {
+		// 			id: client.id,
+		// 			name: formClient.name,
+		// 			phone: `+55${formClient.phone.replace(/[^\d]/g, '')}`,
+		// 			doctype: formClient.docType,
+		// 			document: formClient.document.replace(/[^\d]/g, ''),
+		// 			website: formClient.website,
+		// 			zipCode: formClient.zipCode.replace(/[^\d]/g, ''),
+		// 			city: formClient.city,
+		// 			state: formClient.state,
+		// 			street: formClient.street,
+		// 			number: formClient.number,
+		// 			complement: formClient.complement,
+		// 		},
+		// 	})
+		// );
+		const clientExists = await axios.get(`https://api.mercadopago.com/v1/customers/search?email=${client.email}`, {
+			headers: {  uthorization: `Bearer ${process.env.REACT_APP_MERCADOPAGO_ACCESS_TOKEN}` },
+		});
+		console.log(clientExists);
+
+		const customerName = formClient.name.split(' ');
+		console.log(formClient.phone)
+		const customerPhone = formClient.phone.slice(1).split(') ');
+		const firstName = customerName[0];
+		customerName.shift()
+		const customers = {
+			email: client.email,
+			first_name: firstName,
+			last_name: customerName.join(' '),
+			phone: {
+				area_code: customerPhone[0],
+				number: customerPhone[1].replace(/[^\d]/g, ''),
+			},
+			identification: {
+				type: formClient.docType,
+				number: formClient.document.replace(/[^\d]/g, ''),
+			},
+			address: {
+				zip_code:formClient.zipCode.replace(/[^\d]/g, ''),
+				street_name: formClient.street,
+				street_number: formClient.number,
+			},
+			description: formClient.name,
+		};
+		console.log(customers)
+		const createClient = await axios.post('https://api.mercadopago.com/v1/customers', customers, {
+			headers: { Authorization: `Bearer ${process.env.REACT_APP_MERCADOPAGO_ACCESS_TOKEN}` },
+		});
+		console.log(createClient)
+
 		if (clientLogo) {
 			await Storage.put(`logo/${client.id}.${clientLogo.name.split('.').pop()}`, clientLogo, {
 				contentType: clientLogo.type,
@@ -172,6 +224,21 @@ export default function Profile() {
 		return null;
 	}
 
+	function handleChangeDocument(value) {
+		setFormClient({ ...formClient, document: normalizeDocument(formClient.docType, value) });
+	}
+
+	async function handleDocTypes() {
+		const types = await axios.get('https://api.mercadopago.com/v1/identification_types', {
+			headers: { Authorization: `Bearer ${process.env.REACT_APP_MERCADOPAGO_ACCESS_TOKEN}` },
+		});
+		setDocTypes(types.data);
+	}
+
+	useEffect(() => {
+		handleDocTypes();
+	}, []);
+
 	return (
 		<>
 			{loading && <Loading />}
@@ -179,7 +246,7 @@ export default function Profile() {
 			<Title text="Cadastro" />
 			<form>
 				<div className="flex flex-wrap">
-					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
+					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
 							value={formClient.name || ''}
 							onChange={(e) => setFormClient({ ...formClient, name: e.target.value })}
@@ -188,12 +255,38 @@ export default function Profile() {
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full md:w-6/12 mb-4">
+					<div className="w-full md:w-3/12 sm:pr-4 mb-4">
 						<input
 							value={formClient.phone || ''}
 							onChange={(e) => handleChangePhone(e.target.value)}
 							type="text"
 							placeholder="Telefone"
+							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						/>
+					</div>
+					<div className="w-full md:w-2/12 sm:pr-4 mb-4">
+						<select
+							value={formClient.docType || ''}
+							onChange={(e) => setFormClient({ ...formClient, docType: e.target.value, document: '' })}
+							placeholder="Tipo de Documento"
+							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						>
+							<option value="">Selecione</option>
+							{docTypes.length > 0 &&
+								docTypes.map((docType) => (
+									<option key={docType.id} value={docType.id}>
+										{docType.name}
+									</option>
+								))}
+						</select>
+					</div>
+					<div className="w-full md:w-3/12 mb-4">
+						<input
+							value={formClient.document || ''}
+							onChange={(e) => handleChangeDocument(e.target.value)}
+							type="text"
+							placeholder={formClient.docType || 'Selecione o tipo de Documento'}
+							disabled={!formClient.docType}
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>

@@ -13,6 +13,8 @@ export const getOwner = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -86,6 +88,8 @@ export const listOwners = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -117,6 +121,8 @@ export const getClient = /* GraphQL */ `
       id
       name
       phone
+      doctype
+      document
       email
       website
       zipCode
@@ -137,6 +143,8 @@ export const getClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -179,6 +187,8 @@ export const getClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -234,6 +244,8 @@ export const listClients = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -308,6 +320,8 @@ export const clientsByEmail = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -382,6 +396,8 @@ export const clientsByState = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -463,6 +479,8 @@ export const getEvent = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -678,6 +696,8 @@ export const listEvents = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -798,6 +818,8 @@ export const eventsByState = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -918,6 +940,8 @@ export const eventsByClientID = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1038,6 +1062,8 @@ export const eventsByPartnerID = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1157,6 +1183,8 @@ export const getPartner = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1410,6 +1438,8 @@ export const getSurvey = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1530,6 +1560,8 @@ export const listSurveys = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1620,6 +1652,8 @@ export const surveysByQuestion = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1710,6 +1744,8 @@ export const surveysByEventID = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1798,6 +1834,8 @@ export const getVisitor = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1929,6 +1967,8 @@ export const listVisitors = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -2032,6 +2072,8 @@ export const visitorsByEventDayAndEventID = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -2135,6 +2177,8 @@ export const visitorsByPhoneAndEventID = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -2238,6 +2282,8 @@ export const visitorsByConfirmationAndEventID = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -2339,6 +2385,8 @@ export const visitorsByEventID = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode

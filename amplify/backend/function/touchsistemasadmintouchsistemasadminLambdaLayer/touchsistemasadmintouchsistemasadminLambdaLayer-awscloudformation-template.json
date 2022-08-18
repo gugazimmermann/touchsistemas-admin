@@ -20,60 +20,7 @@
     }
   },
   "Resources": {
-    "LambdaLayerVersionf1330e3c": {
-      "Type": "AWS::Lambda::LayerVersion",
-      "Properties": {
-        "CompatibleRuntimes": {
-          "Ref": "runtimes"
-        },
-        "Content": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
-        },
-        "Description": {
-          "Ref": "description"
-        },
-        "LayerName": {
-          "Fn::Sub": [
-            "touchsistemasadmintouchsistemasadminLambdaLayer-${env}",
-            {
-              "env": {
-                "Ref": "env"
-              }
-            }
-          ]
-        }
-      },
-      "DeletionPolicy": "Delete",
-      "UpdateReplacePolicy": "Retain"
-    },
-    "LambdaLayerPermissionAwsAccounts494458123866f1330e3c": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": {
-          "Ref": "LambdaLayerVersionf1330e3c"
-        },
-        "Principal": "494458123866"
-      }
-    },
-    "LambdaLayerPermissionPrivatef1330e3c": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": {
-          "Ref": "LambdaLayerVersionf1330e3c"
-        },
-        "Principal": {
-          "Ref": "AWS::AccountId"
-        }
-      }
-    },
-    "LambdaLayerVersion32e33c5f": {
+    "LambdaLayerVersion86ba9932": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": [
@@ -83,9 +30,9 @@
           "S3Bucket": {
             "Ref": "deploymentBucketName"
           },
-          "S3Key": "amplify-builds/touchsistemasadmintouchsistemasadminLambdaLayer-LambdaLayerVersion32e33c5f-build.zip"
+          "S3Key": "amplify-builds/touchsistemasadmintouchsistemasadminLambdaLayer-LambdaLayerVersion86ba9932-build.zip"
         },
-        "Description": "Updated layer version 2022-08-18T12:10:32.103Z",
+        "Description": "Updated layer version 2022-08-18T19:56:01.590Z",
         "LayerName": {
           "Fn::Sub": [
             "touchsistemasadmintouchsistemasadminLambdaLayer-${env}",
@@ -100,64 +47,19 @@
       "DeletionPolicy": "Delete",
       "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionAwsAccounts49445812386632e33c5f": {
+    "LambdaLayerPermissionAwsAccounts49445812386686ba9932": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:6",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:8",
         "Principal": "494458123866"
       }
     },
-    "LambdaLayerPermissionPrivate32e33c5f": {
+    "LambdaLayerPermissionPrivate86ba9932": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:6",
-        "Principal": {
-          "Ref": "AWS::AccountId"
-        }
-      }
-    },
-    "LambdaLayerVersion73521306": {
-      "Type": "AWS::Lambda::LayerVersion",
-      "Properties": {
-        "CompatibleRuntimes": [
-          "nodejs14.x"
-        ],
-        "Content": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": "amplify-builds/touchsistemasadmintouchsistemasadminLambdaLayer-LambdaLayerVersion73521306-build.zip"
-        },
-        "Description": "Updated layer version 2022-08-17T17:20:09.355Z",
-        "LayerName": {
-          "Fn::Sub": [
-            "touchsistemasadmintouchsistemasadminLambdaLayer-${env}",
-            {
-              "env": {
-                "Ref": "env"
-              }
-            }
-          ]
-        }
-      },
-      "DeletionPolicy": "Delete",
-      "UpdateReplacePolicy": "Retain"
-    },
-    "LambdaLayerPermissionAwsAccounts49445812386673521306": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:5",
-        "Principal": "494458123866"
-      }
-    },
-    "LambdaLayerPermissionPrivate73521306": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:5",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:8",
         "Principal": {
           "Ref": "AWS::AccountId"
         }
@@ -170,12 +72,22 @@
         "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:3",
         "Principal": "494458123866"
       }
+    },
+    "LambdaLayerPermissionPrivateLegacy3": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:3",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
     }
   },
   "Outputs": {
     "Arn": {
       "Value": {
-        "Ref": "LambdaLayerVersionf1330e3c"
+        "Ref": "LambdaLayerVersion86ba9932"
       }
     }
   }

@@ -48,6 +48,8 @@ export declare class Client {
   readonly id: string;
   readonly name?: string | null;
   readonly phone?: string | null;
+  readonly doctype?: string | null;
+  readonly document?: string | null;
   readonly email: string;
   readonly website?: string | null;
   readonly zipCode?: string | null;

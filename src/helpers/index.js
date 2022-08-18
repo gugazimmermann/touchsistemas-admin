@@ -62,6 +62,30 @@ export function normalizePhoneToShow(phone) {
 	return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 7)}-${currentValue.slice(7, 11)}`;
 }
 
+function normalizeCPF(value) {
+	const cvLength = value.length;
+	if (cvLength < 3) return value;
+	if (cvLength < 6) return `${value.slice(0, 3)}.${value.slice(3)}`;
+	if (cvLength < 9) return `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)}`;
+	return `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9, 11)}`;
+}
+
+function normalizeCNPJ(value) {
+	const cvLength = value.length;
+	if (cvLength < 3) return value;
+	if (cvLength < 5) return `${value.slice(0, 2)}.${value.slice(2)}`;
+	if (cvLength < 8) return `${value.slice(0, 2)}.${value.slice(2, 5)}.${value.slice(5)}`;
+	if (cvLength < 12) return `${value.slice(0, 2)}.${value.slice(2, 5)}.${value.slice(5, 8)}/${value.slice(8, 12)}`;
+	return `${value.slice(0, 2)}.${value.slice(2, 5)}.${value.slice(5, 8)}/${value.slice(8, 12)}-${value.slice(12, 14)}`;
+}
+
+export function normalizeDocument(type, document) {
+	if (!type || !document) return document;
+	const currentValue = document.replace(/[^\d]/g, '');
+	const doc = type === 'CPF' ? normalizeCPF(currentValue) : normalizeCNPJ(currentValue)
+	return doc
+}
+
 export function orderEventsByLastDay(events, sort = 'DESC') {
 	const eventsWithLastDay = events.map((i) => ({
 		...i,

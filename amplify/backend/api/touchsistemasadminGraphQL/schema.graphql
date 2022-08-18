@@ -11,6 +11,8 @@ type Client @model @auth(rules: [{ allow: public }]) {
 	id: ID!
 	name: String
 	phone: AWSPhone
+	doctype: String
+	document: String
 	email: AWSEmail! @index(name: "byEmail", queryField: "clientsByEmail")
 	website: AWSURL
 	zipCode: String

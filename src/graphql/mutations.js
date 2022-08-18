@@ -16,6 +16,8 @@ export const createOwner = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -87,6 +89,8 @@ export const updateOwner = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -158,6 +162,8 @@ export const deleteOwner = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -223,6 +229,8 @@ export const createClient = /* GraphQL */ `
       id
       name
       phone
+      doctype
+      document
       email
       website
       zipCode
@@ -243,6 +251,8 @@ export const createClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -285,6 +295,8 @@ export const createClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -338,6 +350,8 @@ export const updateClient = /* GraphQL */ `
       id
       name
       phone
+      doctype
+      document
       email
       website
       zipCode
@@ -358,6 +372,8 @@ export const updateClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -400,6 +416,8 @@ export const updateClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -453,6 +471,8 @@ export const deleteClient = /* GraphQL */ `
       id
       name
       phone
+      doctype
+      document
       email
       website
       zipCode
@@ -473,6 +493,8 @@ export const deleteClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -515,6 +537,8 @@ export const deleteClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -588,6 +612,8 @@ export const createEvent = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -801,6 +827,8 @@ export const updateEvent = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -1014,6 +1042,8 @@ export const deleteEvent = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -1239,6 +1269,8 @@ export const createPartner = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1325,6 +1357,8 @@ export const updatePartner = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1411,6 +1445,8 @@ export const deletePartner = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1492,6 +1528,8 @@ export const createSurvey = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1610,6 +1648,8 @@ export const updateSurvey = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1728,6 +1768,8 @@ export const deleteSurvey = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1857,6 +1899,8 @@ export const createVisitor = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1986,6 +2030,8 @@ export const updateVisitor = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -2115,6 +2161,8 @@ export const deleteVisitor = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode

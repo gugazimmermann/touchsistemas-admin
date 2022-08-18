@@ -13,6 +13,8 @@ export const onCreateOwner = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -81,6 +83,8 @@ export const onUpdateOwner = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -149,6 +153,8 @@ export const onDeleteOwner = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -211,6 +217,8 @@ export const onCreateClient = /* GraphQL */ `
       id
       name
       phone
+      doctype
+      document
       email
       website
       zipCode
@@ -231,6 +239,8 @@ export const onCreateClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -273,6 +283,8 @@ export const onCreateClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -323,6 +335,8 @@ export const onUpdateClient = /* GraphQL */ `
       id
       name
       phone
+      doctype
+      document
       email
       website
       zipCode
@@ -343,6 +357,8 @@ export const onUpdateClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -385,6 +401,8 @@ export const onUpdateClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -435,6 +453,8 @@ export const onDeleteClient = /* GraphQL */ `
       id
       name
       phone
+      doctype
+      document
       email
       website
       zipCode
@@ -455,6 +475,8 @@ export const onDeleteClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -497,6 +519,8 @@ export const onDeleteClient = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -567,6 +591,8 @@ export const onCreateEvent = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -777,6 +803,8 @@ export const onUpdateEvent = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -987,6 +1015,8 @@ export const onDeleteEvent = /* GraphQL */ `
         id
         name
         phone
+        doctype
+        document
         email
         website
         zipCode
@@ -1209,6 +1239,8 @@ export const onCreatePartner = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1292,6 +1324,8 @@ export const onUpdatePartner = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1375,6 +1409,8 @@ export const onDeletePartner = /* GraphQL */ `
             id
             name
             phone
+            doctype
+            document
             email
             website
             zipCode
@@ -1453,6 +1489,8 @@ export const onCreateSurvey = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1568,6 +1606,8 @@ export const onUpdateSurvey = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1683,6 +1723,8 @@ export const onDeleteSurvey = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1809,6 +1851,8 @@ export const onCreateVisitor = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -1935,6 +1979,8 @@ export const onUpdateVisitor = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode
@@ -2061,6 +2107,8 @@ export const onDeleteVisitor = /* GraphQL */ `
           id
           name
           phone
+          doctype
+          document
           email
           website
           zipCode

@@ -126,6 +126,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "doctype": {
+                    "name": "doctype",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "document": {
+                    "name": "document",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "email": {
                     "name": "email",
                     "isArray": false,
@@ -1000,6 +1014,17 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
+                        "name": "byPhoneAndEventID",
+                        "queryField": "visitorsByPhoneAndEventID",
+                        "fields": [
+                            "phone",
+                            "EventID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
                         "name": "byConfirmationAndEventID",
                         "queryField": "visitorsByConfirmationAndEventID",
                         "fields": [
@@ -1047,5 +1072,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "e2ee7f452c9cf390012a6bfd26267f4f"
+    "version": "7487846437aba6f9c0ddcec011b45210"
 };

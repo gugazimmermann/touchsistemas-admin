@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "aws-amplify": "^4.3.28",
+    "axios": "^0.27.2",
     "boxicons": "^2.1.2",
     "google-map-react": "^2.2.0",
     "moment": "^2.29.4",

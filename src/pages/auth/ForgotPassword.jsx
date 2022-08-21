@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+import { AppContext } from '../../context';
+import { languages } from '../../constants';
 import ForgotPasswordImage from '../../icons/ForgotPassword.svg';
 import LogoAuth from '../../components/LogoAuth';
 import Loading from '../../components/Loading';
 import Alert from './components/Alert';
+import Language from '../../components/Language';
+import ROUTES from '../../routes/constants';
 
 export default function ForgotPassword() {
 	const navigate = useNavigate();
+	const { state } = useContext(AppContext);
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState('');
@@ -27,10 +32,11 @@ export default function ForgotPassword() {
 	const disabled = () => email === '';
 
 	return (
-		<section className="h-screen container mx-auto bg-white">
+		<section className="h-screen mx-auto bg-white">
 			{loading && <Loading />}
-			<div className="container h-full">
-				<div className="h-full flex flex-col-reverse md:flex-row items-center justify-around">
+			<div className="container h-full fixed">
+				{Language()}
+				<div className="h-full flex flex-col-reverse md:flex-row items-center justify-evenly">
 					<div className="w-10/12 md:w-6/12 lg:w-4/12 md:mb-0">
 						<img src={ForgotPasswordImage} alt="Forgot Password" className="w-full" />
 					</div>
@@ -44,7 +50,7 @@ export default function ForgotPassword() {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-									placeholder="Email"
+									placeholder={languages[state.lang].email}
 								/>
 							</div>
 							<button
@@ -57,11 +63,11 @@ export default function ForgotPassword() {
 										: 'bg-primary cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg'
 								} inline-block px-2 py-2 text-white font-medium uppercase rounded shadow-md transition duration-150 ease-in-out w-full`}
 							>
-								Enviar Código
+								{languages[state.lang].sendCode}
 							</button>
 							<div className="w-full text-center mt-6">
-								<Link to="/" className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out">
-									Voltar para Entrar
+								<Link to={ROUTES[state.lang].HOME} className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out">
+									{languages[state.lang].backToSignIn}
 								</Link>
 							</div>
 						</form>

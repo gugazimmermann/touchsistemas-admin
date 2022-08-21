@@ -97,3 +97,12 @@ export function orderEventsByLastDay(events, sort = 'DESC') {
 			: eventsWithLastDay.sort((a, b) => moment(b.lastDay) - moment(a.lastDay));
 	return orderEvents;
 }
+
+// TODO: handle better the plans
+export function translatePlan(plan) {
+	return plan === 'BASIC' ? 'Básico' : plan === 'ADVANCED' ? 'Avançado' : 'Assinatura'
+}
+
+export function translatePlanUrl(plan) {
+	return plan === 'BASIC' ? 'basico' : plan === 'ADVANCED' ? 'avancado' : 'assinatura'
+}

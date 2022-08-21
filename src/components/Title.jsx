@@ -1,3 +1,3 @@
-export default function Title({ text }) {
-	return <h2 className="text-primary text-xl pb-4">{text}</h2>;
+export default function Title({ text, color }) {
+	return <h2 className={`${!color ? 'text-primary' : color} font-bold text-xl mb-2`}>{text}</h2>;
 }

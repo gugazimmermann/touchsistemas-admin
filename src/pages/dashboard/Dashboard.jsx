@@ -6,7 +6,7 @@ export default function Dashboard() {
 	const [client] = useOutletContext();
 
 	const profileLink = () => (
-		<Link className="pl-2" to="/cadastro">
+		<Link className="pl-2" to="/perfil">
 			Clique Aqui!
 		</Link>
 	);

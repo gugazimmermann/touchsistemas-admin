@@ -1,13 +1,14 @@
 export default function Alert({ type, children }) {
 	const seeType = (t) => {
-		if (t === 'danger') return 'bg-red-100 text-red-700';
-		if (t === 'warning') return 'bg-yellow-100 text-yellow-700';
-		if (t === 'info') return 'bg-blue-100 text-blue-700';
-		if (t === 'success') return 'bg-green-100 text-green-700';
-		return 'bg-yellow-100 text-yellow-700';
+		if (t === 'danger') return 'bg-red-100 border border-red-300 text-red-500';
+		if (t === 'warning') return 'bg-amber-100 border border-amber-300 text-amber-500';
+		if (t === 'info') return 'bg-sky-100 border border-sky-300 text-sky-500';
+		if (t === 'success') return 'bg-emerald-100 border border-emerald-300 text-emerald-500';
+		return 'bg-amber-100 text-amber-700';
 	};
 	return (
-		<div className={`${seeType(type)} mx-4 my-4 rounded-lg py-5 px-6 text-base`} role="alert">
+		<div className={`${seeType(type)} mb-2 rounded-lg py-3 px-4 flex items-center shadow font-bold`} role="alert">
+			<i className='bx bxs-error-circle text-2xl pr-2' />
 			{children}
 		</div>
 	);

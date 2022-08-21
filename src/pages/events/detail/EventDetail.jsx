@@ -7,6 +7,7 @@ import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../../graphql/queries';
 import { Loading, Alert, LoadingIcon } from '../../../components';
+import { translatePlan } from '../../../helpers';
 
 export default function EventDetail() {
 	const params = useParams();
@@ -305,6 +306,39 @@ export default function EventDetail() {
 		);
 	}
 
+	function renderMethodRow() {
+		return (
+			<div className="p-2 border-b sm:grid sm:grid-cols-12">
+				<dt className="text-sm font-medium sm:col-span-2">Método:</dt>
+				<dl className="text-sm sm:mt-0 sm:col-span-4 font-bold">{event.method}</dl>
+				{!event.eventOver && (
+				<dl className="text-sm sm:mt-0 sm:col-span-6 text-right">
+					<button type="button" className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg">
+						Alterar
+					</button>
+				</dl>
+				)}
+			</div>
+		);
+	}
+
+	function renderSurveyRow() {
+		const surveyQuestions = event.Surveys.items.length;
+		return (
+			<div className="p-2 border-b sm:grid sm:grid-cols-12">
+				<dt className="text-sm font-medium sm:col-span-2">Pesquisa:</dt>
+				<dl className="text-sm sm:mt-0 sm:col-span-4 font-bold">{!surveyQuestions ? 'Não Cadastrada' : `${surveyQuestions} perguntas`}</dl>
+				{!event.eventOver && (
+					<dl className="text-sm sm:mt-0 sm:col-span-6 text-right">
+						<button type="button" className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg">
+							Adicionar
+						</button>
+					</dl>
+				)}
+			</div>
+		);
+	}
+
 	return (
 		<>
 			{loading && <Loading />}
@@ -350,39 +384,41 @@ export default function EventDetail() {
 						</div>
 					</div>
 					<div className="shadow-md rounded-lg flex flex-row">
-						<dl className='flex-1'>
+						<dl className="flex-1">
+							{renderMethodRow()}
+							{renderSurveyRow()}
 							{event.website && (
-								<div className="p-4 border-b sm:grid sm:grid-cols-12">
+								<div className="p-2 border-b sm:grid sm:grid-cols-12">
 									<dt className="text-sm font-medium sm:col-span-2">WebSite</dt>
-									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.website}</dd>
+									<dd className="text-sm sm:col-span-10">{event.website}</dd>
 								</div>
 							)}
 							{event.email && (
-								<div className="p-4 border-b sm:grid sm:grid-cols-12">
+								<div className="p-2 border-b sm:grid sm:grid-cols-12">
 									<dt className="text-sm font-medium sm:col-span-2">Email</dt>
-									<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.email}</dd>
+									<dd className="text-sm sm:col-span-10">{event.email}</dd>
 								</div>
 							)}
-							<div className="p-4 border-b sm:grid sm:grid-cols-12">
+							<div className="p-2 border-b sm:grid sm:grid-cols-12">
 								<dt className="text-sm font-medium sm:col-span-2">Endereço</dt>
-								<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{formatAddress(event)}</dd>
+								<dd className="text-sm sm:col-span-10">{formatAddress(event)}</dd>
 							</div>
-							<div className="p-4 border-b sm:grid sm:grid-cols-12">
+							<div className="p-2 border-b sm:grid sm:grid-cols-12">
 								<dt className="text-sm font-medium sm:col-span-2">Plano</dt>
-								<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{event.plan}</dd>
+								<dd className="text-sm sm:col-span-10">{translatePlan(event.plan)}</dd>
 								{event.partner && (
 									<>
-										<dt className="text-sm font-medium sm:col-span-2">Parceiro</dt>
-										<dd className="mt-1 text-sm sm:mt-0 sm:col-span-10">{`${event.partner.name} | ${event.partner.referralCode}`}</dd>
+										<dt className="mt-2 text-sm font-medium sm:col-span-2">Parceiro</dt>
+										<dd className="mt-2 text-sm sm:col-span-10">{`${event.partner.name} | ${event.partner.referralCode}`}</dd>
 									</>
 								)}
 							</div>
 						</dl>
 						{map && (
 							<div className="px-4 py-4 flex-1 justify-center">
-									<a href={map} target="_blank" rel="noreferrer">
-										<img alt="map" src={map} className="rounded-lg" />
-									</a>
+								<a href={map} target="_blank" rel="noreferrer">
+									<img alt="map" src={map} className="rounded-lg" />
+								</a>
 							</div>
 						)}
 					</div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createOwner, updateOwner, deleteOwner } from '../../graphql/mutations';
 import { normalizePhone, validateEmail } from '../../helpers';
-import { ConfirmationDialog } from '../../components';
+import { Title, ConfirmationDialog } from '../../components';
 
 const initial = { name: '', phone: '', email: '' };
 
@@ -98,7 +98,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	function renderForm() {
 		return (
-			<form className="flex flex-wrap mb-4">
+			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow">
 				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
 						value={!update ? owner?.name : selected?.name}
@@ -154,38 +154,38 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 	function renderTable() {
 		return (
 			<div className="overflow-x-auto">
-				<table className="items-center w-full bg-white shadow border-collapse mb-4">
+				<table className="items-center w-full rounded-md bg-white shadow border-collapse mb-4">
 					<thead>
 						<tr>
-							<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
+							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
 								Nome do Responsável
 							</th>
-							<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
+							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
 								Telefone
 							</th>
-							<th className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
+							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
 								Email
 							</th>
 							<th
 								colSpan={2}
-								className="px-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left"
+								className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left"
 							/>
 						</tr>
 					</thead>
 					<tbody>
 						{ownersList.map((o) => (
 							<tr key={o.email}>
-								<td className="border-b text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
+								<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 pl-2 text-left">
 									{o.name}
 								</td>
-								<td className="border-b text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
+								<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
 									{o.phone.slice(4)}
 								</td>
-								<td className="border-b text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
+								<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
 									{o.email}
 								</td>
 								<td
-									className="border-b border-gray-200 align-middle py-2 text-right cursor-pointer"
+									className="border-t border-gray-200 align-middle py-2 text-right cursor-pointer"
 									onClick={() => {
 										setSelected(o);
 										setUpdate(!update);
@@ -198,7 +198,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 									)}
 								</td>
 								<td
-									className="border-b border-gray-200 align-middle py-2 text-right cursor-pointer"
+									className="border-t border-gray-200 align-middle py-2 pr-2 text-right cursor-pointer"
 									onClick={() => {
 										setSelected(o);
 										setConfirmDelete(true);
@@ -230,9 +230,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	return (
 		<>
-			<h3 className={`text-primary text-xl py-4 ${!update ? 'text-primary' : 'text-warning'}`}>
-				{!update ? 'Adicionar' : 'Atualizar'} Responsável
-			</h3>
+			<Title text={`${!update ? 'Adicionar' : 'Atualizar'} Responsável`} color={update && 'text-warning'} />
 			{renderForm()}
 			{ownersList.length > 0 && renderTable()}
 			{renderDeleteDialog()}

@@ -1,10 +1,13 @@
+import { useEffect, useRef, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
 import { Storage } from 'aws-amplify';
-import LogoIcon from '../../../icons/LogoIcon';
-import AvatarIcon from '../../../icons/AvatarIcon';
+import { AppContext } from '../../context';
+import LogoIcon from '../../icons/LogoIcon';
+import AvatarIcon from '../../icons/AvatarIcon';
+import ROUTES from '../../routes/constants';
 
 export default function Nav({ client, signout }) {
+	const { state } = useContext(AppContext);
 	const avatarMenuRef = useRef(null);
 	const [isMenuOpen, setMenuOpen] = useState(false);
 	const [isAvatarOpen, setAvatarOpen] = useState(false);
@@ -27,15 +30,13 @@ export default function Nav({ client, signout }) {
 			if (isAvatarOpen && avatarMenuRef.current && !avatarMenuRef.current.contains(e.target)) setAvatarOpen(false);
 		};
 		document.addEventListener('mousedown', checkIfClickedOutside);
-		return () => {
-			document.removeEventListener('mousedown', checkIfClickedOutside);
-		};
+		return () => document.removeEventListener('mousedown', checkIfClickedOutside);
 	}, [isAvatarOpen, setAvatarOpen]);
 
 	return (
-		<nav className="flex flex-wrap items-center justify-between">
+		<nav className="flex flex-wrap items-center justify-between bg-white">
 			<div className="container-fluid w-full flex flex-wrap items-center justify-between px-6 py-2 shadow-md z-10">
-				<Link to="/dashboard" className="flex flex-row items-center text-primary ">
+				<Link to={ROUTES[state.lang].DASHBOARD} className="flex flex-row items-center text-primary ">
 					<LogoIcon styles="h-8 w-8" />
 					<p className="text-2xl">{process.env.REACT_APP_TITLE}</p>
 				</Link>
@@ -54,10 +55,10 @@ export default function Nav({ client, signout }) {
 				<div className={`${isMenuOpen ? 'flex pb-4' : 'hidden'} w-full md:w-auto flex-col md:flex md:flex-row `}>
 					<ul className="md:flex flex-row list-style-none pr-2 ">
 						<li className="p-2 text-center md:text-base">
-							<Link to="/dashboard">Dashboard</Link>
+							<Link to={ROUTES[state.lang].DASHBOARD}>Dashboard</Link>
 						</li>
 						<li className="p-2 text-center md:text-base">
-							<Link to="/eventos/novo">Novo Evento</Link>
+							<Link to={ROUTES[state.lang].NEW}>Cadastrar</Link>
 						</li>
 					</ul>
 
@@ -92,10 +93,10 @@ export default function Nav({ client, signout }) {
 								} list-style-none w-48 -right-4 top-9 border bg-white`}
 							>
 								<li className="p-2 text-center">
-									<Link to="/cadastro">Meu Cadastro</Link>
+									<Link to={ROUTES[state.lang].PROFILE}>Meu Cadastro</Link>
 								</li>
 								<li className="p-2 text-center">
-									<Link to="/cadastro/pagamentos">Financeiro</Link>
+									<Link to={ROUTES[state.lang].PAYMENTS}>Financeiro</Link>
 								</li>
 								<li className="p-2 text-center">
 									<button type="button" onClick={() => signout()}>

@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
+import { AppProvider } from './context';
 import App from './App';
 import './index.css';
 
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<BrowserRouter>
 		<CookiesProvider>
-			<App />
+			<AppProvider>
+				<App />
+			</AppProvider>
 		</CookiesProvider>
 	</BrowserRouter>
 );

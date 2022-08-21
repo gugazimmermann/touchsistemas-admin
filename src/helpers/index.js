@@ -82,8 +82,8 @@ function normalizeCNPJ(value) {
 export function normalizeDocument(type, document) {
 	if (!type || !document) return document;
 	const currentValue = document.replace(/[^\d]/g, '');
-	const doc = type === 'CPF' ? normalizeCPF(currentValue) : normalizeCNPJ(currentValue)
-	return doc
+	const doc = type === 'CPF' ? normalizeCPF(currentValue) : normalizeCNPJ(currentValue);
+	return doc;
 }
 
 export function orderEventsByLastDay(events, sort = 'DESC') {
@@ -100,9 +100,9 @@ export function orderEventsByLastDay(events, sort = 'DESC') {
 
 // TODO: handle better the plans
 export function translatePlan(plan) {
-	return plan === 'BASIC' ? 'Básico' : plan === 'ADVANCED' ? 'Avançado' : 'Assinatura'
+	return plan === 'BASIC' ? 'Básico' : plan === 'ADVANCED' ? 'Avançado' : 'Assinatura';
 }
 
 export function translatePlanUrl(plan) {
-	return plan === 'BASIC' ? 'basico' : plan === 'ADVANCED' ? 'avancado' : 'assinatura'
+	return plan === 'BASIC' ? 'basico' : plan === 'ADVANCED' ? 'avancado' : 'assinatura';
 }

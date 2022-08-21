@@ -312,11 +312,11 @@ export default function EventDetail() {
 				<dt className="text-sm font-medium sm:col-span-2">Método:</dt>
 				<dl className="text-sm sm:mt-0 sm:col-span-4 font-bold">{event.method}</dl>
 				{!event.eventOver && (
-				<dl className="text-sm sm:mt-0 sm:col-span-6 text-right">
-					<button type="button" className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg">
-						Alterar
-					</button>
-				</dl>
+					<dl className="text-sm sm:mt-0 sm:col-span-6 text-right">
+						<button type="button" className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg">
+							Alterar
+						</button>
+					</dl>
 				)}
 			</div>
 		);
@@ -327,7 +327,9 @@ export default function EventDetail() {
 		return (
 			<div className="p-2 border-b sm:grid sm:grid-cols-12">
 				<dt className="text-sm font-medium sm:col-span-2">Pesquisa:</dt>
-				<dl className="text-sm sm:mt-0 sm:col-span-4 font-bold">{!surveyQuestions ? 'Não Cadastrada' : `${surveyQuestions} perguntas`}</dl>
+				<dl className="text-sm sm:mt-0 sm:col-span-4 font-bold">
+					{!surveyQuestions ? 'Não Cadastrada' : `${surveyQuestions} perguntas`}
+				</dl>
 				{!event.eventOver && (
 					<dl className="text-sm sm:mt-0 sm:col-span-6 text-right">
 						<button type="button" className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg">

@@ -3,13 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { createClient } from '../../graphql/mutations';
 import { AppContext } from '../../context';
-import { languages } from '../../constants';
-import SignUpImage from '../../icons/SignUp.svg';
-import LogoAuth from '../../components/LogoAuth';
-import Loading from '../../components/Loading';
+import { LANGUAGES, ROUTES } from '../../constants';
+import { Language, LogoAuth, Loading } from '../../components';
 import Alert from './components/Alert';
-import Language from '../../components/Language';
-import ROUTES from '../../routes/constants';
+import SignUpImage from '../../icons/SignUp.svg';
 
 export default function SignUp() {
 	const navigate = useNavigate();
@@ -61,7 +58,7 @@ export default function SignUp() {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-									placeholder={languages[state.lang].email}
+									placeholder={LANGUAGES[state.lang].email}
 								/>
 							</div>
 							<div className="mb-4">
@@ -70,7 +67,7 @@ export default function SignUp() {
 									value={pwd}
 									onChange={(e) => setPwd(e.target.value)}
 									className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-									placeholder={languages[state.lang].password}
+									placeholder={LANGUAGES[state.lang].password}
 								/>
 							</div>
 							<div className="mb-4">
@@ -79,7 +76,7 @@ export default function SignUp() {
 									value={repeat}
 									onChange={(e) => setRepeat(e.target.value)}
 									className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-									placeholder={languages[state.lang].repeatPassword}
+									placeholder={LANGUAGES[state.lang].repeatPassword}
 								/>
 							</div>
 							<button
@@ -92,11 +89,14 @@ export default function SignUp() {
 										: 'bg-primary cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg'
 								} inline-block px-2 py-2 text-white font-medium uppercase rounded shadow-md transition duration-150 ease-in-out w-full`}
 							>
-								{languages[state.lang].register}
+								{LANGUAGES[state.lang].register}
 							</button>
 							<div className="w-full text-center mt-6">
-								<Link to={ROUTES[state.lang].HOME} className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out">
-								{languages[state.lang].backToSignIn}
+								<Link
+									to={ROUTES[state.lang].HOME}
+									className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out"
+								>
+									{LANGUAGES[state.lang].backToSignIn}
 								</Link>
 							</div>
 						</form>

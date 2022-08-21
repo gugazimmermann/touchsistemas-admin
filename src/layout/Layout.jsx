@@ -3,11 +3,11 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../graphql/queries';
-import { AppContext } from '../context';
-import { Loading } from '../components';
 import { decodeCookie } from '../helpers/cookies';
+import { AppContext } from '../context';
+import { ROUTES } from '../constants';
+import { Loading } from '../components';
 import Nav from './nav/Nav';
-import ROUTES from '../routes/constants';
 
 export default function Layout() {
 	const navigate = useNavigate();
@@ -30,7 +30,9 @@ export default function Layout() {
 	async function loadClient() {
 		setLoading(true);
 		const clientID = decodeCookie(cookies?.touchsistemas)?.client;
-		const { data: { getClient } } = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
+		const {
+			data: { getClient },
+		} = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
 		setClient(getClient);
 		setLoading(false);
 	}

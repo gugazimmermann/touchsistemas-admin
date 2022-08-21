@@ -16,9 +16,9 @@ const initial = {
 	street: '',
 	number: '',
 	complement: '',
-  plan: '',
-  referralCode: '',
-  logo: ''
+	plan: '',
+	referralCode: '',
+	logo: '',
 };
 
 export default function SubscriptionsForm() {
@@ -106,7 +106,7 @@ export default function SubscriptionsForm() {
 					street: formSubscription.street,
 					number: formSubscription.number,
 					complement: formSubscription.complement,
-          referralCode: formSubscription.referralCode || null,
+					referralCode: formSubscription.referralCode || null,
 					plan: formSubscription.plan,
 					clientID: client.id,
 					partnerID,
@@ -302,9 +302,11 @@ export default function SubscriptionsForm() {
 							onChange={(e) => setFormSubscription({ ...formSubscription, plan: e.target.value })}
 							placeholder="Selecione o Plano *"
 							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-              disabled
+							disabled
 						>
-							<option value="SUBSCRIPTION" selected>Assinatura - R$ 250,00 / Mensal</option>
+							<option value="SUBSCRIPTION" selected>
+								Assinatura - R$ 250,00 / Mensal
+							</option>
 						</select>
 					</div>
 					<div className="w-full md:w-6/12 mb-4">

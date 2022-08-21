@@ -3,7 +3,8 @@ import AppReducer from './reducers';
 
 const initialState = { lang: 'br' };
 
-const getInitialStaste = () => localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : initialState
+const getInitialStaste = () =>
+	localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : initialState;
 
 const mainReducer = (state, action) => AppReducer(state, action);
 

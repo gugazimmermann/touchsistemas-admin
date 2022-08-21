@@ -1,10 +1,10 @@
 import { lazy, Suspense, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AppContext } from './context';
+import { ROUTES } from './constants';
+import { Loading } from './components';
 import PublicRoute from './routes/PublicRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
-import { Loading } from './components';
-import ROUTES from './routes/constants';
 
 const NotFound = lazy(() => import('./pages/not-found/NotFound'));
 const SignIn = lazy(() => import('./pages/auth/SignIn'));
@@ -24,6 +24,7 @@ function App() {
 	const { state } = useContext(AppContext);
 	// const language = window.navigator.userLanguage || window.navigator.language;
 	if (process.env.NODE_ENV === 'development') console.debug('Language:', state.lang);
+	console.debug(ROUTES);
 
 	return (
 		<Suspense fallback={<Loading />}>

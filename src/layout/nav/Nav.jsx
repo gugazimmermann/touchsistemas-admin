@@ -4,7 +4,7 @@ import { Storage } from 'aws-amplify';
 import { AppContext } from '../../context';
 import LogoIcon from '../../icons/LogoIcon';
 import AvatarIcon from '../../icons/AvatarIcon';
-import ROUTES from '../../routes/constants';
+import { ROUTES } from '../../constants';
 
 export default function Nav({ client, signout }) {
 	const { state } = useContext(AppContext);

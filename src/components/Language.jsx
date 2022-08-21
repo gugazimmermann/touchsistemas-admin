@@ -1,6 +1,6 @@
 import { useContext, useRef, useState, useEffect } from 'react';
 import { AppContext } from '../context';
-import { languages } from '../constants';
+import { LANGUAGES } from '../constants';
 import Arrow from '../icons/Arrow';
 import BR from '../icons/flags/br.svg';
 import EN from '../icons/flags/en.svg';
@@ -44,7 +44,7 @@ export default function Language() {
 				{showFlag(state.lang)}
 			</button>
 			<ul ref={langRef} className={`flex flex-col items-end pr-1 mt-2 ${!open && 'hidden'}`}>
-				{Object.keys(languages)
+				{Object.keys(LANGUAGES)
 					.filter((l) => l !== state.lang)
 					.map((l) => (
 						<li key={l}>

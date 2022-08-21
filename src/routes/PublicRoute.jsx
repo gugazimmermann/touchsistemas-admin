@@ -4,7 +4,7 @@ import { Auth } from 'aws-amplify';
 import { useCookies } from 'react-cookie';
 import { AppContext } from '../context';
 import { decodeCookie } from '../helpers/cookies';
-import ROUTES from './constants';
+import { ROUTES } from '../constants';
 
 export default function PublicRoute() {
 	const { state } = useContext(AppContext);
@@ -19,6 +19,7 @@ export default function PublicRoute() {
 		}
 	};
 
-	if (decodeCookie(cookies?.touchsistemas)?.client && seeUser()) return <Navigate to={ROUTES[state.lang].DASHBOARD} replace />;
+	if (decodeCookie(cookies?.touchsistemas)?.client && seeUser())
+		return <Navigate to={ROUTES[state.lang].DASHBOARD} replace />;
 	return <Outlet />;
 }

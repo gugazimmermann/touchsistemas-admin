@@ -4,7 +4,7 @@ import { Auth } from 'aws-amplify';
 import { useCookies } from 'react-cookie';
 import { AppContext } from '../context';
 import { decodeCookie } from '../helpers/cookies';
-import ROUTES from './constants';
+import { ROUTES } from '../constants';
 
 export default function ProtectedRoute() {
 	const { state } = useContext(AppContext);

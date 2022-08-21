@@ -1,25 +1,30 @@
-import br from "./languages/br"
-import en from "./languages/en"
-import es from "./languages/es"
+import { brLang, enLang, esLang } from './languages';
+import { brRoute, enRoute, esRoute } from './routes';
 
 export const SURVEY = {
 	SINGLE: 'SINGLE',
-	MULTIPLE: 'MULTIPLE'
-}
+	MULTIPLE: 'MULTIPLE',
+};
 
 export const METHOD = {
 	SMS: 'SMS',
-	EMAIL: 'EMAIL'
-}
+	EMAIL: 'EMAIL',
+};
 
 export const PLANS = {
 	BASIC: 'BASIC',
 	ADVANCED: 'ADVANCED',
-	SUBSCRIPTION: 'SUBSCRIPTION'
-}
+	SUBSCRIPTION: 'SUBSCRIPTION',
+};
 
-export const languages = {
-	'br': br,
-	'en': en,
-	'es': es
-}
+export const LANGUAGES = {
+	br: brLang,
+	en: enLang,
+	es: esLang,
+};
+
+export const ROUTES = {
+	br: brRoute,
+	en: enRoute,
+	es: esRoute,
+};

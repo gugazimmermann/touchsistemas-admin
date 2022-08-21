@@ -28,8 +28,7 @@ export default function EventDetail() {
 			const url = await QRCode.toDataURL(`${process.env.REACT_APP_EVENTS_URL}${params.id}`, { width: 3840 });
 			setQr(url);
 		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.log(error);
+			console.error(error);
 		}
 	}
 

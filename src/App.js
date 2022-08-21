@@ -24,7 +24,6 @@ function App() {
 	const { state } = useContext(AppContext);
 	// const language = window.navigator.userLanguage || window.navigator.language;
 	if (process.env.NODE_ENV === 'development') console.debug('Language:', state.lang);
-	console.debug(ROUTES);
 
 	return (
 		<Suspense fallback={<Loading />}>

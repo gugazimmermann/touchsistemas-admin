@@ -1,3 +1,19 @@
+enum SurveyTypes {
+	SINGLE
+	MULTIPLE
+}
+
+enum MethodTypes {
+	SMS
+	EMAIL
+}
+
+enum PlansTypes {
+	BASIC
+	ADVANCED
+	SUBSCRIPTION
+}
+
 type Owner @model @auth(rules: [{ allow: public }]) {
 	id: ID!
 	name: String!
@@ -29,7 +45,8 @@ type Client @model @auth(rules: [{ allow: public }]) {
 type Event @model @auth(rules: [{ allow: public }]) {
 	id: ID!
 	referralCode: String
-	plan: String!
+	plan: PlansTypes!
+	method: MethodTypes!
 	name: String!
 	website: AWSURL
 	email: AWSEmail
@@ -97,9 +114,4 @@ type Visitor @model @auth(rules: [{ allow: public }]) {
 	surveyAnswers: AWSJSON
 	EventID: ID! @index(name: "byEvent", queryField: "visitorsByEventID")
 	Event: Event @belongsTo
-}
-
-enum SurveyTypes {
-	SINGLE
-	MULTIPLE
 }

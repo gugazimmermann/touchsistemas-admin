@@ -317,6 +317,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "method": {
+                    "name": "method",
+                    "isArray": false,
+                    "type": {
+                        "enum": "MethodTypes"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "name": {
                     "name": "name",
                     "isArray": false,
@@ -1069,8 +1078,15 @@ export const schema = {
                 "SINGLE",
                 "MULTIPLE"
             ]
+        },
+        "MethodTypes": {
+            "name": "MethodTypes",
+            "values": [
+                "SMS",
+                "EMAIL"
+            ]
         }
     },
     "nonModels": {},
-    "version": "7487846437aba6f9c0ddcec011b45210"
+    "version": "e4645befe9c7b88a4171b42bd56462dd"
 };

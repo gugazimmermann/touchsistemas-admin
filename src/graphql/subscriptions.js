@@ -41,6 +41,7 @@ export const onCreateOwner = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -111,6 +112,7 @@ export const onUpdateOwner = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -181,6 +183,7 @@ export const onDeleteOwner = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -263,6 +266,7 @@ export const onCreateClient = /* GraphQL */ `
           id
           referralCode
           plan
+          method
           name
           website
           email
@@ -381,6 +385,7 @@ export const onUpdateClient = /* GraphQL */ `
           id
           referralCode
           plan
+          method
           name
           website
           email
@@ -499,6 +504,7 @@ export const onDeleteClient = /* GraphQL */ `
           id
           referralCode
           plan
+          method
           name
           website
           email
@@ -571,6 +577,7 @@ export const onCreateEvent = /* GraphQL */ `
       id
       referralCode
       plan
+      method
       name
       website
       email
@@ -619,6 +626,7 @@ export const onCreateEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -661,6 +669,7 @@ export const onCreateEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -699,6 +708,7 @@ export const onCreateEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -747,6 +757,7 @@ export const onCreateEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -783,6 +794,7 @@ export const onUpdateEvent = /* GraphQL */ `
       id
       referralCode
       plan
+      method
       name
       website
       email
@@ -831,6 +843,7 @@ export const onUpdateEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -873,6 +886,7 @@ export const onUpdateEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -911,6 +925,7 @@ export const onUpdateEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -959,6 +974,7 @@ export const onUpdateEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -995,6 +1011,7 @@ export const onDeleteEvent = /* GraphQL */ `
       id
       referralCode
       plan
+      method
       name
       website
       email
@@ -1043,6 +1060,7 @@ export const onDeleteEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -1085,6 +1103,7 @@ export const onDeleteEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -1123,6 +1142,7 @@ export const onDeleteEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -1171,6 +1191,7 @@ export const onDeleteEvent = /* GraphQL */ `
             id
             referralCode
             plan
+            method
             name
             website
             email
@@ -1219,6 +1240,7 @@ export const onCreatePartner = /* GraphQL */ `
           id
           referralCode
           plan
+          method
           name
           website
           email
@@ -1304,6 +1326,7 @@ export const onUpdatePartner = /* GraphQL */ `
           id
           referralCode
           plan
+          method
           name
           website
           email
@@ -1389,6 +1412,7 @@ export const onDeletePartner = /* GraphQL */ `
           id
           referralCode
           plan
+          method
           name
           website
           email
@@ -1469,6 +1493,7 @@ export const onCreateSurvey = /* GraphQL */ `
         id
         referralCode
         plan
+        method
         name
         website
         email
@@ -1586,6 +1611,7 @@ export const onUpdateSurvey = /* GraphQL */ `
         id
         referralCode
         plan
+        method
         name
         website
         email
@@ -1703,6 +1729,7 @@ export const onDeleteSurvey = /* GraphQL */ `
         id
         referralCode
         plan
+        method
         name
         website
         email
@@ -1831,6 +1858,7 @@ export const onCreateVisitor = /* GraphQL */ `
         id
         referralCode
         plan
+        method
         name
         website
         email
@@ -1959,6 +1987,7 @@ export const onUpdateVisitor = /* GraphQL */ `
         id
         referralCode
         plan
+        method
         name
         website
         email
@@ -2087,6 +2116,7 @@ export const onDeleteVisitor = /* GraphQL */ `
         id
         referralCode
         plan
+        method
         name
         website
         email

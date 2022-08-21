@@ -7,6 +7,11 @@ const SurveyTypes = {
   "MULTIPLE": "MULTIPLE"
 };
 
+const MethodTypes = {
+  "SMS": "SMS",
+  "EMAIL": "EMAIL"
+};
+
 const { Owner, Client, Event, Partner, Survey, Visitor } = initSchema(schema);
 
 export {
@@ -16,5 +21,6 @@ export {
   Partner,
   Survey,
   Visitor,
-  SurveyTypes
+  SurveyTypes,
+  MethodTypes
 };

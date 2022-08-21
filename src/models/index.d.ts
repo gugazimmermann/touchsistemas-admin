@@ -5,6 +5,11 @@ export enum SurveyTypes {
   MULTIPLE = "MULTIPLE"
 }
 
+export enum MethodTypes {
+  SMS = "SMS",
+  EMAIL = "EMAIL"
+}
+
 
 
 type OwnerMetaData = {
@@ -71,6 +76,7 @@ export declare class Event {
   readonly id: string;
   readonly referralCode?: string | null;
   readonly plan: string;
+  readonly method: MethodTypes | keyof typeof MethodTypes;
   readonly name: string;
   readonly website?: string | null;
   readonly email?: string | null;

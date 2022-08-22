@@ -1,11 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Storage } from 'aws-amplify';
-import { AppContext } from '../../../context';
-import { LANGUAGES, ROUTES } from '../../../constants';
-import useCloseMenu from '../../../helpers/useCloseMenu';
-import AvatarIcon from '../../../images/AvatarIcon';
-import Arrow from '../../../images/Arrow';
+import { AppContext } from '../../../../context';
+import { LANGUAGES, ROUTES } from '../../../../constants';
+import useCloseMenu from '../../../../helpers/useCloseMenu';
+import AvatarIcon from '../../../../images/AvatarIcon';
+import Arrow from '../../../../images/Arrow';
 
 export default function NavProfile({ client, signout, alerts }) {
 	const { state } = useContext(AppContext);
@@ -31,7 +31,7 @@ export default function NavProfile({ client, signout, alerts }) {
 	}, [location]);
 
 	return (
-		<div className="relative pt-1">
+		<div className="relative pt-1 -mr-4">
 			<button
 				type="button"
 				aria-controls="navbarAvatarContent"
@@ -50,7 +50,7 @@ export default function NavProfile({ client, signout, alerts }) {
 						10
 					</span>
 				)}
-				<Arrow styles={`ml-1 w-4 h-4 ${open && 'rotate-180'}`} />
+				<Arrow styles={`w-4 h-4 ${open && 'rotate-180'}`} />
 			</button>
 			<ul ref={ref} className={`${open ? 'absolute' : 'hidden'} list-style-none w-48 -right-4 top-9 border bg-white`}>
 				<li className="p-2 text-center">

@@ -12,7 +12,7 @@ const ForgotPassword = lazy(() => import('./pages/auth/ForgotPassword'));
 const RedefinePwd = lazy(() => import('./pages/auth/RedefinePwd'));
 const SignUp = lazy(() => import('./pages/auth/SignUp'));
 const ConfirmationCode = lazy(() => import('./pages/auth/ConfirmationCode'));
-const Layout = lazy(() => import('./layout/Layout'));
+const Layout = lazy(() => import('./pages/layout/Layout'));
 const Dashboard = lazy(() => import('./pages/dashboard/Dashboard'));
 const DashboardEvent = lazy(() => import('./pages/dashboard/Event/DashboardEvent'));
 const Profile = lazy(() => import('./pages/profile/Profile'));

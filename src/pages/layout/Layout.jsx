@@ -2,11 +2,11 @@ import { useEffect, useState, useContext } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../graphql/queries';
-import { decodeCookie } from '../helpers/cookies';
-import { AppContext } from '../context';
-import { ROUTES } from '../constants';
-import { Loading } from '../components';
+import * as queries from '../../graphql/queries';
+import { decodeCookie } from '../../helpers/cookies';
+import { AppContext } from '../../context';
+import { ROUTES } from '../../constants';
+import { Loading } from '../../components';
 import Nav from './nav/Nav';
 
 export default function Layout() {
@@ -20,8 +20,7 @@ export default function Layout() {
 		try {
 			await Auth.signOut({ global: true });
 		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.log(error);
+			console.error(error);
 		}
 		removeCookie('touchsistemas');
 		navigate(ROUTES[state.lang].HOME);

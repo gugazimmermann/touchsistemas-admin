@@ -1,4 +1,4 @@
-import LogoIcon from '../icons/LogoIcon';
+import LogoIcon from '../../../images/LogoIcon';
 
 export default function LogoAuth({ styles }) {
 	return (

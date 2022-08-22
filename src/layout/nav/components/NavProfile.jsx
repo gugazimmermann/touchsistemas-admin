@@ -4,8 +4,8 @@ import { Storage } from 'aws-amplify';
 import { AppContext } from '../../../context';
 import { LANGUAGES, ROUTES } from '../../../constants';
 import useCloseMenu from '../../../helpers/useCloseMenu';
-import AvatarIcon from '../../../icons/AvatarIcon';
-import Arrow from '../../../icons/Arrow';
+import AvatarIcon from '../../../images/AvatarIcon';
+import Arrow from '../../../images/Arrow';
 
 export default function NavProfile({ client, signout, alerts }) {
 	const { state } = useContext(AppContext);

@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AppContext } from '../../context';
-import LogoIcon from '../../icons/LogoIcon';
+import LogoIcon from '../../images/LogoIcon';
 import { ROUTES } from '../../constants';
-import { NavAlert, NavInfo, NavProfile } from './components';
+import { NavAlert, NavInfo, NavProfile, } from './components';
 
 export default function Nav({ client, signout }) {
 	const { state } = useContext(AppContext);

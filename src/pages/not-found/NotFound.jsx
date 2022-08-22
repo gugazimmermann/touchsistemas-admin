@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { AppContext } from '../../context';
 import { LANGUAGES } from '../../constants';
-import NotFoundImg from '../../icons/404.svg';
+import NotFoundImg from '../../images/404.svg';
 
 function NotFound() {
 	const { state } = useContext(AppContext);

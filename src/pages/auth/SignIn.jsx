@@ -6,10 +6,10 @@ import { clientsByEmail } from '../../graphql/queries';
 import { encodeCookie } from '../../helpers/cookies';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
-import { Language, LogoAuth, Loading } from '../../components';
-import Alert from './components/Alert';
-// import LoginSocial from './components/LoginSocial';
-import SignInImage from '../../icons/SignIn.svg';
+import { Loading } from '../../components';
+import {Alert, Language, LogoAuth } from './components';
+// import {Alert, Language, LoginSocial} from './components';
+import SignInImage from '../../images/auth/SignIn.svg';
 
 export default function SignIn() {
 	const location = useLocation();

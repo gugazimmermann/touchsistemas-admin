@@ -3,9 +3,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
-import { Language, LogoAuth, Loading } from '../../components';
-import Alert from './components/Alert';
-import SignUpImage from '../../icons/SignUp.svg';
+import { Loading } from '../../components';
+import {Alert, Language, LogoAuth } from './components';
+import SignUpImage from '../../images/auth/SignUp.svg';
 
 export default function RedefinePwd() {
 	const location = useLocation();

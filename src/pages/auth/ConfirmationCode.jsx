@@ -3,9 +3,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
-import { Language, LogoAuth, Loading } from '../../components';
-import Alert from './components/Alert';
-import ConfirmationCodeImage from '../../icons/ConfirmationCode.svg';
+import { Loading } from '../../components';
+import {Alert, Language, LogoAuth } from './components';
+import ConfirmationCodeImage from '../../images/auth/ConfirmationCode.svg';
 
 export default function ConfirmationCode() {
 	const location = useLocation();

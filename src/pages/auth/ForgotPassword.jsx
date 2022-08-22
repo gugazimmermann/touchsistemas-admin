@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
-import { Language, LogoAuth, Loading } from '../../components';
-import Alert from './components/Alert';
-import ForgotPasswordImage from '../../icons/ForgotPassword.svg';
+import { Loading } from '../../components';
+import {Alert, Language, LogoAuth } from './components';
+import ForgotPasswordImage from '../../images/auth/ForgotPassword.svg';
 
 export default function ForgotPassword() {
 	const navigate = useNavigate();

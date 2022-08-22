@@ -16,4 +16,9 @@ export default {
 	code: 'Code',
 	redefine: 'Redefine Password',
 	confirm: 'Confirm',
+	nav: {
+		profile: 'My Profile',
+		payments: 'Payments',
+		logout: 'Logout'
+	}
 };

@@ -98,7 +98,6 @@ export default function SignIn() {
 									{LANGUAGES[state.lang].forgotPassword}
 								</Link>
 							</div>
-
 							<button
 								type="button"
 								onClick={() => signIn()}
@@ -119,7 +118,6 @@ export default function SignIn() {
 									{LANGUAGES[state.lang].newRegister}
 								</Link>
 							</div>
-
 							{/* <LoginSocial /> */}
 						</form>
 					</div>

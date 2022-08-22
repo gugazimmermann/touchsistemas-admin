@@ -40,10 +40,10 @@ export default function Language() {
 	return (
 		<div className="absolute top-2 right-2 z-10">
 			<button type="button" className="flex items-center px-1" onClick={() => setOpen(!open)}>
-				<Arrow styles={`mr-1 w-4 h-4 ${open && 'rotate-180'}`} />
 				{showFlag(state.lang)}
+				<Arrow styles={`ml-1 w-4 h-4 ${open && 'rotate-180'}`} />
 			</button>
-			<ul ref={langRef} className={`flex flex-col items-end pr-1 mt-2 ${!open && 'hidden'}`}>
+			<ul ref={langRef} className={`flex flex-col items-start pl-1 mt-2 ${!open && 'hidden'}`}>
 				{Object.keys(LANGUAGES)
 					.filter((l) => l !== state.lang)
 					.map((l) => (

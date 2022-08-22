@@ -1,112 +1,30 @@
-import { useEffect, useRef, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Storage } from 'aws-amplify';
+import { useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { AppContext } from '../../context';
 import LogoIcon from '../../icons/LogoIcon';
-import AvatarIcon from '../../icons/AvatarIcon';
 import { ROUTES } from '../../constants';
+import { NavAlert, NavInfo, NavProfile } from './components';
 
 export default function Nav({ client, signout }) {
 	const { state } = useContext(AppContext);
-	const avatarMenuRef = useRef(null);
-	const [isMenuOpen, setMenuOpen] = useState(false);
-	const [isAvatarOpen, setAvatarOpen] = useState(false);
-	const [url, setUrl] = useState();
-
-	async function logo() {
-		const list = await Storage.list(`logo/${client.id}`);
-		if (list?.length) {
-			const getUrl = await Storage.get(list[0].key);
-			setUrl(getUrl);
-		}
-	}
-
-	useEffect(() => {
-		if (client) logo();
-	}, [client]);
-
-	useEffect(() => {
-		const checkIfClickedOutside = (e) => {
-			if (isAvatarOpen && avatarMenuRef.current && !avatarMenuRef.current.contains(e.target)) setAvatarOpen(false);
-		};
-		document.addEventListener('mousedown', checkIfClickedOutside);
-		return () => document.removeEventListener('mousedown', checkIfClickedOutside);
-	}, [isAvatarOpen, setAvatarOpen]);
+	const location = useLocation();
 
 	return (
-		<nav className="flex flex-wrap items-center justify-between bg-white">
-			<div className="container-fluid w-full flex flex-wrap items-center justify-between px-6 py-2 shadow-md z-10">
-				<Link to={ROUTES[state.lang].DASHBOARD} className="flex flex-row items-center text-primary ">
-					<LogoIcon styles="h-8 w-8" />
-					<p className="text-2xl">{process.env.REACT_APP_TITLE}</p>
+		<nav className="w-full flex flex-wrap justify-center sm:justify-between shadow-md z-10 px-4 py-2 bg-white">
+			<Link to={ROUTES[state.lang].DASHBOARD} className="flex flex-row items-center text-primary mb-2 sm:mb-0">
+				<LogoIcon styles="h-8 w-8" />
+				<p className="text-2xl">{process.env.REACT_APP_TITLE}</p>
+			</Link>
+			<div className="w-auto flex flex-row gap-4">
+				<Link to={ROUTES[state.lang].DASHBOARD}>
+					<i className={`bx ${location.pathname === ROUTES[state.lang].DASHBOARD ? 'bxs' : 'bx'}-grid-alt text-3xl`} />
 				</Link>
-
-				<button
-					className="md:hidden border-0 hover:shadow-none hover:no-underline py-2 px-2.5 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline"
-					type="button"
-					aria-controls="navbarSupportedContent"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-					onClick={() => setMenuOpen(!isMenuOpen)}
-				>
-					<i className="bx bx-menu text-3xl" />
-				</button>
-
-				<div className={`${isMenuOpen ? 'flex pb-4' : 'hidden'} w-full md:w-auto flex-col md:flex md:flex-row `}>
-					<ul className="md:flex flex-row list-style-none pr-2 ">
-						<li className="p-2 text-center md:text-base">
-							<Link to={ROUTES[state.lang].DASHBOARD}>Dashboard</Link>
-						</li>
-						<li className="p-2 text-center md:text-base">
-							<Link to={ROUTES[state.lang].NEW}>Cadastrar</Link>
-						</li>
-					</ul>
-
-					<div className="flex justify-evenly">
-						{/* <Link to="/dashboard" className="mr-4 flex items-center" role="button" aria-expanded="false">
-							<i className="bx bxs-message-check text-2xl" />
-							<span className="text-white bg-secondary absolute rounded-full text-xs -mt-8 ml-3 py-0 px-1.5">1250</span>
-						</Link>
-						<Link to="/dashboard" className="mr-4 flex items-center" role="button" aria-expanded="false">
-							<i className="bx bxs-bell text-2xl" />
-							<span className="text-white bg-warning absolute rounded-full text-xs -mt-8 ml-3 py-0 px-1.5">1</span>
-						</Link> */}
-						<div className="relative pt-1">
-							<button
-								type="button"
-								aria-controls="navbarAvatarContent"
-								aria-expanded="false"
-								aria-label="Toggle navigation"
-								onClick={() => setAvatarOpen(!isAvatarOpen)}
-							>
-								{url ? (
-									<img alt="client logo" src={url} className="h-8 w-8 rounded" />
-								) : (
-									<AvatarIcon styles="h-8 w-8 text-primary" />
-								)}
-								{/* <span className="text-white bg-danger absolute rounded-full text-xs -mt-10 ml-3 py-0 px-1.5">1</span> */}
-							</button>
-							<ul
-								ref={avatarMenuRef}
-								className={`${
-									isAvatarOpen ? 'absolute' : 'hidden'
-								} list-style-none w-48 -right-4 top-9 border bg-white`}
-							>
-								<li className="p-2 text-center">
-									<Link to={ROUTES[state.lang].PROFILE}>Meu Cadastro</Link>
-								</li>
-								<li className="p-2 text-center">
-									<Link to={ROUTES[state.lang].PAYMENTS}>Financeiro</Link>
-								</li>
-								<li className="p-2 text-center">
-									<button type="button" onClick={() => signout()}>
-										Sair
-									</button>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<Link to={ROUTES[state.lang].NEW}>
+					<i className={`bx ${location.pathname === ROUTES[state.lang].NEW ? 'bxs' : 'bx'}-message-alt-add text-3xl`} />
+				</Link>
+				<NavInfo alerts={0} />
+				<NavAlert alerts={0} />
+				<NavProfile client={client} signout={signout} alerts={0} />
 			</div>
 		</nav>
 	);

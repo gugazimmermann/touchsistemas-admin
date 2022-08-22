@@ -41,7 +41,7 @@ function App() {
 						<Route path={`${ROUTES[state.lang].DASHBOARD}/:id`} element={<DashboardEvent />} />
 						<Route path={ROUTES[state.lang].PROFILE} element={<Profile />} />
 						<Route path={`${ROUTES[state.lang].PAYMENTS}`} element={<Payments />} />
-						<Route path={`${ROUTES[state.lang].NEW}/:plan`} element={<PlanSelection />} />
+						<Route path={`${ROUTES[state.lang].NEW}`} element={<PlanSelection />} />
 						<Route path={`${ROUTES[state.lang].EVENTS}/:id`} element={<Event />} />
 					</Route>
 				</Route>

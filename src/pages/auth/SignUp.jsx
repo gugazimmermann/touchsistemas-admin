@@ -26,6 +26,7 @@ export default function SignUp() {
 			return null;
 		}
 		try {
+			// TODO: send email in diff langs
 			await Auth.signUp({ username: email, password: pwd, attributes: { email } });
 			await API.graphql(graphqlOperation(createClient, { input: { email } }));
 			setLoading(false);

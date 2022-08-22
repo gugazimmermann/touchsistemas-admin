@@ -16,4 +16,9 @@ export default {
 	code: 'Código',
 	redefine: 'Redefinir Senha',
 	confirm: 'Confirmar',
+	nav: {
+		profile: 'Meu Perfil',
+		payments: 'Pagamentos',
+		logout: 'Sair'
+	}
 };

@@ -7,7 +7,7 @@ import { encodeCookie } from '../../helpers/cookies';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
 import { Loading } from '../../components';
-import {Alert, Language, LogoAuth } from './components';
+import { Alert, Language, LogoAuth } from './components';
 // import {Alert, Language, LoginSocial} from './components';
 import SignInImage from '../../images/auth/SignIn.svg';
 

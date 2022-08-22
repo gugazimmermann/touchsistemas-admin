@@ -99,16 +99,16 @@ export default function Payments() {
 						<thead>
 							<tr>
 								<th className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
-								{LANGUAGES[state.lang].payments.name}
+									{LANGUAGES[state.lang].payments.name}
 								</th>
 								<th className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
-								{LANGUAGES[state.lang].payments.number}
+									{LANGUAGES[state.lang].payments.number}
 								</th>
 								<th className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
-								{LANGUAGES[state.lang].payments.valid}
+									{LANGUAGES[state.lang].payments.valid}
 								</th>
 								<th className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
-								{LANGUAGES[state.lang].payments.flag}
+									{LANGUAGES[state.lang].payments.flag}
 								</th>
 							</tr>
 						</thead>

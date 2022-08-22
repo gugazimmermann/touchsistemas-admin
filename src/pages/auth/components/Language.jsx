@@ -3,9 +3,9 @@ import { AppContext } from '../../../context';
 import { LANGUAGES } from '../../../constants';
 import useCloseMenu from '../../../helpers/useCloseMenu';
 import Arrow from '../../../images/Arrow';
-import BR from '../../../images/flags/br.svg'
-import EN from '../../../images/flags/en.svg'
-import ES from '../../../images/flags/es.svg'
+import BR from '../../../images/flags/br.svg';
+import EN from '../../../images/flags/en.svg';
+import ES from '../../../images/flags/es.svg';
 
 export default function Language() {
 	const { state, dispatch } = useContext(AppContext);

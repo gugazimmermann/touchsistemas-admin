@@ -19,7 +19,7 @@ export default {
 	nav: {
 		profile: 'Meu Perfil',
 		payments: 'Pagamentos',
-		logout: 'Sair'
+		logout: 'Sair',
 	},
 	profile: {
 		title: 'Meu Perfil',
@@ -59,5 +59,5 @@ export default {
 		number: 'Número',
 		valid: 'Validade',
 		flag: 'Bandeira',
-	}
+	},
 };

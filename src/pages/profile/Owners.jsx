@@ -1,4 +1,4 @@
-import { useEffect, useState,  useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createOwner, updateOwner, deleteOwner } from '../../graphql/mutations';
 import { AppContext } from '../../context';
@@ -147,7 +147,9 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 							!update ? 'bg-primary' : 'bg-warning'
 						} px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out`}
 					>
-						{`${!update ? LANGUAGES[state.lang].profile.addOwner : LANGUAGES[state.lang].profile.updateOwner} ${LANGUAGES[state.lang].profile.owner}`}
+						{`${!update ? LANGUAGES[state.lang].profile.addOwner : LANGUAGES[state.lang].profile.updateOwner} ${
+							LANGUAGES[state.lang].profile.owner
+						}`}
 					</button>
 				</div>
 			</form>
@@ -164,10 +166,10 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 								{LANGUAGES[state.lang].profile.name}
 							</th>
 							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-							{LANGUAGES[state.lang].profile.phone}
+								{LANGUAGES[state.lang].profile.phone}
 							</th>
 							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-							{LANGUAGES[state.lang].profile.email}
+								{LANGUAGES[state.lang].profile.email}
 							</th>
 							<th
 								colSpan={2}
@@ -233,7 +235,12 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	return (
 		<>
-			<Title text={`${!update ? LANGUAGES[state.lang].profile.addOwner : LANGUAGES[state.lang].profile.updateOwner} ${LANGUAGES[state.lang].profile.owner}`} color={update && 'text-warning'} />
+			<Title
+				text={`${!update ? LANGUAGES[state.lang].profile.addOwner : LANGUAGES[state.lang].profile.updateOwner} ${
+					LANGUAGES[state.lang].profile.owner
+				}`}
+				color={update && 'text-warning'}
+			/>
 			{renderForm()}
 			{ownersList.length > 0 && renderTable()}
 			{renderDeleteDialog()}

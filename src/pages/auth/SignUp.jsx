@@ -5,7 +5,7 @@ import { createClient } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
 import { Loading } from '../../components';
-import {Alert, Language, LogoAuth } from './components';
+import { Alert, Language, LogoAuth } from './components';
 import SignUpImage from '../../images/auth/SignUp.svg';
 
 export default function SignUp() {

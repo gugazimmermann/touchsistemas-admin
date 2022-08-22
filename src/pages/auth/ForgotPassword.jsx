@@ -4,7 +4,7 @@ import { Auth } from 'aws-amplify';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
 import { Loading } from '../../components';
-import {Alert, Language, LogoAuth } from './components';
+import { Alert, Language, LogoAuth } from './components';
 import ForgotPasswordImage from '../../images/auth/ForgotPassword.svg';
 
 export default function ForgotPassword() {

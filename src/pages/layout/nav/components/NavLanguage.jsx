@@ -29,11 +29,13 @@ export default function NavLanguage() {
 	}
 
 	function handleChangeLanguage(language) {
-		const currentPath = location.pathname.split('/').filter(p => p);
-		const path = Object.keys(ROUTES[state.lang]).find(k => ROUTES[state.lang][k] === `/${currentPath[0].toLocaleLowerCase()}`);
+		const currentPath = location.pathname.split('/').filter((p) => p);
+		const path = Object.keys(ROUTES[state.lang]).find(
+			(k) => ROUTES[state.lang][k] === `/${currentPath[0].toLocaleLowerCase()}`
+		);
 		dispatch({ type: 'UPDATE_LANG', payload: language });
-		currentPath.shift()
-		const newPath = `${ROUTES[language][path]}/${currentPath.join('/')}`
+		currentPath.shift();
+		const newPath = `${ROUTES[language][path]}/${currentPath.join('/')}`;
 		navigate(newPath);
 		setOpen(false);
 	}

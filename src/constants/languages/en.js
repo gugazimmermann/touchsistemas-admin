@@ -19,7 +19,7 @@ export default {
 	nav: {
 		profile: 'My Profile',
 		payments: 'Payments',
-		logout: 'Logout'
+		logout: 'Logout',
 	},
 	profile: {
 		title: 'My Profile',
@@ -59,5 +59,5 @@ export default {
 		number: 'Number',
 		valid: 'Expiration',
 		flag: 'Flag',
-	}
+	},
 };

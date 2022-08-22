@@ -9,7 +9,7 @@ export default function NavInfo({ alerts }) {
 					</span>
 				</div>
 			) : (
-				<i className="bx bx-message-rounded-check text-3xl" />
+				<i className="bx bx-message-rounded text-3xl" />
 			)}
 		</div>
 	);

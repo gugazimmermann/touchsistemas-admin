@@ -5,13 +5,13 @@ import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { decodeCookie } from '../../helpers/cookies';
 import { AppContext } from '../../context';
-import { ROUTES } from '../../constants';
+import { ROUTES, LANGUAGES} from '../../constants';
 import { Loading } from '../../components';
 import Nav from './nav/Nav';
 
 export default function Layout() {
 	const navigate = useNavigate();
-	const { state } = useContext(AppContext);
+	const { state, dispatch } = useContext(AppContext);
 	const [cookies, , removeCookie] = useCookies(['touchsistemas']);
 	const [client, setClient] = useState();
 	const [loading, setLoading] = useState(false);
@@ -33,6 +33,14 @@ export default function Layout() {
 			data: { getClient },
 		} = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
 		setClient(getClient);
+		const alerts = [];
+		if (!getClient.phone)
+			alerts.push({ type: 'register', message: LANGUAGES[state.lang].alerts.register });
+		if (getClient.Owners.items.length === 0) alerts.push({ type: 'owner', message: LANGUAGES[state.lang].alerts.owner });
+		if (alerts.length) {
+			dispatch({ type: 'UPDATE_ALERT', payload: alerts });
+			navigate(ROUTES[state.lang].ALERTS);
+		}
 		setLoading(false);
 	}
 

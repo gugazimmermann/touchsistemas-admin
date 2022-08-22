@@ -16,6 +16,11 @@ export default {
 	code: 'Código',
 	redefine: 'Redefinir Contraseña',
 	confirm: 'Confirmar',
+	alerts: {
+		clickHere: '¡Clic aquí!',
+		register: 'Su registro está incompleto, complete para usar el sistema.',
+		owner: '¡Ningún Responsable Registrado!',
+	},
 	nav: {
 		profile: 'Mi Perfil',
 		payments: 'Pagos',

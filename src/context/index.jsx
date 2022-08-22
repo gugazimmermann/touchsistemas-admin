@@ -1,7 +1,10 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './reducers';
 
-const initialState = { lang: 'br' };
+const initialState = { 
+	lang: 'br',
+	alerts: []
+};
 
 const getInitialStaste = () =>
 	localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : initialState;

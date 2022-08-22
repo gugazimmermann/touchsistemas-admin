@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+export const showLink = (state) => !state.alerts.filter((a) => a.type === 'register' || a.type === 'owner');
+
 export function validateEmail(email) {
 	const re =
 		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

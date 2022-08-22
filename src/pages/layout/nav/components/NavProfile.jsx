@@ -6,6 +6,7 @@ import { LANGUAGES, ROUTES } from '../../../../constants';
 import useCloseMenu from '../../../../helpers/useCloseMenu';
 import AvatarIcon from '../../../../images/AvatarIcon';
 import Arrow from '../../../../images/Arrow';
+import { showLink } from '../../../../helpers';
 
 export default function NavProfile({ client, signout, alerts }) {
 	const { state } = useContext(AppContext);
@@ -52,13 +53,18 @@ export default function NavProfile({ client, signout, alerts }) {
 				)}
 				<Arrow styles={`w-4 h-4 ${open && 'rotate-180'}`} />
 			</button>
-			<ul ref={ref} className={`${open ? 'absolute' : 'hidden'} list-style-none w-48 right-0 top-9 border bg-white`}>
+			<ul
+				ref={ref}
+				className={`${open ? 'absolute' : 'hidden'} list-style-none w-48 right-0 top-9 border bg-white z-50`}
+			>
 				<li className="p-2 text-center">
 					<Link to={ROUTES[state.lang].PROFILE}>{LANGUAGES[state.lang].nav.profile}</Link>
 				</li>
-				<li className="p-2 text-center">
-					<Link to={ROUTES[state.lang].PAYMENTS}>{LANGUAGES[state.lang].nav.payments}</Link>
-				</li>
+				{showLink(state) && (
+					<li className="p-2 text-center">
+						<Link to={ROUTES[state.lang].PAYMENTS}>{LANGUAGES[state.lang].nav.payments}</Link>
+					</li>
+				)}
 				<li className="p-2 text-center">
 					<button type="button" onClick={() => signout()}>
 						{LANGUAGES[state.lang].nav.logout}

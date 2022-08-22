@@ -5,6 +5,7 @@ export default {
 	REGISTER: '/registro',
 	CONFIRM_REGISTRATION: '/confirmar-registro',
 	DASHBOARD: '/panel-de-control',
+	ALERTS: '/alertas',
 	PROFILE: '/perfil',
 	PAYMENTS: '/pagos',
 	NEW: '/nuevo',

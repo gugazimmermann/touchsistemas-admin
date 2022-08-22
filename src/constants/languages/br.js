@@ -16,6 +16,11 @@ export default {
 	code: 'Código',
 	redefine: 'Redefinir Senha',
 	confirm: 'Confirmar',
+	alerts: {
+		clickHere: 'Clique Aqui!',
+		register: 'Seu cadastro está incompleto, finalize para utilizar o sistema.',
+		owner: 'Nenhum responsável cadastrado!',
+	},
 	nav: {
 		profile: 'Meu Perfil',
 		payments: 'Pagamentos',

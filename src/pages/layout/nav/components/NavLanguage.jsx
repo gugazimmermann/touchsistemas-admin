@@ -53,7 +53,7 @@ export default function NavLanguage() {
 				{showFlag(state.lang)}
 				<Arrow styles={`w-4 h-4 ${open && 'rotate-180'}`} />
 			</button>
-			<div ref={ref} className={`${open ? 'absolute' : 'hidden'} flex flex-col gap-1 items-start p-1 bg-white`}>
+			<div ref={ref} className={`${open ? 'absolute' : 'hidden'} flex flex-col gap-1 items-start p-1 bg-white z-50`}>
 				{Object.keys(LANGUAGES)
 					.filter((l) => l !== state.lang)
 					.map((l) => (

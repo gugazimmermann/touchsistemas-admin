@@ -16,6 +16,11 @@ export default {
 	code: 'Code',
 	redefine: 'Redefine Password',
 	confirm: 'Confirm',
+	alerts: {
+		clickHere: 'Click Here!',
+		register: 'Your registration is incomplete, complete to use the system.',
+		owner: 'No Responsible Registered!',
+	},
 	nav: {
 		profile: 'My Profile',
 		payments: 'Payments',
@@ -44,7 +49,7 @@ export default {
 		invalidZipCode: 'invalid Zip Code!',
 		imageSize: 'Image cannot have more than 2 mb!',
 		imageType: 'Image need to be PNG or JPG!',
-		owner: 'Owner',
+		owner: 'Responsible',
 		addOwner: 'Add',
 		updateOwner: 'Update',
 	},

@@ -14,6 +14,7 @@ const SignUp = lazy(() => import('./pages/auth/SignUp'));
 const ConfirmationCode = lazy(() => import('./pages/auth/ConfirmationCode'));
 const Layout = lazy(() => import('./pages/layout/Layout'));
 const Dashboard = lazy(() => import('./pages/dashboard/Dashboard'));
+const Alerts = lazy(() => import('./pages/alerts/Alerts'));
 const DashboardEvent = lazy(() => import('./pages/dashboard/Event/DashboardEvent'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
 const Payments = lazy(() => import('./pages/profile/payments/Payments'));
@@ -38,6 +39,7 @@ function App() {
 				<Route element={<ProtectedRoute />}>
 					<Route element={<Layout />}>
 						<Route path={ROUTES[state.lang].DASHBOARD} element={<Dashboard />} />
+						<Route path={ROUTES[state.lang].ALERTS} element={<Alerts />} />
 						<Route path={`${ROUTES[state.lang].DASHBOARD}/:id`} element={<DashboardEvent />} />
 						<Route path={ROUTES[state.lang].PROFILE} element={<Profile />} />
 						<Route path={`${ROUTES[state.lang].PAYMENTS}`} element={<Payments />} />

@@ -5,6 +5,7 @@ export default {
 	REGISTER: '/novo-cadastro',
 	CONFIRM_REGISTRATION: '/confirmar-cadastro',
 	DASHBOARD: '/painel-de-controle',
+	ALERTS: '/alertas',
 	PROFILE: '/perfil',
 	PAYMENTS: '/pagamentos',
 	NEW: '/cadastrar',

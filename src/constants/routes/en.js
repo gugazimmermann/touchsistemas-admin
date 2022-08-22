@@ -5,6 +5,7 @@ export default {
 	REGISTER: '/registration',
 	CONFIRM_REGISTRATION: '/confirm-registration',
 	DASHBOARD: '/dashboard',
+	ALERTS: '/alerts',
 	PROFILE: '/profile',
 	PAYMENTS: '/payments',
 	NEW: '/new',

@@ -31,7 +31,7 @@ export default function NavProfile({ client, signout, alerts }) {
 	}, [location]);
 
 	return (
-		<div className="relative pt-1 -mr-4">
+		<div className="relative pt-1">
 			<button
 				type="button"
 				aria-controls="navbarAvatarContent"
@@ -52,7 +52,7 @@ export default function NavProfile({ client, signout, alerts }) {
 				)}
 				<Arrow styles={`w-4 h-4 ${open && 'rotate-180'}`} />
 			</button>
-			<ul ref={ref} className={`${open ? 'absolute' : 'hidden'} list-style-none w-48 -right-4 top-9 border bg-white`}>
+			<ul ref={ref} className={`${open ? 'absolute' : 'hidden'} list-style-none w-48 right-0 top-9 border bg-white`}>
 				<li className="p-2 text-center">
 					<Link to={ROUTES[state.lang].PROFILE}>{LANGUAGES[state.lang].nav.profile}</Link>
 				</li>

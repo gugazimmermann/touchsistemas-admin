@@ -24,8 +24,8 @@ export default function Nav({ client, signout }) {
 				</Link>
 				<NavInfo alerts={0} />
 				<NavAlert alerts={0} />
-				<NavProfile client={client} signout={signout} alerts={0} />
 				<NavLanguage />
+				<NavProfile client={client} signout={signout} alerts={0} />
 			</div>
 		</nav>
 	);

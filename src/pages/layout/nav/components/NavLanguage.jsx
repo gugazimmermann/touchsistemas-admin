@@ -39,7 +39,7 @@ export default function NavLanguage() {
 	}
 
 	return (
-		<div className="relative top-2">
+		<div className="relative top-2 -mr-3">
 			<button
 				type="button"
 				aria-controls="navbarLanguageContent"

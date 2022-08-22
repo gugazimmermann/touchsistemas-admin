@@ -16,6 +16,7 @@ export default {
 	code: 'Código',
 	redefine: 'Redefinir Contraseña',
 	confirm: 'Confirmar',
+	noRecords: '¡Ningún record fue encontrado!',
 	alerts: {
 		clickHere: '¡Clic aquí!',
 		register: 'Su registro está incompleto, complete para usar el sistema.',

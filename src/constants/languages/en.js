@@ -16,6 +16,7 @@ export default {
 	code: 'Code',
 	redefine: 'Redefine Password',
 	confirm: 'Confirm',
+	noRecords: 'No record found!',
 	alerts: {
 		clickHere: 'Click Here!',
 		register: 'Your registration is incomplete, complete to use the system.',

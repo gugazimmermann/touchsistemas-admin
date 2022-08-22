@@ -1,13 +1,16 @@
 /* eslint-disable no-restricted-syntax */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { updateClient } from '../../graphql/mutations';
+import { AppContext } from '../../context';
+import { LANGUAGES } from '../../constants';
 import { Loading, Grid, EventCard, MapCard, Title } from '../../components';
 import { orderEventsByLastDay } from '../../helpers';
 
 export default function Events() {
 	const [client, loadClient] = useOutletContext();
+	const { state } = useContext(AppContext);
 	const [loading, setLoading] = useState(false);
 	const [events, setEvents] = useState([]);
 	const [map, setMap] = useState();
@@ -75,7 +78,7 @@ export default function Events() {
 	}, [client]);
 
 	if (loading) return <Loading />;
-	if (events.length)
+	if (events.length) {
 		return (
 			<>
 				<Title text="Eventos" />
@@ -87,4 +90,6 @@ export default function Events() {
 				</Grid>
 			</>
 		);
+	}
+	return <h1 className='font-bold text-lg text-center mt-4'>{LANGUAGES[state.lang].noRecords}</h1>;
 }

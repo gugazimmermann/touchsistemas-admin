@@ -22,7 +22,7 @@ export default function ConfirmationCode() {
 		try {
 			await Auth.confirmSignUp(email, code);
 			setLoading(false);
-			navigate('/', { state: { email } });
+			navigate(ROUTES[state.lang].HOME, { state: { email } });
 		} catch (err) {
 			setError(true);
 			setLoading(false);

@@ -19,7 +19,7 @@ export default function ForgotPassword() {
 		setError(false);
 		try {
 			await Auth.forgotPassword(email);
-			navigate('/redefinir-senha', { state: { email } });
+			navigate(ROUTES[state.lang].REDIFINE_PASSWORD, { state: { email } });
 		} catch (err) {
 			setError(true);
 			setLoading(false);

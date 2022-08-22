@@ -29,7 +29,7 @@ export default function RedefinePwd() {
 		try {
 			await Auth.forgotPasswordSubmit(email, code, pwd);
 			setLoading(false);
-			navigate('/');
+			navigate(ROUTES[state.lang].HOME);
 		} catch (err) {
 			setError(true);
 			setLoading(false);

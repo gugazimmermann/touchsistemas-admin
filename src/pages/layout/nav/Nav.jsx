@@ -11,7 +11,7 @@ export default function Nav({ client, signout }) {
 	const location = useLocation();
 
 	return (
-		<nav className="w-full flex flex-wrap justify-center sm:justify-between shadow-md z-30 px-2 py-1 bg-white">
+		<nav className="w-full flex flex-wrap justify-center sm:justify-between shadow-md z-30 px-2 py-1.5 bg-white">
 			<Link to={showLink(state) ? ROUTES[state.lang].DASHBOARD : ROUTES[state.lang].ALERTS} className="flex flex-row items-center text-primary mb-2 sm:mb-0">
 				<LogoIcon styles="h-8 w-8" />
 				<p className="text-2xl">{process.env.REACT_APP_TITLE}</p>

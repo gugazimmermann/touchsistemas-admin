@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const showLink = (state) => !state.alerts.filter((a) => a.type === 'register' || a.type === 'owner');
+export const showLink = (state) => !state.alerts.filter((a) => a.type === 'register' || a.type === 'owner').length;
 
 export function validateEmail(email) {
 	const re =

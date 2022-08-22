@@ -7,17 +7,17 @@ export default function NavAlert({ alerts }) {
 	const { state } = useContext(AppContext);
 	
 	return (
-		<Link to={ROUTES[state.lang].ALERTS} className="flex items-center">
+		<div className="relative">
 			{alerts ? (
-				<div className="relative">
+				<Link to={ROUTES[state.lang].ALERTS}>
 					<i className="bx bxs-bell text-3xl" />
 					<span className="absolute -top-1 -right-3 py-0 px-1.5 text-white bg-danger rounded-full text-xs">
 						{alerts}
 					</span>
-				</div>
+				</Link>
 			) : (
 				<i className="bx bx-bell text-3xl" />
 			)}
-		</Link>
+		</div>
 	);
 }

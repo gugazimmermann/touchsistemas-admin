@@ -37,10 +37,8 @@ export default function Layout() {
 		if (!getClient.phone)
 			alerts.push({ type: 'register', message: LANGUAGES[state.lang].alerts.register });
 		if (getClient.Owners.items.length === 0) alerts.push({ type: 'owner', message: LANGUAGES[state.lang].alerts.owner });
-		if (alerts.length) {
-			dispatch({ type: 'UPDATE_ALERT', payload: alerts });
-			navigate(ROUTES[state.lang].ALERTS);
-		}
+		dispatch({ type: 'UPDATE_ALERT', payload: alerts });
+		navigate(ROUTES[state.lang].ALERTS);
 		setLoading(false);
 	}
 

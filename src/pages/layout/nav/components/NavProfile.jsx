@@ -32,7 +32,7 @@ export default function NavProfile({ client, signout, alerts }) {
 	}, [location]);
 
 	return (
-		<div className="relative pt-1">
+		<div className="relative">
 			<button
 				type="button"
 				aria-controls="navbarAvatarContent"

@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { updateClient } from '../../graphql/mutations';
+import { AppContext } from '../../context';
+import { LANGUAGES } from '../../constants';
 import {
 	getAddressFromCEP,
 	normalizeCEP,
@@ -28,6 +30,7 @@ const initial = {
 };
 
 export default function Profile() {
+	const { state } = useContext(AppContext);
 	const navigate = useNavigate();
 	const [client, loadClient] = useOutletContext();
 	const [error, setError] = useState(false);
@@ -69,19 +72,19 @@ export default function Profile() {
 			!formClient.state ||
 			!formClient.street
 		) {
-			setErrorMsg('Preencha todos os dados!');
+			setErrorMsg(LANGUAGES[state.lang].profile.required);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
 		if (formClient.phone.length < 15) {
-			setErrorMsg('Telefone inválido!');
+			setErrorMsg(LANGUAGES[state.lang].profile.invalidPhone);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
 		if (formClient.zipCode.length < 10) {
-			setErrorMsg('CEP inválido!');
+			setErrorMsg(LANGUAGES[state.lang].profile.invalidZipCode);
 			setError(true);
 			setLoading(false);
 			return null;
@@ -166,22 +169,22 @@ export default function Profile() {
 		setError(false);
 		if (e.target.files && e.target.files.length) {
 			const file = e.target.files[0];
-			if (file.size > 500 * 1024) {
-				setErrorMsg('Imagem pode ter no máximo 1mb!');
+			if (file.size > 2 * 1024 * 1024) {
+				setErrorMsg(LANGUAGES[state.lang].profile.imageSize);
 				setError(true);
 				setLoading(false);
 				return null;
 			}
 			const acceptedTypes = ['image/png', 'image/jpeg'];
 			if (!acceptedTypes.includes(file.type)) {
-				setErrorMsg('Imagem deve ser PNG ou JPG!');
+				setErrorMsg(LANGUAGES[state.lang].profile.imageType);
 				setError(true);
 				setLoading(false);
 				return null;
 			}
 			const acceptedExtensions = ['jpg', 'jpeg', 'png'];
 			if (!acceptedExtensions.includes(file.name.split('.').pop())) {
-				setErrorMsg('Imagem deve ser PNG ou JPG!');
+				setErrorMsg(LANGUAGES[state.lang].profile.imageType);
 				setError(true);
 				setLoading(false);
 				return null;
@@ -205,14 +208,14 @@ export default function Profile() {
 		<>
 			{loading && <Loading />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
-			<Title text="Cadastro" />
+			<Title text={LANGUAGES[state.lang].profile.title} />
 			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow">
 				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
 						value={formClient.name || ''}
 						onChange={(e) => setFormClient({ ...formClient, name: e.target.value })}
 						type="text"
-						placeholder="Nome da Empresa"
+						placeholder={LANGUAGES[state.lang].profile.name}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -221,7 +224,7 @@ export default function Profile() {
 						value={formClient.phone || ''}
 						onChange={(e) => handleChangePhone(e.target.value)}
 						type="text"
-						placeholder="Telefone"
+						placeholder={LANGUAGES[state.lang].profile.phone}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -229,7 +232,7 @@ export default function Profile() {
 					<select
 						value={formClient.docType || ''}
 						onChange={(e) => setFormClient({ ...formClient, docType: e.target.value })}
-						placeholder="Tipo de Documento"
+						placeholder={LANGUAGES[state.lang].profile.docType}
 						className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					>
 						<option value="">Selecione</option>
@@ -242,7 +245,7 @@ export default function Profile() {
 						value={formClient.document || ''}
 						onChange={(e) => handleChangeDocument(e.target.value)}
 						type="text"
-						placeholder={formClient.docType || 'Selecione o tipo de Documento'}
+						placeholder={formClient.docType || LANGUAGES[state.lang].profile.selectDoc}
 						disabled={!formClient.docType}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
@@ -251,7 +254,7 @@ export default function Profile() {
 					<input
 						value={formClient.email || ''}
 						type="text"
-						placeholder="Email"
+						placeholder={LANGUAGES[state.lang].profile.email}
 						disabled
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
@@ -261,7 +264,7 @@ export default function Profile() {
 						value={formClient.website || ''}
 						onChange={(e) => setFormClient({ ...formClient, website: e.target.value })}
 						type="text"
-						placeholder="WebSite"
+						placeholder={LANGUAGES[state.lang].profile.website}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -270,7 +273,7 @@ export default function Profile() {
 						value={formClient.zipCode || ''}
 						onChange={(e) => handleChangeCEP(e.target.value)}
 						type="text"
-						placeholder="CEP"
+						placeholder={LANGUAGES[state.lang].profile.zipCode}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -279,7 +282,7 @@ export default function Profile() {
 						value={formClient.city || ''}
 						onChange={(e) => setFormClient({ ...formClient, city: e.target.value })}
 						type="text"
-						placeholder="Cidade"
+						placeholder={LANGUAGES[state.lang].profile.city}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -287,10 +290,10 @@ export default function Profile() {
 					<select
 						value={formClient.state || ''}
 						onChange={(e) => setFormClient({ ...formClient, state: e.target.value })}
-						placeholder="Estado"
+						placeholder={LANGUAGES[state.lang].profile.state}
 						className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					>
-						<option value="">Selecione</option>
+						<option value="">{LANGUAGES[state.lang].profile.select}</option>
 						<option value="AC">Acre</option>
 						<option value="AL">Alagoas</option>
 						<option value="AP">Amapá</option>
@@ -325,7 +328,7 @@ export default function Profile() {
 						value={formClient.street || ''}
 						onChange={(e) => setFormClient({ ...formClient, street: e.target.value })}
 						type="text"
-						placeholder="Rua"
+						placeholder={LANGUAGES[state.lang].profile.street}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -334,7 +337,7 @@ export default function Profile() {
 						value={formClient.number || ''}
 						onChange={(e) => setFormClient({ ...formClient, number: e.target.value })}
 						type="text"
-						placeholder="Número"
+						placeholder={LANGUAGES[state.lang].profile.number}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -343,7 +346,7 @@ export default function Profile() {
 						value={formClient.complement || ''}
 						onChange={(e) => setFormClient({ ...formClient, complement: e.target.value })}
 						type="text"
-						placeholder="Complemento"
+						placeholder={LANGUAGES[state.lang].profile.complement}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -351,7 +354,7 @@ export default function Profile() {
 					<input
 						onChange={(e) => handleFile(e)}
 						type="file"
-						placeholder="Logo"
+						placeholder={LANGUAGES[state.lang].profile.logo}
 						accept=".jpg,.jpeg,.png,image/png,image/jpeg"
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
@@ -362,7 +365,7 @@ export default function Profile() {
 						onClick={() => handleUpdate()}
 						className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out"
 					>
-						Atualizar Cadastro
+						{LANGUAGES[state.lang].profile.update}
 					</button>
 				</div>
 			</form>

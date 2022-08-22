@@ -103,6 +103,11 @@ export function translatePlan(plan) {
 	return plan === 'BASIC' ? 'Básico' : plan === 'ADVANCED' ? 'Avançado' : 'Assinatura';
 }
 
+// TODO: handle better the plans
+export function plansValues(plan) {
+	return plan === 'BASIC' ? 250 : plan === 'ADVANCED' ? 500 : 250;
+}
+
 export function translatePlanUrl(plan) {
 	return plan === 'BASIC' ? 'basico' : plan === 'ADVANCED' ? 'avancado' : 'assinatura';
 }

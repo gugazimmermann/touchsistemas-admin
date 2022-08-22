@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,  useContext } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createOwner, updateOwner, deleteOwner } from '../../graphql/mutations';
+import { AppContext } from '../../context';
+import { LANGUAGES } from '../../constants';
 import { normalizePhone, validateEmail } from '../../helpers';
 import { Title, ConfirmationDialog } from '../../components';
 
 const initial = { name: '', phone: '', email: '' };
 
 export default function Owners({ clientID, ownersList, setError, setErrorMsg, setLoading, loadClient }) {
+	const { state } = useContext(AppContext);
 	const [owner, setOwner] = useState(initial);
 	const [selected, setSelected] = useState();
 	const [confirmDelete, setConfirmDelete] = useState(false);
@@ -21,19 +24,19 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 		setError(false);
 		setLoading(true);
 		if (!owner.email || !owner.name || !owner.phone) {
-			setErrorMsg('Preencha todos os dados do Responsável!');
+			setErrorMsg(LANGUAGES[state.lang].profile.required);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
 		if (owner.phone.length < 15) {
-			setErrorMsg('Telefone do Responsável inválido!');
+			setErrorMsg(LANGUAGES[state.lang].profile.invalidPhone);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
 		if (!validateEmail(owner.email)) {
-			setErrorMsg('Email do Responsável inválido!');
+			setErrorMsg(LANGUAGES[state.lang].profile.requiredEmail);
 			setError(true);
 			setLoading(false);
 			return null;
@@ -107,7 +110,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 							else setSelected({ ...selected, name: e.target.value });
 						}}
 						type="text"
-						placeholder="Nome do Responsável"
+						placeholder={`${LANGUAGES[state.lang].profile.name} *`}
 						className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -116,7 +119,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 						value={!update ? owner?.phone : selected?.phone[0] === '+' ? selected?.phone.slice(4) : selected?.phone}
 						onChange={(e) => handleChangePhone(e.target.value)}
 						type="text"
-						placeholder="Telefone"
+						placeholder={`${LANGUAGES[state.lang].profile.phone} *`}
 						className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -129,7 +132,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 						}}
 						type="email"
 						color="orange"
-						placeholder="Email"
+						placeholder={`${LANGUAGES[state.lang].profile.email} *`}
 						className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
 				</div>
@@ -144,7 +147,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 							!update ? 'bg-primary' : 'bg-warning'
 						} px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out`}
 					>
-						{!update ? 'Adicionar' : 'Atualizar'} Responsável
+						{`${!update ? LANGUAGES[state.lang].profile.addOwner : LANGUAGES[state.lang].profile.updateOwner} ${LANGUAGES[state.lang].profile.owner}`}
 					</button>
 				</div>
 			</form>
@@ -158,13 +161,13 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 					<thead>
 						<tr>
 							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-								Nome do Responsável
+								{LANGUAGES[state.lang].profile.name}
 							</th>
 							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-								Telefone
+							{LANGUAGES[state.lang].profile.phone}
 							</th>
 							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-								Email
+							{LANGUAGES[state.lang].profile.email}
 							</th>
 							<th
 								colSpan={2}
@@ -230,7 +233,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	return (
 		<>
-			<Title text={`${!update ? 'Adicionar' : 'Atualizar'} Responsável`} color={update && 'text-warning'} />
+			<Title text={`${!update ? LANGUAGES[state.lang].profile.addOwner : LANGUAGES[state.lang].profile.updateOwner} ${LANGUAGES[state.lang].profile.owner}`} color={update && 'text-warning'} />
 			{renderForm()}
 			{ownersList.length > 0 && renderTable()}
 			{renderDeleteDialog()}

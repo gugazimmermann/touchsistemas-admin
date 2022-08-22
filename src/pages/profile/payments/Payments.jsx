@@ -1,31 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import moment from 'moment';
 import { useOutletContext } from 'react-router-dom';
+import { AppContext } from '../../../context';
+import { LANGUAGES } from '../../../constants';
 import { Title } from '../../../components';
-import { orderEventsByLastDay } from '../../../helpers';
+import { orderEventsByLastDay, plansValues, translatePlan } from '../../../helpers';
 
 export default function Payments() {
+	const { state } = useContext(AppContext);
 	const [client] = useOutletContext();
 	const [payments, setPayments] = useState();
 	const [cardOwner, setCardOwner] = useState();
 
-	const titulos = ['Evento', 'Plano', 'Data', 'Valor', 'Status'];
-
-	const planName = (plan) => {
-		if (plan === 'Básico') return 'Básico';
-		if (plan === 'Avançado') return 'Avançado';
-		return 'Pró';
-	};
-
-	const planValue = (plan) => {
-		if (plan === 'Básico') return '500,00';
-		if (plan === 'Avançado') return '800,00';
-		return '1.500,00';
-	};
+	const titles = [
+		LANGUAGES[state.lang].payments.name,
+		LANGUAGES[state.lang].payments.plan,
+		LANGUAGES[state.lang].payments.date,
+		LANGUAGES[state.lang].payments.value,
+		LANGUAGES[state.lang].payments.status,
+	];
 
 	const statusRow = (tipo) => {
-		if (tipo === 'aguardando') return <i className="bx bxs-hourglass text-primary text-lg mr-2" />;
-		if (tipo === 'falha') return <i className="bx bx-x-circle text-danger text-xl mr-2" />;
+		if (tipo === 'waiting') return <i className="bx bxs-hourglass text-primary text-lg mr-2" />;
+		if (tipo === 'failure') return <i className="bx bx-x-circle text-danger text-xl mr-2" />;
 		return <i className="bx bx-check-circle text-secondary text-xl mr-2" />;
 	};
 
@@ -36,11 +33,11 @@ export default function Payments() {
 			const eventsPayments = [];
 			orderEvents.forEach((event) => {
 				eventsPayments.push({
-					evento: event.name,
-					plano: planName(event.plan),
-					data: moment(event.lastDay).add(1, 'day').format('DD/MM/YY'),
-					valor: planValue(event.plan),
-					status: 'paid',
+					name: event.name,
+					plan: translatePlan(event.plan),
+					date: event.dates.map((d) => moment(d, 'YYYY-MM-DD').format('DD/MM/YYYY')).join(', '),
+					value: plansValues(event.plan),
+					status: moment(event.lastDay, 'YYYY-MM-DD').unix() > moment().unix() ? 'waiting' : 'paid',
 				});
 			});
 			setPayments(eventsPayments);
@@ -50,12 +47,12 @@ export default function Payments() {
 	function renderPayments() {
 		return (
 			<>
-				<Title text="Pagamentos" />
+				<Title text={LANGUAGES[state.lang].payments.title} />
 				<div className="overflow-x-auto">
 					<table className="items-center w-full rounded-md bg-white shadow border-collapse mb-4">
 						<thead>
 							<tr>
-								{titulos.map((t) => (
+								{titles.map((t) => (
 									<th
 										key={t}
 										className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal"
@@ -68,18 +65,18 @@ export default function Payments() {
 						<tbody>
 							{payments &&
 								payments.map((c) => (
-									<tr key={`${c.evento}${c.status}`}>
+									<tr key={`${c.name}${c.status}`}>
 										<th className="border-t border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
-											{c.evento}
+											{c.name}
 										</th>
 										<th className="border-t border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
-											{c.plano}
+											{c.plan}
 										</th>
 										<th className="border-t border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
-											{c.data}
+											{c.date}
 										</th>
 										<th className="border-t border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
-											R$ {c.valor}
+											R$ {c.value}
 										</th>
 										<th className="border-t border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
 											{statusRow(c.status)}
@@ -96,22 +93,22 @@ export default function Payments() {
 	function renderCard() {
 		return (
 			<>
-				<Title text="Cartão Cadastrado" />
+				<Title text={LANGUAGES[state.lang].payments.creditCards} />
 				<div className="overflow-x-auto">
 					<table className="items-center w-full rounded-md bg-white shadow border-collapse mb-4">
 						<thead>
 							<tr>
 								<th className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
-									Nome
+								{LANGUAGES[state.lang].payments.name}
 								</th>
 								<th className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
-									Número
+								{LANGUAGES[state.lang].payments.number}
 								</th>
 								<th className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
-									Validade
+								{LANGUAGES[state.lang].payments.valid}
 								</th>
 								<th className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">
-									Bandeira
+								{LANGUAGES[state.lang].payments.flag}
 								</th>
 							</tr>
 						</thead>

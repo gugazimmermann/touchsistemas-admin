@@ -63,7 +63,6 @@ export default function Subscriptions() {
 		const showSubscriptions = [];
 		if (cloneSubscriptions.length) {
 			const sortSubscriptions = cloneSubscriptions.sort((a, b) => moment(b.createdAt) - moment(a.createdAt));
-			console.debug(sortSubscriptions);
 			for (const s of sortSubscriptions) {
 				const list = await Storage.list(`logo/${s.id}`);
 				if (list?.length) s.image = await Storage.get(list[0].key);

@@ -122,9 +122,6 @@ export default function Profile() {
 		if (clientLogo) {
 			await Storage.put(`logo/${client.id}.${clientLogo.name.split('.').pop()}`, clientLogo, {
 				contentType: clientLogo.type,
-				// progressCallback(progress) {
-				// 	console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-				// },
 			});
 		}
 		loadClient();

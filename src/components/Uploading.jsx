@@ -4,7 +4,6 @@ import { LANGUAGES } from '../constants';
 
 export default function Uploading({ progress }) {
 	const { state } = useContext(AppContext);
-	console.debug(progress)
 	return (
 		<div className="fixed inset-0 bg-gray-900 bg-opacity-90 overflow-y-auto h-full w-full z-50">
 			<div className="flex flex-col justify-center items-center h-full w-full">

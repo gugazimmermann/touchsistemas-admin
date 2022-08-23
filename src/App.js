@@ -19,9 +19,11 @@ const DashboardEvent = lazy(() => import('./pages/dashboard/Event/DashboardEvent
 const Profile = lazy(() => import('./pages/profile/Profile'));
 const Payments = lazy(() => import('./pages/profile/payments/Payments'));
 const PlanSelection = lazy(() => import('./pages/plan-selection/PlanSelection'));
-const NewEvent = lazy(() => import('./pages/events/new/NewEvent'));
+const New = lazy(() => import('./pages/plan-selection/New'));
 const Subscriptions = lazy(() => import('./pages/subscriptions/Subscriptions'));
-const Event = lazy(() => import('./pages/events/detail/EventDetail'));
+const SubscriptionDetail = lazy(() => import('./pages/subscriptions/SubscriptionDetail'));
+const Events = lazy(() => import('./pages/events/Events'));
+const EventDetail = lazy(() => import('./pages/events/EventDetail'));
 
 function App() {
 	const { state } = useContext(AppContext);
@@ -46,9 +48,11 @@ function App() {
 						<Route path={ROUTES[state.lang].PROFILE} element={<Profile />} />
 						<Route path={`${ROUTES[state.lang].PAYMENTS}`} element={<Payments />} />
 						<Route path={`${ROUTES[state.lang].NEW}`} element={<PlanSelection />} />
-						<Route path={`${ROUTES[state.lang].NEW}/:type`} element={<NewEvent />} />
+						<Route path={`${ROUTES[state.lang].NEW}/:type`} element={<New />} />
 						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}`} element={<Subscriptions />} />
-						<Route path={`${ROUTES[state.lang].EVENTS}/:id`} element={<Event />} />
+						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}/:id`} element={<SubscriptionDetail />} />
+						<Route path={`${ROUTES[state.lang].EVENTS}`} element={<Events />} />
+						<Route path={`${ROUTES[state.lang].EVENTS}/:id`} element={<EventDetail />} />
 					</Route>
 				</Route>
 				<Route path="*" element={<NotFound />} />

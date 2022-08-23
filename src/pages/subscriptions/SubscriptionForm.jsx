@@ -1,34 +1,14 @@
 import { useEffect, useState, useContext } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import DatePicker from 'react-multi-date-picker';
-import moment from 'moment';
-import { partnersByReferralCode } from '../../../graphql/queries';
-import { createEvent } from '../../../graphql/mutations';
-import { AppContext } from '../../../context';
-import { Loading, Alert, Title } from '../../../components';
-import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../../helpers';
-import { ROUTES } from '../../../constants';
-
-const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const months = [
-	'Janeiro',
-	'Fevereiro',
-	'Março',
-	'Abril',
-	'Maio',
-	'Junho',
-	'Julho',
-	'Agosto',
-	'Setembro',
-	'Outubro',
-	'Novembro',
-	'Dezembro',
-];
+import { partnersByReferralCode } from '../../graphql/queries';
+import { createSubscriptions } from '../../graphql/mutations';
+import { AppContext } from '../../context';
+import { Loading, Alert, Title, Uploading } from '../../components';
+import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers';
+import { LANGUAGES, ROUTES } from '../../constants';
 
 const initial = {
-	referralCode: '',
-	plan: '',
 	name: '',
 	website: '',
 	email: '',
@@ -38,11 +18,10 @@ const initial = {
 	street: '',
 	number: '',
 	complement: '',
-	description: '',
-	dates: '',
+	referralCode: '',
 };
 
-export default function NewEvent() {
+export default function SubscriptionForm() {
 	const navigate = useNavigate();
 	const [client, loadClient] = useOutletContext();
 	const { state } = useContext(AppContext);
@@ -51,12 +30,8 @@ export default function NewEvent() {
 	const [loading, setLoading] = useState(false);
 	const [formEvent, setFormEvent] = useState(initial);
 	const [eventLogo, setEventLogo] = useState();
-
-	function handleDatesChange(value) {
-		const dates = value.toString().split(',');
-		const fomartedDates = dates.map((d) => moment(d, 'DD-MM-YYYY').format('YYYY-MM-DD'));
-		setFormEvent({ ...formEvent, dates: fomartedDates });
-	}
+	const [fileName, setFileName] = useState(LANGUAGES[state.lang].subscription.logo);
+	const [progress, setProgress] = useState();
 
 	function handleChangeCEP(value) {
 		setFormEvent({ ...formEvent, zipCode: normalizeCEP(value) });
@@ -90,22 +65,23 @@ export default function NewEvent() {
 		setError(false);
 		if (e.target.files && e.target.files.length) {
 			const file = e.target.files[0];
-			if (file.size > 500 * 1024) {
-				setErrorMsg('Imagem pode ter no máximo 1mb!');
+			setFileName(file.name);
+			if (file.size > 2 * 1024 * 1024) {
+				setErrorMsg(LANGUAGES[state.lang].subscription.imageSize);
 				setError(true);
 				setLoading(false);
 				return null;
 			}
 			const acceptedTypes = ['image/png', 'image/jpeg'];
 			if (!acceptedTypes.includes(file.type)) {
-				setErrorMsg('Imagem deve ser PNG ou JPG!');
+				setErrorMsg(LANGUAGES[state.lang].subscription.imageType);
 				setError(true);
 				setLoading(false);
 				return null;
 			}
 			const acceptedExtensions = ['jpg', 'jpeg', 'png'];
 			if (!acceptedExtensions.includes(file.name.split('.').pop())) {
-				setErrorMsg('Imagem deve ser PNG ou JPG!');
+				setErrorMsg(LANGUAGES[state.lang].subscription.imageType);
 				setError(true);
 				setLoading(false);
 				return null;
@@ -121,36 +97,36 @@ export default function NewEvent() {
 		return null;
 	}
 
-	async function graphCreateEvent(partnerID) {
+	async function handleCreateSubscription(partnerID) {
+		if (formEvent.website) {
+			if (formEvent.website.charAt(0).toLocaleLowerCase !== 'h') formEvent.website = `http://${formEvent.website}`;
+		}
 		const { data } = await API.graphql(
-			graphqlOperation(createEvent, {
+			graphqlOperation(createSubscriptions, {
 				input: {
 					referralCode: formEvent.referralCode || null,
-					plan: formEvent.plan,
 					name: formEvent.name,
 					website: formEvent.website || null,
 					email: formEvent.email || null,
-					zipCode: formEvent.zipCode,
+					zipCode: formEvent.zipCode.replace(/\D/g, ''),
 					state: formEvent.state,
 					city: formEvent.city,
 					street: formEvent.street,
 					number: formEvent.number,
 					complement: formEvent.complement,
-					description: formEvent.description,
-					dates: formEvent.dates,
 					clientID: client.id,
 					partnerID,
 				},
 			})
 		);
-		return data.createEvent;
+		return data.createSubscriptions;
 	}
 
 	async function addEventMap(newEvent) {
 		const eventAddress = encodeURIComponent(
 			`${newEvent.street}, ${newEvent.number} - ${newEvent.city} - ${newEvent.state}, ${newEvent.zipCode}`
 		);
-		const eventMarker = `markers=color:0xf59e0b%7Clabel:${newEvent.name[0]}%7C${eventAddress}`;
+		const eventMarker = `markers=color:0xa855f7%7Clabel:${newEvent.name[0]}%7C${eventAddress}`;
 		const mapURL = `https://maps.googleapis.com/maps/api/staticmap?center=${eventAddress}&zoom=17&size=1280x1280&scale=2&${eventMarker}&key=${process.env.REACT_APP_API_KEY}`;
 		const res = await fetch(mapURL);
 		const blob = await res.blob();
@@ -161,29 +137,34 @@ export default function NewEvent() {
 	}
 
 	async function addEventLogo(newEvent) {
+		setProgress(0);
 		await Storage.put(`logo/${newEvent.id}.${eventLogo.name.split('.').pop()}`, eventLogo, {
 			contentType: eventLogo.type,
+			progressCallback(p) {
+				setProgress(parseInt((p.loaded / p.total) * 100, 10))
+			},
 		});
+		setProgress(0);
 	}
 
 	async function handleAdd() {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
-		if (!formEvent.plan || !formEvent.name || !formEvent.zipCode || !formEvent.state || !formEvent.city) {
-			setErrorMsg('Preencha todos os dados assinalados!');
+		if (!formEvent.name || !formEvent.zipCode || !formEvent.state || !formEvent.city) {
+			setErrorMsg(LANGUAGES[state.lang].subscription.required);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
 		if (formEvent.email && !validateEmail(formEvent.email)) {
-			setErrorMsg('Email inválido!');
+			setErrorMsg(LANGUAGES[state.lang].subscription.requiredEmail);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
 		if (formEvent.zipCode.length < 10) {
-			setErrorMsg('CEP inválido!');
+			setErrorMsg(LANGUAGES[state.lang].subscription.requiredEmail);
 			setError(true);
 			setLoading(false);
 			return null;
@@ -201,30 +182,31 @@ export default function NewEvent() {
 			}
 			partnerID = getPartner.data.partnersByReferralCode.items[0].id;
 		}
-		const newEvent = await graphCreateEvent(partnerID);
-		if (eventLogo) await addEventLogo(newEvent);
-		await addEventMap(newEvent);
+		const newSubscription = await handleCreateSubscription(partnerID);
+		await addEventMap(newSubscription);
+		setLoading(false);
+		if (eventLogo) await addEventLogo(newSubscription);
 		loadClient();
 		setFormEvent(initial);
-		setLoading(false);
-		navigate(`${ROUTES[state.lang].EVENTS}/${newEvent.id}`, { state: { success: true } });
+		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${newSubscription.id}`, { state: { success: true } });
 		return true;
 	}
 
 	return (
 		<>
 			{loading && <Loading />}
+			{!!progress && <Uploading progress={progress} />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
-			<Title text="Novo Evento" />
-			<form>
+			<Title text={LANGUAGES[state.lang].subscription.title} />
+			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow-md">
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
 							value={formEvent.name || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, name: e.target.value })}
 							type="text"
-							placeholder="Nome *"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+							placeholder={`${LANGUAGES[state.lang].subscription.name} *`}
+							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
@@ -232,8 +214,8 @@ export default function NewEvent() {
 							value={formEvent.website || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, website: e.target.value })}
 							type="text"
-							placeholder="WebSite"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+							placeholder={LANGUAGES[state.lang].subscription.website}
+							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
@@ -241,8 +223,8 @@ export default function NewEvent() {
 							value={formEvent.email || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, email: e.target.value })}
 							type="email"
-							placeholder="Email"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+							placeholder={LANGUAGES[state.lang].subscription.email}
+							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
@@ -250,27 +232,18 @@ export default function NewEvent() {
 							value={formEvent.zipCode || ''}
 							onChange={(e) => handleChangeCEP(e.target.value)}
 							type="text"
-							placeholder="CEP *"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+							placeholder={`${LANGUAGES[state.lang].subscription.zipCode} *`}
+							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
-						<input
-							value={formEvent.city || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, city: e.target.value })}
-							type="text"
-							placeholder="Cidade *"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-						/>
-					</div>
-					<div className="w-full md:w-4/12 mb-4">
 						<select
 							value={formEvent.state || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, state: e.target.value })}
-							placeholder="Estado"
-							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+							placeholder={`${LANGUAGES[state.lang].subscription.state} *`}
+							className="bg-white block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						>
-							<option value="">Selecione</option>
+							<option value="">{`${LANGUAGES[state.lang].subscription.select} *`}</option>
 							<option value="AC">Acre</option>
 							<option value="AL">Alagoas</option>
 							<option value="AP">Amapá</option>
@@ -300,13 +273,22 @@ export default function NewEvent() {
 							<option value="TO">Tocantins</option>
 						</select>
 					</div>
+					<div className="w-full md:w-4/12 mb-4">
+						<input
+							value={formEvent.city || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, city: e.target.value })}
+							type="text"
+							placeholder={`${LANGUAGES[state.lang].subscription.city} *`}
+							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						/>
+					</div>
 					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<input
 							value={formEvent.street || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, street: e.target.value })}
 							type="text"
-							placeholder="Rua"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+							placeholder={LANGUAGES[state.lang].subscription.street}
+							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-3/12 sm:pr-4 mb-4">
@@ -314,8 +296,8 @@ export default function NewEvent() {
 							value={formEvent.number || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, number: e.target.value })}
 							type="text"
-							placeholder="Número"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+							placeholder={LANGUAGES[state.lang].subscription.number}
+							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-3/12 mb-4">
@@ -323,56 +305,34 @@ export default function NewEvent() {
 							value={formEvent.complement || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, complement: e.target.value })}
 							type="text"
-							placeholder="Complemento"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-						/>
-					</div>
-					<div className="w-full mb-4">
-						<DatePicker
-							onChange={handleDatesChange}
-							format="DD/MM/YYYY"
-							multiple
-							weekDays={weekDays}
-							months={months}
-							minDate={new Date()}
-							style={{
-								border: '1px solid #d1d5db',
-								borderRadius: '4px',
-								padding: '8px',
-								height: '40px',
-							}}
-							placeholder="Datas *"
+							placeholder={LANGUAGES[state.lang].subscription.complement}
+							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
-						<select
-							onChange={(e) => setFormEvent({ ...formEvent, plan: e.target.value })}
-							placeholder="Selecione o Plano *"
-							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-						>
-							<option value="">Selecione *</option>
-							<option value="Básico">Básico - R$ 500,00</option>
-							<option value="Avançado">Avançado - R$ 800,00</option>
-							<option value="Pró">Pró - R$ 1.500,00</option>
-						</select>
-					</div>
-					<div className="w-full md:w-6/12 mb-4">
 						<input
 							value={formEvent.referralCode || ''}
 							onChange={(e) => setFormEvent({ ...formEvent, referralCode: e.target.value })}
 							type="text"
-							placeholder="Código de Referência"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+							placeholder={LANGUAGES[state.lang].subscription.referralCode}
+							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
-					<div className="w-full mb-4">
+					<div className="w-full md:w-6/12 mb-4">
 						<input
-							onChange={(e) => handleFile(e)}
 							type="file"
-							placeholder="Logo"
+							id="files"
+							className="hidden"
+							onChange={(e) => handleFile(e)}
 							accept=".jpg,.jpeg,.png,image/png,image/jpeg"
-							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
+						<label
+							htmlFor="files"
+							className="relative file:hidden bg-white block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+						>
+							<i className="bx bx-file-find text-2xl absolute top-1 right-1" />
+							{fileName}
+						</label>
 					</div>
 					<div className="w-full flex justify-center">
 						<button
@@ -380,7 +340,7 @@ export default function NewEvent() {
 							onClick={() => handleAdd()}
 							className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md transition duration-150 ease-in-out"
 						>
-							Adicionar Novo Evento
+							{LANGUAGES[state.lang].subscription.add}
 						</button>
 					</div>
 				</div>

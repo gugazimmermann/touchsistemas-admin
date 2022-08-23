@@ -5,11 +5,11 @@ import slugify from 'slugify';
 import { CSVLink } from 'react-csv';
 import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../../graphql/queries';
-import { AppContext } from '../../../context';
-import { Loading, Alert, LoadingIcon } from '../../../components';
-import { translatePlan } from '../../../helpers';
-import { ROUTES } from '../../../constants';
+import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../graphql/queries';
+import { AppContext } from '../../context';
+import { Loading, Alert, LoadingIcon } from '../../components';
+import { translatePlan } from '../../helpers';
+import { ROUTES } from '../../constants';
 
 export default function EventDetail() {
 	const params = useParams();

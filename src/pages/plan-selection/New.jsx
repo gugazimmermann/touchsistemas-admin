@@ -1,10 +1,11 @@
 import { useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { AppContext } from '../../../context';
-import { PLANS, ROUTES } from '../../../constants';
-import NewSubscription from './SubscriptionForm';
+import { AppContext } from '../../context';
+import { PLANS, ROUTES } from '../../constants';
+import SubscriptionForm from '../subscriptions/SubscriptionForm';
+import EventForm from '../events/EventForm';
 
-export default function NewEvent() {
+export default function New() {
 	const navigate = useNavigate();
 	const params = useParams();
 	const { state } = useContext(AppContext);
@@ -15,7 +16,7 @@ export default function NewEvent() {
 	}, [params]);
 
 	if (params.type.toLocaleUpperCase() === PLANS.SUBSCRIPTION) {
-		return <NewSubscription />;
+		return <SubscriptionForm />;
 	}
-	return <NewEvent />;
+	return <EventForm />;
 }

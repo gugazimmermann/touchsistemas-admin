@@ -1,4 +1,13 @@
-export default function ConfirmationDialog({ open, setOpen, handleConfirm, icon, cancelText, confirmText, children }) {
+export default function ConfirmationDialog({
+	open,
+	setOpen,
+	handleConfirm,
+	icon,
+	cancelText,
+	confirmText,
+	confirmColor,
+	children,
+}) {
 	return (
 		<div
 			className={`${
@@ -25,7 +34,9 @@ export default function ConfirmationDialog({ open, setOpen, handleConfirm, icon,
 								</button>
 								<button
 									type="button"
-									className="text-white bg-danger font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+									className={`text-white bg-${
+										confirmColor || 'danger'
+									} font-bold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center`}
 									onClick={() => handleConfirm()}
 								>
 									{confirmText}

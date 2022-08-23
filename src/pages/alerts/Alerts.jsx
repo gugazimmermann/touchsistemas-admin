@@ -8,7 +8,9 @@ import { LANGUAGES, ROUTES } from '../../constants';
 export default function Alerts() {
 	const { state, dispatch } = useContext(AppContext);
 
-	const profileLink = () => <Link className="pl-2" to={ROUTES[state.lang].PROFILE}>{` ${LANGUAGES[state.lang].alerts.clickHere}`}</Link>;
+	const profileLink = () => (
+		<Link className="pl-2" to={ROUTES[state.lang].PROFILE}>{` ${LANGUAGES[state.lang].alerts.clickHere}`}</Link>
+	);
 
 	function handleAlertType(type) {
 		switch (type) {
@@ -33,7 +35,7 @@ export default function Alerts() {
 	}
 
 	function handleClose(index) {
-		const cloneAlerts = state.alerts.map((a, i) => i !== index ? a : null).filter(a => a);
+		const cloneAlerts = state.alerts.map((a, i) => (i !== index ? a : null)).filter((a) => a);
 		dispatch({ type: 'UPDATE_ALERT', payload: cloneAlerts });
 	}
 
@@ -41,7 +43,12 @@ export default function Alerts() {
 		state.alerts &&
 		state.alerts.length > 0 &&
 		state.alerts.map((a, i) => (
-			<Alert key={i} index={i} type={handleAlertType(a.type)} close={(a.type !== 'register' && a.type !== 'owner' ? handleClose : null)}>
+			<Alert
+				key={i}
+				index={i}
+				type={handleAlertType(a.type)}
+				close={a.type !== 'register' && a.type !== 'owner' ? handleClose : null}
+			>
 				{a.message}
 				{handleAlertLink(a.type)}
 			</Alert>

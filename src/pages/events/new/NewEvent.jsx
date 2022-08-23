@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
 import { partnersByReferralCode } from '../../../graphql/queries';
 import { createEvent } from '../../../graphql/mutations';
+import { AppContext } from '../../../context';
 import { Loading, Alert, Title } from '../../../components';
 import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../../helpers';
+import { ROUTES } from '../../../constants';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const months = [
@@ -43,6 +45,7 @@ const initial = {
 export default function NewEvent() {
 	const navigate = useNavigate();
 	const [client, loadClient] = useOutletContext();
+	const { state } = useContext(AppContext);
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -204,7 +207,7 @@ export default function NewEvent() {
 		loadClient();
 		setFormEvent(initial);
 		setLoading(false);
-		navigate(`/eventos/${newEvent.id}`, { state: { success: true } });
+		navigate(`${ROUTES[state.lang].EVENTS}/${newEvent.id}`, { state: { success: true } });
 		return true;
 	}
 

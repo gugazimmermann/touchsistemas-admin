@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import slugify from 'slugify';
@@ -6,13 +6,16 @@ import { CSVLink } from 'react-csv';
 import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../../graphql/queries';
+import { AppContext } from '../../../context';
 import { Loading, Alert, LoadingIcon } from '../../../components';
 import { translatePlan } from '../../../helpers';
+import { ROUTES } from '../../../constants';
 
 export default function EventDetail() {
 	const params = useParams();
 	const location = useLocation();
 	const navigate = useNavigate();
+	const { state } = useContext(AppContext);
 	const [success] = useState(location?.state?.success || null);
 	const [loading, setLoading] = useState(false);
 	const [event, setEvent] = useState();
@@ -127,7 +130,8 @@ export default function EventDetail() {
 	}
 
 	function handleDashboard() {
-		if (event.visitorsInfo.total) navigate(`/dashboard/${event.id}`, { state: { event, visitors } });
+		if (event.visitorsInfo.total)
+			navigate(`${ROUTES[state.lang].DASHBOARD}/${event.id}`, { state: { event, visitors } });
 	}
 
 	function formatAddress(o) {

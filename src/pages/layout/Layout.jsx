@@ -5,7 +5,7 @@ import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { decodeCookie } from '../../helpers/cookies';
 import { AppContext } from '../../context';
-import { ROUTES, LANGUAGES} from '../../constants';
+import { ROUTES, LANGUAGES } from '../../constants';
 import { Loading } from '../../components';
 import Nav from './nav/Nav';
 
@@ -34,9 +34,9 @@ export default function Layout() {
 		} = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
 		setClient(getClient);
 		const alerts = [];
-		if (!getClient.phone)
-			alerts.push({ type: 'register', message: LANGUAGES[state.lang].alerts.register });
-		if (getClient.Owners.items.length === 0) alerts.push({ type: 'owner', message: LANGUAGES[state.lang].alerts.owner });
+		if (!getClient.phone) alerts.push({ type: 'register', message: LANGUAGES[state.lang].alerts.register });
+		if (getClient.Owners.items.length === 0)
+			alerts.push({ type: 'owner', message: LANGUAGES[state.lang].alerts.owner });
 		dispatch({ type: 'UPDATE_ALERT', payload: alerts });
 		if (alerts.length) navigate(ROUTES[state.lang].ALERTS);
 		setLoading(false);

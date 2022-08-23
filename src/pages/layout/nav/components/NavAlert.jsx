@@ -5,7 +5,7 @@ import { ROUTES } from '../../../../constants';
 
 export default function NavAlert({ alerts }) {
 	const { state } = useContext(AppContext);
-	
+
 	return (
 		<div className="relative">
 			{alerts ? (

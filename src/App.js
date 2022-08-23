@@ -18,7 +18,7 @@ const Alerts = lazy(() => import('./pages/alerts/Alerts'));
 const DashboardEvent = lazy(() => import('./pages/dashboard/Event/DashboardEvent'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
 const Payments = lazy(() => import('./pages/profile/payments/Payments'));
-const PlanSelection = lazy(() => import('./pages/events/new/PlanSelection'));
+const PlanSelection = lazy(() => import('./pages/planSelection/PlanSelection'));
 const Event = lazy(() => import('./pages/events/detail/EventDetail'));
 
 function App() {

@@ -91,5 +91,5 @@ export default function Events() {
 			</>
 		);
 	}
-	return <h1 className='font-bold text-lg text-center mt-4'>{LANGUAGES[state.lang].noRecords}</h1>;
+	return <h1 className="font-bold text-lg text-center mt-4">{LANGUAGES[state.lang].noRecords}</h1>;
 }

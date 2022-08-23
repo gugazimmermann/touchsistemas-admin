@@ -1,9 +1,9 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './reducers';
 
-const initialState = { 
+const initialState = {
 	lang: 'br',
-	alerts: []
+	alerts: [],
 };
 
 const getInitialStaste = () =>

@@ -1,6 +1,67 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getPlan = /* GraphQL */ `
+  query GetPlan($id: ID!) {
+    getPlan(id: $id) {
+      id
+      type
+      name
+      detail
+      price
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPlans = /* GraphQL */ `
+  query ListPlans(
+    $filter: ModelPlanFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        name
+        detail
+        price
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const plansByType = /* GraphQL */ `
+  query PlansByType(
+    $type: PlansTypes!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPlanFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    plansByType(
+      type: $type
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        name
+        detail
+        price
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getOwner = /* GraphQL */ `
   query GetOwner($id: ID!) {
     getOwner(id: $id) {

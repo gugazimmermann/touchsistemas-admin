@@ -101,7 +101,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	function renderForm() {
 		return (
-			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow">
+			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow-md">
 				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
 						value={!update ? owner?.name : selected?.name}
@@ -145,7 +145,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 						}}
 						className={`${
 							!update ? 'bg-primary' : 'bg-warning'
-						} px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out`}
+						} px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md transition duration-150 ease-in-out`}
 					>
 						{`${!update ? LANGUAGES[state.lang].profile.addOwner : LANGUAGES[state.lang].profile.updateOwner} ${
 							LANGUAGES[state.lang].profile.owner

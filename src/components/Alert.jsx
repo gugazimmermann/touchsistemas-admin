@@ -8,7 +8,7 @@ export default function Alert({ index, type, close, children }) {
 	};
 	return (
 		<div
-			className={`${seeType(type)} relative mb-2 rounded-lg py-3 px-4 flex items-center shadow font-bold`}
+			className={`${seeType(type)} relative mb-2 rounded-lg p-1.5 flex items-center shadow-md`}
 			role="alert"
 		>
 			{close && (

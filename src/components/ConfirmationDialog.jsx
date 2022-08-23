@@ -16,7 +16,7 @@ export default function ConfirmationDialog({
 		>
 			<div className="flex justify-center items-center w-full h-full">
 				<div className="relative w-full max-w-md md:h-auto">
-					<div className="relative bg-white mx-4 sm:mx-0 rounded-lg shadow">
+					<div className="relative bg-white mx-4 sm:mx-0 rounded-lg shadow-md">
 						<button type="button" className="absolute top-1 right-1" onClick={() => setOpen(!open)}>
 							<i className="bx bx-x text-2xl" />
 							<span className="sr-only">Close modal</span>

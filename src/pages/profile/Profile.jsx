@@ -209,7 +209,7 @@ export default function Profile() {
 			{loading && <Loading />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
 			<Title text={LANGUAGES[state.lang].profile.title} />
-			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow">
+			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow-md">
 				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
 						value={formClient.name || ''}
@@ -363,7 +363,7 @@ export default function Profile() {
 					<button
 						type="button"
 						onClick={() => handleUpdate()}
-						className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out"
+						className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md transition duration-150 ease-in-out"
 					>
 						{LANGUAGES[state.lang].profile.update}
 					</button>

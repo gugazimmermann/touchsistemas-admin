@@ -49,7 +49,7 @@ export default function Payments() {
 			<>
 				<Title text={LANGUAGES[state.lang].payments.title} />
 				<div className="overflow-x-auto">
-					<table className="items-center w-full rounded-md bg-white shadow border-collapse mb-4">
+					<table className="items-center w-full rounded-md bg-white shadow-md border-collapse mb-4">
 						<thead>
 							<tr>
 								{titles.map((t) => (
@@ -95,7 +95,7 @@ export default function Payments() {
 			<>
 				<Title text={LANGUAGES[state.lang].payments.creditCards} />
 				<div className="overflow-x-auto">
-					<table className="items-center w-full rounded-md bg-white shadow border-collapse mb-4">
+					<table className="items-center w-full rounded-md bg-white shadow-md border-collapse mb-4">
 						<thead>
 							<tr>
 								<th className="p-2 text-secondary border-b border-solid border-secondary whitespace-nowrap text-left  text-sm font-normal">

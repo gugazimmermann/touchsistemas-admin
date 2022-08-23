@@ -10,7 +10,17 @@ export enum MethodTypes {
   EMAIL = "EMAIL"
 }
 
+export enum PlansTypes {
+  BASIC = "BASIC",
+  ADVANCED = "ADVANCED",
+  SUBSCRIPTION = "SUBSCRIPTION"
+}
 
+
+
+type PlanMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
 
 type OwnerMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -34,6 +44,18 @@ type SurveyMetaData = {
 
 type VisitorMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+export declare class Plan {
+  readonly id: string;
+  readonly type: PlansTypes | keyof typeof PlansTypes;
+  readonly name?: string | null;
+  readonly detail?: string | null;
+  readonly price?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Plan, PlanMetaData>);
+  static copyOf(source: Plan, mutator: (draft: MutableModel<Plan, PlanMetaData>) => MutableModel<Plan, PlanMetaData> | void): Plan;
 }
 
 export declare class Owner {
@@ -75,7 +97,7 @@ export declare class Client {
 export declare class Event {
   readonly id: string;
   readonly referralCode?: string | null;
-  readonly plan: string;
+  readonly plan: PlansTypes | keyof typeof PlansTypes;
   readonly method: MethodTypes | keyof typeof MethodTypes;
   readonly name: string;
   readonly website?: string | null;

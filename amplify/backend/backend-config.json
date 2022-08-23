@@ -111,6 +111,14 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasListPlans",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
     }
@@ -224,6 +232,27 @@
       ]
     },
     "touchsistemasadminEventsVisitorsPoDGetByPhone": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "touchsistemasadminGraphQL",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "touchsistemasadmintouchsistemasadminLambdaLayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "touchsistemasListPlans": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

@@ -1,5 +1,97 @@
 export const schema = {
     "models": {
+        "Plan": {
+            "name": "Plan",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": {
+                        "enum": "PlansTypes"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "detail": {
+                    "name": "detail",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "price": {
+                    "name": "price",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Plans",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byType",
+                        "queryField": "plansByType",
+                        "fields": [
+                            "type"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Owner": {
             "name": "Owner",
             "fields": {
@@ -313,7 +405,9 @@ export const schema = {
                 "plan": {
                     "name": "plan",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "enum": "PlansTypes"
+                    },
                     "isRequired": true,
                     "attributes": []
                 },
@@ -1085,8 +1179,16 @@ export const schema = {
                 "SMS",
                 "EMAIL"
             ]
+        },
+        "PlansTypes": {
+            "name": "PlansTypes",
+            "values": [
+                "BASIC",
+                "ADVANCED",
+                "SUBSCRIPTION"
+            ]
         }
     },
     "nonModels": {},
-    "version": "e4645befe9c7b88a4171b42bd56462dd"
+    "version": "752067494a671c6436a466bbd3d1fc44"
 };

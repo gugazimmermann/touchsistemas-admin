@@ -45,6 +45,10 @@
         "touchsistemasadminEventsVisitorsPoDGetByPhone": {
           "deploymentBucketName": "amplify-touchsistemasadmin-dev-115403-deployment",
           "s3Key": "amplify-builds/touchsistemasadminEventsVisitorsPoDGetByPhone-30466b61354c686d2b4d-build.zip"
+        },
+        "touchsistemasListPlans": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-115403-deployment",
+          "s3Key": "amplify-builds/touchsistemasListPlans-654e68796c54594c514f-build.zip"
         }
       }
     }

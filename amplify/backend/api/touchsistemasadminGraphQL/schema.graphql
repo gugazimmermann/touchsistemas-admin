@@ -19,7 +19,7 @@ type Plan @model @auth(rules: [{ allow: public }]) {
 	type: PlansTypes! @index(name: "byType", queryField: "plansByType")
 	name: AWSJSON
 	detail: AWSJSON
-	price: String
+	price: AWSJSON
 }
 
 type Owner @model @auth(rules: [{ allow: public }]) {

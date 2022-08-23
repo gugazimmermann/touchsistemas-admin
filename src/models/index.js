@@ -12,9 +12,16 @@ const MethodTypes = {
   "EMAIL": "EMAIL"
 };
 
-const { Owner, Client, Event, Partner, Survey, Visitor } = initSchema(schema);
+const PlansTypes = {
+  "BASIC": "BASIC",
+  "ADVANCED": "ADVANCED",
+  "SUBSCRIPTION": "SUBSCRIPTION"
+};
+
+const { Plan, Owner, Client, Event, Partner, Survey, Visitor } = initSchema(schema);
 
 export {
+  Plan,
   Owner,
   Client,
   Event,
@@ -22,5 +29,6 @@ export {
   Survey,
   Visitor,
   SurveyTypes,
-  MethodTypes
+  MethodTypes,
+  PlansTypes
 };

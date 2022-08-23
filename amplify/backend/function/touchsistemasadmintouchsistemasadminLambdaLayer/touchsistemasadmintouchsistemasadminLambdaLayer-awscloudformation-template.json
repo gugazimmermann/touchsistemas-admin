@@ -20,7 +20,7 @@
     }
   },
   "Resources": {
-    "LambdaLayerVersion9ad3f98c": {
+    "LambdaLayerVersionbcbf7328": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": [
@@ -30,9 +30,9 @@
           "S3Bucket": {
             "Ref": "deploymentBucketName"
           },
-          "S3Key": "amplify-builds/touchsistemasadmintouchsistemasadminLambdaLayer-LambdaLayerVersion9ad3f98c-build.zip"
+          "S3Key": "amplify-builds/touchsistemasadmintouchsistemasadminLambdaLayer-LambdaLayerVersionbcbf7328-build.zip"
         },
-        "Description": "Updated layer version 2022-08-23T10:55:25.507Z",
+        "Description": "Updated layer version 2022-08-23T14:47:26.495Z",
         "LayerName": {
           "Fn::Sub": [
             "touchsistemasadmintouchsistemasadminLambdaLayer-${env}",
@@ -47,19 +47,19 @@
       "DeletionPolicy": "Delete",
       "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionAwsAccounts4944581238669ad3f98c": {
+    "LambdaLayerPermissionAwsAccounts494458123866bcbf7328": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:23",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:26",
         "Principal": "494458123866"
       }
     },
-    "LambdaLayerPermissionPrivate9ad3f98c": {
+    "LambdaLayerPermissionPrivatebcbf7328": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:23",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:494458123866:layer:touchsistemasadmintouchsistemasadminLambdaLayer-dev:26",
         "Principal": {
           "Ref": "AWS::AccountId"
         }
@@ -87,7 +87,7 @@
   "Outputs": {
     "Arn": {
       "Value": {
-        "Ref": "LambdaLayerVersion9ad3f98c"
+        "Ref": "LambdaLayerVersionbcbf7328"
       }
     }
   }

@@ -18,7 +18,7 @@ const PlansTypes = {
   "SUBSCRIPTION": "SUBSCRIPTION"
 };
 
-const { Plan, Owner, Client, Event, Partner, Survey, Visitor } = initSchema(schema);
+const { Plan, Owner, Client, Event, Partner, Subscriptions, Survey, Visitor } = initSchema(schema);
 
 export {
   Plan,
@@ -26,6 +26,7 @@ export {
   Client,
   Event,
   Partner,
+  Subscriptions,
   Survey,
   Visitor,
   SurveyTypes,

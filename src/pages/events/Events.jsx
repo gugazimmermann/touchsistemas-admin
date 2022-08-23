@@ -78,18 +78,19 @@ export default function Events() {
 	}, [client]);
 
 	if (loading) return <Loading />;
-	if (events.length) {
-		return (
-			<>
-				<Title text="Eventos" />
+	return (
+		<>
+			<Title text="Eventos" />
+			{events.length === 0 ? (
+				<h1 className="font-bold text-lg text-center mt-4">{LANGUAGES[state.lang].noRecords}</h1>
+			) : (
 				<Grid>
 					{events.map((event) => (
 						<EventCard key={event.id} event={event} />
 					))}
 					{map && <MapCard map={map} />}
 				</Grid>
-			</>
-		);
-	}
-	return <h1 className="font-bold text-lg text-center mt-4">{LANGUAGES[state.lang].noRecords}</h1>;
+			)}
+		</>
+	);
 }

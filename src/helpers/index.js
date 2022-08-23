@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { PLANS } from '../constants';
 
 export const showLink = (state) => !state.alerts.filter((a) => a.type === 'register' || a.type === 'owner').length;
 
@@ -102,14 +103,10 @@ export function orderEventsByLastDay(events, sort = 'DESC') {
 
 // TODO: handle better the plans
 export function translatePlan(plan) {
-	return plan === 'BASIC' ? 'Básico' : plan === 'ADVANCED' ? 'Avançado' : 'Assinatura';
+	return plan === PLANS.BASIC ? 'Básico' : plan === PLANS.ADVANCED ? 'Avançado' : 'Assinatura';
 }
 
 // TODO: handle better the plans
 export function plansValues(plan) {
-	return plan === 'BASIC' ? 250 : plan === 'ADVANCED' ? 500 : 250;
-}
-
-export function translatePlanUrl(plan) {
-	return plan === 'BASIC' ? 'basico' : plan === 'ADVANCED' ? 'avancado' : 'assinatura';
+	return plan === PLANS.BASIC ? 250 : plan === PLANS.ADVANCED ? 500 : 250;
 }

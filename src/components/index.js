@@ -6,4 +6,6 @@ export { default as Grid } from './Grid';
 export { default as Loading } from './Loading';
 export { default as LoadingIcon } from './LoadingIcon';
 export { default as MapCard } from './MapCard';
+export { default as SubscriptionCard } from './SubscriptionCard';
 export { default as Title } from './Title';
+export { default as Uploading } from './Uploading';

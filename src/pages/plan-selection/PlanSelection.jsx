@@ -2,19 +2,21 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listPlans } from '../../graphql/queries';
-import { PLANS, LANGUAGES } from '../../constants';
+import { PLANS, LANGUAGES, ROUTES } from '../../constants';
 import { AppContext } from '../../context';
-import { translatePlanUrl } from '../../helpers';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
+import { Loading } from '../../components';
 
 export default function PlanSelection() {
 	const navigate = useNavigate();
 	const { state } = useContext(AppContext);
+	const [loading, setLoading] = useState(false);
 	const [plans, setPlans] = useState();
 	const [open, setOpen] = useState(false);
 	const [planModal, setPlanModal] = useState();
 
 	async function getPlans() {
+		setLoading(true)
 		const {
 			data: {
 				listPlans: { items },
@@ -37,6 +39,7 @@ export default function PlanSelection() {
 			});
 		});
 		setPlans(formatPlans);
+		setLoading(false)
 	}
 
 	function plansCardInfo(type) {
@@ -65,7 +68,8 @@ export default function PlanSelection() {
 	}
 
 	function choosePlan(p) {
-		navigate(`/cadastrar/${translatePlanUrl(p)}`);
+		// TODO: traduzir roda
+		navigate(`${ROUTES[state.lang].NEW}/${p.toLocaleLowerCase()}`);
 	}
 
 	function handlePlanInfo(p) {
@@ -83,7 +87,7 @@ export default function PlanSelection() {
 	function renderPlanCard(p) {
 		const cardInfo = plansCardInfo(p.type);
 		return (
-			<div className="relative shadow text-center bg-white">
+			<div className="relative shadow-md text-center bg-white">
 				<button type="button" onClick={() => handlePlanInfo(p)} className="absolute top-2 right-2 text-slate-500 z-10">
 					<i className="bx bxs-info-circle text-3xl" />
 				</button>
@@ -140,6 +144,8 @@ export default function PlanSelection() {
 		}
 		return null;
 	}
+
+	if (loading) return <Loading />;
 
 	return (
 		<div className="grid sm:grid-cols-3 gap-4">

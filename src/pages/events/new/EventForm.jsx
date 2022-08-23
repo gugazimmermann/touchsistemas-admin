@@ -1,12 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { partnersByReferralCode } from '../../graphql/queries';
-import { createEvent } from '../../graphql/mutations';
-import { Loading, Alert, Title } from '../../components';
-import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers';
+import DatePicker from 'react-multi-date-picker';
+import moment from 'moment';
+import { partnersByReferralCode } from '../../../graphql/queries';
+import { createEvent } from '../../../graphql/mutations';
+import { AppContext } from '../../../context';
+import { Loading, Alert, Title } from '../../../components';
+import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../../helpers';
+import { ROUTES } from '../../../constants';
+
+const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+const months = [
+	'Janeiro',
+	'Fevereiro',
+	'Março',
+	'Abril',
+	'Maio',
+	'Junho',
+	'Julho',
+	'Agosto',
+	'Setembro',
+	'Outubro',
+	'Novembro',
+	'Dezembro',
+];
 
 const initial = {
+	referralCode: '',
+	plan: '',
 	name: '',
 	website: '',
 	email: '',
@@ -16,32 +38,38 @@ const initial = {
 	street: '',
 	number: '',
 	complement: '',
-	plan: '',
-	referralCode: '',
-	logo: '',
+	description: '',
+	dates: '',
 };
 
-export default function SubscriptionsForm() {
+export default function NewEvent() {
 	const navigate = useNavigate();
 	const [client, loadClient] = useOutletContext();
+	const { state } = useContext(AppContext);
 	const [error, setError] = useState(false);
-	const [errorMsg, setErrorMsg] = useState();
+	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [formSubscription, setFormSubscription] = useState(initial);
-	const [subscriptionLogo, setSubscriptionLogo] = useState();
+	const [formEvent, setFormEvent] = useState(initial);
+	const [eventLogo, setEventLogo] = useState();
+
+	function handleDatesChange(value) {
+		const dates = value.toString().split(',');
+		const fomartedDates = dates.map((d) => moment(d, 'DD-MM-YYYY').format('YYYY-MM-DD'));
+		setFormEvent({ ...formEvent, dates: fomartedDates });
+	}
 
 	function handleChangeCEP(value) {
-		setFormSubscription({ ...formSubscription, zipCode: normalizeCEP(value) });
+		setFormEvent({ ...formEvent, zipCode: normalizeCEP(value) });
 	}
 
 	async function getAddress() {
-		setErrorMsg();
+		setErrorMsg('');
 		setError(false);
 		setLoading(true);
 		try {
-			const address = await getAddressFromCEP(formSubscription.zipCode.replace(/\D/g, ''));
-			setSubscriptionLogo({
-				...formSubscription,
+			const address = await getAddressFromCEP(formEvent.zipCode.replace(/\D/g, ''));
+			setFormEvent({
+				...formEvent,
 				state: address.state,
 				city: address.city,
 				street: address.street,
@@ -54,16 +82,16 @@ export default function SubscriptionsForm() {
 	}
 
 	useEffect(() => {
-		if (formSubscription?.zipCode?.length === 10) getAddress();
-	}, [formSubscription.zipCode]);
+		if (formEvent?.zipCode?.length === 10) getAddress();
+	}, [formEvent.zipCode]);
 
 	function handleFile(e) {
 		setErrorMsg('');
 		setError(false);
 		if (e.target.files && e.target.files.length) {
 			const file = e.target.files[0];
-			if (file.size > 1024 * 1024 * 2) {
-				setErrorMsg('Imagem pode ter no máximo 2mb!');
+			if (file.size > 500 * 1024) {
+				setErrorMsg('Imagem pode ter no máximo 1mb!');
 				setError(true);
 				setLoading(false);
 				return null;
@@ -85,7 +113,7 @@ export default function SubscriptionsForm() {
 			setErrorMsg('');
 			setError(false);
 			setLoading(false);
-			setSubscriptionLogo(file);
+			setEventLogo(file);
 		}
 		setErrorMsg('');
 		setError(false);
@@ -97,17 +125,19 @@ export default function SubscriptionsForm() {
 		const { data } = await API.graphql(
 			graphqlOperation(createEvent, {
 				input: {
-					name: formSubscription.name,
-					website: formSubscription.website || null,
-					email: formSubscription.email || null,
-					zipCode: formSubscription.zipCode,
-					state: formSubscription.state,
-					city: formSubscription.city,
-					street: formSubscription.street,
-					number: formSubscription.number,
-					complement: formSubscription.complement,
-					referralCode: formSubscription.referralCode || null,
-					plan: formSubscription.plan,
+					referralCode: formEvent.referralCode || null,
+					plan: formEvent.plan,
+					name: formEvent.name,
+					website: formEvent.website || null,
+					email: formEvent.email || null,
+					zipCode: formEvent.zipCode,
+					state: formEvent.state,
+					city: formEvent.city,
+					street: formEvent.street,
+					number: formEvent.number,
+					complement: formEvent.complement,
+					description: formEvent.description,
+					dates: formEvent.dates,
 					clientID: client.id,
 					partnerID,
 				},
@@ -131,8 +161,8 @@ export default function SubscriptionsForm() {
 	}
 
 	async function addEventLogo(newEvent) {
-		await Storage.put(`logo/${newEvent.id}.${subscriptionLogo.name.split('.').pop()}`, subscriptionLogo, {
-			contentType: subscriptionLogo.type,
+		await Storage.put(`logo/${newEvent.id}.${eventLogo.name.split('.').pop()}`, eventLogo, {
+			contentType: eventLogo.type,
 		});
 	}
 
@@ -140,28 +170,28 @@ export default function SubscriptionsForm() {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
-		if (!formSubscription.name || !formSubscription.zipCode || !formSubscription.state || !formSubscription.city) {
+		if (!formEvent.plan || !formEvent.name || !formEvent.zipCode || !formEvent.state || !formEvent.city) {
 			setErrorMsg('Preencha todos os dados assinalados!');
 			setError(true);
 			setLoading(false);
 			return null;
 		}
-		if (formSubscription.email && !validateEmail(formSubscription.email)) {
+		if (formEvent.email && !validateEmail(formEvent.email)) {
 			setErrorMsg('Email inválido!');
 			setError(true);
 			setLoading(false);
 			return null;
 		}
-		if (formSubscription.zipCode.length < 10) {
+		if (formEvent.zipCode.length < 10) {
 			setErrorMsg('CEP inválido!');
 			setError(true);
 			setLoading(false);
 			return null;
 		}
 		let partnerID = null;
-		if (formSubscription.referralCode) {
+		if (formEvent.referralCode) {
 			const getPartner = await API.graphql(
-				graphqlOperation(partnersByReferralCode, { referralCode: formSubscription.referralCode })
+				graphqlOperation(partnersByReferralCode, { referralCode: formEvent.referralCode })
 			);
 			if (getPartner?.data?.partnersByReferralCode?.items.length <= 0) {
 				setErrorMsg('Parceiro não encontrado!');
@@ -171,13 +201,13 @@ export default function SubscriptionsForm() {
 			}
 			partnerID = getPartner.data.partnersByReferralCode.items[0].id;
 		}
-		const newSubscription = await graphCreateEvent(partnerID);
-		if (subscriptionLogo) await addEventLogo(newSubscription);
-		await addEventMap(newSubscription);
+		const newEvent = await graphCreateEvent(partnerID);
+		if (eventLogo) await addEventLogo(newEvent);
+		await addEventMap(newEvent);
 		loadClient();
-		setFormSubscription(initial);
+		setFormEvent(initial);
 		setLoading(false);
-		navigate(`/assinaturas/${newSubscription.id}`, { state: { success: true } });
+		navigate(`${ROUTES[state.lang].EVENTS}/${newEvent.id}`, { state: { success: true } });
 		return true;
 	}
 
@@ -185,13 +215,13 @@ export default function SubscriptionsForm() {
 		<>
 			{loading && <Loading />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
-			<Title text="Nova Assinatura" />
-			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow">
+			<Title text="Novo Evento" />
+			<form>
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
-							value={formSubscription.name || ''}
-							onChange={(e) => setFormSubscription({ ...formSubscription, name: e.target.value })}
+							value={formEvent.name || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, name: e.target.value })}
 							type="text"
 							placeholder="Nome *"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -199,8 +229,8 @@ export default function SubscriptionsForm() {
 					</div>
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
-							value={formSubscription.website || ''}
-							onChange={(e) => setFormSubscription({ ...formSubscription, website: e.target.value })}
+							value={formEvent.website || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, website: e.target.value })}
 							type="text"
 							placeholder="WebSite"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -208,8 +238,8 @@ export default function SubscriptionsForm() {
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
 						<input
-							value={formSubscription.email || ''}
-							onChange={(e) => setFormSubscription({ ...formSubscription, email: e.target.value })}
+							value={formEvent.email || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, email: e.target.value })}
 							type="email"
 							placeholder="Email"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -217,7 +247,7 @@ export default function SubscriptionsForm() {
 					</div>
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
-							value={formSubscription.zipCode || ''}
+							value={formEvent.zipCode || ''}
 							onChange={(e) => handleChangeCEP(e.target.value)}
 							type="text"
 							placeholder="CEP *"
@@ -226,8 +256,8 @@ export default function SubscriptionsForm() {
 					</div>
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
-							value={formSubscription.city || ''}
-							onChange={(e) => setFormSubscription({ ...formSubscription, city: e.target.value })}
+							value={formEvent.city || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, city: e.target.value })}
 							type="text"
 							placeholder="Cidade *"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -235,12 +265,12 @@ export default function SubscriptionsForm() {
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
 						<select
-							value={formSubscription.state || ''}
-							onChange={(e) => setFormSubscription({ ...formSubscription, state: e.target.value })}
-							placeholder="Estado *"
+							value={formEvent.state || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, state: e.target.value })}
+							placeholder="Estado"
 							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						>
-							<option value="">Selecione *</option>
+							<option value="">Selecione</option>
 							<option value="AC">Acre</option>
 							<option value="AL">Alagoas</option>
 							<option value="AP">Amapá</option>
@@ -272,8 +302,8 @@ export default function SubscriptionsForm() {
 					</div>
 					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<input
-							value={formSubscription.street || ''}
-							onChange={(e) => setFormSubscription({ ...formSubscription, street: e.target.value })}
+							value={formEvent.street || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, street: e.target.value })}
 							type="text"
 							placeholder="Rua"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -281,8 +311,8 @@ export default function SubscriptionsForm() {
 					</div>
 					<div className="w-full md:w-3/12 sm:pr-4 mb-4">
 						<input
-							value={formSubscription.number || ''}
-							onChange={(e) => setFormSubscription({ ...formSubscription, number: e.target.value })}
+							value={formEvent.number || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, number: e.target.value })}
 							type="text"
 							placeholder="Número"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -290,29 +320,46 @@ export default function SubscriptionsForm() {
 					</div>
 					<div className="w-full md:w-3/12 mb-4">
 						<input
-							value={formSubscription.complement || ''}
-							onChange={(e) => setFormSubscription({ ...formSubscription, complement: e.target.value })}
+							value={formEvent.complement || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, complement: e.target.value })}
 							type="text"
 							placeholder="Complemento"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						/>
 					</div>
+					<div className="w-full mb-4">
+						<DatePicker
+							onChange={handleDatesChange}
+							format="DD/MM/YYYY"
+							multiple
+							weekDays={weekDays}
+							months={months}
+							minDate={new Date()}
+							style={{
+								border: '1px solid #d1d5db',
+								borderRadius: '4px',
+								padding: '8px',
+								height: '40px',
+							}}
+							placeholder="Datas *"
+						/>
+					</div>
 					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<select
-							onChange={(e) => setFormSubscription({ ...formSubscription, plan: e.target.value })}
+							onChange={(e) => setFormEvent({ ...formEvent, plan: e.target.value })}
 							placeholder="Selecione o Plano *"
 							className="bg-white block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-							disabled
 						>
-							<option value="SUBSCRIPTION" selected>
-								Assinatura - R$ 250,00 / Mensal
-							</option>
+							<option value="">Selecione *</option>
+							<option value="Básico">Básico - R$ 500,00</option>
+							<option value="Avançado">Avançado - R$ 800,00</option>
+							<option value="Pró">Pró - R$ 1.500,00</option>
 						</select>
 					</div>
 					<div className="w-full md:w-6/12 mb-4">
 						<input
-							value={formSubscription.referralCode || ''}
-							onChange={(e) => setFormSubscription({ ...formSubscription, referralCode: e.target.value })}
+							value={formEvent.referralCode || ''}
+							onChange={(e) => setFormEvent({ ...formEvent, referralCode: e.target.value })}
 							type="text"
 							placeholder="Código de Referência"
 							className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -331,9 +378,9 @@ export default function SubscriptionsForm() {
 						<button
 							type="button"
 							onClick={() => handleAdd()}
-							className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-lg focus:bg-secondary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-secondary active:shadow-lg transition duration-150 ease-in-out"
+							className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md transition duration-150 ease-in-out"
 						>
-							Cadastrar
+							Adicionar Novo Evento
 						</button>
 					</div>
 				</div>

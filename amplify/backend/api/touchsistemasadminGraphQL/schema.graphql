@@ -46,8 +46,30 @@ type Client @model @auth(rules: [{ allow: public }]) {
 	number: String
 	complement: String
 	eventsMap: Int
+	subscriptionsMap: Int
 	Owners: [Owner] @hasMany(indexName: "byClient", fields: ["id"])
 	Events: [Event] @hasMany(indexName: "byClient", fields: ["id"])
+	Subscriptions: [Subscriptions] @hasMany(indexName: "byClient", fields: ["id"])
+}
+
+type Subscriptions @model @auth(rules: [{ allow: public }]) {
+	id: ID!
+	referralCode: String
+	name: String!
+	website: AWSURL
+	email: AWSEmail
+	zipCode: String!
+	state: String! @index(name: "byState", queryField: "subscriptionsByState")
+	city: String!
+	street: String
+	number: String
+	complement: String
+	clientID: ID! @index(name: "byClient", queryField: "subscriptionsByClientID")
+	Client: Client @belongsTo
+	partnerID: ID @index(name: "byPartner", queryField: "subscriptionsByPartnerID")
+	Partner: Partner @belongsTo
+	Surveys: [Survey] @hasMany(indexName: "bySubscriptions", fields: ["id"])
+	Visitors: [Visitor] @hasMany(indexName: "bySubscriptions", fields: ["id"])
 }
 
 type Event @model @auth(rules: [{ allow: public }]) {
@@ -80,17 +102,18 @@ type Event @model @auth(rules: [{ allow: public }]) {
 
 type Partner @model @auth(rules: [{ allow: public }]) {
 	id: ID!
+	referralCode: String! @index(name: "byReferralCode", queryField: "partnersByReferralCode")
 	name: String!
 	contact: String!
 	email: AWSEmail!
 	phone: AWSPhone!
-	referralCode: String! @index(name: "byReferralCode", queryField: "partnersByReferralCode")
 	zipCode: String!
 	state: String! @index(name: "byState", queryField: "partnersByState")
 	city: String!
 	street: String
-	Events: [Event] @hasMany(indexName: "byPartner", fields: ["id"])
 	number: String
+	Events: [Event] @hasMany(indexName: "byPartner", fields: ["id"])
+	Subscriptions: [Subscriptions] @hasMany(indexName: "byPartner", fields: ["id"])
 }
 
 type Survey @model @auth(rules: [{ allow: public }]) {
@@ -101,6 +124,8 @@ type Survey @model @auth(rules: [{ allow: public }]) {
 	answers: AWSJSON!
 	EventID: ID! @index(name: "byEvent", queryField: "surveysByEventID")
 	Event: Event @belongsTo
+	SubscriptionsID: ID! @index(name: "bySubscriptions", queryField: "surveysBySubscriptionsID")
+	Subscriptions: Subscriptions @belongsTo
 }
 
 type Visitor @model @auth(rules: [{ allow: public }]) {
@@ -122,4 +147,6 @@ type Visitor @model @auth(rules: [{ allow: public }]) {
 	surveyAnswers: AWSJSON
 	EventID: ID! @index(name: "byEvent", queryField: "visitorsByEventID")
 	Event: Event @belongsTo
+	SubscriptionsID: ID! @index(name: "bySubscriptions", queryField: "visitorsBySubscriptionsID")
+	Subscriptions: Subscriptions @belongsTo
 }

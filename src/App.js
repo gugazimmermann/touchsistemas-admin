@@ -18,7 +18,9 @@ const Alerts = lazy(() => import('./pages/alerts/Alerts'));
 const DashboardEvent = lazy(() => import('./pages/dashboard/Event/DashboardEvent'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
 const Payments = lazy(() => import('./pages/profile/payments/Payments'));
-const PlanSelection = lazy(() => import('./pages/planSelection/PlanSelection'));
+const PlanSelection = lazy(() => import('./pages/plan-selection/PlanSelection'));
+const NewEvent = lazy(() => import('./pages/events/new/NewEvent'));
+const Subscriptions = lazy(() => import('./pages/subscriptions/Subscriptions'));
 const Event = lazy(() => import('./pages/events/detail/EventDetail'));
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
 						<Route path={ROUTES[state.lang].PROFILE} element={<Profile />} />
 						<Route path={`${ROUTES[state.lang].PAYMENTS}`} element={<Payments />} />
 						<Route path={`${ROUTES[state.lang].NEW}`} element={<PlanSelection />} />
+						<Route path={`${ROUTES[state.lang].NEW}/:type`} element={<NewEvent />} />
+						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}`} element={<Subscriptions />} />
 						<Route path={`${ROUTES[state.lang].EVENTS}/:id`} element={<Event />} />
 					</Route>
 				</Route>

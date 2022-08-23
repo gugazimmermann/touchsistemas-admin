@@ -38,6 +38,10 @@ type PartnerMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type SubscriptionsMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type SurveyMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -88,6 +92,7 @@ export declare class Client {
   readonly eventsMap?: number | null;
   readonly Owners?: (Owner | null)[] | null;
   readonly Events?: (Event | null)[] | null;
+  readonly Subscriptions?: (Subscriptions | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Client, ClientMetaData>);
@@ -128,21 +133,46 @@ export declare class Event {
 
 export declare class Partner {
   readonly id: string;
+  readonly referralCode: string;
   readonly name: string;
   readonly contact: string;
   readonly email: string;
   readonly phone: string;
-  readonly referralCode: string;
   readonly zipCode: string;
   readonly state: string;
   readonly city: string;
   readonly street?: string | null;
-  readonly Events?: (Event | null)[] | null;
   readonly number?: string | null;
+  readonly Events?: (Event | null)[] | null;
+  readonly Subscriptions?: (Subscriptions | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Partner, PartnerMetaData>);
   static copyOf(source: Partner, mutator: (draft: MutableModel<Partner, PartnerMetaData>) => MutableModel<Partner, PartnerMetaData> | void): Partner;
+}
+
+export declare class Subscriptions {
+  readonly id: string;
+  readonly referralCode?: string | null;
+  readonly name: string;
+  readonly website?: string | null;
+  readonly email?: string | null;
+  readonly zipCode: string;
+  readonly state: string;
+  readonly city: string;
+  readonly street?: string | null;
+  readonly number?: string | null;
+  readonly complement?: string | null;
+  readonly clientID: string;
+  readonly Client?: Client | null;
+  readonly partnerID?: string | null;
+  readonly Partner?: Partner | null;
+  readonly Surveys?: (Survey | null)[] | null;
+  readonly Visitors?: (Visitor | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Subscriptions, SubscriptionsMetaData>);
+  static copyOf(source: Subscriptions, mutator: (draft: MutableModel<Subscriptions, SubscriptionsMetaData>) => MutableModel<Subscriptions, SubscriptionsMetaData> | void): Subscriptions;
 }
 
 export declare class Survey {
@@ -153,6 +183,8 @@ export declare class Survey {
   readonly answers: string;
   readonly EventID: string;
   readonly Event?: Event | null;
+  readonly SubscriptionsID: string;
+  readonly Subscriptions?: Subscriptions | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Survey, SurveyMetaData>);
@@ -178,6 +210,8 @@ export declare class Visitor {
   readonly surveyAnswers?: string | null;
   readonly EventID: string;
   readonly Event?: Event | null;
+  readonly SubscriptionsID: string;
+  readonly Subscriptions?: Subscriptions | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Visitor, VisitorMetaData>);

@@ -323,6 +323,20 @@ export const schema = {
                         "associatedWith": "clientID"
                     }
                 },
+                "Subscriptions": {
+                    "name": "Subscriptions",
+                    "isArray": true,
+                    "type": {
+                        "model": "Subscriptions"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "clientID"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -676,6 +690,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "referralCode": {
+                    "name": "referralCode",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "name": {
                     "name": "name",
                     "isArray": false,
@@ -701,13 +722,6 @@ export const schema = {
                     "name": "phone",
                     "isArray": false,
                     "type": "AWSPhone",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "referralCode": {
-                    "name": "referralCode",
-                    "isArray": false,
-                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -739,6 +753,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "number": {
+                    "name": "number",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "Events": {
                     "name": "Events",
                     "isArray": true,
@@ -753,12 +774,19 @@ export const schema = {
                         "associatedWith": "partnerID"
                     }
                 },
-                "number": {
-                    "name": "number",
-                    "isArray": false,
-                    "type": "String",
+                "Subscriptions": {
+                    "name": "Subscriptions",
+                    "isArray": true,
+                    "type": {
+                        "model": "Subscriptions"
+                    },
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "partnerID"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -801,6 +829,226 @@ export const schema = {
                         "queryField": "partnersByState",
                         "fields": [
                             "state"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Subscriptions": {
+            "name": "Subscriptions",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "referralCode": {
+                    "name": "referralCode",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "website": {
+                    "name": "website",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "zipCode": {
+                    "name": "zipCode",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "state": {
+                    "name": "state",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "city": {
+                    "name": "city",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "street": {
+                    "name": "street",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "number": {
+                    "name": "number",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "complement": {
+                    "name": "complement",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "clientID": {
+                    "name": "clientID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Client": {
+                    "name": "Client",
+                    "isArray": false,
+                    "type": {
+                        "model": "Client"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "clientSubscriptionsId"
+                    }
+                },
+                "partnerID": {
+                    "name": "partnerID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Partner": {
+                    "name": "Partner",
+                    "isArray": false,
+                    "type": {
+                        "model": "Partner"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "partnerSubscriptionsId"
+                    }
+                },
+                "Surveys": {
+                    "name": "Surveys",
+                    "isArray": true,
+                    "type": {
+                        "model": "Survey"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "SubscriptionsID"
+                    }
+                },
+                "Visitors": {
+                    "name": "Visitors",
+                    "isArray": true,
+                    "type": {
+                        "model": "Visitor"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "SubscriptionsID"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Subscriptions",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byState",
+                        "queryField": "subscriptionsByState",
+                        "fields": [
+                            "state"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byClient",
+                        "queryField": "subscriptionsByClientID",
+                        "fields": [
+                            "clientID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPartner",
+                        "queryField": "subscriptionsByPartnerID",
+                        "fields": [
+                            "partnerID"
                         ]
                     }
                 },
@@ -882,6 +1130,26 @@ export const schema = {
                         "targetName": "eventSurveysId"
                     }
                 },
+                "SubscriptionsID": {
+                    "name": "SubscriptionsID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Subscriptions": {
+                    "name": "Subscriptions",
+                    "isArray": false,
+                    "type": {
+                        "model": "Subscriptions"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "subscriptionsSurveysId"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -923,6 +1191,16 @@ export const schema = {
                         "queryField": "surveysByEventID",
                         "fields": [
                             "EventID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "bySubscriptions",
+                        "queryField": "surveysBySubscriptionsID",
+                        "fields": [
+                            "SubscriptionsID"
                         ]
                     }
                 },
@@ -1079,6 +1357,26 @@ export const schema = {
                         "targetName": "eventVisitorsId"
                     }
                 },
+                "SubscriptionsID": {
+                    "name": "SubscriptionsID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Subscriptions": {
+                    "name": "Subscriptions",
+                    "isArray": false,
+                    "type": {
+                        "model": "Subscriptions"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "subscriptionsVisitorsId"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -1147,6 +1445,16 @@ export const schema = {
                     }
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "bySubscriptions",
+                        "queryField": "visitorsBySubscriptionsID",
+                        "fields": [
+                            "SubscriptionsID"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -1190,5 +1498,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "752067494a671c6436a466bbd3d1fc44"
+    "version": "fb3fea10d88cb3d576f4063e89fa02c5"
 };

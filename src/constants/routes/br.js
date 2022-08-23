@@ -9,5 +9,6 @@ export default {
 	PROFILE: '/perfil',
 	PAYMENTS: '/pagamentos',
 	NEW: '/cadastrar',
+	SUBSCRIPTIONS: '/assinaturas',
 	EVENTS: '/eventos',
 };

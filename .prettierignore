@@ -16,3 +16,4 @@ amplify/
 src/aws-exports.js
 src/graphql/
 src/models/
+seeds-resources/

@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
@@ -10,6 +10,7 @@ import SignUpImage from '../../images/auth/SignUp.svg';
 export default function RedefinePwd() {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
 	const { state } = useContext(AppContext);
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -36,6 +37,11 @@ export default function RedefinePwd() {
 		}
 		return null;
 	}
+
+	useEffect(() => {
+		if (searchParams.get('email')) setEmail(searchParams.get('email'));
+		if (searchParams.get('code')) setCode(searchParams.get('code'));
+	}, []);
 
 	const disabled = () => email === '' || pwd === '' || repeat === '';
 

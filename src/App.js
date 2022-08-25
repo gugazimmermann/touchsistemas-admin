@@ -33,8 +33,7 @@ function App() {
 	// Logger('Navigator:', language);
 
 	useEffect(() => {
-		const lang = searchParams.get('lang');
-		if (lang) {
+		if (searchParams.get('lang')) {
 			dispatch({ type: 'UPDATE_LANG', payload: searchParams.get('lang') });
 		}
 		Logger('Language:', state.lang);

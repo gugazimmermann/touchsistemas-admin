@@ -1,0 +1,35 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-touchsistemasadmin-dev-73931-authRole",
+      "UnauthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemasadmin-dev-73931-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::494458123866:role/amplify-touchsistemasadmin-dev-73931-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-touchsistemasadmin-dev-73931-deployment",
+      "UnauthRoleName": "amplify-touchsistemasadmin-dev-73931-unauthRole",
+      "StackName": "amplify-touchsistemasadmin-dev-73931",
+      "StackId": "arn:aws:cloudformation:us-east-1:494458123866:stack/amplify-touchsistemasadmin-dev-73931/3521dcc0-2462-11ed-8544-0aac641f7ce9",
+      "AmplifyAppId": "d3tzf86u25iuju",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-touchsistemasadmin-dev-73931-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "touchsistemasadminAuth": {}
+      },
+      "function": {
+        "touchsistemasadminAuthCustomMessage": {
+          "title": "Touch Sistemas",
+          "adminUrl": "https://admin.touchsistemas.com.br/",
+          "siteUrl": "https://www.touchsistemas.com.br/",
+          "siteLogo": "https://s3.amazonaws.com/touchsistemas.com.br/android-chrome-192x192.png",
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-73931-deployment",
+          "s3Key": "amplify-builds/touchsistemasadminAuthCustomMessage-3448507665534d585945-build.zip"
+        },
+        "touchsistemasadminStorageResizeImages": {
+          "deploymentBucketName": "amplify-touchsistemasadmin-dev-73931-deployment",
+          "s3Key": "amplify-builds/touchsistemasadminStorageResizeImages-524342585245544f7556-build.zip"
+        }
+      }
+    }
+  }
+}

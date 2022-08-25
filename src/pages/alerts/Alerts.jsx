@@ -34,6 +34,17 @@ export default function Alerts() {
 		}
 	}
 
+	function handleAlertMessage(type) {
+		switch (type) {
+			case 'register':
+				return LANGUAGES[state.lang].alerts.register;
+			case 'owner':
+				return LANGUAGES[state.lang].alerts.owner;
+			default:
+				return null;
+		}
+	}
+
 	function handleClose(index) {
 		const cloneAlerts = state.alerts.map((a, i) => (i !== index ? a : null)).filter((a) => a);
 		dispatch({ type: 'UPDATE_ALERT', payload: cloneAlerts });
@@ -49,7 +60,7 @@ export default function Alerts() {
 				type={handleAlertType(a.type)}
 				close={a.type !== 'register' && a.type !== 'owner' ? handleClose : null}
 			>
-				{a.message}
+				{handleAlertMessage(a.type)}
 				{handleAlertLink(a.type)}
 			</Alert>
 		))

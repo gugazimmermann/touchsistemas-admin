@@ -1,0 +1,16 @@
+{
+  "resourceName": "touchsistemasadminStorage",
+  "policyUUID": "c8d7525d",
+  "bucketName": "touchsistemasadminstoragebucket",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "touchsistemasadminStorageResizeImages",
+  "groupAccess": {}
+}

@@ -23,6 +23,10 @@ export default function NavProfile({ client, signout, alerts }) {
 		}
 	}
 
+	async function handleSignOut() {
+		await signout();
+	}
+
 	useEffect(() => {
 		if (client) logo();
 	}, [client]);
@@ -66,7 +70,7 @@ export default function NavProfile({ client, signout, alerts }) {
 					</li>
 				)}
 				<li className="p-2 text-center">
-					<button type="button" onClick={() => signout()}>
+					<button type="button" onClick={() => handleSignOut()}>
 						{LANGUAGES[state.lang].nav.logout}
 					</button>
 				</li>

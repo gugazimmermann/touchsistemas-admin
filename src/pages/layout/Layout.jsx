@@ -4,8 +4,9 @@ import { useCookies } from 'react-cookie';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { decodeCookie } from '../../helpers/cookies';
+import Logger from '../../helpers/logger';
 import { AppContext } from '../../context';
-import { ROUTES, LANGUAGES } from '../../constants';
+import { ROUTES } from '../../constants';
 import { Loading } from '../../components';
 import Nav from './nav/Nav';
 
@@ -19,8 +20,8 @@ export default function Layout() {
 	async function signOut() {
 		try {
 			await Auth.signOut({ global: true });
-		} catch (error) {
-			console.error(error);
+			} catch (error) {
+			Logger('SignOut', error);
 		}
 		removeCookie('touchsistemas');
 		navigate(ROUTES[state.lang].HOME);
@@ -32,11 +33,11 @@ export default function Layout() {
 		const {
 			data: { getClient },
 		} = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
+		Logger('Client', getClient);
 		setClient(getClient);
 		const alerts = [];
-		if (!getClient?.phone) alerts.push({ type: 'register', message: LANGUAGES[state.lang].alerts.register });
-		if (getClient?.Owners.items.length === 0)
-			alerts.push({ type: 'owner', message: LANGUAGES[state.lang].alerts.owner });
+		if (!getClient?.phone) alerts.push({ type: 'register' });
+		if (getClient?.Owners?.items) alerts.push({ type: 'owner' });
 		dispatch({ type: 'UPDATE_ALERT', payload: alerts });
 		if (alerts.length) navigate(ROUTES[state.lang].ALERTS);
 		setLoading(false);

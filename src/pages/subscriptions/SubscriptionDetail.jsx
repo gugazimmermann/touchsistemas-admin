@@ -5,7 +5,7 @@ import slugify from 'slugify';
 import { CSVLink } from 'react-csv';
 import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { getSubscriptions, partnerByReferralCode, visitorByEventID } from '../../graphql/queries';
+import { getSubscriptions, partnerByReferralCode, visitorByEventsID } from '../../graphql/queries';
 import { AppContext } from '../../context';
 import { Loading, Alert, LoadingIcon } from '../../components';
 import { ROUTES } from '../../constants';
@@ -79,13 +79,13 @@ export default function SubscriptionDetail() {
 		let token = null;
 		do {
 			const getVisitors = await API.graphql(
-				graphqlOperation(visitorByEventID, { EventID: subscriptionData.id, limit: 1000, nextToken: token })
+				graphqlOperation(visitorByEventsID, { EventID: subscriptionData.id, limit: 1000, nextToken: token })
 			);
 			if (getVisitors?.data?.visitorByEventID?.items) {
-				getVisitors.data.visitorByEventID.items.forEach((v) => visitorsArray.push(v));
+				getVisitors.data.visitorByEventsID.items.forEach((v) => visitorsArray.push(v));
 			}
 			token =
-				getVisitors?.data?.visitorByEventID?.nextToken !== token ? getVisitors.data.visitorByEventID.nextToken : null;
+				getVisitors?.data?.visitorByEventsID?.nextToken !== token ? getVisitors.data.visitorByEventsID.nextToken : null;
 		} while (token);
 		setVisitors(visitorsArray);
 		subscriptionData.visitorsInfo = {

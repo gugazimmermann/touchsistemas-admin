@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../../context';
-import { LANGUAGES } from '../../../constants';
+import { LANGUAGES, ROUTES } from '../../../constants';
 import useCloseMenu from '../../../helpers/useCloseMenu';
 import Arrow from '../../../images/Arrow';
 import BR from '../../../images/flags/br.svg';
@@ -8,6 +9,8 @@ import EN from '../../../images/flags/en.svg';
 import ES from '../../../images/flags/es.svg';
 
 export default function Language() {
+	const location = useLocation();
+	const navigate = useNavigate();
 	const { state, dispatch } = useContext(AppContext);
 	const [open, setOpen] = useState(false);
 	const ref = useCloseMenu(open, setOpen);
@@ -26,7 +29,11 @@ export default function Language() {
 	}
 
 	function handleChangeLanguage(language) {
+		const currentRoute = Object.keys(ROUTES[state.lang])
+		.map((k) => ({ key: k, value: ROUTES[state.lang][k] }))
+		.find((r) => r.value === location.pathname);
 		dispatch({ type: 'UPDATE_LANG', payload: language });
+		navigate(ROUTES[language][currentRoute.key]);
 		setOpen(false);
 	}
 

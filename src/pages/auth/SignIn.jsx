@@ -2,8 +2,9 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
-import { clientByEmail } from '../../graphql/queries';
+import * as queries from '../../graphql/queries';
 import { encodeCookie } from '../../helpers/cookies';
+import Logger from '../../helpers/logger';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
 import { Loading } from '../../components';
@@ -27,15 +28,16 @@ export default function SignIn() {
 		setError(false);
 		try {
 			const auth = await Auth.signIn(email, pwd);
-			console.debug(auth.attributes.email)
+			Logger('Auth', auth);
 			if (auth.challengeName === 'NEW_PASSWORD_REQUIRED') await Auth.completeNewPassword(auth, pwd);
 			if (remember) await Auth.rememberDevice();
 			else await Auth.forgetDevice();
-			console.debug({ email: auth.attributes.email })
-			const client = await API.graphql(graphqlOperation(clientByEmail, { email: auth.attributes.email }));
-			console.debug(client)
+			const {
+				data: { clientByEmail: {items} },
+			} = await API.graphql(graphqlOperation(queries.clientByEmail, { email: auth.attributes.email }));
+			if (!items.length) throw new Error('Client not found');
 			const encodedContent = encodeCookie(
-				JSON.stringify({ uuid: auth.username, email, client: client.data.clientsByEmail.items[0].id })
+				JSON.stringify({ uuid: auth.username, email, client: items[0].id })
 			);
 			const date = new Date();
 			date.setDate(date.getDate() + 365);
@@ -43,7 +45,7 @@ export default function SignIn() {
 			setLoading(false);
 			navigate(ROUTES[state.lang].DASHBOARD);
 		} catch (err) {
-			console.debug(err)
+			Logger('Auth Error', err);
 			setError(true);
 			setLoading(false);
 		}

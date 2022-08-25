@@ -5,6 +5,7 @@ import { ROUTES } from './constants';
 import { Loading } from './components';
 import PublicRoute from './routes/PublicRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
+import Logger from './helpers/logger';
 
 const NotFound = lazy(() => import('./pages/not-found/NotFound'));
 const SignIn = lazy(() => import('./pages/auth/SignIn'));
@@ -28,8 +29,7 @@ const EventDetail = lazy(() => import('./pages/events/EventDetail'));
 function App() {
 	const { state } = useContext(AppContext);
 	// const language = window.navigator.userLanguage || window.navigator.language;
-	if (process.env.NODE_ENV === 'development') console.debug('Language:', state.lang);
-
+	Logger('Language:', state.lang);
 	return (
 		<Suspense fallback={<Loading />}>
 			<Routes>

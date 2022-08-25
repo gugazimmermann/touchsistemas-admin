@@ -5,7 +5,7 @@ import slugify from 'slugify';
 import { CSVLink } from 'react-csv';
 import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { getEvent, partnersByReferralCode, visitorsByEventID } from '../../graphql/queries';
+import { getEvents, partnerByReferralCode, visitorByEventID } from '../../graphql/queries';
 import { AppContext } from '../../context';
 import { Loading, Alert, LoadingIcon } from '../../components';
 import { translatePlan } from '../../helpers';
@@ -79,7 +79,7 @@ export default function EventDetail() {
 		let token = null;
 		do {
 			const getVisitors = await API.graphql(
-				graphqlOperation(visitorsByEventID, { EventID: eventData.id, limit: 1000, nextToken: token })
+				graphqlOperation(visitorByEventID, { EventID: eventData.id, limit: 1000, nextToken: token })
 			);
 			if (getVisitors?.data?.visitorsByEventID?.items) {
 				getVisitors.data.visitorsByEventID.items.forEach((v) => visitorsArray.push(v));
@@ -101,12 +101,12 @@ export default function EventDetail() {
 
 	async function handleGetEvent(id) {
 		setLoading(true);
-		const oneEnvent = await API.graphql(graphqlOperation(getEvent, { id }));
+		const oneEnvent = await API.graphql(graphqlOperation(getEvents, { id }));
 		const eventData = oneEnvent.data.getEvent;
 		if (eventData) {
 			if (eventData.referralCode) {
 				const partnerDetails = await API.graphql(
-					graphqlOperation(partnersByReferralCode, { referralCode: eventData.referralCode })
+					graphqlOperation(partnerByReferralCode, { referralCode: eventData.referralCode })
 				);
 				const partner = partnerDetails.data.partnersByReferralCode.items[0];
 				eventData.partner = partner;

@@ -6,7 +6,7 @@ import moment from 'moment';
 import { Chart } from 'react-google-charts';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import slugify from 'slugify';
-import { getEvent, visitorsByEventID, surveysByEventID } from '../../../graphql/queries';
+import { getEvents, visitorByEventID, surveyByEventID } from '../../../graphql/queries';
 import { Loading } from '../../../components';
 
 const colors = [
@@ -207,7 +207,7 @@ export default function Dashboard() {
 			data: {
 				surveysByEventID: { items: surveyQuestions },
 			},
-		} = await API.graphql(graphqlOperation(surveysByEventID, { EventID: eventData.id }));
+		} = await API.graphql(graphqlOperation(surveyByEventID, { EventID: eventData.id }));
 		surveyQuestions.sort((a, b) => a.order - b.order);
 		surveyQuestions = surveyQuestions.map((q) => ({ question: q.question, type: q.type }));
 		const validSurvey = data.map((d) => JSON.parse(d.surveyAnswers)).filter((n) => n);
@@ -234,7 +234,7 @@ export default function Dashboard() {
 			let token = null;
 			do {
 				const getVisitors = await API.graphql(
-					graphqlOperation(visitorsByEventID, { EventID: eventData.id, limit: 1000, nextToken: token })
+					graphqlOperation(visitorByEventID, { EventID: eventData.id, limit: 1000, nextToken: token })
 				);
 				if (getVisitors?.data?.visitorsByEventID?.items) {
 					getVisitors.data.visitorsByEventID.items.forEach((v) => totalVisitors.push(v));
@@ -266,7 +266,7 @@ export default function Dashboard() {
 		let eventData;
 		setLoading(true);
 		if (!location?.state?.event) {
-			const getEventData = await API.graphql(graphqlOperation(getEvent, { id }));
+			const getEventData = await API.graphql(graphqlOperation(getEvents, { id }));
 			if (getEventData.data.getEvent) eventData = getEventData.data.getEvent;
 			else navigate('/dashboard');
 		} else {

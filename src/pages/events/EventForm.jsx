@@ -3,8 +3,8 @@ import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import DatePicker from 'react-multi-date-picker';
 import moment from 'moment';
-import { partnersByReferralCode } from '../../graphql/queries';
-import { createEvent } from '../../graphql/mutations';
+import { partnerByReferralCode } from '../../graphql/queries';
+import { createEvents } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { Loading, Alert, Title } from '../../components';
 import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers';
@@ -123,7 +123,7 @@ export default function EventForm() {
 
 	async function graphCreateEvent(partnerID) {
 		const { data } = await API.graphql(
-			graphqlOperation(createEvent, {
+			graphqlOperation(createEvents, {
 				input: {
 					referralCode: formEvent.referralCode || null,
 					plan: formEvent.plan,
@@ -191,7 +191,7 @@ export default function EventForm() {
 		let partnerID = null;
 		if (formEvent.referralCode) {
 			const getPartner = await API.graphql(
-				graphqlOperation(partnersByReferralCode, { referralCode: formEvent.referralCode })
+				graphqlOperation(partnerByReferralCode, { referralCode: formEvent.referralCode })
 			);
 			if (getPartner?.data?.partnersByReferralCode?.items.length <= 0) {
 				setErrorMsg('Parceiro não encontrado!');

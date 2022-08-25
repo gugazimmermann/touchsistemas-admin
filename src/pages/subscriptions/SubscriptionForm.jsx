@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { partnersByReferralCode } from '../../graphql/queries';
+import { partnerByReferralCode } from '../../graphql/queries';
 import { createSubscriptions } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { Loading, Alert, Title, Uploading } from '../../components';
@@ -172,15 +172,15 @@ export default function SubscriptionForm() {
 		let partnerID = null;
 		if (formEvent.referralCode) {
 			const getPartner = await API.graphql(
-				graphqlOperation(partnersByReferralCode, { referralCode: formEvent.referralCode })
+				graphqlOperation(partnerByReferralCode, { referralCode: formEvent.referralCode })
 			);
-			if (getPartner?.data?.partnersByReferralCode?.items.length <= 0) {
+			if (getPartner?.data?.partnerByReferralCode?.items.length <= 0) {
 				setErrorMsg('Parceiro não encontrado!');
 				setError(true);
 				setLoading(false);
 				return null;
 			}
-			partnerID = getPartner.data.partnersByReferralCode.items[0].id;
+			partnerID = getPartner.data.partnerByReferralCode.items[0].id;
 		}
 		const newSubscription = await handleCreateSubscription(partnerID);
 		await addEventMap(newSubscription);

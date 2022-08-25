@@ -5,7 +5,7 @@ import slugify from 'slugify';
 import { CSVLink } from 'react-csv';
 import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { getSubscriptions, partnersByReferralCode, visitorsByEventID } from '../../graphql/queries';
+import { getSubscriptions, partnerByReferralCode, visitorByEventID } from '../../graphql/queries';
 import { AppContext } from '../../context';
 import { Loading, Alert, LoadingIcon } from '../../components';
 import { ROUTES } from '../../constants';
@@ -79,13 +79,13 @@ export default function SubscriptionDetail() {
 		let token = null;
 		do {
 			const getVisitors = await API.graphql(
-				graphqlOperation(visitorsByEventID, { EventID: subscriptionData.id, limit: 1000, nextToken: token })
+				graphqlOperation(visitorByEventID, { EventID: subscriptionData.id, limit: 1000, nextToken: token })
 			);
-			if (getVisitors?.data?.visitorsByEventID?.items) {
-				getVisitors.data.visitorsByEventID.items.forEach((v) => visitorsArray.push(v));
+			if (getVisitors?.data?.visitorByEventID?.items) {
+				getVisitors.data.visitorByEventID.items.forEach((v) => visitorsArray.push(v));
 			}
 			token =
-				getVisitors?.data?.visitorsByEventID?.nextToken !== token ? getVisitors.data.visitorsByEventID.nextToken : null;
+				getVisitors?.data?.visitorByEventID?.nextToken !== token ? getVisitors.data.visitorByEventID.nextToken : null;
 		} while (token);
 		setVisitors(visitorsArray);
 		subscriptionData.visitorsInfo = {
@@ -103,9 +103,9 @@ export default function SubscriptionDetail() {
 		if (subscriptionData) {
 			if (subscriptionData.referralCode) {
 				const partnerDetails = await API.graphql(
-					graphqlOperation(partnersByReferralCode, { referralCode: subscriptionData.referralCode })
+					graphqlOperation(partnerByReferralCode, { referralCode: subscriptionData.referralCode })
 				);
-				const partner = partnerDetails.data.partnersByReferralCode.items[0];
+				const partner = partnerDetails.data.partnerByReferralCode.items[0];
 				subscriptionData.partner = partner;
 			}
 			setLoading(false);

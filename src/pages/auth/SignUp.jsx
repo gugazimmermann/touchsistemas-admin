@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
@@ -26,8 +27,7 @@ export default function SignUp() {
 			return null;
 		}
 		try {
-			// TODO: send email in diff langs
-			await Auth.signUp({ username: email, password: pwd, attributes: { email } });
+			await Auth.signUp({ username: email, password: pwd, attributes: { email, locale: state.lang } });
 			await API.graphql(graphqlOperation(createClient, { input: { email } }));
 			setLoading(false);
 			navigate(ROUTES[state.lang].CONFIRM_REGISTRATION, { state: { email } });

@@ -4,7 +4,7 @@ import slugify from 'slugify';
 import { CSVLink } from 'react-csv';
 import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { getSubscriptions, partnerByReferralCode, visitorByEventsID } from '../../graphql/queries';
+import * as queries from '../../graphql/queries';
 import { AppContext } from '../../context';
 import { Loading, Alert } from '../../components';
 import { ROUTES } from '../../constants';
@@ -35,17 +35,21 @@ export default function SubscriptionDetail() {
 	}
 
 	async function handleLogo(id) {
+		// remove unused images from Storage Bucket
+		// add new value logo in subscriptions DB
 		const list = await Storage.list(`logo/${id}`);
 		if (list?.length) {
-			const getUrl = await Storage.get(list[0].key);
+			const getUrl = `${process.env.REACT_APP_IMAGES_URL}logo/${id}.png?${new Date().getTime()}`;
 			setLogo(getUrl);
 		}
 	}
 
 	async function handleMap(id) {
+		// remove unused images from Storage Bucket
+		// add new value logo in subscriptions DB
 		const list = await Storage.list(`maps/${id}`);
 		if (list?.length) {
-			const getUrl = await Storage.get(list[0].key);
+			const getUrl = `${process.env.REACT_APP_IMAGES_URL}maps/${id}.png?${new Date().getTime()}`;
 			setMap(getUrl);
 		}
 	}
@@ -77,14 +81,13 @@ export default function SubscriptionDetail() {
 		const visitorsArray = [];
 		let token = null;
 		do {
-			const getVisitors = await API.graphql(
-				graphqlOperation(visitorByEventsID, { EventID: subscriptionData.id, limit: 1000, nextToken: token })
+			const {
+				data: { visitorByEventsID },
+			} = await API.graphql(
+				graphqlOperation(queries.visitorByEventsID, { EventsID: subscriptionData.id, limit: 1000, nextToken: token })
 			);
-			if (getVisitors?.data?.visitorByEventID?.items) {
-				getVisitors.data.visitorByEventsID.items.forEach((v) => visitorsArray.push(v));
-			}
-			token =
-				getVisitors?.data?.visitorByEventsID?.nextToken !== token ? getVisitors.data.visitorByEventsID.nextToken : null;
+			if (visitorByEventsID.items) visitorByEventsID.items.forEach((v) => visitorsArray.push(v));
+			token = visitorByEventsID?.nextToken !== token ? visitorByEventsID.nextToken : null;
 		} while (token);
 		setVisitors(visitorsArray);
 		subscriptionData.visitorsInfo = {
@@ -97,22 +100,27 @@ export default function SubscriptionDetail() {
 
 	async function handleGetSubscription(id) {
 		setLoading(true);
-		const oneSubscription = await API.graphql(graphqlOperation(getSubscriptions, { id }));
-		const subscriptionData = oneSubscription.data.getSubscriptions;
-		if (subscriptionData) {
-			if (subscriptionData.referralCode) {
-				const partnerDetails = await API.graphql(
-					graphqlOperation(partnerByReferralCode, { referralCode: subscriptionData.referralCode })
+		const {
+			data: { getSubscriptions },
+		} = await API.graphql(graphqlOperation(queries.getSubscriptions, { id, active: 'TRUE' }));
+		if (getSubscriptions) {
+			if (getSubscriptions.referralCode) {
+				const {
+					data: {
+						partnerByReferralCode: { items },
+					},
+				} = await API.graphql(
+					graphqlOperation(queries.partnerByReferralCode, { referralCode: getSubscriptions.referralCode })
 				);
-				const partner = partnerDetails.data.partnerByReferralCode.items[0];
-				subscriptionData.partner = partner;
+				const [partner] = items;
+				getSubscriptions.partner = partner;
 			}
 			setLoading(false);
 			generateQRCode();
-			setSubscription(subscriptionData);
-			handleLogo(subscriptionData.id);
-			handleMap(subscriptionData.id);
-			handleVisitors(subscriptionData);
+			setSubscription(getSubscriptions);
+			handleLogo(getSubscriptions.id);
+			handleMap(getSubscriptions.id);
+			handleVisitors(getSubscriptions);
 		} else {
 			navigate(ROUTES[state.lang].DASHBOARD);
 		}
@@ -206,7 +214,7 @@ export default function SubscriptionDetail() {
 
 	function renderCards() {
 		return (
-			<div className="w-full md:w-3/12 flex flex-col sm:justify-between">
+			<div className="w-full md:w-3/12 flex flex-col sm:justify-evenly">
 				{renderSurveysAnsweredCard()}
 				{renderCompleteSurveysCard()}
 			</div>

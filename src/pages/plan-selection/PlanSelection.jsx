@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API, graphqlOperation } from 'aws-amplify';
-import { listPlans } from '../../graphql/queries';
+import { planByActive } from '../../graphql/queries';
 import { PLANS, LANGUAGES, ROUTES } from '../../constants';
 import { AppContext } from '../../context';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
@@ -19,9 +19,9 @@ export default function PlanSelection() {
 		setLoading(true);
 		const {
 			data: {
-				listPlans: { items },
+				planByActive: { items },
 			},
-		} = await API.graphql(graphqlOperation(listPlans, { filter: { active: { eq: 'TRUE' }}}));
+		} = await API.graphql(graphqlOperation(planByActive, { active: 'TRUE'}));
 		const languages = Object.keys(LANGUAGES);
 		const formatPlans = {};
 		languages.forEach((l) => {

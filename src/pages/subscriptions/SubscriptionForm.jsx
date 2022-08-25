@@ -1,12 +1,12 @@
 import { useEffect, useState, useContext } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { partnerByReferralCode } from '../../graphql/queries';
+import { planByType, partnerByReferralCode } from '../../graphql/queries';
 import { createSubscriptions } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { Loading, Alert, Title, Uploading } from '../../components';
-import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers';
-import { LANGUAGES, ROUTES } from '../../constants';
+import { delay, getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers';
+import { LANGUAGES, PLANS, ROUTES } from '../../constants';
 
 const initial = {
 	name: '',
@@ -28,13 +28,13 @@ export default function SubscriptionForm() {
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [formEvent, setFormEvent] = useState(initial);
+	const [formSubscription, setFormSubscription] = useState(initial);
 	const [eventLogo, setEventLogo] = useState();
 	const [fileName, setFileName] = useState(LANGUAGES[state.lang].subscription.logo);
 	const [progress, setProgress] = useState();
 
 	function handleChangeCEP(value) {
-		setFormEvent({ ...formEvent, zipCode: normalizeCEP(value) });
+		setFormSubscription({ ...formSubscription, zipCode: normalizeCEP(value) });
 	}
 
 	async function getAddress() {
@@ -42,9 +42,9 @@ export default function SubscriptionForm() {
 		setError(false);
 		setLoading(true);
 		try {
-			const address = await getAddressFromCEP(formEvent.zipCode.replace(/\D/g, ''));
-			setFormEvent({
-				...formEvent,
+			const address = await getAddressFromCEP(formSubscription.zipCode.replace(/\D/g, ''));
+			setFormSubscription({
+				...formSubscription,
 				state: address.state,
 				city: address.city,
 				street: address.street,
@@ -57,8 +57,8 @@ export default function SubscriptionForm() {
 	}
 
 	useEffect(() => {
-		if (formEvent?.zipCode?.length === 10) getAddress();
-	}, [formEvent.zipCode]);
+		if (formSubscription?.zipCode?.length === 10) getAddress();
+	}, [formSubscription.zipCode]);
 
 	function handleFile(e) {
 		setErrorMsg('');
@@ -97,25 +97,24 @@ export default function SubscriptionForm() {
 		return null;
 	}
 
-	async function handleCreateSubscription(partnerID) {
-		if (formEvent.website) {
-			if (formEvent.website.charAt(0).toLocaleLowerCase !== 'h') formEvent.website = `http://${formEvent.website}`;
-		}
+	async function handleCreateSubscription(partnerID, planID) {
 		const { data } = await API.graphql(
 			graphqlOperation(createSubscriptions, {
 				input: {
-					referralCode: formEvent.referralCode || null,
-					name: formEvent.name,
-					website: formEvent.website || null,
-					email: formEvent.email || null,
-					zipCode: formEvent.zipCode.replace(/\D/g, ''),
-					state: formEvent.state,
-					city: formEvent.city,
-					street: formEvent.street,
-					number: formEvent.number,
-					complement: formEvent.complement,
-					clientID: client.id,
-					partnerID,
+					referralCode: formSubscription.referralCode || null,
+					name: formSubscription.name,
+					website: formSubscription.website || null,
+					email: formSubscription.email || null,
+					zipCode: formSubscription.zipCode.replace(/\D/g, ''),
+					state: formSubscription.state,
+					city: formSubscription.city,
+					street: formSubscription.street || null,
+					number: formSubscription.street || null,
+					complement: formSubscription.street || null,
+					active: 'TRUE',
+					PlanID: planID,
+					ClientID: client.id,
+					PartnerID: partnerID,
 				},
 			})
 		);
@@ -151,28 +150,36 @@ export default function SubscriptionForm() {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
-		if (!formEvent.name || !formEvent.zipCode || !formEvent.state || !formEvent.city) {
+		if (!formSubscription.name || !formSubscription.zipCode || !formSubscription.state || !formSubscription.city) {
 			setErrorMsg(LANGUAGES[state.lang].subscription.required);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
-		if (formEvent.email && !validateEmail(formEvent.email)) {
+		if (formSubscription.email && !validateEmail(formSubscription.email)) {
 			setErrorMsg(LANGUAGES[state.lang].subscription.requiredEmail);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
-		if (formEvent.zipCode.length < 10) {
+		if (formSubscription.zipCode.length < 10) {
 			setErrorMsg(LANGUAGES[state.lang].subscription.requiredEmail);
 			setError(true);
 			setLoading(false);
 			return null;
+		}
+		if (formSubscription.website) {
+			if (formSubscription.website.charAt(0).toLocaleLowerCase() !== 'h') {
+				formSubscription.website = `http://${formSubscription.website}`;
+			}
+			if (formSubscription.website.charAt(formSubscription.website.length - 1) === '/') {
+				formSubscription.website = formSubscription.website.slice(0, -1);
+			}
 		}
 		let partnerID = null;
-		if (formEvent.referralCode) {
+		if (formSubscription.referralCode) {
 			const getPartner = await API.graphql(
-				graphqlOperation(partnerByReferralCode, { referralCode: formEvent.referralCode })
+				graphqlOperation(partnerByReferralCode, { referralCode: formSubscription.referralCode })
 			);
 			if (getPartner?.data?.partnerByReferralCode?.items.length <= 0) {
 				setErrorMsg('Parceiro não encontrado!');
@@ -182,12 +189,23 @@ export default function SubscriptionForm() {
 			}
 			partnerID = getPartner.data.partnerByReferralCode.items[0].id;
 		}
-		const newSubscription = await handleCreateSubscription(partnerID);
+		const getPlan = await API.graphql(
+			graphqlOperation(planByType, { type: PLANS.SUBSCRIPTION, filter: { active: { eq: 'TRUE' } } })
+		);
+		if (getPlan?.data?.planByType?.items.length <= 0) {
+			setErrorMsg('Plano não encontrado!');
+			setError(true);
+			setLoading(false);
+			return null;
+		}
+		const planID = getPlan.data.planByType.items[0].id;
+		const newSubscription = await handleCreateSubscription(partnerID, planID);
 		await addEventMap(newSubscription);
 		setLoading(false);
 		if (eventLogo) await addEventLogo(newSubscription);
+		delay(3000)
 		loadClient();
-		setFormEvent(initial);
+		setFormSubscription(initial);
 		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${newSubscription.id}`, { state: { success: true } });
 		return true;
 	}
@@ -202,8 +220,8 @@ export default function SubscriptionForm() {
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
-							value={formEvent.name || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, name: e.target.value })}
+							value={formSubscription.name || ''}
+							onChange={(e) => setFormSubscription({ ...formSubscription, name: e.target.value })}
 							type="text"
 							placeholder={`${LANGUAGES[state.lang].subscription.name} *`}
 							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -211,8 +229,8 @@ export default function SubscriptionForm() {
 					</div>
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
-							value={formEvent.website || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, website: e.target.value })}
+							value={formSubscription.website || ''}
+							onChange={(e) => setFormSubscription({ ...formSubscription, website: e.target.value })}
 							type="text"
 							placeholder={LANGUAGES[state.lang].subscription.website}
 							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -220,8 +238,8 @@ export default function SubscriptionForm() {
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
 						<input
-							value={formEvent.email || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, email: e.target.value })}
+							value={formSubscription.email || ''}
+							onChange={(e) => setFormSubscription({ ...formSubscription, email: e.target.value })}
 							type="email"
 							placeholder={LANGUAGES[state.lang].subscription.email}
 							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -229,7 +247,7 @@ export default function SubscriptionForm() {
 					</div>
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
-							value={formEvent.zipCode || ''}
+							value={formSubscription.zipCode || ''}
 							onChange={(e) => handleChangeCEP(e.target.value)}
 							type="text"
 							placeholder={`${LANGUAGES[state.lang].subscription.zipCode} *`}
@@ -238,8 +256,8 @@ export default function SubscriptionForm() {
 					</div>
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<select
-							value={formEvent.state || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, state: e.target.value })}
+							value={formSubscription.state || ''}
+							onChange={(e) => setFormSubscription({ ...formSubscription, state: e.target.value })}
 							placeholder={`${LANGUAGES[state.lang].subscription.state} *`}
 							className="bg-white block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 						>
@@ -275,8 +293,8 @@ export default function SubscriptionForm() {
 					</div>
 					<div className="w-full md:w-4/12 mb-4">
 						<input
-							value={formEvent.city || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, city: e.target.value })}
+							value={formSubscription.city || ''}
+							onChange={(e) => setFormSubscription({ ...formSubscription, city: e.target.value })}
 							type="text"
 							placeholder={`${LANGUAGES[state.lang].subscription.city} *`}
 							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -284,8 +302,8 @@ export default function SubscriptionForm() {
 					</div>
 					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<input
-							value={formEvent.street || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, street: e.target.value })}
+							value={formSubscription.street || ''}
+							onChange={(e) => setFormSubscription({ ...formSubscription, street: e.target.value })}
 							type="text"
 							placeholder={LANGUAGES[state.lang].subscription.street}
 							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -293,8 +311,8 @@ export default function SubscriptionForm() {
 					</div>
 					<div className="w-full md:w-3/12 sm:pr-4 mb-4">
 						<input
-							value={formEvent.number || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, number: e.target.value })}
+							value={formSubscription.number || ''}
+							onChange={(e) => setFormSubscription({ ...formSubscription, number: e.target.value })}
 							type="text"
 							placeholder={LANGUAGES[state.lang].subscription.number}
 							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -302,8 +320,8 @@ export default function SubscriptionForm() {
 					</div>
 					<div className="w-full md:w-3/12 mb-4">
 						<input
-							value={formEvent.complement || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, complement: e.target.value })}
+							value={formSubscription.complement || ''}
+							onChange={(e) => setFormSubscription({ ...formSubscription, complement: e.target.value })}
 							type="text"
 							placeholder={LANGUAGES[state.lang].subscription.complement}
 							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -311,8 +329,8 @@ export default function SubscriptionForm() {
 					</div>
 					<div className="w-full md:w-6/12 sm:pr-4 mb-4">
 						<input
-							value={formEvent.referralCode || ''}
-							onChange={(e) => setFormEvent({ ...formEvent, referralCode: e.target.value })}
+							value={formSubscription.referralCode || ''}
+							onChange={(e) => setFormSubscription({ ...formSubscription, referralCode: e.target.value })}
 							type="text"
 							placeholder={LANGUAGES[state.lang].subscription.referralCode}
 							className=" block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"

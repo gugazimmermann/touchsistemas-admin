@@ -125,9 +125,7 @@ export default function Profile() {
 				contentType: clientLogo.type,
 			});
 		}
-		console.debug(new Date())
-		await delay(5000);
-		console.debug(new Date())
+		await delay(3000);
 		loadClient();
 		navigate(ROUTES[state.lang].DASHBOARD);
 		setLoading(false);

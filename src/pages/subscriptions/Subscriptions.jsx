@@ -48,8 +48,9 @@ export default function Subscriptions() {
 		loadClient();
 	}
 
+	// TODO: handle better the maps, not just when add new one, but when change address
 	async function handleMap(e) {
-		if (client.subscriptionsMap !== (e?.length || 0)) await createMap(e);
+		if (+client.subscriptionsMap[0] !== (e?.length || 0)) await createMap(e);
 		const mapsList = await Storage.list(`maps/subscriptions_${client.id}`);
 		if (mapsList.length !== 0) {
 			const getUrl = await Storage.get(mapsList[0].key);

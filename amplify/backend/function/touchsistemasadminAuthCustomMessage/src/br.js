@@ -5,7 +5,7 @@ async function signUpMessage(event, generateEmailBody) {
       <p>Bem Vindo ao ${process.env.TITLE},</p>
       <p>Seu email de cadastrado é ${event.request.userAttributes.email} e seu código de verificação é: ${event.request.codeParameter}</p>
       <br />
-      <p>Digite seu código no campo informado ou <a href="${process.env.ADMIN_URL}confirmar-cadastro?email=${event.request.userAttributes.email}&code=${event.request.codeParameter}">clique aqui</a>.</p>
+      <p>Digite seu código no campo informado ou <a href="${process.env.ADMIN_URL}confirmar-cadastro?lang=${event.request.userAttributes.locale}&email=${event.request.userAttributes.email}&code=${event.request.codeParameter}">clique aqui</a>.</p>
       `),
 	};
 	return event;
@@ -17,7 +17,7 @@ async function forgotPassword(event, generateEmailBody) {
 		emailMessage: generateEmailBody(`
       <p>Seu código de recuperação de senha é: ${event.request.codeParameter}</p>
       <br />
-      <p>Digite seu código no campo informado ou clique aqui: <a>${process.env.ADMIN_URL}redefinir-senha</a></p>
+      <p>Digite seu código no campo informado ou clique aqui: <a>${process.env.ADMIN_URL}redefinir-senha?lang=${event.request.userAttributes.locale}</a></p>
       `),
 	};
 	return event;

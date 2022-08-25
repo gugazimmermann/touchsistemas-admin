@@ -3,8 +3,9 @@ import { useOutletContext, useNavigate } from 'react-router-dom';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { updateClient } from '../../graphql/mutations';
 import { AppContext } from '../../context';
-import { LANGUAGES } from '../../constants';
+import { LANGUAGES, ROUTES } from '../../constants';
 import {
+	delay,
 	getAddressFromCEP,
 	normalizeCEP,
 	normalizeDocument,
@@ -124,8 +125,11 @@ export default function Profile() {
 				contentType: clientLogo.type,
 			});
 		}
+		console.debug(new Date())
+		await delay(5000);
+		console.debug(new Date())
 		loadClient();
-		navigate('/dashboard');
+		navigate(ROUTES[state.lang].DASHBOARD);
 		setLoading(false);
 		return true;
 	}

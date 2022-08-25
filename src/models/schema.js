@@ -313,7 +313,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "subscriptionsSurveysId"
+                        "associatedWith": "SubscriptionsID"
                     }
                 },
                 "Visitors": {
@@ -327,7 +327,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "subscriptionsVisitorsId"
+                        "associatedWith": "SubscriptionsID"
                     }
                 },
                 "createdAt": {
@@ -552,7 +552,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "clientOwnersId"
+                        "associatedWith": "ClientID"
                     }
                 },
                 "Events": {
@@ -566,7 +566,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "clientEventsId"
+                        "associatedWith": "ClientID"
                     }
                 },
                 "Subscriptions": {
@@ -580,7 +580,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "clientSubscriptionsId"
+                        "associatedWith": "ClientID"
                     }
                 },
                 "createdAt": {
@@ -743,7 +743,6 @@ export const schema = {
                     "type": "key",
                     "properties": {
                         "name": "byClient",
-                        "queryField": "ownerByClient",
                         "fields": [
                             "ClientID"
                         ]
@@ -939,6 +938,13 @@ export const schema = {
                         "targetName": "clientEventsId"
                     }
                 },
+                "PartnerID": {
+                    "name": "PartnerID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "Partner": {
                     "name": "Partner",
                     "isArray": false,
@@ -963,7 +969,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "eventsSurveysId"
+                        "associatedWith": "EventsID"
                     }
                 },
                 "Visitors": {
@@ -977,7 +983,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "eventsVisitorsId"
+                        "associatedWith": "EventsID"
                     }
                 },
                 "createdAt": {
@@ -1027,10 +1033,20 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byClientID",
+                        "name": "byClient",
                         "queryField": "eventsByClientID",
                         "fields": [
                             "ClientID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPartner",
+                        "queryField": "eventsByPartnerID",
+                        "fields": [
+                            "PartnerID"
                         ]
                     }
                 },
@@ -1143,7 +1159,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "partnerEventsId"
+                        "associatedWith": "PartnerID"
                     }
                 },
                 "Subscriptions": {
@@ -1157,7 +1173,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "partnerSubscriptionsId"
+                        "associatedWith": "PartnerID"
                     }
                 },
                 "createdAt": {
@@ -1687,5 +1703,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "6ae847c7fa34ed3524635c87490d8fb8"
+    "version": "1f6a0be538ce0607892cee17ef896937"
 };

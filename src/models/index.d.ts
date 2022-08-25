@@ -160,6 +160,7 @@ export declare class Events {
   readonly Plan?: Plan | null;
   readonly ClientID: string;
   readonly Client?: Client | null;
+  readonly PartnerID?: string | null;
   readonly Partner?: Partner | null;
   readonly Surveys?: (Survey | null)[] | null;
   readonly Visitors?: (Visitor | null)[] | null;

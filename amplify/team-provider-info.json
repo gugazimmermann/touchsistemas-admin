@@ -27,7 +27,7 @@
         },
         "touchsistemasadminStorageResizeImages": {
           "deploymentBucketName": "amplify-touchsistemasadmin-dev-73931-deployment",
-          "s3Key": "amplify-builds/touchsistemasadminStorageResizeImages-524342585245544f7556-build.zip"
+          "s3Key": "amplify-builds/touchsistemasadminStorageResizeImages-46364e4d4e766c373363-build.zip"
         }
       }
     }

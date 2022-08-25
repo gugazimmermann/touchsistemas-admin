@@ -48,9 +48,9 @@ type Client @model @auth(rules: [{ allow: public }]) {
 	complement: String
 	eventsMap: [String]
 	subscriptionsMap: [String]
-	Owners: [Owner] @hasMany
-	Events: [Events] @hasMany
-	Subscriptions: [Subscriptions] @hasMany
+	Owners: [Owner] @hasMany(indexName: "byClient", fields: ["id"])
+	Events: [Events] @hasMany(indexName: "byClient", fields: ["id"])
+	Subscriptions: [Subscriptions] @hasMany(indexName: "byClient", fields: ["id"])
 }
 
 type Owner @model @auth(rules: [{ allow: public }]) {
@@ -58,7 +58,7 @@ type Owner @model @auth(rules: [{ allow: public }]) {
 	name: String!
 	phone: AWSPhone!
 	email: AWSEmail! @index(name: "byEmail", queryField: "ownerByEmail")
-	ClientID: ID! @index(name: "byClient", queryField: "ownerByClient")
+	ClientID: ID! @index(name: "byClient")
   Client: Client @belongsTo
 }
 
@@ -83,11 +83,12 @@ type Events @model @auth(rules: [{ allow: public }]) {
 	prizeDrawDescription: String
 	PlanID: ID! @index(name: "byPlanID", queryField: "eventsByPlanID")
   Plan: Plan @belongsTo
-  ClientID: ID! @index(name: "byClientID", queryField: "eventsByClientID")
+  ClientID: ID! @index(name: "byClient", queryField: "eventsByClientID")
   Client: Client @belongsTo
+	PartnerID: ID @index(name: "byPartner", queryField: "eventsByPartnerID")
   Partner: Partner @belongsTo
-  Surveys: [Survey] @hasMany
-  Visitors: [Visitor] @hasMany
+	Surveys: [Survey] @hasMany(indexName: "byEvents", fields: ["id"])
+	Visitors: [Visitor] @hasMany(indexName: "byEvents", fields: ["id"])
 }
 
 type Subscriptions @model @auth(rules: [{ allow: public }]) {
@@ -109,8 +110,8 @@ type Subscriptions @model @auth(rules: [{ allow: public }]) {
 	Client: Client @belongsTo
 	PartnerID: ID @index(name: "byPartner", queryField: "subscriptionsByPartnerID")
 	Partner: Partner @belongsTo
-	Surveys: [Survey] @hasMany
-	Visitors: [Visitor] @hasMany
+	Surveys: [Survey] @hasMany(indexName: "bySubscriptions", fields: ["id"])
+	Visitors: [Visitor] @hasMany(indexName: "bySubscriptions", fields: ["id"])
 }
 
 type Partner @model @auth(rules: [{ allow: public }]) {
@@ -125,8 +126,8 @@ type Partner @model @auth(rules: [{ allow: public }]) {
 	city: String!
 	street: String
 	number: String
-	Events: [Events] @hasMany
-	Subscriptions: [Subscriptions] @hasMany
+	Events: [Events] @hasMany(indexName: "byPartner", fields: ["id"])
+	Subscriptions: [Subscriptions] @hasMany(indexName: "byPartner", fields: ["id"])
 }
 
 type Survey @model @auth(rules: [{ allow: public }]) {

@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Storage } from 'aws-amplify';
 import { AppContext } from '../../../../context';
 import { LANGUAGES, ROUTES } from '../../../../constants';
 import useCloseMenu from '../../../../helpers/useCloseMenu';
@@ -11,25 +10,12 @@ import { showLink } from '../../../../helpers';
 export default function NavProfile({ client, signout, alerts }) {
 	const { state } = useContext(AppContext);
 	const location = useLocation();
-	const [url, setUrl] = useState();
 	const [open, setOpen] = useState(false);
 	const ref = useCloseMenu(open, setOpen);
-
-	async function logo() {
-		const list = await Storage.list(`logo/${client.id}`);
-		if (list?.length) {
-			const getUrl = await Storage.get(list[0].key);
-			setUrl(getUrl);
-		}
-	}
 
 	async function handleSignOut() {
 		await signout();
 	}
-
-	useEffect(() => {
-		if (client) logo();
-	}, [client]);
 
 	useEffect(() => {
 		setOpen(false);
@@ -45,8 +31,8 @@ export default function NavProfile({ client, signout, alerts }) {
 				className="flex items-center px-1"
 				onClick={() => setOpen(!open)}
 			>
-				{url ? (
-					<img alt="client logo" src={url} className="h-8 w-8 rounded" />
+				{client?.logo ? (
+					<img alt="client logo" src={client?.logo} className="h-8 w-8 rounded" />
 				) : (
 					<AvatarIcon styles="h-8 w-8 text-primary" />
 				)}

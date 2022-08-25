@@ -1,6 +1,9 @@
 import moment from 'moment';
 import { PLANS } from '../constants';
 
+// eslint-disable-next-line no-promise-executor-return
+export const delay = ms => new Promise(res => setTimeout(res, ms));
+
 export const showLink = (state) => !state.alerts.filter((a) => a.type === 'register' || a.type === 'owner').length;
 
 export function validateEmail(email) {

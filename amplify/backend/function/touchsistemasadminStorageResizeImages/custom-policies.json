@@ -1,6 +1,12 @@
 [
-  {
-    "Action": [],
-    "Resource": []
-  }
+	{
+		"Action": [
+			"s3:PutObject",
+			"s3:PutObjectAcl",
+			"s3:PutOverwriteObject"
+		],
+		"Resource": [
+			"arn:aws:s3:::images.touchsistemas.com.br/*"
+		]
+	}
 ]

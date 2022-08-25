@@ -21,7 +21,7 @@ export default function PlanSelection() {
 			data: {
 				listPlans: { items },
 			},
-		} = await API.graphql(graphqlOperation(listPlans));
+		} = await API.graphql(graphqlOperation(listPlans, { filter: { active: { eq: 'TRUE' }}}));
 		const languages = Object.keys(LANGUAGES);
 		const formatPlans = {};
 		languages.forEach((l) => {

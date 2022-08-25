@@ -47,7 +47,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 					name: owner.name,
 					phone: `+55 ${owner.phone}`,
 					email: owner.email,
-					clientID,
+					ClientID: clientID,
 				},
 			})
 		);
@@ -68,7 +68,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 					name: selected.name,
 					phone: selected.phone[0] !== '+' ? `+55 ${selected.phone}` : selected.phone,
 					email: selected.email,
-					clientID,
+					ClientID: clientID,
 				},
 			})
 		);

@@ -33,12 +33,12 @@ export default function SignIn() {
 			if (remember) await Auth.rememberDevice();
 			else await Auth.forgetDevice();
 			const {
-				data: { clientByEmail: {items} },
+				data: {
+					clientByEmail: { items },
+				},
 			} = await API.graphql(graphqlOperation(queries.clientByEmail, { email: auth.attributes.email }));
 			if (!items.length) throw new Error('Client not found');
-			const encodedContent = encodeCookie(
-				JSON.stringify({ uuid: auth.username, email, client: items[0].id })
-			);
+			const encodedContent = encodeCookie(JSON.stringify({ uuid: auth.username, email, client: items[0].id }));
 			const date = new Date();
 			date.setDate(date.getDate() + 365);
 			setCookie('touchsistemas', encodedContent, { expires: date, path: '/' });

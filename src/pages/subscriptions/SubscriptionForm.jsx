@@ -141,7 +141,7 @@ export default function SubscriptionForm() {
 		await Storage.put(`logo/${newEvent.id}.${eventLogo.name.split('.').pop()}`, eventLogo, {
 			contentType: eventLogo.type,
 			progressCallback(p) {
-				setProgress(parseInt((p.loaded / p.total) * 100, 10))
+				setProgress(parseInt((p.loaded / p.total) * 100, 10));
 			},
 		});
 		setProgress(0);

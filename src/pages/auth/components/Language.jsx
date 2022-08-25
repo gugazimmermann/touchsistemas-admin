@@ -30,8 +30,8 @@ export default function Language() {
 
 	function handleChangeLanguage(language) {
 		const currentRoute = Object.keys(ROUTES[state.lang])
-		.map((k) => ({ key: k, value: ROUTES[state.lang][k] }))
-		.find((r) => r.value === location.pathname);
+			.map((k) => ({ key: k, value: ROUTES[state.lang][k] }))
+			.find((r) => r.value === location.pathname);
 		dispatch({ type: 'UPDATE_LANG', payload: language });
 		navigate(ROUTES[language][currentRoute.key]);
 		setOpen(false);

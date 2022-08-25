@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import slugify from 'slugify';
@@ -7,7 +6,7 @@ import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { getSubscriptions, partnerByReferralCode, visitorByEventsID } from '../../graphql/queries';
 import { AppContext } from '../../context';
-import { Loading, Alert, LoadingIcon } from '../../components';
+import { Loading, Alert } from '../../components';
 import { ROUTES } from '../../constants';
 
 export default function SubscriptionDetail() {

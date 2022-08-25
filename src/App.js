@@ -1,5 +1,5 @@
-import { lazy, Suspense, useContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense, useContext, useEffect } from 'react';
+import { Routes, Route, useSearchParams } from 'react-router-dom';
 import { AppContext } from './context';
 import { ROUTES } from './constants';
 import { Loading } from './components';
@@ -27,9 +27,19 @@ const Events = lazy(() => import('./pages/events/Events'));
 const EventDetail = lazy(() => import('./pages/events/EventDetail'));
 
 function App() {
-	const { state } = useContext(AppContext);
+	const [searchParams] = useSearchParams();
+	const { state, dispatch } = useContext(AppContext);
 	// const language = window.navigator.userLanguage || window.navigator.language;
-	Logger('Language:', state.lang);
+	// Logger('Navigator:', language);
+
+	useEffect(() => {
+		const lang = searchParams.get('lang');
+		if (lang) {
+			dispatch({ type: 'UPDATE_LANG', payload: searchParams.get('lang') });
+		}
+		Logger('Language:', state.lang);
+	}, []);
+
 	return (
 		<Suspense fallback={<Loading />}>
 			<Routes>

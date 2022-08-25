@@ -7,10 +7,7 @@ export default function Alert({ index, type, close, children }) {
 		return 'bg-amber-100 text-amber-700';
 	};
 	return (
-		<div
-			className={`${seeType(type)} relative mb-2 rounded-lg p-1.5 flex items-center shadow-md`}
-			role="alert"
-		>
+		<div className={`${seeType(type)} relative mb-2 rounded-lg p-1.5 flex items-center shadow-md`} role="alert">
 			{close && (
 				<button type="button" className="absolute top-1 right-1" onClick={() => close(index)}>
 					<i className="bx bx-x text-xl" />

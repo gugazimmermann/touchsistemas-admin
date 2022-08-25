@@ -20,7 +20,7 @@ export default function Layout() {
 	async function signOut() {
 		try {
 			await Auth.signOut({ global: true });
-			} catch (error) {
+		} catch (error) {
 			Logger('SignOut', error);
 		}
 		removeCookie('touchsistemas');

@@ -16,7 +16,7 @@ export default function PlanSelection() {
 	const [planModal, setPlanModal] = useState();
 
 	async function getPlans() {
-		setLoading(true)
+		setLoading(true);
 		const {
 			data: {
 				listPlans: { items },
@@ -39,7 +39,7 @@ export default function PlanSelection() {
 			});
 		});
 		setPlans(formatPlans);
-		setLoading(false)
+		setLoading(false);
 	}
 
 	function plansCardInfo(type) {

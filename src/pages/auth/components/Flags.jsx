@@ -8,7 +8,7 @@ import BR from '../../../images/flags/br.svg';
 import EN from '../../../images/flags/en.svg';
 import ES from '../../../images/flags/es.svg';
 
-export default function Language() {
+export default function Flags() {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { state, dispatch } = useContext(AppContext);

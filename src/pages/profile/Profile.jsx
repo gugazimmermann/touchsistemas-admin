@@ -32,8 +32,9 @@ const initial = {
 
 export default function Profile() {
 	const { state } = useContext(AppContext);
+	const { client } = state;
 	const navigate = useNavigate();
-	const [client, loadClient] = useOutletContext();
+	const [loadClient] = useOutletContext();
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);

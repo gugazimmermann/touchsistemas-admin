@@ -9,8 +9,9 @@ import { Loading, Grid, EventCard, MapCard, Title } from '../../components';
 import { orderEventsByLastDay } from '../../helpers';
 
 export default function Events() {
-	const [client, loadClient] = useOutletContext();
+	const [loadClient] = useOutletContext();
 	const { state } = useContext(AppContext);
+	const {client} = state;
 	const [loading, setLoading] = useState(false);
 	const [events, setEvents] = useState([]);
 	const [map, setMap] = useState();
@@ -74,8 +75,8 @@ export default function Events() {
 	}
 
 	useEffect(() => {
-		if (client) orderEvents();
-	}, [client]);
+		orderEvents();
+	}, []);
 
 	if (loading) return <Loading />;
 	return (

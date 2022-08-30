@@ -7,7 +7,7 @@ import AvatarIcon from '../../../../images/AvatarIcon';
 import Arrow from '../../../../images/Arrow';
 import { showLink } from '../../../../helpers';
 
-export default function NavProfile({ client, signout, alerts }) {
+export default function NavProfile({ signout, alerts }) {
 	const { state } = useContext(AppContext);
 	const location = useLocation();
 	const [open, setOpen] = useState(false);
@@ -31,8 +31,8 @@ export default function NavProfile({ client, signout, alerts }) {
 				className="flex items-center px-1"
 				onClick={() => setOpen(!open)}
 			>
-				{client?.logo ? (
-					<img alt="client logo" src={client?.logo} className="h-8 w-8 rounded" />
+				{state.client?.logo ? (
+					<img alt="client logo" src={state.client?.logo} className="h-8 w-8 rounded" />
 				) : (
 					<AvatarIcon styles="h-8 w-8 text-primary" />
 				)}

@@ -14,7 +14,7 @@ export default function Layout() {
 	const navigate = useNavigate();
 	const { state, dispatch } = useContext(AppContext);
 	const [cookies, , removeCookie] = useCookies(['touchsistemas']);
-	const [client, setClient] = useState();
+	const [, setClient] = useState();
 	const [loading, setLoading] = useState(false);
 
 	async function signOut() {
@@ -35,20 +35,23 @@ export default function Layout() {
 		return null;
 	}
 
-	async function loadClient() {
+	async function loadClient(force) {
 		setLoading(true);
-		const clientID = decodeCookie(cookies?.touchsistemas)?.client;
-		const {
-			data: { getClient },
-		} = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
-		Logger('Client', getClient);
-		getClient.logo = await handleLogo(getClient.id);
-		setClient(getClient);
-		const alerts = [];
-		if (!getClient?.phone) alerts.push({ type: 'register' });
-		if (!getClient?.Owners?.items.length) alerts.push({ type: 'owner' });
-		dispatch({ type: 'UPDATE_ALERT', payload: alerts });
-		if (alerts.length) navigate(ROUTES[state.lang].ALERTS);
+		if (!state.client || force) {
+			const clientID = decodeCookie(cookies?.touchsistemas)?.client;
+			const {
+				data: { getClient },
+			} = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
+			getClient.logo = await handleLogo(getClient.id);
+			setClient(getClient);
+			dispatch({ type: 'UPDATE_CLIENT', payload: getClient });
+			Logger('Loading Client', getClient);
+			const alerts = [];
+			if (!getClient?.phone) alerts.push({ type: 'register' });
+			if (!getClient?.Owners?.items.length) alerts.push({ type: 'owner' });
+			dispatch({ type: 'UPDATE_ALERT', payload: alerts });
+			if (alerts.length) navigate(ROUTES[state.lang].ALERTS);
+		}
 		setLoading(false);
 	}
 
@@ -57,11 +60,11 @@ export default function Layout() {
 	}, []);
 
 	return (
-		<main className="container mx-auto h-screen max-w-screen-lg bg-slate-50">
+		<main className="mx-auto h-screen">
 			{loading && <Loading />}
-			<Nav client={client} signout={signOut} />
-			<div className="p-4 ">
-				<Outlet context={[client, loadClient]} />
+			<Nav signout={signOut} />
+			<div className="mx-auto max-w-screen-lg p-4">
+				<Outlet context={[loadClient]} />
 			</div>
 		</main>
 	);

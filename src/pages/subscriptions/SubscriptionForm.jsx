@@ -23,8 +23,9 @@ const initial = {
 
 export default function SubscriptionForm() {
 	const navigate = useNavigate();
-	const [client, loadClient] = useOutletContext();
+	const [loadClient] = useOutletContext();
 	const { state } = useContext(AppContext);
+	const { client } = state;
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -163,7 +164,7 @@ export default function SubscriptionForm() {
 			return null;
 		}
 		if (formSubscription.zipCode.length < 10) {
-			setErrorMsg(LANGUAGES[state.lang].subscription.requiredEmail);
+			setErrorMsg(LANGUAGES[state.lang].subscription.invalidZipCode);
 			setError(true);
 			setLoading(false);
 			return null;
@@ -182,7 +183,7 @@ export default function SubscriptionForm() {
 				graphqlOperation(partnerByReferralCode, { referralCode: formSubscription.referralCode })
 			);
 			if (getPartner?.data?.partnerByReferralCode?.items.length <= 0) {
-				setErrorMsg('Parceiro não encontrado!');
+				setErrorMsg(LANGUAGES[state.lang].subscription.invalidPartner);
 				setError(true);
 				setLoading(false);
 				return null;
@@ -216,7 +217,7 @@ export default function SubscriptionForm() {
 			{!!progress && <Uploading progress={progress} />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
 			<Title text={LANGUAGES[state.lang].subscription.title} />
-			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow-md">
+			<form className="flex flex-wrap bg-white p-4 mb-8 rounded-md shadow-md">
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input

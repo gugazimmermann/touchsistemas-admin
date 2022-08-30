@@ -6,12 +6,13 @@ import { ROUTES } from '../../../constants';
 import { NavAlert, NavInfo, NavLanguage, NavProfile } from './components';
 import { showLink } from '../../../helpers';
 
-export default function Nav({ client, signout }) {
+export default function Nav({ signout }) {
 	const { state } = useContext(AppContext);
 	const location = useLocation();
 
 	return (
-		<nav className="w-full flex flex-wrap justify-center sm:justify-between shadow-md z-30 px-2 py-1.5 bg-white text-slate-500">
+		<nav className="w-full shadow-md z-30 px-2 py-1.5 bg-white text-slate-500">
+			<div className='container mx-auto flex flex-wrap justify-center sm:justify-between'>
 			<Link
 				to={showLink(state) ? ROUTES[state.lang].DASHBOARD : ROUTES[state.lang].ALERTS}
 				className="flex flex-row items-center text-primary mb-2 sm:mb-0"
@@ -41,7 +42,8 @@ export default function Nav({ client, signout }) {
 				<NavInfo alerts={0} />
 				<NavAlert alerts={state.alerts.length} />
 				<NavLanguage />
-				<NavProfile client={client} signout={signout} alerts={0} />
+				<NavProfile signout={signout} alerts={0} />
+			</div>
 			</div>
 		</nav>
 	);

@@ -9,8 +9,9 @@ import { LANGUAGES } from '../../constants';
 import { Loading, Grid, MapCard, Title, SubscriptionCard } from '../../components';
 
 export default function Subscriptions() {
-	const [client, loadClient] = useOutletContext();
+	const [loadClient] = useOutletContext();
 	const { state } = useContext(AppContext);
+	const { client } = state;
 	const [loading, setLoading] = useState(false);
 	const [subscriptions, setSubscriptions] = useState([]);
 	const [map, setMap] = useState(null);
@@ -76,8 +77,8 @@ export default function Subscriptions() {
 	}
 
 	useEffect(() => {
-		if (client) orderSubscriptions();
-	}, [client]);
+		orderSubscriptions();
+	}, []);
 
 	if (loading) return <Loading />;
 	return (

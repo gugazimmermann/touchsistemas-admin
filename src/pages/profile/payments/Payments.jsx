@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
 import moment from 'moment';
-import { useOutletContext } from 'react-router-dom';
 import { AppContext } from '../../../context';
 import { LANGUAGES } from '../../../constants';
 import { Title } from '../../../components';
@@ -8,7 +7,7 @@ import { orderEventsByLastDay, plansValues, translatePlan } from '../../../helpe
 
 export default function Payments() {
 	const { state } = useContext(AppContext);
-	const [client] = useOutletContext();
+	const { client } = state;
 	const [payments, setPayments] = useState();
 	const [cardOwner, setCardOwner] = useState();
 

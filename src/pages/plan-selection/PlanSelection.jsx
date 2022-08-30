@@ -21,7 +21,7 @@ export default function PlanSelection() {
 			data: {
 				planByActive: { items },
 			},
-		} = await API.graphql(graphqlOperation(planByActive, { active: 'TRUE'}));
+		} = await API.graphql(graphqlOperation(planByActive, { active: 'TRUE' }));
 		const languages = Object.keys(LANGUAGES);
 		const formatPlans = {};
 		languages.forEach((l) => {

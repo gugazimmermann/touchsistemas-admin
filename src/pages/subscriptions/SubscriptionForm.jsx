@@ -204,7 +204,7 @@ export default function SubscriptionForm() {
 		await addEventMap(newSubscription);
 		setLoading(false);
 		if (eventLogo) await addEventLogo(newSubscription);
-		delay(3000)
+		delay(3000);
 		loadClient();
 		setFormSubscription(initial);
 		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${newSubscription.id}`, { state: { success: true } });

@@ -107,7 +107,20 @@ export default {
 		complement: 'Complement',
 		dates: 'Dates',
 		weekDays: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-		months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
+		months: [
+			'January',
+			'February',
+			'March',
+			'April',
+			'May',
+			'June',
+			'July',
+			'August',
+			'September',
+			'October',
+			'November',
+			'December',
+		],
 		referralCode: 'Referral Code',
 		logo: 'Logo',
 		continue: 'Continue',
@@ -118,5 +131,5 @@ export default {
 		requiredEmail: 'E-Mail is Required!',
 		invalidZipCode: 'invalid Zip Code!',
 		invalidPartner: 'Partner not found!',
-	}
+	},
 };

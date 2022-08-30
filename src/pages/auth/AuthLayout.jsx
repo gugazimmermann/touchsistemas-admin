@@ -145,7 +145,16 @@ export default function AuthLayout() {
 					<div className="w-10/12 md:w-5/12 lg:w-4/12">
 						<LogoAuth styles="mb-5 text-primary" />
 						<Alert error={error} />
-						<Outlet context={[signUp, resendConfirmationCode, confirmSignUp, signIn, sendForgotPasswordCode, redefinePassword]} />
+						<Outlet
+							context={[
+								signUp,
+								resendConfirmationCode,
+								confirmSignUp,
+								signIn,
+								sendForgotPasswordCode,
+								redefinePassword,
+							]}
+						/>
 					</div>
 				</div>
 			</div>

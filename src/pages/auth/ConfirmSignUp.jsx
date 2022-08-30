@@ -50,7 +50,9 @@ export default function ConfirmSignUp() {
 					type="button"
 					onClick={() => resendConfirmationCode(email)}
 					disabled={disabledReSend()}
-					className={`duration-200 transition ease-in-out ${disabledReSend() ? 'text-slate-500' : 'text-primary hover:text-secondary'}`}
+					className={`duration-200 transition ease-in-out ${
+						disabledReSend() ? 'text-slate-500' : 'text-primary hover:text-secondary'
+					}`}
 				>
 					{LANGUAGES[state.lang].reSendCode}
 				</button>

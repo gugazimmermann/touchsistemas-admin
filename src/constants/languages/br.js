@@ -107,7 +107,20 @@ export default {
 		complement: 'Complemento',
 		dates: 'Datas',
 		weekDays: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-		months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
+		months: [
+			'Janeiro',
+			'Fevereiro',
+			'Março',
+			'Abril',
+			'Maio',
+			'Junho',
+			'Julho',
+			'Agosto',
+			'Setembro',
+			'Outubro',
+			'Novembro',
+			'Dezembro',
+		],
 		referralCode: 'Código de Referência',
 		logo: 'Logo',
 		continue: 'Continuar',
@@ -118,5 +131,5 @@ export default {
 		requiredEmail: 'E-Mail é Obrigatório!',
 		invalidZipCode: 'CEP Inválido!',
 		invalidPartner: 'Parceiro de Referência não encontrado!',
-	}
+	},
 };

@@ -11,7 +11,7 @@ import { orderEventsByLastDay } from '../../helpers';
 export default function Events() {
 	const [loadClient] = useOutletContext();
 	const { state } = useContext(AppContext);
-	const {client} = state;
+	const { client } = state;
 	const [loading, setLoading] = useState(false);
 	const [events, setEvents] = useState([]);
 	const [map, setMap] = useState();

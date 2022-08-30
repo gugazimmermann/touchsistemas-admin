@@ -60,7 +60,7 @@ export default function Subscriptions() {
 	}
 
 	async function orderSubscriptions() {
-		const cloneSubscriptions = client.Subscriptions.items.map((s) => s);
+		const cloneSubscriptions = client.Subscriptions?.items.map((s) => s);
 		setLoading(true);
 		const showSubscriptions = [];
 		if (cloneSubscriptions.length) {

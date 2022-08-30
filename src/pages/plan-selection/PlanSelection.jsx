@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API, graphqlOperation } from 'aws-amplify';
-import { planByActive } from '../../graphql/queries';
+import slugify from 'slugify';
 import { PLANS, LANGUAGES, ROUTES } from '../../constants';
 import { AppContext } from '../../context';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
@@ -17,16 +16,11 @@ export default function PlanSelection() {
 
 	async function getPlans() {
 		setLoading(true);
-		const {
-			data: {
-				planByActive: { items },
-			},
-		} = await API.graphql(graphqlOperation(planByActive, { active: 'TRUE' }));
 		const languages = Object.keys(LANGUAGES);
 		const formatPlans = {};
 		languages.forEach((l) => {
 			formatPlans[`${l}`] = {};
-			items.forEach((p) => {
+			state.plans.forEach((p) => {
 				formatPlans[`${l}`][`${p.type}`] = {
 					id: p.id,
 					type: p.type,
@@ -68,8 +62,7 @@ export default function PlanSelection() {
 	}
 
 	function choosePlan(p) {
-		// TODO: traduzir rota
-		navigate(`${ROUTES[state.lang].NEW}/${p.toLocaleLowerCase()}`);
+		navigate(`${ROUTES[state.lang].NEW}/${slugify(p.name, { lower: true})}`);
 	}
 
 	function handlePlanInfo(p) {
@@ -91,7 +84,7 @@ export default function PlanSelection() {
 				<button type="button" onClick={() => handlePlanInfo(p)} className="absolute top-2 right-2 text-slate-500 z-10">
 					<i className="bx bxs-info-circle text-3xl" />
 				</button>
-				<button type="button" onClick={() => choosePlan(p.type)} className={`p-8 hover:text-${cardInfo.color}`}>
+				<button type="button" onClick={() => choosePlan(p)} className={`p-8 hover:text-${cardInfo.color}`}>
 					{cardInfo.icon}
 					<h1 className="text-lg font-bold">{p.name}</h1>
 				</button>
@@ -99,6 +92,7 @@ export default function PlanSelection() {
 		);
 	}
 
+	// TODO: handle languages better
 	function renderPlanPrice(price, type) {
 		switch (state.lang) {
 			case 'br':
@@ -159,7 +153,7 @@ export default function PlanSelection() {
 			<ConfirmationDialog
 				open={open}
 				setOpen={setOpen}
-				handleConfirm={() => choosePlan(planModal?.plan?.type)}
+				handleConfirm={() => choosePlan(planModal?.plan)}
 				icon={planModal?.info?.icon}
 				cancelText="Fechar"
 				confirmText="Selecionar"

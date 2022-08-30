@@ -60,7 +60,7 @@ function App() {
 						<Route path={ROUTES[state.lang].PROFILE} element={<Profile />} />
 						<Route path={`${ROUTES[state.lang].PAYMENTS}`} element={<Payments />} />
 						<Route path={`${ROUTES[state.lang].NEW}`} element={<PlanSelection />} />
-						<Route path={`${ROUTES[state.lang].NEW}/:type`} element={<New />} />
+						<Route path={`${ROUTES[state.lang].NEW}/:name`} element={<New />} />
 						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}`} element={<Subscriptions />} />
 						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}/:id`} element={<SubscriptionDetail />} />
 						<Route path={`${ROUTES[state.lang].EVENTS}`} element={<Events />} />

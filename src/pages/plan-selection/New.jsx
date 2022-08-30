@@ -1,21 +1,38 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import slugify from 'slugify';
 import { AppContext } from '../../context';
 import { PLANS, ROUTES } from '../../constants';
 import SubscriptionForm from '../subscriptions/SubscriptionForm';
 import EventForm from '../events/EventForm';
+import { Loading } from '../../components';
 
 export default function New() {
 	const navigate = useNavigate();
 	const params = useParams();
 	const { state } = useContext(AppContext);
+	const [loading, setLoading] = useState(true);
+	const [plan, setPlan] = useState();
 
 	useEffect(() => {
-		if (!PLANS[params.type.toLocaleUpperCase()]) navigate(`${ROUTES[state.lang].DASHBOARD}`);
+		setLoading(true)
+		const selectedPlan = state.plans
+			.map((p) => {
+				const planName = JSON.parse(p.name).find((n) => slugify(n.name, { lower: true }) === params.name);
+				if (planName) return p;
+				return null;
+			})
+			.filter((n) => n)[0];
+		if (!selectedPlan) navigate(`${ROUTES[state.lang].DASHBOARD}`);
+		setPlan(selectedPlan);
+		setLoading(false)
 	}, [params]);
 
-	if (params.type.toLocaleUpperCase() === PLANS.SUBSCRIPTION) {
-		return <SubscriptionForm />;
+	if (!plan && loading) {
+		return <Loading />;
 	}
-	return <EventForm planType={PLANS[params.type.toLocaleUpperCase()]} />;
+	if (plan && !loading) {
+		if (plan?.type.toLocaleUpperCase() === PLANS.SUBSCRIPTION) return <SubscriptionForm />;
+		return <EventForm plan={plan} />;
+	}
 }

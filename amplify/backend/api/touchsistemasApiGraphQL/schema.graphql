@@ -46,6 +46,7 @@ type Client @model @auth(rules: [{ allow: public }]) {
 	street: String
 	number: String
 	complement: String
+	logo: String
 	eventsMap: [String]
 	subscriptionsMap: [String]
 	Owners: [Owner] @hasMany(indexName: "byClient", fields: ["id"])
@@ -75,7 +76,7 @@ type Events @model @auth(rules: [{ allow: public }]) {
 	street: String
 	number: String
 	complement: String
-	description: String
+	logo: String
 	dates: [AWSDate]
 	gift: Boolean
 	giftDescription: String
@@ -103,6 +104,7 @@ type Subscriptions @model @auth(rules: [{ allow: public }]) {
 	street: String
 	number: String
 	complement: String
+	logo: String
   active: String! @index(name: "byActive", queryField: "subscriptionsByActive")
 	PlanID: ID! @index(name: "byPlanID", queryField: "subscriptionsByPlanID")
   Plan: Plan @belongsTo

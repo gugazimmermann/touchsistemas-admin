@@ -24,6 +24,7 @@ export const getPlan = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -52,6 +53,7 @@ export const getPlan = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -100,7 +102,7 @@ export const getPlan = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -133,6 +135,7 @@ export const getPlan = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -210,6 +213,7 @@ export const listPlans = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -235,7 +239,7 @@ export const listPlans = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -294,6 +298,7 @@ export const planByType = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -319,7 +324,7 @@ export const planByType = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -378,6 +383,7 @@ export const planByActive = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -403,7 +409,7 @@ export const planByActive = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -442,6 +448,7 @@ export const getClient = /* GraphQL */ `
       street
       number
       complement
+      logo
       eventsMap
       subscriptionsMap
       Owners {
@@ -465,6 +472,7 @@ export const getClient = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -489,7 +497,7 @@ export const getClient = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -522,6 +530,7 @@ export const getClient = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -569,6 +578,7 @@ export const getClient = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -597,6 +607,7 @@ export const getClient = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -657,6 +668,7 @@ export const listClients = /* GraphQL */ `
         street
         number
         complement
+        logo
         eventsMap
         subscriptionsMap
         Owners {
@@ -685,7 +697,7 @@ export const listClients = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -714,6 +726,7 @@ export const listClients = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -761,6 +774,7 @@ export const clientByEmail = /* GraphQL */ `
         street
         number
         complement
+        logo
         eventsMap
         subscriptionsMap
         Owners {
@@ -789,7 +803,7 @@ export const clientByEmail = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -818,6 +832,7 @@ export const clientByEmail = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -865,6 +880,7 @@ export const clientByState = /* GraphQL */ `
         street
         number
         complement
+        logo
         eventsMap
         subscriptionsMap
         Owners {
@@ -893,7 +909,7 @@ export const clientByState = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -922,6 +938,7 @@ export const clientByState = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -962,6 +979,7 @@ export const getOwner = /* GraphQL */ `
         street
         number
         complement
+        logo
         eventsMap
         subscriptionsMap
         Owners {
@@ -990,7 +1008,7 @@ export const getOwner = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -1019,6 +1037,7 @@ export const getOwner = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -1075,6 +1094,7 @@ export const listOwners = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -1131,6 +1151,7 @@ export const ownerByEmail = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -1167,7 +1188,7 @@ export const getEvents = /* GraphQL */ `
       street
       number
       complement
-      description
+      logo
       dates
       gift
       giftDescription
@@ -1195,6 +1216,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -1220,7 +1242,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -1254,6 +1276,7 @@ export const getEvents = /* GraphQL */ `
         street
         number
         complement
+        logo
         eventsMap
         subscriptionsMap
         Owners {
@@ -1282,7 +1305,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -1311,6 +1334,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -1352,7 +1376,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -1381,6 +1405,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -1416,7 +1441,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -1443,6 +1468,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -1489,7 +1515,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -1516,6 +1542,7 @@ export const getEvents = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -1557,7 +1584,7 @@ export const listEvents = /* GraphQL */ `
         street
         number
         complement
-        description
+        logo
         dates
         gift
         giftDescription
@@ -1596,6 +1623,7 @@ export const listEvents = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -1708,7 +1736,7 @@ export const eventsByState = /* GraphQL */ `
         street
         number
         complement
-        description
+        logo
         dates
         gift
         giftDescription
@@ -1747,6 +1775,7 @@ export const eventsByState = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -1859,7 +1888,7 @@ export const eventsByPlanID = /* GraphQL */ `
         street
         number
         complement
-        description
+        logo
         dates
         gift
         giftDescription
@@ -1898,6 +1927,7 @@ export const eventsByPlanID = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -2010,7 +2040,7 @@ export const eventsByClientID = /* GraphQL */ `
         street
         number
         complement
-        description
+        logo
         dates
         gift
         giftDescription
@@ -2049,6 +2079,7 @@ export const eventsByClientID = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -2161,7 +2192,7 @@ export const eventsByPartnerID = /* GraphQL */ `
         street
         number
         complement
-        description
+        logo
         dates
         gift
         giftDescription
@@ -2200,6 +2231,7 @@ export const eventsByPartnerID = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -2298,6 +2330,7 @@ export const getSubscriptions = /* GraphQL */ `
       street
       number
       complement
+      logo
       active
       PlanID
       Plan {
@@ -2321,6 +2354,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -2346,7 +2380,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -2380,6 +2414,7 @@ export const getSubscriptions = /* GraphQL */ `
         street
         number
         complement
+        logo
         eventsMap
         subscriptionsMap
         Owners {
@@ -2408,7 +2443,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -2437,6 +2472,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -2478,7 +2514,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -2507,6 +2543,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -2542,7 +2579,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -2569,6 +2606,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -2615,7 +2653,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -2642,6 +2680,7 @@ export const getSubscriptions = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -2692,6 +2731,7 @@ export const listSubscriptions = /* GraphQL */ `
         street
         number
         complement
+        logo
         active
         PlanID
         Plan {
@@ -2726,6 +2766,7 @@ export const listSubscriptions = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -2837,6 +2878,7 @@ export const subscriptionsByState = /* GraphQL */ `
         street
         number
         complement
+        logo
         active
         PlanID
         Plan {
@@ -2871,6 +2913,7 @@ export const subscriptionsByState = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -2982,6 +3025,7 @@ export const subscriptionsByActive = /* GraphQL */ `
         street
         number
         complement
+        logo
         active
         PlanID
         Plan {
@@ -3016,6 +3060,7 @@ export const subscriptionsByActive = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -3127,6 +3172,7 @@ export const subscriptionsByPlanID = /* GraphQL */ `
         street
         number
         complement
+        logo
         active
         PlanID
         Plan {
@@ -3161,6 +3207,7 @@ export const subscriptionsByPlanID = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -3272,6 +3319,7 @@ export const subscriptionsByClientID = /* GraphQL */ `
         street
         number
         complement
+        logo
         active
         PlanID
         Plan {
@@ -3306,6 +3354,7 @@ export const subscriptionsByClientID = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -3417,6 +3466,7 @@ export const subscriptionsByPartnerID = /* GraphQL */ `
         street
         number
         complement
+        logo
         active
         PlanID
         Plan {
@@ -3451,6 +3501,7 @@ export const subscriptionsByPartnerID = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -3563,7 +3614,7 @@ export const getPartner = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -3596,6 +3647,7 @@ export const getPartner = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -3643,6 +3695,7 @@ export const getPartner = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -3671,6 +3724,7 @@ export const getPartner = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -3753,7 +3807,7 @@ export const listPartners = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -3782,6 +3836,7 @@ export const listPartners = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -3841,7 +3896,7 @@ export const partnerByReferralCode = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -3870,6 +3925,7 @@ export const partnerByReferralCode = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -3929,7 +3985,7 @@ export const partnerByContact = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -3958,6 +4014,7 @@ export const partnerByContact = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -4017,7 +4074,7 @@ export const partnerByEmail = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -4046,6 +4103,7 @@ export const partnerByEmail = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -4105,7 +4163,7 @@ export const partnerByState = /* GraphQL */ `
             street
             number
             complement
-            description
+            logo
             dates
             gift
             giftDescription
@@ -4134,6 +4192,7 @@ export const partnerByState = /* GraphQL */ `
             street
             number
             complement
+            logo
             active
             PlanID
             ClientID
@@ -4174,7 +4233,7 @@ export const getSurvey = /* GraphQL */ `
         street
         number
         complement
-        description
+        logo
         dates
         gift
         giftDescription
@@ -4213,6 +4272,7 @@ export const getSurvey = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -4306,6 +4366,7 @@ export const getSurvey = /* GraphQL */ `
         street
         number
         complement
+        logo
         active
         PlanID
         Plan {
@@ -4340,6 +4401,7 @@ export const getSurvey = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -4462,7 +4524,7 @@ export const listSurveys = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -4495,6 +4557,7 @@ export const listSurveys = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -4540,6 +4603,7 @@ export const listSurveys = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -4568,6 +4632,7 @@ export const listSurveys = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -4642,7 +4707,7 @@ export const surveyByEventsID = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -4675,6 +4740,7 @@ export const surveyByEventsID = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -4720,6 +4786,7 @@ export const surveyByEventsID = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -4748,6 +4815,7 @@ export const surveyByEventsID = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -4822,7 +4890,7 @@ export const surveyBySubscriptionsID = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -4855,6 +4923,7 @@ export const surveyBySubscriptionsID = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -4900,6 +4969,7 @@ export const surveyBySubscriptionsID = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -4928,6 +4998,7 @@ export const surveyBySubscriptionsID = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -5000,7 +5071,7 @@ export const getVisitor = /* GraphQL */ `
         street
         number
         complement
-        description
+        logo
         dates
         gift
         giftDescription
@@ -5039,6 +5110,7 @@ export const getVisitor = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -5132,6 +5204,7 @@ export const getVisitor = /* GraphQL */ `
         street
         number
         complement
+        logo
         active
         PlanID
         Plan {
@@ -5166,6 +5239,7 @@ export const getVisitor = /* GraphQL */ `
           street
           number
           complement
+          logo
           eventsMap
           subscriptionsMap
           Owners {
@@ -5289,7 +5363,7 @@ export const listVisitors = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -5322,6 +5396,7 @@ export const listVisitors = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -5367,6 +5442,7 @@ export const listVisitors = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -5395,6 +5471,7 @@ export const listVisitors = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -5482,7 +5559,7 @@ export const visitorByDay = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -5515,6 +5592,7 @@ export const visitorByDay = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -5560,6 +5638,7 @@ export const visitorByDay = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -5588,6 +5667,7 @@ export const visitorByDay = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -5675,7 +5755,7 @@ export const visitorByPhone = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -5708,6 +5788,7 @@ export const visitorByPhone = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -5753,6 +5834,7 @@ export const visitorByPhone = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -5781,6 +5863,7 @@ export const visitorByPhone = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -5868,7 +5951,7 @@ export const visitorByConfirmation = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -5901,6 +5984,7 @@ export const visitorByConfirmation = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -5946,6 +6030,7 @@ export const visitorByConfirmation = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -5974,6 +6059,7 @@ export const visitorByConfirmation = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -6059,7 +6145,7 @@ export const visitorByEventsID = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -6092,6 +6178,7 @@ export const visitorByEventsID = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -6137,6 +6224,7 @@ export const visitorByEventsID = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -6165,6 +6253,7 @@ export const visitorByEventsID = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -6250,7 +6339,7 @@ export const visitorBySubscriptionsID = /* GraphQL */ `
           street
           number
           complement
-          description
+          logo
           dates
           gift
           giftDescription
@@ -6283,6 +6372,7 @@ export const visitorBySubscriptionsID = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt
@@ -6328,6 +6418,7 @@ export const visitorBySubscriptionsID = /* GraphQL */ `
           street
           number
           complement
+          logo
           active
           PlanID
           Plan {
@@ -6356,6 +6447,7 @@ export const visitorBySubscriptionsID = /* GraphQL */ `
             street
             number
             complement
+            logo
             eventsMap
             subscriptionsMap
             createdAt

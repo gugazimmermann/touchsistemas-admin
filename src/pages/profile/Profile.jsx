@@ -12,7 +12,7 @@ import {
 	normalizePhone,
 	normalizePhoneToShow,
 } from '../../helpers';
-import { Loading, Alert, Title } from '../../components';
+import { Loading, Alert, Title, Uploading } from '../../components';
 import Owners from './Owners';
 
 const initial = {
@@ -41,6 +41,7 @@ export default function Profile() {
 	const [formClient, setFormClient] = useState(initial);
 	const [clientLogo, setClientLogo] = useState();
 	const [fileName, setFileName] = useState(LANGUAGES[state.lang].profile.logo);
+	const [progress, setProgress] = useState();
 
 	useEffect(() => {
 		if (client) {
@@ -60,6 +61,17 @@ export default function Profile() {
 			});
 		}
 	}, [client]);
+
+	async function addLogo(id, logo) {
+		setProgress(0);
+		await Storage.put(`logo/${id}.${logo.name.split('.').pop()}`, logo, {
+			contentType: logo.type,
+			progressCallback(p) {
+				setProgress(parseInt((p.loaded / p.total) * 100, 10));
+			},
+		});
+		setProgress(0);
+	}
 
 	async function handleUpdate() {
 		setErrorMsg('');
@@ -123,15 +135,11 @@ export default function Profile() {
 					state: formClient.state,
 					street: formClient.street,
 					number: formClient.number,
-					complement: formClient.complement,
+					complement: formClient.complement
 				},
 			})
 		);
-		if (clientLogo) {
-			await Storage.put(`logo/${client.id}.${clientLogo.name.split('.').pop()}`, clientLogo, {
-				contentType: clientLogo.type,
-			});
-		}
+		if (clientLogo) await addLogo(client.id, clientLogo)
 		await delay(3000);
 		loadClient(true);
 		navigate(ROUTES[state.lang].DASHBOARD);
@@ -214,6 +222,7 @@ export default function Profile() {
 	return (
 		<>
 			{loading && <Loading />}
+			{!!progress && <Uploading progress={progress} />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
 			<Title text={LANGUAGES[state.lang].profile.title} />
 			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow-md">

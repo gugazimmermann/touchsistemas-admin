@@ -84,6 +84,7 @@ export declare class Subscriptions {
   readonly street?: string | null;
   readonly number?: string | null;
   readonly complement?: string | null;
+  readonly logo?: string | null;
   readonly active: string;
   readonly PlanID: string;
   readonly Plan?: Plan | null;
@@ -113,6 +114,7 @@ export declare class Client {
   readonly street?: string | null;
   readonly number?: string | null;
   readonly complement?: string | null;
+  readonly logo?: string | null;
   readonly eventsMap?: (string | null)[] | null;
   readonly subscriptionsMap?: (string | null)[] | null;
   readonly Owners?: (Owner | null)[] | null;
@@ -150,7 +152,7 @@ export declare class Events {
   readonly street?: string | null;
   readonly number?: string | null;
   readonly complement?: string | null;
-  readonly description?: string | null;
+  readonly logo?: string | null;
   readonly dates?: (string | null)[] | null;
   readonly gift?: boolean | null;
   readonly giftDescription?: string | null;

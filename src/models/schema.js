@@ -235,6 +235,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "logo": {
+                    "name": "logo",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "active": {
                     "name": "active",
                     "isArray": false,
@@ -520,6 +527,13 @@ export const schema = {
                 },
                 "complement": {
                     "name": "complement",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "logo": {
+                    "name": "logo",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -855,8 +869,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "description": {
-                    "name": "description",
+                "logo": {
+                    "name": "logo",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -1703,5 +1717,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "1f6a0be538ce0607892cee17ef896937"
+    "version": "5dc3bc5c4502c1bca47a425ef8e44f24"
 };

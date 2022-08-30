@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "touchsistemasadminAuthIdentityPool",
+    "identityPoolName": "touchsistemasAuthIdentityPool",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "touchsfe9141eb",
-    "userPoolName": "touchsistemasadminUserPool",
+    "resourceNameTruncated": "touchsb7e2c434",
+    "userPoolName": "touchsistemasAuthUserPool",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,17 +31,15 @@
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": "365",
     "userpoolClientWriteAttributes": [
-      "email",
-      "locale"
+      "email"
     ],
     "userpoolClientReadAttributes": [
-      "email",
-      "locale"
+      "email"
     ],
-    "userpoolClientLambdaRole": "touchsfe9141eb_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": true,
-    "sharedId": "fe9141eb",
-    "resourceName": "touchsistemasadminAuth",
+    "userpoolClientLambdaRole": "touchsb7e2c434_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "sharedId": "b7e2c434",
+    "resourceName": "touchsistemasAuth",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "manual",
     "thirdPartyAuth": false,

@@ -40,6 +40,7 @@ export default function Profile() {
 	const [loading, setLoading] = useState(false);
 	const [formClient, setFormClient] = useState(initial);
 	const [clientLogo, setClientLogo] = useState();
+	const [fileName, setFileName] = useState(LANGUAGES[state.lang].profile.logo);
 
 	useEffect(() => {
 		if (client) {
@@ -79,7 +80,7 @@ export default function Profile() {
 			setLoading(false);
 			return null;
 		}
-		if (formClient.phone.length < 15) {
+		if (formClient.phone.length < 14) {
 			setErrorMsg(LANGUAGES[state.lang].profile.invalidPhone);
 			setError(true);
 			setLoading(false);
@@ -101,7 +102,12 @@ export default function Profile() {
 			return null;
 		}
 		if (formClient.website) {
-			if (formClient.website.charAt(0).toLocaleLowerCase !== 'h') formClient.website = `http://${formClient.website}`;
+			if (formClient.website.charAt(0).toLocaleLowerCase() !== 'h') {
+				formClient.website = `http://${formClient.website}`;
+			}
+			if (formClient.website.charAt(formClient.website.length - 1) === '/') {
+				formClient.website = formClient.website.slice(0, -1);
+			}
 		}
 		await API.graphql(
 			graphqlOperation(updateClient, {
@@ -127,7 +133,7 @@ export default function Profile() {
 			});
 		}
 		await delay(3000);
-		loadClient();
+		loadClient(true);
 		navigate(ROUTES[state.lang].DASHBOARD);
 		setLoading(false);
 		return true;
@@ -169,6 +175,7 @@ export default function Profile() {
 		setError(false);
 		if (e.target.files && e.target.files.length) {
 			const file = e.target.files[0];
+			setFileName(file.name);
 			if (file.size > 2 * 1024 * 1024) {
 				setErrorMsg(LANGUAGES[state.lang].profile.imageSize);
 				setError(true);
@@ -352,12 +359,19 @@ export default function Profile() {
 				</div>
 				<div className="w-full mb-4">
 					<input
-						onChange={(e) => handleFile(e)}
 						type="file"
-						placeholder={LANGUAGES[state.lang].profile.logo}
+						id="files"
+						className="hidden"
+						onChange={(e) => handleFile(e)}
 						accept=".jpg,.jpeg,.png,image/png,image/jpeg"
-						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					/>
+					<label
+						htmlFor="files"
+						className="relative file:hidden bg-white block w-full px-4 py-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
+					>
+						<i className="bx bx-file-find text-2xl absolute top-1 right-1" />
+						{fileName}
+					</label>
 				</div>
 				<div className="w-full flex justify-center">
 					<button

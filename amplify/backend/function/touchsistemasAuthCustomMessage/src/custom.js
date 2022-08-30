@@ -1,7 +1,7 @@
 /**
  * REMEMBER TO ADD PROCESS ENV: TITLE, ADMIN_URL, SITE_URL and SITE_LOGO
  */
-function generateEmailBody(emailBody) {
+ function generateEmailBody(emailBody) {
 	return `
 <html>
   <body style="background-color:#ffffff">

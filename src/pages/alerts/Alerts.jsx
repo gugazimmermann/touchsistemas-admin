@@ -49,6 +49,12 @@ export default function Alerts() {
 		dispatch({ type: 'UPDATE_ALERT', payload: cloneAlerts });
 	}
 
+	if (state.alerts.length === 0) {
+		return (
+			<h1 className="font-bold text-lg text-center my-4">{LANGUAGES[state.lang].noRecords}</h1>
+		)
+	}
+
 	return (
 		state.alerts &&
 		state.alerts.length > 0 &&

@@ -29,8 +29,59 @@ export const createPlan = /* GraphQL */ `
           complement
           active
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planSubscriptionsId
@@ -59,8 +110,59 @@ export const createPlan = /* GraphQL */ `
           prizeDraw
           prizeDrawDescription
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planEventsId
@@ -101,8 +203,59 @@ export const updatePlan = /* GraphQL */ `
           complement
           active
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planSubscriptionsId
@@ -131,8 +284,59 @@ export const updatePlan = /* GraphQL */ `
           prizeDraw
           prizeDrawDescription
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planEventsId
@@ -173,8 +377,59 @@ export const deletePlan = /* GraphQL */ `
           complement
           active
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planSubscriptionsId
@@ -203,8 +458,59 @@ export const deletePlan = /* GraphQL */ `
           prizeDraw
           prizeDrawDescription
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planEventsId
@@ -245,6 +551,25 @@ export const createClient = /* GraphQL */ `
           phone
           email
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -271,8 +596,59 @@ export const createClient = /* GraphQL */ `
           prizeDraw
           prizeDrawDescription
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planEventsId
@@ -295,8 +671,59 @@ export const createClient = /* GraphQL */ `
           complement
           active
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planSubscriptionsId
@@ -337,6 +764,25 @@ export const updateClient = /* GraphQL */ `
           phone
           email
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -363,8 +809,59 @@ export const updateClient = /* GraphQL */ `
           prizeDraw
           prizeDrawDescription
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planEventsId
@@ -387,8 +884,59 @@ export const updateClient = /* GraphQL */ `
           complement
           active
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planSubscriptionsId
@@ -429,6 +977,25 @@ export const deleteClient = /* GraphQL */ `
           phone
           email
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -455,8 +1022,59 @@ export const deleteClient = /* GraphQL */ `
           prizeDraw
           prizeDrawDescription
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planEventsId
@@ -479,8 +1097,59 @@ export const deleteClient = /* GraphQL */ `
           complement
           active
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planSubscriptionsId
@@ -521,12 +1190,69 @@ export const createOwner = /* GraphQL */ `
         eventsMap
         subscriptionsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            ClientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -565,12 +1291,69 @@ export const updateOwner = /* GraphQL */ `
         eventsMap
         subscriptionsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            ClientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -609,12 +1392,69 @@ export const deleteOwner = /* GraphQL */ `
         eventsMap
         subscriptionsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            ClientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -659,9 +1499,57 @@ export const createEvents = /* GraphQL */ `
         frequency
         active
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         createdAt
@@ -685,12 +1573,69 @@ export const createEvents = /* GraphQL */ `
         eventsMap
         subscriptionsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            ClientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -710,9 +1655,57 @@ export const createEvents = /* GraphQL */ `
         street
         number
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -726,7 +1719,55 @@ export const createEvents = /* GraphQL */ `
           question
           answers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -751,7 +1792,55 @@ export const createEvents = /* GraphQL */ `
           birthdate
           surveyAnswers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -798,9 +1887,57 @@ export const updateEvents = /* GraphQL */ `
         frequency
         active
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         createdAt
@@ -824,12 +1961,69 @@ export const updateEvents = /* GraphQL */ `
         eventsMap
         subscriptionsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            ClientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -849,9 +2043,57 @@ export const updateEvents = /* GraphQL */ `
         street
         number
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -865,7 +2107,55 @@ export const updateEvents = /* GraphQL */ `
           question
           answers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -890,7 +2180,55 @@ export const updateEvents = /* GraphQL */ `
           birthdate
           surveyAnswers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -937,9 +2275,57 @@ export const deleteEvents = /* GraphQL */ `
         frequency
         active
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         createdAt
@@ -963,12 +2349,69 @@ export const deleteEvents = /* GraphQL */ `
         eventsMap
         subscriptionsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            ClientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -988,9 +2431,57 @@ export const deleteEvents = /* GraphQL */ `
         street
         number
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -1004,7 +2495,55 @@ export const deleteEvents = /* GraphQL */ `
           question
           answers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -1029,7 +2568,55 @@ export const deleteEvents = /* GraphQL */ `
           birthdate
           surveyAnswers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -1070,9 +2657,57 @@ export const createSubscriptions = /* GraphQL */ `
         frequency
         active
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         createdAt
@@ -1096,12 +2731,69 @@ export const createSubscriptions = /* GraphQL */ `
         eventsMap
         subscriptionsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            ClientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -1121,9 +2813,57 @@ export const createSubscriptions = /* GraphQL */ `
         street
         number
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -1137,7 +2877,55 @@ export const createSubscriptions = /* GraphQL */ `
           question
           answers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -1162,7 +2950,55 @@ export const createSubscriptions = /* GraphQL */ `
           birthdate
           surveyAnswers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -1203,9 +3039,57 @@ export const updateSubscriptions = /* GraphQL */ `
         frequency
         active
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         createdAt
@@ -1229,12 +3113,69 @@ export const updateSubscriptions = /* GraphQL */ `
         eventsMap
         subscriptionsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            ClientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -1254,9 +3195,57 @@ export const updateSubscriptions = /* GraphQL */ `
         street
         number
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -1270,7 +3259,55 @@ export const updateSubscriptions = /* GraphQL */ `
           question
           answers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -1295,7 +3332,55 @@ export const updateSubscriptions = /* GraphQL */ `
           birthdate
           surveyAnswers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -1336,9 +3421,57 @@ export const deleteSubscriptions = /* GraphQL */ `
         frequency
         active
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         createdAt
@@ -1362,12 +3495,69 @@ export const deleteSubscriptions = /* GraphQL */ `
         eventsMap
         subscriptionsMap
         Owners {
+          items {
+            id
+            name
+            phone
+            email
+            ClientID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -1387,9 +3577,57 @@ export const deleteSubscriptions = /* GraphQL */ `
         street
         number
         Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           nextToken
         }
         Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           nextToken
         }
         createdAt
@@ -1403,7 +3641,55 @@ export const deleteSubscriptions = /* GraphQL */ `
           question
           answers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -1428,7 +3714,55 @@ export const deleteSubscriptions = /* GraphQL */ `
           birthdate
           surveyAnswers
           EventsID
+          Events {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            description
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
           SubscriptionsID
+          Subscriptions {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
           createdAt
           updatedAt
         }
@@ -1479,8 +3813,59 @@ export const createPartner = /* GraphQL */ `
           prizeDraw
           prizeDrawDescription
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planEventsId
@@ -1503,8 +3888,59 @@ export const createPartner = /* GraphQL */ `
           complement
           active
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planSubscriptionsId
@@ -1555,8 +3991,59 @@ export const updatePartner = /* GraphQL */ `
           prizeDraw
           prizeDrawDescription
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planEventsId
@@ -1579,8 +4066,59 @@ export const updatePartner = /* GraphQL */ `
           complement
           active
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planSubscriptionsId
@@ -1631,8 +4169,59 @@ export const deletePartner = /* GraphQL */ `
           prizeDraw
           prizeDrawDescription
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planEventsId
@@ -1655,8 +4244,59 @@ export const deletePartner = /* GraphQL */ `
           complement
           active
           PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
           ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
           PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
           createdAt
           updatedAt
           planSubscriptionsId
@@ -1709,6 +4349,12 @@ export const createSurvey = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1729,6 +4375,15 @@ export const createSurvey = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1745,13 +4400,52 @@ export const createSurvey = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -1782,6 +4476,12 @@ export const createSurvey = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1802,6 +4502,15 @@ export const createSurvey = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1818,13 +4527,52 @@ export const createSurvey = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -1877,6 +4625,12 @@ export const updateSurvey = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1897,6 +4651,15 @@ export const updateSurvey = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1913,13 +4676,52 @@ export const updateSurvey = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -1950,6 +4752,12 @@ export const updateSurvey = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1970,6 +4778,15 @@ export const updateSurvey = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1986,13 +4803,52 @@ export const updateSurvey = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -2045,6 +4901,12 @@ export const deleteSurvey = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2065,6 +4927,15 @@ export const deleteSurvey = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2081,13 +4952,52 @@ export const deleteSurvey = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -2118,6 +5028,12 @@ export const deleteSurvey = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2138,6 +5054,15 @@ export const deleteSurvey = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2154,13 +5079,52 @@ export const deleteSurvey = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -2224,6 +5188,12 @@ export const createVisitor = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2244,6 +5214,15 @@ export const createVisitor = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2260,13 +5239,52 @@ export const createVisitor = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -2297,6 +5315,12 @@ export const createVisitor = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2317,6 +5341,15 @@ export const createVisitor = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2333,13 +5366,52 @@ export const createVisitor = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -2403,6 +5475,12 @@ export const updateVisitor = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2423,6 +5501,15 @@ export const updateVisitor = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2439,13 +5526,52 @@ export const updateVisitor = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -2476,6 +5602,12 @@ export const updateVisitor = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2496,6 +5628,15 @@ export const updateVisitor = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2512,13 +5653,52 @@ export const updateVisitor = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -2582,6 +5762,12 @@ export const deleteVisitor = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2602,6 +5788,15 @@ export const deleteVisitor = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2618,13 +5813,52 @@ export const deleteVisitor = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -2655,6 +5889,12 @@ export const deleteVisitor = /* GraphQL */ `
           price
           frequency
           active
+          Subscriptions {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2675,6 +5915,15 @@ export const deleteVisitor = /* GraphQL */ `
           complement
           eventsMap
           subscriptionsMap
+          Owners {
+            nextToken
+          }
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2691,13 +5940,52 @@ export const deleteVisitor = /* GraphQL */ `
           city
           street
           number
+          Events {
+            nextToken
+          }
+          Subscriptions {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         Surveys {
+          items {
+            id
+            order
+            type
+            question
+            answers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         Visitors {
+          items {
+            id
+            day
+            phone
+            code
+            confirmation
+            codeUsed
+            authorization
+            name
+            email
+            gender
+            maritalStatus
+            disabledPerson
+            state
+            city
+            birthdate
+            surveyAnswers
+            EventsID
+            SubscriptionsID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt

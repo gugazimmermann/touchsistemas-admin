@@ -54,17 +54,18 @@ export function normalizePhone(phone) {
 	const currentValue = phone.replace(/[^\d]/g, '');
 	const cvLength = currentValue.length;
 	if (cvLength < 3) return currentValue;
-	if (cvLength < 7) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2)}`;
+	if (cvLength < 6) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2)}`;
+	if (cvLength < 11) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 6)}-${currentValue.slice(6, 10)}`;
 	return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 7)}-${currentValue.slice(7, 11)}`;
 }
 
 export function normalizePhoneToShow(phone) {
 	if (!phone) return phone;
 	const currentValue = phone.replace(/[^\d]/g, '').slice(2);
-
 	const cvLength = currentValue.length;
 	if (cvLength < 3) return currentValue;
 	if (cvLength < 7) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2)}`;
+	if (cvLength < 11) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 6)}-${currentValue.slice(6, 10)}`;
 	return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 7)}-${currentValue.slice(7, 11)}`;
 }
 

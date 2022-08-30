@@ -1,4 +1,6 @@
 export default {
+	yes: 'Sí',
+	no: 'No',
 	loading: 'Mantener',
 	notFound: 'Página no Encontrada',
 	email: 'e-mail',
@@ -95,6 +97,8 @@ export default {
 	events: {
 		category: 'Eventos',
 		title: 'Nuevo Evento',
+		stepOne: 'Informacion General',
+		stepTwo: 'Detalles del Evento',
 		name: 'Nombre',
 		website: 'website',
 		email: 'e-mail',
@@ -123,6 +127,11 @@ export default {
 		],
 		referralCode: 'Código de Referencia',
 		logo: 'Logo',
+		method: 'Método',
+		gift: '¿Regalo?',
+		giftDescription: 'Descripción del Regalo',
+		prizeDraw: 'Premio Final',
+		prizeDrawDescription: 'Descripción del Premio Final',
 		continue: 'Continuar',
 		add: 'Agregar Nuevo Evento',
 		imageSize: '¡La Imagen no puede tener más de 2 mb!',

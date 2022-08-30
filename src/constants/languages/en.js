@@ -1,4 +1,6 @@
 export default {
+	yes: 'Yes',
+	no: 'No',
 	loading: 'Loading',
 	notFound: 'Page Not Found',
 	email: 'e-mail',
@@ -95,6 +97,8 @@ export default {
 	events: {
 		category: 'Events',
 		title: 'New Event',
+		stepOne: 'General Data',
+		stepTwo: 'Event Details',
 		name: 'Name',
 		website: 'website',
 		email: 'e-mail',
@@ -123,6 +127,11 @@ export default {
 		],
 		referralCode: 'Referral Code',
 		logo: 'Logo',
+		method: 'Method',
+		gift: 'Gift?',
+		giftDescription: 'Gift Description',
+		prizeDraw: 'Final Prize',
+		prizeDrawDescription: 'Final Prize Description',
 		continue: 'Continue',
 		add: 'Add New Event',
 		imageSize: 'Image cannot have more than 2 mb!',

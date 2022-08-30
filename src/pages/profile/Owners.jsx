@@ -29,7 +29,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 			setLoading(false);
 			return null;
 		}
-		if (owner.phone.length < 15) {
+		if (owner.phone.length < 14) {
 			setErrorMsg(LANGUAGES[state.lang].profile.invalidPhone);
 			setError(true);
 			setLoading(false);
@@ -51,7 +51,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 				},
 			})
 		);
-		loadClient();
+		loadClient(true);
 		setOwner(initial);
 		setLoading(false);
 		return true;

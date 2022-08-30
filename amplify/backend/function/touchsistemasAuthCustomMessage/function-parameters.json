@@ -3,15 +3,15 @@
   "modules": [
     "custom"
   ],
-  "parentResource": "touchsistemasadminAuth",
-  "functionName": "touchsistemasadminAuthCustomMessage",
-  "resourceName": "touchsistemasadminAuthCustomMessage",
+  "parentResource": "touchsistemasAuth",
+  "functionName": "touchsistemasAuthCustomMessage",
+  "resourceName": "touchsistemasAuthCustomMessage",
   "parentStack": "auth",
   "triggerEnvs": [],
   "triggerDir": "/snapshot/repo/build/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/CustomMessage",
   "triggerTemplate": "CustomMessage.json.ejs",
   "triggerEventPath": "CustomMessage.event.json",
-  "roleName": "touchsistemasadminAuthCustomMessage",
+  "roleName": "touchsistemasAuthCustomMessage",
   "skipEdit": true,
   "enableCors": false,
   "environmentVariableList": [
@@ -20,12 +20,12 @@
       "environmentVariableName": "TITLE"
     },
     {
-      "cloudFormationParameterName": "adminUrl",
-      "environmentVariableName": "ADMIN_URL"
-    },
-    {
       "cloudFormationParameterName": "siteUrl",
       "environmentVariableName": "SITE_URL"
+    },
+    {
+      "cloudFormationParameterName": "adminUrl",
+      "environmentVariableName": "ADMIN_URL"
     },
     {
       "cloudFormationParameterName": "siteLogo",

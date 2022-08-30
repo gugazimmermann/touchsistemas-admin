@@ -1,12 +1,12 @@
 export type AmplifyDependentResourcesAttributes = {
     "function": {
-        "touchsistemasadminAuthCustomMessage": {
+        "touchsistemasAuthCustomMessage": {
             "Name": "string",
             "Arn": "string",
             "LambdaExecutionRole": "string",
             "Region": "string"
         },
-        "touchsistemasadminStorageResizeImages": {
+        "touchsistemasStorageResizeImage": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
@@ -14,7 +14,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "auth": {
-        "touchsistemasadminAuth": {
+        "touchsistemasAuth": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -25,28 +25,16 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "touchsistemasadminStorage": {
+        "touchsistemasStorage": {
             "BucketName": "string",
             "Region": "string"
         }
     },
     "api": {
-        "touchsistemasadminApiGraphQL": {
+        "touchsistemasApiGraphQL": {
             "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
-        }
-    },
-    "hosting": {
-        "S3AndCloudFront": {
-            "Region": "string",
-            "HostingBucketName": "string",
-            "WebsiteURL": "string",
-            "S3BucketSecureURL": "string",
-            "CloudFrontDistributionID": "string",
-            "CloudFrontDomainName": "string",
-            "CloudFrontSecureURL": "string",
-            "CloudFrontOriginAccessIdentity": "string"
         }
     }
 }

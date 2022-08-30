@@ -1,24 +1,24 @@
 {
   "function": {
-    "touchsistemasadminAuthCustomMessage": {
+    "touchsistemasAuthCustomMessage": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "touchsistemasadminStorageResizeImages": {
+    "touchsistemasStorageResizeImage": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "auth": {
-    "touchsistemasadminAuth": {
+    "touchsistemasAuth": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "touchsistemasadminAuthCustomMessage",
+          "resourceName": "touchsistemasAuthCustomMessage",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -55,13 +55,13 @@
     }
   },
   "storage": {
-    "touchsistemasadminStorage": {
+    "touchsistemasStorage": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "touchsistemasadminStorageResizeImages",
+          "resourceName": "touchsistemasStorageResizeImage",
           "attributes": [
             "Name",
             "Arn",
@@ -72,13 +72,13 @@
     }
   },
   "api": {
-    "touchsistemasadminApiGraphQL": {
+    "touchsistemasApiGraphQL": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "touchsistemasadminAuth",
+          "resourceName": "touchsistemasAuth",
           "attributes": [
             "UserPoolId"
           ]
@@ -90,15 +90,15 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 365,
-              "apiKeyExpirationDate": "2023-08-25T11:47:41.617Z",
-              "description": "touchsistemasadminApiKey"
+              "apiKeyExpirationDate": "2023-08-30T19:57:05.119Z",
+              "description": "touchsistemasApiGraphQLKey"
             }
           },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
               "userPoolConfig": {
-                "userPoolId": "authtouchsistemasadminAuth"
+                "userPoolId": "authtouchsistemasAuth"
               }
             },
             {
@@ -107,12 +107,6 @@
           ]
         }
       }
-    }
-  },
-  "hosting": {
-    "S3AndCloudFront": {
-      "service": "S3AndCloudFront",
-      "providerPlugin": "awscloudformation"
     }
   }
 }

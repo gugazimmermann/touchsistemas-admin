@@ -11,12 +11,11 @@ export default function New() {
 	const { state } = useContext(AppContext);
 
 	useEffect(() => {
-		const planExists = PLANS[params.type.toLocaleUpperCase()];
-		if (!planExists) navigate(`${ROUTES[state.lang].DASHBOARD}`);
+		if (!PLANS[params.type.toLocaleUpperCase()]) navigate(`${ROUTES[state.lang].DASHBOARD}`);
 	}, [params]);
 
 	if (params.type.toLocaleUpperCase() === PLANS.SUBSCRIPTION) {
 		return <SubscriptionForm />;
 	}
-	return <EventForm />;
+	return <EventForm planType={PLANS[params.type.toLocaleUpperCase()]} />;
 }

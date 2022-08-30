@@ -68,7 +68,7 @@ export default function PlanSelection() {
 	}
 
 	function choosePlan(p) {
-		// TODO: traduzir roda
+		// TODO: traduzir rota
 		navigate(`${ROUTES[state.lang].NEW}/${p.toLocaleLowerCase()}`);
 	}
 
@@ -159,7 +159,7 @@ export default function PlanSelection() {
 			<ConfirmationDialog
 				open={open}
 				setOpen={setOpen}
-				handleConfirm={choosePlan}
+				handleConfirm={() => choosePlan(planModal?.plan?.type)}
 				icon={planModal?.info?.icon}
 				cancelText="Fechar"
 				confirmText="Selecionar"

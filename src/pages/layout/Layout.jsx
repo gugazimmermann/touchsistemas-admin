@@ -28,8 +28,7 @@ export default function Layout() {
 	}
 
 	async function handleLogo(clientID) {
-		// remove unused images from Storage Bucket
-		// add new value logo in client DB
+		// TODO: remove unused images from Storage Bucket and add new value logo in client DB
 		const list = await Storage.list(`logo/${clientID}`);
 		if (list?.length) return `${process.env.REACT_APP_IMAGES_URL}logo/${clientID}.png?${new Date().getTime()}`;
 		return null;
@@ -55,8 +54,22 @@ export default function Layout() {
 		setLoading(false);
 	}
 
+	async function loadPlans() {
+		setLoading(true);
+		if (!state.plans) {
+			const {
+				data: {
+					planByActive: { items },
+				},
+			} = await API.graphql(graphqlOperation(queries.planByActive, { active: 'TRUE' }));
+			dispatch({ type: 'UPDATE_PLANS', payload: items });
+		}
+		setLoading(false);
+	}
+
 	useEffect(() => {
 		loadClient();
+		loadPlans();
 	}, []);
 
 	return (

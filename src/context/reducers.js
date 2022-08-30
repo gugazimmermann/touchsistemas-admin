@@ -2,14 +2,20 @@ function saveState(state) {
 	localStorage.setItem('state', JSON.stringify(state));
 }
 
-function updateClient(state, payload) {
-	const newState = { ...state, client: payload };
+function updateLang(state, payload) {
+	const newState = { ...state, lang: payload };
 	saveState(newState);
 	return newState;
 }
 
-function updateLang(state, payload) {
-	const newState = { ...state, lang: payload };
+function updatePlans(state, payload) {
+	const newState = { ...state, plans: payload };
+	saveState(newState);
+	return newState;
+}
+
+function updateClient(state, payload) {
+	const newState = { ...state, client: payload };
 	saveState(newState);
 	return newState;
 }
@@ -22,10 +28,12 @@ function updateAlert(state, payload) {
 
 export default function AppReducer(state, { type, payload }) {
 	switch (type) {
-		case 'UPDATE_CLIENT':
-			return updateClient(state, payload);
 		case 'UPDATE_LANG':
 			return updateLang(state, payload);
+		case 'UPDATE_PLANS':
+			return updatePlans(state, payload);
+		case 'UPDATE_CLIENT':
+			return updateClient(state, payload);
 		case 'UPDATE_ALERT':
 			return updateAlert(state, payload);
 		default:

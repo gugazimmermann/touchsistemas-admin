@@ -50,7 +50,7 @@ export default function Events() {
 	}
 
 	async function handleMap(e) {
-		if (client.eventsMap !== (e?.length || 0)) await createMap(e);
+		if (((client?.eventsMap?.length && client?.eventsMap[0]) || 0) !== (e?.length || 0)) await createMap(e);
 		const mapsList = await Storage.list(`maps/events_${client.id}`);
 		if (mapsList.length !== 0) {
 			const getUrl = await Storage.get(mapsList[0].key);

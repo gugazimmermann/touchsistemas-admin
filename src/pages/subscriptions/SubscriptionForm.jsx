@@ -30,7 +30,7 @@ export default function SubscriptionForm() {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [formSubscription, setFormSubscription] = useState(initial);
-	const [eventLogo, setEventLogo] = useState();
+	const [subscriptionLogo, setSubscriptionLogo] = useState();
 	const [fileName, setFileName] = useState(LANGUAGES[state.lang].subscription.logo);
 	const [progress, setProgress] = useState();
 
@@ -90,7 +90,7 @@ export default function SubscriptionForm() {
 			setErrorMsg('');
 			setError(false);
 			setLoading(false);
-			setEventLogo(file);
+			setSubscriptionLogo(file);
 		}
 		setErrorMsg('');
 		setError(false);
@@ -122,24 +122,24 @@ export default function SubscriptionForm() {
 		return data.createSubscriptions;
 	}
 
-	async function addEventMap(newEvent) {
-		const eventAddress = encodeURIComponent(
-			`${newEvent.street}, ${newEvent.number} - ${newEvent.city} - ${newEvent.state}, ${newEvent.zipCode}`
+	async function addSubscriptionMap(newSubscription) {
+		const subscriptionAddress = encodeURIComponent(
+			`${newSubscription.street}, ${newSubscription.number} - ${newSubscription.city} - ${newSubscription.state}, ${newSubscription.zipCode}`
 		);
-		const eventMarker = `markers=color:0xa855f7%7Clabel:${newEvent.name[0]}%7C${eventAddress}`;
-		const mapURL = `https://maps.googleapis.com/maps/api/staticmap?center=${eventAddress}&zoom=17&size=1280x1280&scale=2&${eventMarker}&key=${process.env.REACT_APP_API_KEY}`;
+		const subscriptionMarker = `markers=color:0xa855f7%7Clabel:${newSubscription.name[0]}%7C${subscriptionAddress}`;
+		const mapURL = `https://maps.googleapis.com/maps/api/staticmap?center=${subscriptionAddress}&zoom=17&size=1280x1280&scale=2&${subscriptionMarker}&key=${process.env.REACT_APP_API_KEY}`;
 		const res = await fetch(mapURL);
 		const blob = await res.blob();
-		const file = new File([blob], `${newEvent.id}.png`);
-		await Storage.put(`maps/${newEvent.id}.png`, file, {
+		const file = new File([blob], `${newSubscription.id}.png`);
+		await Storage.put(`maps/${newSubscription.id}.png`, file, {
 			contentType: 'image/png',
 		});
 	}
 
-	async function addEventLogo(newEvent) {
+	async function addSubscriptionLogo(newSubscription) {
 		setProgress(0);
-		await Storage.put(`logo/${newEvent.id}.${eventLogo.name.split('.').pop()}`, eventLogo, {
-			contentType: eventLogo.type,
+		await Storage.put(`logo/${newSubscription.id}.${subscriptionLogo.name.split('.').pop()}`, subscriptionLogo, {
+			contentType: subscriptionLogo.type,
 			progressCallback(p) {
 				setProgress(parseInt((p.loaded / p.total) * 100, 10));
 			},
@@ -201,11 +201,11 @@ export default function SubscriptionForm() {
 		}
 		const planID = getPlan.data.planByType.items[0].id;
 		const newSubscription = await handleCreateSubscription(partnerID, planID);
-		await addEventMap(newSubscription);
+		await addSubscriptionMap(newSubscription);
 		setLoading(false);
-		if (eventLogo) await addEventLogo(newSubscription);
+		if (subscriptionLogo) await addSubscriptionLogo(newSubscription);
 		delay(3000);
-		loadClient();
+		loadClient(true);
 		setFormSubscription(initial);
 		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${newSubscription.id}`, { state: { success: true } });
 		return true;

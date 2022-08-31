@@ -1,6 +1,8 @@
 export default {
 	yes: 'Sim',
 	no: 'Não',
+	close: 'Fechar',
+	select: 'Selecionar',
 	loading: 'Aguarde',
 	notFound: 'Página Não Encontrada',
 	email: 'e-mail',
@@ -60,6 +62,10 @@ export default {
 		updateOwner: 'Atualizar',
 	},
 	payments: {
+		type: {
+			monthly: 'Mensal',
+			byEvent: 'Por Evento',
+		},
 		title: 'Pagamentos',
 		name: 'Nome',
 		plan: 'Plano',

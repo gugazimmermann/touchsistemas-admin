@@ -29,6 +29,7 @@ export default function PlanSelection() {
 						.find((x) => x.language === l)
 						.detail.map((d) => d),
 					price: JSON.parse(p.price).find((x) => x.language === l).price,
+					currency: JSON.parse(p.price).find((x) => x.language === l).currency,
 				};
 			});
 		});
@@ -37,28 +38,22 @@ export default function PlanSelection() {
 	}
 
 	function plansCardInfo(type) {
-		switch (type) {
-			case PLANS.BASIC:
-				return {
-					color: 'emerald-500',
-					icon: <i className="bx bx-mail-send text-6xl mb-4 hover:text-emerald-500" />,
-				};
-			case PLANS.ADVANCED:
-				return {
-					color: 'orange-500',
-					icon: <i className="bx bxs-message-detail text-6xl mb-4 hover:text-orange-500" />,
-				};
-			case PLANS.SUBSCRIPTION:
-				return {
-					color: 'sky-500',
-					icon: <i className="bx bx-calendar text-6xl mb-4 hover:text-sky-500" />,
-				};
-			default:
-				return {
-					color: 'emerald-500',
-					icon: <i className="bx bx-mail-send text-6xl mb-4 hover:text-emerald-500" />,
-				};
+		if (type === PLANS.BASIC) {
+			return {
+				color: 'emerald-500',
+				icon: <i className="bx bx-mail-send text-6xl mb-4 hover:text-emerald-500" />,
+			};
 		}
+		if (type === PLANS.ADVANCED) {
+			return {
+				color: 'orange-500',
+				icon: <i className="bx bxs-message-detail text-6xl mb-4 hover:text-orange-500" />,
+			};
+		}
+		return {
+			color: 'sky-500',
+			icon: <i className="bx bx-calendar text-6xl mb-4 hover:text-sky-500" />,
+		};
 	}
 
 	function choosePlan(p) {
@@ -92,34 +87,15 @@ export default function PlanSelection() {
 		);
 	}
 
-	// TODO: handle languages better
-	function renderPlanPrice(price, type) {
-		switch (state.lang) {
-			case 'br':
-				return type === PLANS.BASIC
-					? `R$ ${price},00 por evento`
-					: type === PLANS.ADVANCED
-					? `R$ ${price},00* por evento`
-					: `R$ ${price},00 mensal`;
-			case 'en':
-				return type === PLANS.BASIC
-					? `$ ${price},00 per event`
-					: type === PLANS.ADVANCED
-					? `R$ ${price},00* per event`
-					: `R$ ${price},00 monthly`;
-			case 'es':
-				return type === PLANS.BASIC
-					? `USD$ ${price},00 por evento`
-					: type === PLANS.ADVANCED
-					? `USD$ ${price},00* por evento`
-					: `USD$ ${price},00 mensuales`;
-			default:
-				return type === PLANS.BASIC
-					? `R$ ${price},00 por evento`
-					: type === PLANS.ADVANCED
-					? `R$ ${price},00* por evento`
-					: `R$ ${price},00 mensal`;
-		}
+	function renderPlanPrice(price, currency, type) {
+		let res = currency === 'brl' ? `R$ ${price},00` : `USD$ ${price},00`;
+		res +=
+			type === PLANS.SUBSCRIPTION
+				? ` ${LANGUAGES[state.lang].payments.type.monthly}`
+				: type === PLANS.BASIC
+				? ` ${LANGUAGES[state.lang].payments.type.byEvent}`
+				: `* ${LANGUAGES[state.lang].payments.type.byEvent}`;
+		return res;
 	}
 
 	function renderInfoModal(p) {
@@ -132,7 +108,7 @@ export default function PlanSelection() {
 							{d}
 						</p>
 					))}
-					<h2 className="font-bold mt-4">{renderPlanPrice(p.price, p.type)}</h2>
+					<h2 className="font-bold mt-4">{renderPlanPrice(p.price, p.currency, p.type)}</h2>
 				</div>
 			);
 		}
@@ -155,8 +131,8 @@ export default function PlanSelection() {
 				setOpen={setOpen}
 				handleConfirm={() => choosePlan(planModal?.plan)}
 				icon={planModal?.info?.icon}
-				cancelText="Fechar"
-				confirmText="Selecionar"
+				cancelText={LANGUAGES[state.lang].close}
+				confirmText={LANGUAGES[state.lang].select}
 				confirmColor={planModal?.info?.color}
 			>
 				{renderInfoModal(planModal?.plan)}

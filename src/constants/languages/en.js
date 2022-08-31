@@ -1,6 +1,8 @@
 export default {
 	yes: 'Yes',
 	no: 'No',
+	close: 'Close',
+	select: 'Select',
 	loading: 'Loading',
 	notFound: 'Page Not Found',
 	email: 'e-mail',
@@ -60,6 +62,10 @@ export default {
 		updateOwner: 'Update',
 	},
 	payments: {
+		type: {
+			monthly: 'Monthly',
+			byEvent: 'By Event',
+		},
 		title: 'Payments',
 		name: 'Name',
 		plan: 'Plan',

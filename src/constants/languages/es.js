@@ -1,6 +1,8 @@
 export default {
 	yes: 'Sí',
 	no: 'No',
+	close: 'Cerrar',
+	select: 'Selecciona',
 	loading: 'Mantener',
 	notFound: 'Página no Encontrada',
 	email: 'e-mail',
@@ -60,6 +62,10 @@ export default {
 		updateOwner: 'Actualizar',
 	},
 	payments: {
+		type: {
+			monthly: 'Mensual',
+			byEvent: 'Por Evento',
+		},
 		title: 'Pagos',
 		name: 'Nombre',
 		plan: 'Plan',

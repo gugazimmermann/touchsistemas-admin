@@ -114,7 +114,7 @@ export default {
 				city: 'Cidade',
 			},
 			cards: {
-				answered: 'Respondidadas',
+				answered: 'Respondidas',
 				complete: 'Completas',
 			},
 			dashboard: {

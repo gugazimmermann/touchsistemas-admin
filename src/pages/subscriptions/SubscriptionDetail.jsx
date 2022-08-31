@@ -7,7 +7,7 @@ import { Storage, API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { AppContext } from '../../context';
 import { Loading, Alert } from '../../components';
-import { ROUTES } from '../../constants';
+import { ROUTES, LANGUAGES } from '../../constants';
 
 export default function SubscriptionDetail() {
 	const params = useParams();
@@ -29,48 +29,40 @@ export default function SubscriptionDetail() {
 		try {
 			const url = await QRCode.toDataURL(`${process.env.REACT_APP_SUBSCRIPTIONS_URL}${params.id}`, { width: 3840 });
 			setQr(url);
-		} catch (error) {
-			console.error(error);
+		} catch (err) {
+			console.error(err);
 		}
 	}
 
+	// TODO: remove unused images from Storage Bucket and add new value logo in subscriptions DB
 	async function handleLogo(id) {
-		// remove unused images from Storage Bucket
-		// add new value logo in subscriptions DB
 		const list = await Storage.list(`logo/${id}`);
-		if (list?.length) {
-			const getUrl = `${process.env.REACT_APP_IMAGES_URL}logo/${id}.png?${new Date().getTime()}`;
-			setLogo(getUrl);
-		}
+		if (list?.length) setLogo(`${process.env.REACT_APP_IMAGES_URL}logo/${id}.png?${new Date().getTime()}`);
 	}
 
+	// TODO: remove unused images from Storage Bucket and add new value logo in subscriptions DB
 	async function handleMap(id) {
-		// remove unused images from Storage Bucket
-		// add new value logo in subscriptions DB
 		const list = await Storage.list(`maps/${id}`);
-		if (list?.length) {
-			const getUrl = `${process.env.REACT_APP_IMAGES_URL}maps/${id}.png?${new Date().getTime()}`;
-			setMap(getUrl);
-		}
+		if (list?.length) setMap(`${process.env.REACT_APP_IMAGES_URL}maps/${id}.png?${new Date().getTime()}`);
 	}
 
 	function createReport(v) {
 		const resportHeaders = [
-			{ label: 'Telefone', key: 'phone' },
-			{ label: 'Nome', key: 'name' },
-			{ label: 'Email', key: 'email' },
-			{ label: 'Cidade', key: 'city' },
-			{ label: 'Estado', key: 'state' },
+			{ label: LANGUAGES[state.lang].subscription.details.report.name, key: 'name' },
+			{ label: LANGUAGES[state.lang].subscription.details.report.phone, key: 'phone' },
+			{ label: LANGUAGES[state.lang].subscription.details.report.email, key: 'email' },
+			{ label: LANGUAGES[state.lang].subscription.details.report.state, key: 'state' },
+			{ label: LANGUAGES[state.lang].subscription.details.report.city, key: 'city' },
 		];
 
 		const resportData = [];
 		v.forEach((vi) =>
 			resportData.push({
-				phone: vi.phone,
 				name: vi.name,
+				phone: vi.phone,
 				email: vi.email,
-				city: vi.city,
 				state: vi.state,
+				city: vi.city,
 			})
 		);
 		setHeaders(resportHeaders);
@@ -172,7 +164,7 @@ export default function SubscriptionDetail() {
 						<i className="bx bxs-select-multiple" />
 					</div>
 					<div>
-						<p className="text-lg font-bold">Respondidas</p>
+						<p className="text-lg font-bold">{LANGUAGES[state.lang].subscription.details.cards.answered}</p>
 						<div className="border-t-2 mb-2" />
 						<div className="flex justify-between">
 							<div className="w-full text-center">
@@ -196,7 +188,7 @@ export default function SubscriptionDetail() {
 						<i className="bx bxs-bar-chart-square" />
 					</div>
 					<div>
-						<p className="text-xl font-bold">Completas</p>
+						<p className="text-xl font-bold">{LANGUAGES[state.lang].subscription.details.cards.complete}</p>
 						<div className="border-t-2 mb-2" />
 						<div className="flex justify-between">
 							<div className="w-full text-center">
@@ -232,7 +224,7 @@ export default function SubscriptionDetail() {
 					} w-full p-1 flex flex-col justify-center items-center text-secondary`}
 				>
 					<i className="bx bxs-pie-chart-alt-2 text-9xl" />
-					<h2 className="text-lg font-bold">Relatório</h2>
+					<h2 className="text-lg font-bold">{LANGUAGES[state.lang].subscription.details.dashboard.report}</h2>
 				</div>
 				{data && subscription?.visitorsInfo?.total && (
 					<CSVLink
@@ -241,7 +233,7 @@ export default function SubscriptionDetail() {
 						filename={slugify(subscription.name, { lower: true })}
 						className="px-2 py-1 mx-8 my-2 bg-secondary text-white rounded-lg shadow-md text-center font-bold"
 					>
-						<i className="bx bxs-download" /> Exportar Dados
+						<i className="bx bxs-download" /> {LANGUAGES[state.lang].subscription.details.dashboard.export}
 					</CSVLink>
 				)}
 			</div>
@@ -253,7 +245,7 @@ export default function SubscriptionDetail() {
 			<div className="bg-white shadow-md rounded-lg sm:w-2/12 flex flex-col justify-around py-2 mb-4">
 				<a
 					href={qr}
-					download={`${slugify(subscription.name, { lower: true })}.png`}
+					download={`${slugify(`${subscription.name}-qrcode`, { lower: true })}.png`}
 					className={`${
 						subscription?.visitorsInfo?.total && 'cursor-pointer'
 					} w-full flex flex-col justify-center items-center text-secondary`}
@@ -269,14 +261,16 @@ export default function SubscriptionDetail() {
 		const surveyQuestions = subscription.Surveys.items.length;
 		return (
 			<div className="p-2 border-b grid grid-cols-12">
-				<dt className="text-sm font-medium col-span-3">Pesquisa:</dt>
+				<dt className="text-sm font-medium col-span-3">{LANGUAGES[state.lang].subscription.details.survey.title}:</dt>
 				<dl className="text-sm font-bold col-span-4">
-					{!surveyQuestions ? 'Não Cadastrada' : `${surveyQuestions} perguntas`}
+					{!surveyQuestions
+						? LANGUAGES[state.lang].subscription.details.survey.noQuestions
+						: `${surveyQuestions} ${LANGUAGES[state.lang].subscription.details.survey.questions}`}
 				</dl>
 				{!surveyQuestions && (
 					<dl className="text-sm col-span-5 text-right">
 						<button type="button" className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg">
-							Adicionar
+							{LANGUAGES[state.lang].subscription.details.survey.add}
 						</button>
 					</dl>
 				)}
@@ -284,10 +278,67 @@ export default function SubscriptionDetail() {
 		);
 	}
 
+	function renderDetails() {
+		return (
+			<dl className="flex-1">
+				{renderSurveyRow()}
+				{subscription.website && (
+					<div className="p-2 border-b grid grid-cols-12">
+						<dt className="text-sm font-medium col-span-3">
+							{LANGUAGES[state.lang].subscription.details.info.website}
+						</dt>
+						<dd className="text-sm col-span-9">
+							<a href={subscription.website} target="_blank" rel="noreferrer">
+								{subscription.website}
+								<i className="bx bx-link-external ml-2" />
+							</a>
+						</dd>
+					</div>
+				)}
+				{subscription.email && (
+					<div className="p-2 border-b sm:grid grid-cols-12">
+						<dt className="text-sm font-medium col-span-3">{LANGUAGES[state.lang].subscription.details.info.email}</dt>
+						<dd className="text-sm col-span-9">
+							<a href={`mailto:${subscription.email}`} target="_blank" rel="noreferrer">
+								{subscription.email}
+								<i className="bx bx-envelope ml-2" />
+							</a>
+						</dd>
+					</div>
+				)}
+				<div className="p-2 border-b sm:grid grid-cols-12">
+					<dt className="text-sm font-medium col-span-3">{LANGUAGES[state.lang].subscription.details.info.address}</dt>
+					<dd className="text-sm col-span-9">{formatAddress(subscription)}</dd>
+				</div>
+
+				{subscription.partner && (
+					<div className="p-2 border-b sm:grid grid-cols-12">
+						<dt className="mt-2 text-sm font-medium col-span-3">
+							{LANGUAGES[state.lang].subscription.details.info.partner}
+						</dt>
+						<dd className="mt-2 text-sm col-span-9">{`${subscription.partner.name} | ${subscription.partner.referralCode}`}</dd>
+					</div>
+				)}
+			</dl>
+		);
+	}
+
+	function renderMap() {
+		return (
+			<div className="p-4 flex-1 flex justify-center items-center">
+				<div className="w-6/12">
+					<a href={map} target="_blank" rel="noreferrer">
+						<img alt="map" src={map} className="rounded-lg" />
+					</a>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<>
 			{loading && <Loading />}
-			{success && <Alert type="success">Assinatura Cadastrada com Sucesso</Alert>}
+			{success && <Alert type="success">{LANGUAGES[state.lang].subscription.details.success}</Alert>}
 			{!loading && subscription && (
 				<>
 					<div className="flex flex-col md:flex-row justify-between">
@@ -297,41 +348,8 @@ export default function SubscriptionDetail() {
 						{renderQRCodeCard()}
 					</div>
 					<div className="shadow-md rounded-lg flex flex-col md:flex-row bg-white">
-						<dl className="flex-1">
-							{renderSurveyRow()}
-							{subscription.website && (
-								<div className="p-2 border-b grid grid-cols-12">
-									<dt className="text-sm font-medium col-span-3">WebSite</dt>
-									<dd className="text-sm col-span-9">{subscription.website}</dd>
-								</div>
-							)}
-							{subscription.email && (
-								<div className="p-2 border-b sm:grid grid-cols-12">
-									<dt className="text-sm font-medium col-span-3">Email</dt>
-									<dd className="text-sm col-span-9">{subscription.email}</dd>
-								</div>
-							)}
-							<div className="p-2 border-b sm:grid grid-cols-12">
-								<dt className="text-sm font-medium col-span-3">Endereço</dt>
-								<dd className="text-sm col-span-9">{formatAddress(subscription)}</dd>
-							</div>
-
-							{subscription.partner && (
-								<div className="p-2 border-b sm:grid grid-cols-12">
-									<dt className="mt-2 text-sm font-medium col-span-3">Parceiro</dt>
-									<dd className="mt-2 text-sm col-span-9">{`${subscription.partner.name} | ${subscription.partner.referralCode}`}</dd>
-								</div>
-							)}
-						</dl>
-						{map && (
-							<div className="p-4 flex-1 flex justify-center items-center">
-								<div className="w-6/12">
-									<a href={map} target="_blank" rel="noreferrer">
-										<img alt="map" src={map} className="rounded-lg" />
-									</a>
-								</div>
-							</div>
-						)}
+						{renderDetails()}
+						{map && renderMap()}
 					</div>
 				</>
 			)}

@@ -93,6 +93,36 @@ export default {
 		requiredEmail: '¡E-Mail es requerido!!',
 		invalidZipCode: '¡Código postal Inválido!',
 		invalidPartner: '¡Socio de Referencia no Encontrado!',
+		details: {
+			success: 'Suscripción Registrada Correctamente',
+			report: {
+				name: 'Nombre',
+				phone: 'Teléfono',
+				email: 'Email',
+				state: 'Estado',
+				city: 'Ciudad'
+			},
+			cards: {
+				answered: 'Respondido',
+				complete: 'Completar'
+			},
+			dashboard: {
+				report: 'Informe',
+				export: 'Export Data'
+			},
+			survey: {
+				title: 'Survey',
+				noQuestions: 'No Registrado',
+				add: 'Añadir',
+				questions: 'Preguntas',
+			},
+			info: {
+				website: 'WebSite',
+				email: 'Email',
+				address: 'Dirección',
+				partner: 'Referencia'
+			}
+		}
 	},
 	events: {
 		category: 'Eventos',

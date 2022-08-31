@@ -93,6 +93,36 @@ export default {
 		requiredEmail: 'E-Mail is Required!',
 		invalidZipCode: 'invalid Zip Code!',
 		invalidPartner: 'Partner not found!',
+		details: {
+			success: 'Successfully Registered Subscription',
+			report: {
+				name: 'Name',
+				phone: 'Phone',
+				email: 'Email',
+				state: 'State',
+				city: 'City'
+			},
+			cards: {
+				answered: 'Answered',
+				complete: 'Complete'
+			},
+			dashboard: {
+				report: 'Report',
+				export: 'Export Data'
+			},
+			survey: {
+				title: 'Survey',
+				noQuestions: 'Not Registered',
+				add: 'Add',
+				questions: 'Questions',
+			},
+			info: {
+				website: 'WebSite',
+				email: 'Email',
+				address: 'Address',
+				partner: 'Referral'
+			}
+		}
 	},
 	events: {
 		category: 'Events',

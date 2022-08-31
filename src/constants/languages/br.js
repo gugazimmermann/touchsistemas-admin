@@ -93,6 +93,36 @@ export default {
 		requiredEmail: 'E-Mail é Obrigatório!',
 		invalidZipCode: 'CEP Inválido!',
 		invalidPartner: 'Parceiro de Referência não encontrado!',
+		details: {
+			success: 'Assinatura Cadastrada com Sucesso',
+			report: {
+				name: 'Nome',
+				phone: 'Telefone',
+				email: 'Email',
+				state: 'Estado',
+				city: 'Cidade'
+			},
+			cards: {
+				answered: 'Respondidadas',
+				complete: 'Completas'
+			},
+			dashboard: {
+				report: 'Relatório',
+				export: 'Exportar Datos'
+			},
+			survey: {
+				title: 'Pesquisa',
+				noQuestions: 'Não Cadastrada',
+				add: 'Adicionar',
+				questions: 'Perguntas',
+			},
+			info: {
+				website: 'WebSite',
+				email: 'Email',
+				address: 'Endereço',
+				partner: 'Referência'
+			}
+		}
 	},
 	events: {
 		category: 'Eventos',

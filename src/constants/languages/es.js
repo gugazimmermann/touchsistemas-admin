@@ -79,7 +79,7 @@ export default {
 		valid: 'Vencimiento',
 		flag: 'Bandera',
 	},
-	subscription: {
+	subscriptions: {
 		category: 'Suscripciones',
 		title: 'Nueva Suscripción',
 		name: 'Nombre',

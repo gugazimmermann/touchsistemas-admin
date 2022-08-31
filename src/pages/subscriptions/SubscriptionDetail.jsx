@@ -8,7 +8,7 @@ import * as queries from '../../graphql/queries';
 import { AppContext } from '../../context';
 import { normalizeCEP } from '../../helpers';
 import { Loading, Alert } from '../../components';
-import { ROUTES, LANGUAGES } from '../../constants';
+import { ROUTES, LANGUAGES, PLANS } from '../../constants';
 
 export default function SubscriptionDetail() {
 	const params = useParams();
@@ -50,11 +50,11 @@ export default function SubscriptionDetail() {
 
 	function createReport(v) {
 		const resportHeaders = [
-			{ label: LANGUAGES[state.lang].subscription.details.report.name, key: 'name' },
-			{ label: LANGUAGES[state.lang].subscription.details.report.phone, key: 'phone' },
-			{ label: LANGUAGES[state.lang].subscription.details.report.email, key: 'email' },
-			{ label: LANGUAGES[state.lang].subscription.details.report.state, key: 'state' },
-			{ label: LANGUAGES[state.lang].subscription.details.report.city, key: 'city' },
+			{ label: LANGUAGES[state.lang].subscriptions.details.report.name, key: 'name' },
+			{ label: LANGUAGES[state.lang].subscriptions.details.report.phone, key: 'phone' },
+			{ label: LANGUAGES[state.lang].subscriptions.details.report.email, key: 'email' },
+			{ label: LANGUAGES[state.lang].subscriptions.details.report.state, key: 'state' },
+			{ label: LANGUAGES[state.lang].subscriptions.details.report.city, key: 'city' },
 		];
 
 		const resportData = [];
@@ -137,6 +137,10 @@ export default function SubscriptionDetail() {
 		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${params.id}${ROUTES[state.lang].EDIT}`);
 	}
 
+	function handleAddSurvey() {
+		navigate(`${ROUTES[state.lang].SURVEYS}`, { state: { type: PLANS.SUBSCRIPTION, subscription } });
+	}
+
 	useEffect(() => {
 		if (params.id) handleGetSubscription(params.id);
 	}, [params]);
@@ -170,7 +174,7 @@ export default function SubscriptionDetail() {
 						<i className="bx bxs-select-multiple" />
 					</div>
 					<div>
-						<p className="text-lg font-bold">{LANGUAGES[state.lang].subscription.details.cards.answered}</p>
+						<p className="text-lg font-bold">{LANGUAGES[state.lang].subscriptions.details.cards.answered}</p>
 						<div className="border-t-2 mb-2" />
 						<div className="flex justify-between">
 							<div className="w-full text-center">
@@ -194,7 +198,7 @@ export default function SubscriptionDetail() {
 						<i className="bx bxs-bar-chart-square" />
 					</div>
 					<div>
-						<p className="text-xl font-bold">{LANGUAGES[state.lang].subscription.details.cards.complete}</p>
+						<p className="text-xl font-bold">{LANGUAGES[state.lang].subscriptions.details.cards.complete}</p>
 						<div className="border-t-2 mb-2" />
 						<div className="flex justify-between">
 							<div className="w-full text-center">
@@ -230,7 +234,7 @@ export default function SubscriptionDetail() {
 					} w-full p-1 flex flex-col justify-center items-center text-secondary`}
 				>
 					<i className="bx bxs-pie-chart-alt-2 text-9xl" />
-					<h2 className="text-lg font-bold">{LANGUAGES[state.lang].subscription.details.dashboard.report}</h2>
+					<h2 className="text-lg font-bold">{LANGUAGES[state.lang].subscriptions.details.dashboard.report}</h2>
 				</div>
 				{data && subscription?.visitorsInfo?.total && (
 					<CSVLink
@@ -239,7 +243,7 @@ export default function SubscriptionDetail() {
 						filename={slugify(subscription.name, { lower: true })}
 						className="px-2 py-1 mx-8 my-2 bg-secondary text-white rounded-lg shadow-md text-center font-bold"
 					>
-						<i className="bx bxs-download" /> {LANGUAGES[state.lang].subscription.details.dashboard.export}
+						<i className="bx bxs-download" /> {LANGUAGES[state.lang].subscriptions.details.dashboard.export}
 					</CSVLink>
 				)}
 			</div>
@@ -267,16 +271,20 @@ export default function SubscriptionDetail() {
 		const surveyQuestions = subscription.Surveys.items.length;
 		return (
 			<div className="p-2 border-b grid grid-cols-12">
-				<dt className="text-sm font-medium col-span-3">{LANGUAGES[state.lang].subscription.details.survey.title}:</dt>
+				<dt className="text-sm font-medium col-span-3">{LANGUAGES[state.lang].subscriptions.details.survey.title}:</dt>
 				<dl className="text-sm font-bold col-span-4">
 					{!surveyQuestions
-						? LANGUAGES[state.lang].subscription.details.survey.noQuestions
-						: `${surveyQuestions} ${LANGUAGES[state.lang].subscription.details.survey.questions}`}
+						? LANGUAGES[state.lang].subscriptions.details.survey.noQuestions
+						: `${surveyQuestions} ${LANGUAGES[state.lang].subscriptions.details.survey.questions}`}
 				</dl>
 				{!surveyQuestions && (
 					<dl className="text-sm col-span-5 text-right">
-						<button type="button" className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg">
-							{LANGUAGES[state.lang].subscription.details.survey.add}
+						<button
+						type="button"
+						onClick={() => handleAddSurvey()}
+						className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg"
+						>
+							{LANGUAGES[state.lang].subscriptions.details.survey.add}
 						</button>
 					</dl>
 				)}
@@ -292,7 +300,7 @@ export default function SubscriptionDetail() {
 					{subscription.website && (
 						<div className="p-2 border-b grid grid-cols-12">
 							<dt className="text-sm font-medium col-span-3">
-								{LANGUAGES[state.lang].subscription.details.info.website}
+								{LANGUAGES[state.lang].subscriptions.details.info.website}
 							</dt>
 							<dd className="text-sm col-span-9">
 								<a href={subscription.website} target="_blank" rel="noreferrer">
@@ -305,7 +313,7 @@ export default function SubscriptionDetail() {
 					{subscription.email && (
 						<div className="p-2 border-b sm:grid grid-cols-12">
 							<dt className="text-sm font-medium col-span-3">
-								{LANGUAGES[state.lang].subscription.details.info.email}
+								{LANGUAGES[state.lang].subscriptions.details.info.email}
 							</dt>
 							<dd className="text-sm col-span-9">
 								<a href={`mailto:${subscription.email}`} target="_blank" rel="noreferrer">
@@ -317,14 +325,14 @@ export default function SubscriptionDetail() {
 					)}
 					<div className="p-2 border-b sm:grid grid-cols-12">
 						<dt className="text-sm font-medium col-span-3">
-							{LANGUAGES[state.lang].subscription.details.info.address}
+							{LANGUAGES[state.lang].subscriptions.details.info.address}
 						</dt>
 						<dd className="text-sm col-span-9">{formatAddress(subscription)}</dd>
 					</div>
 					{subscription.partner && (
 						<div className="p-2 border-b sm:grid grid-cols-12">
 							<dt className="mt-2 text-sm font-medium col-span-3">
-								{LANGUAGES[state.lang].subscription.details.info.partner}
+								{LANGUAGES[state.lang].subscriptions.details.info.partner}
 							</dt>
 							<dd className="mt-2 text-sm col-span-9">{`${subscription.partner.name} | ${subscription.partner.referralCode}`}</dd>
 						</div>
@@ -336,7 +344,7 @@ export default function SubscriptionDetail() {
 						onClick={() => handleEdit()}
 						className="px-6 py-1 bg-orange-300 border-orange-500 text-white rounded-lg"
 					>
-						{LANGUAGES[state.lang].subscription.details.edit}
+						{LANGUAGES[state.lang].subscriptions.details.edit}
 					</button>
 				</div>
 			</div>
@@ -358,8 +366,8 @@ export default function SubscriptionDetail() {
 	return (
 		<>
 			{loading && <Loading />}
-			{success && <Alert type="success">{LANGUAGES[state.lang].subscription.details.success}</Alert>}
-			{edited && <Alert type="info">{LANGUAGES[state.lang].subscription.details.edited}</Alert>}
+			{success && <Alert type="success">{LANGUAGES[state.lang].subscriptions.details.success}</Alert>}
+			{edited && <Alert type="info">{LANGUAGES[state.lang].subscriptions.details.edited}</Alert>}
 			{!loading && subscription && (
 				<>
 					<div className="flex flex-col sm:flex-row justify-between">

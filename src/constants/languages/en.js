@@ -79,7 +79,7 @@ export default {
 		valid: 'Expiration',
 		flag: 'Flag',
 	},
-	subscription: {
+	subscriptions: {
 		category: 'Subscriptions',
 		title: 'New Subscription',
 		name: 'Name',

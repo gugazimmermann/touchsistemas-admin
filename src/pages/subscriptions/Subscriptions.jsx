@@ -84,7 +84,7 @@ export default function Subscriptions() {
 	if (loading) return <Loading />;
 	return (
 		<>
-			<Title text={LANGUAGES[state.lang].subscription.category} />
+			<Title text={LANGUAGES[state.lang].subscriptions.category} />
 			{subscriptions.length === 0 ? (
 				<h1 className="font-bold text-lg text-center my-4">{LANGUAGES[state.lang].noRecords}</h1>
 			) : (

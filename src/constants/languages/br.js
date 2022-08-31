@@ -79,7 +79,7 @@ export default {
 		valid: 'Validade',
 		flag: 'Bandeira',
 	},
-	subscription: {
+	subscriptions: {
 		category: 'Assinaturas',
 		title: 'Nova Assinatura',
 		titleEdit: 'Editar Assinatura',
@@ -181,5 +181,5 @@ export default {
 		requiredEmail: 'E-Mail é Obrigatório!',
 		invalidZipCode: 'CEP Inválido!',
 		invalidPartner: 'Parceiro de Referência não encontrado!',
-	},
+	}
 };

@@ -40,7 +40,7 @@ export default function EventForm({ plan }) {
 	const [step, setStep] = useState(1);
 	const [formEvent, setFormEvent] = useState(initial);
 	const [eventLogo, setEventLogo] = useState();
-	const [fileName, setFileName] = useState(LANGUAGES[state.lang].subscription.logo);
+	const [fileName, setFileName] = useState(LANGUAGES[state.lang].subscriptions.logo);
 	const [progress, setProgress] = useState();
 
 	// TODO: fix dates format to language
@@ -84,21 +84,21 @@ export default function EventForm({ plan }) {
 			const file = e.target.files[0];
 			setFileName(file.name);
 			if (file.size > 2 * 1024 * 1024) {
-				setErrorMsg(LANGUAGES[state.lang].subscription.imageSize);
+				setErrorMsg(LANGUAGES[state.lang].subscriptions.imageSize);
 				setError(true);
 				setLoading(false);
 				return null;
 			}
 			const acceptedTypes = ['image/png', 'image/jpeg'];
 			if (!acceptedTypes.includes(file.type)) {
-				setErrorMsg(LANGUAGES[state.lang].subscription.imageType);
+				setErrorMsg(LANGUAGES[state.lang].subscriptions.imageType);
 				setError(true);
 				setLoading(false);
 				return null;
 			}
 			const acceptedExtensions = ['jpg', 'jpeg', 'png'];
 			if (!acceptedExtensions.includes(file.name.split('.').pop())) {
-				setErrorMsg(LANGUAGES[state.lang].subscription.imageType);
+				setErrorMsg(LANGUAGES[state.lang].subscriptions.imageType);
 				setError(true);
 				setLoading(false);
 				return null;
@@ -175,19 +175,19 @@ export default function EventForm({ plan }) {
 		setError(false);
 		setLoading(true);
 		if (!formEvent.name || !formEvent.zipCode || !formEvent.state || !formEvent.city) {
-			setErrorMsg(LANGUAGES[state.lang].subscription.required);
+			setErrorMsg(LANGUAGES[state.lang].subscriptions.required);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
 		if (formEvent.email && !validateEmail(formEvent.email)) {
-			setErrorMsg(LANGUAGES[state.lang].subscription.requiredEmail);
+			setErrorMsg(LANGUAGES[state.lang].subscriptions.requiredEmail);
 			setError(true);
 			setLoading(false);
 			return null;
 		}
 		if (formEvent.zipCode.length < 10) {
-			setErrorMsg(LANGUAGES[state.lang].subscription.invalidZipCode);
+			setErrorMsg(LANGUAGES[state.lang].subscriptions.invalidZipCode);
 			setError(true);
 			setLoading(false);
 			return null;
@@ -216,7 +216,7 @@ export default function EventForm({ plan }) {
 				graphqlOperation(partnerByReferralCode, { referralCode: formEvent.referralCode })
 			);
 			if (getPartner?.data?.partnerByReferralCode?.items.length <= 0) {
-				setErrorMsg(LANGUAGES[state.lang].subscription.invalidPartner);
+				setErrorMsg(LANGUAGES[state.lang].subscriptions.invalidPartner);
 				setError(true);
 				setLoading(false);
 				return null;

@@ -40,7 +40,7 @@ export default function Nav({ signout }) {
 						<i className="bx bx-message-alt-x text-3xl" />
 					)}
 					<NavInfo alerts={0} />
-					<NavAlert alerts={state.alerts.length} />
+					{state.alerts.length > 0 && <NavAlert alerts={state.alerts.length} />}
 					<NavLanguage />
 					<NavProfile signout={signout} alerts={0} />
 				</div>

@@ -1,20 +1,28 @@
 import { brLang, enLang, esLang } from './languages';
 import { brRoute, enRoute, esRoute } from './routes';
 
+export const PLANS = {
+	BASIC: 'BASIC',
+	ADVANCED: 'ADVANCED',
+	SUBSCRIPTION: 'SUBSCRIPTION',
+};
+
+export const FREQUENCY = {
+	SINGLE: 'SINGLE',
+	MONTHLY: 'MONTHLY',
+};
+
 export const SURVEY = {
 	SINGLE: 'SINGLE',
 	MULTIPLE: 'MULTIPLE',
+	TEXT: 'TEXT',
+	MULTILINE: 'MULTILINE',
 };
 
 export const METHOD = {
 	SMS: 'SMS',
 	EMAIL: 'EMAIL',
-};
-
-export const PLANS = {
-	BASIC: 'BASIC',
-	ADVANCED: 'ADVANCED',
-	SUBSCRIPTION: 'SUBSCRIPTION',
+	NONE: 'NONE',
 };
 
 export const LANGUAGES = {

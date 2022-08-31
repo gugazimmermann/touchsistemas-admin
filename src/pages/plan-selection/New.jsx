@@ -15,7 +15,7 @@ export default function New() {
 	const [plan, setPlan] = useState();
 
 	useEffect(() => {
-		setLoading(true)
+		setLoading(true);
 		const selectedPlan = state.plans
 			.map((p) => {
 				const planName = JSON.parse(p.name).find((n) => slugify(n.name, { lower: true }) === params.name);
@@ -25,7 +25,7 @@ export default function New() {
 			.filter((n) => n)[0];
 		if (!selectedPlan) navigate(`${ROUTES[state.lang].DASHBOARD}`);
 		setPlan(selectedPlan);
-		setLoading(false)
+		setLoading(false);
 	}, [params]);
 
 	if (!plan && loading) {

@@ -135,11 +135,11 @@ export default function Profile() {
 					state: formClient.state,
 					street: formClient.street,
 					number: formClient.number,
-					complement: formClient.complement
+					complement: formClient.complement,
 				},
 			})
 		);
-		if (clientLogo) await addLogo(client.id, clientLogo)
+		if (clientLogo) await addLogo(client.id, clientLogo);
 		await delay(3000);
 		loadClient(true);
 		navigate(ROUTES[state.lang].DASHBOARD);

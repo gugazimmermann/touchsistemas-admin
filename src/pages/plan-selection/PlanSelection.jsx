@@ -62,7 +62,7 @@ export default function PlanSelection() {
 	}
 
 	function choosePlan(p) {
-		navigate(`${ROUTES[state.lang].NEW}/${slugify(p.name, { lower: true})}`);
+		navigate(`${ROUTES[state.lang].NEW}/${slugify(p.name, { lower: true })}`);
 	}
 
 	function handlePlanInfo(p) {

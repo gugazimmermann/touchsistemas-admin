@@ -241,7 +241,7 @@ export default function EventForm({ plan }) {
 				method: plan.type.toLocaleLowerCase() === 'basic' ? 'EMAIL' : '',
 				gift: plan.type.toLocaleLowerCase() === 'basic' ? 'NO' : '',
 				prizeDraw: plan.type.toLocaleLowerCase() === 'basic' ? 'NO' : '',
-			})
+			});
 		}
 	}, []);
 

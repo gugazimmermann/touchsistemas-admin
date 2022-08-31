@@ -5,7 +5,6 @@ import { ROUTES } from '../../constants';
 import Subscriptions from '../subscriptions/Subscriptions';
 import Events from '../events/Events';
 
-
 export default function Dashboard() {
 	const { state } = useContext(AppContext);
 	const navigate = useNavigate();

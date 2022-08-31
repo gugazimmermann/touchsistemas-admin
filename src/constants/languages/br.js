@@ -100,15 +100,15 @@ export default {
 				phone: 'Telefone',
 				email: 'Email',
 				state: 'Estado',
-				city: 'Cidade'
+				city: 'Cidade',
 			},
 			cards: {
 				answered: 'Respondidadas',
-				complete: 'Completas'
+				complete: 'Completas',
 			},
 			dashboard: {
 				report: 'Relatório',
-				export: 'Exportar Datos'
+				export: 'Exportar Datos',
 			},
 			survey: {
 				title: 'Pesquisa',
@@ -120,9 +120,9 @@ export default {
 				website: 'WebSite',
 				email: 'Email',
 				address: 'Endereço',
-				partner: 'Referência'
-			}
-		}
+				partner: 'Referência',
+			},
+		},
 	},
 	events: {
 		category: 'Eventos',

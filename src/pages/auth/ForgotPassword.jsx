@@ -31,14 +31,14 @@ export default function ForgotPassword() {
 						: 'bg-primary cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md'
 				} inline-block px-2 py-2 text-white font-medium uppercase rounded shadow-md transition duration-150 ease-in-out w-full`}
 			>
-				{LANGUAGES[state.lang].sendCode}
+				{LANGUAGES[state.lang].auth.sendCode}
 			</button>
 			<div className="w-full text-center mt-6">
 				<Link
 					to={ROUTES[state.lang].HOME}
 					className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out"
 				>
-					{LANGUAGES[state.lang].backToSignIn}
+					{LANGUAGES[state.lang].auth.backToSignIn}
 				</Link>
 			</div>
 		</form>

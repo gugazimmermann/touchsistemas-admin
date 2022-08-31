@@ -37,7 +37,7 @@ export default function RedefinePwd() {
 					value={code}
 					onChange={(e) => setCode(e.target.value)}
 					className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-					placeholder={LANGUAGES[state.lang].code}
+					placeholder={LANGUAGES[state.lang].auth.code}
 				/>
 			</div>
 			<div className="mb-4">
@@ -55,7 +55,7 @@ export default function RedefinePwd() {
 					value={repeat}
 					onChange={(e) => setRepeat(e.target.value)}
 					className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-					placeholder={LANGUAGES[state.lang].repeatPassword}
+					placeholder={LANGUAGES[state.lang].auth.repeatPassword}
 				/>
 			</div>
 			<button
@@ -68,14 +68,14 @@ export default function RedefinePwd() {
 						: 'bg-primary cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md'
 				} inline-block px-2 py-2 text-white font-medium uppercase rounded shadow-md transition duration-150 ease-in-out w-full`}
 			>
-				{LANGUAGES[state.lang].redefine}
+				{LANGUAGES[state.lang].auth.redefine}
 			</button>
 			<div className="w-full text-center mt-6">
 				<Link
 					to={ROUTES[state.lang].HOME}
 					className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out"
 				>
-					{LANGUAGES[state.lang].backToSignIn}
+					{LANGUAGES[state.lang].auth.backToSignIn}
 				</Link>
 			</div>
 		</form>

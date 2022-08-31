@@ -25,8 +25,8 @@ export default function ConfirmSignUp() {
 
 	return (
 		<form>
-			<Alert error={exists} type={exists} text={LANGUAGES[state.lang].exist} />
-			<Alert error={reSent} type={reSent} text={LANGUAGES[state.lang].checkEmail} />
+			<Alert error={exists} type={exists} text={LANGUAGES[state.lang].auth.exist} />
+			<Alert error={reSent} type={reSent} text={LANGUAGES[state.lang].auth.checkEmail} />
 			<div className="mb-4">
 				<input
 					type="email"
@@ -42,7 +42,7 @@ export default function ConfirmSignUp() {
 					value={code}
 					onChange={(e) => setCode(e.target.value)}
 					className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-					placeholder={LANGUAGES[state.lang].code}
+					placeholder={LANGUAGES[state.lang].auth.code}
 				/>
 			</div>
 			<div className="flex justify-end mb-4">
@@ -54,7 +54,7 @@ export default function ConfirmSignUp() {
 						disabledReSend() ? 'text-slate-500' : 'text-primary hover:text-secondary'
 					}`}
 				>
-					{LANGUAGES[state.lang].reSendCode}
+					{LANGUAGES[state.lang].auth.reSendCode}
 				</button>
 			</div>
 			<button
@@ -74,7 +74,7 @@ export default function ConfirmSignUp() {
 					to={ROUTES[state.lang].HOME}
 					className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out"
 				>
-					{LANGUAGES[state.lang].backToSignIn}
+					{LANGUAGES[state.lang].auth.backToSignIn}
 				</Link>
 			</div>
 		</form>

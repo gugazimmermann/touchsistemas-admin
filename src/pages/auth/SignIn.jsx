@@ -42,14 +42,14 @@ export default function SignIn() {
 						className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-primary checked:border-primary focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
 					/>
 					<label className="form-check-label inline-block" htmlFor="exampleCheck2">
-						{LANGUAGES[state.lang].remember}
+						{LANGUAGES[state.lang].auth.remember}
 					</label>
 				</div>
 				<Link
 					to={ROUTES[state.lang].FORGOT_PASSWORD}
 					className="text-primary hover:text-secondary duration-200 transition ease-in-out"
 				>
-					{LANGUAGES[state.lang].forgotPassword}
+					{LANGUAGES[state.lang].auth.forgotPassword}
 				</Link>
 			</div>
 			<button
@@ -62,7 +62,7 @@ export default function SignIn() {
 						: 'bg-primary cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md'
 				} inline-block px-2 py-2 text-white font-medium uppercase rounded shadow-md transition duration-150 ease-in-out w-full`}
 			>
-				{LANGUAGES[state.lang].signIn}
+				{LANGUAGES[state.lang].auth.signIn}
 			</button>
 			{/* <LoginSocial /> */}
 			<div className="w-full text-center mt-6">
@@ -70,7 +70,7 @@ export default function SignIn() {
 					to={ROUTES[state.lang].REGISTER}
 					className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out"
 				>
-					{LANGUAGES[state.lang].newRegister}
+					{LANGUAGES[state.lang].auth.newRegister}
 				</Link>
 			</div>
 		</form>

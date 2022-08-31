@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/plans": {
+      "name": "/plans",
+      "lambdaFunction": "touchsistemasListPlans",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

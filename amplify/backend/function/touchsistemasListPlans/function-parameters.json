@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "storage": {
+      "Plan:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

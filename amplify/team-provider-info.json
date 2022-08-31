@@ -28,6 +28,10 @@
         "touchsistemasStorageResizeImage": {
           "deploymentBucketName": "amplify-touchsistemas-dev-163244-deployment",
           "s3Key": "amplify-builds/touchsistemasStorageResizeImage-36635043472f61704b42-build.zip"
+        },
+        "touchsistemasListPlans": {
+          "deploymentBucketName": "amplify-touchsistemas-dev-163244-deployment",
+          "s3Key": "amplify-builds/touchsistemasListPlans-64466870585578346377-build.zip"
         }
       }
     }

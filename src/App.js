@@ -24,6 +24,7 @@ const PlanSelection = lazy(() => import('./pages/plan-selection/PlanSelection'))
 const New = lazy(() => import('./pages/plan-selection/New'));
 const Subscriptions = lazy(() => import('./pages/subscriptions/Subscriptions'));
 const SubscriptionDetail = lazy(() => import('./pages/subscriptions/SubscriptionDetail'));
+const SubscriptionForm = lazy(() => import('./pages/subscriptions/SubscriptionForm'));
 const Events = lazy(() => import('./pages/events/Events'));
 const EventDetail = lazy(() => import('./pages/events/EventDetail'));
 
@@ -63,6 +64,7 @@ function App() {
 						<Route path={`${ROUTES[state.lang].NEW}/:name`} element={<New />} />
 						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}`} element={<Subscriptions />} />
 						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}/:id`} element={<SubscriptionDetail />} />
+						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}/:id${ROUTES[state.lang].EDIT}`} element={<SubscriptionForm />} />
 						<Route path={`${ROUTES[state.lang].EVENTS}`} element={<Events />} />
 						<Route path={`${ROUTES[state.lang].EVENTS}/:id`} element={<EventDetail />} />
 					</Route>

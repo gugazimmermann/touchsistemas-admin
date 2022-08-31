@@ -103,6 +103,7 @@ export default {
 		invalidPartner: 'Partner not found!',
 		details: {
 			success: 'Successfully Registered Subscription',
+			edit: 'Edit',
 			report: {
 				name: 'Name',
 				phone: 'Phone',
@@ -112,7 +113,7 @@ export default {
 			},
 			cards: {
 				answered: 'Answered',
-				complete: 'Complete',
+				complete: 'Completed',
 			},
 			dashboard: {
 				report: 'Report',

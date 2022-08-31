@@ -131,13 +131,17 @@ export default function SubscriptionDetail() {
 		return address;
 	}
 
+	function handleEdit() {
+		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${params.id}${ROUTES[state.lang].EDIT}`);
+	}
+
 	useEffect(() => {
 		if (params.id) handleGetSubscription(params.id);
 	}, [params]);
 
 	function renderLogo() {
 		return (
-			<div className="w-full md:w-3/12 mb-4 flex justify-center items-center">
+			<div className="w-6/12 sm:w-3/12 mb-4 flex justify-center items-center mx-auto sm:mx-0">
 				<div className="bg-white shadow-md overflow-hidden rounded-lg">
 					{logo ? (
 						<img src={logo} alt="logo" className="object-cover w-full rounded-t-md" />
@@ -160,7 +164,7 @@ export default function SubscriptionDetail() {
 		return (
 			<div className="mt-4 mb-4">
 				<div className="relative bg-white py-2 px-4 rounded-lg shadow-md">
-					<div className="text-white flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-fuchsia-500 right-4 -top-4">
+					<div className="text-white flex sm:hidden md:flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-fuchsia-500 right-4 -top-4">
 						<i className="bx bxs-select-multiple" />
 					</div>
 					<div>
@@ -184,7 +188,7 @@ export default function SubscriptionDetail() {
 		return (
 			<div className="mt-4 mb-4">
 				<div className="relative bg-white py-2 px-4 rounded-lg shadow-md">
-					<div className="text-white flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-violet-500 right-4 -top-4">
+					<div className="text-white flex sm:hidden md:flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-violet-500 right-4 -top-4">
 						<i className="bx bxs-bar-chart-square" />
 					</div>
 					<div>
@@ -206,7 +210,7 @@ export default function SubscriptionDetail() {
 
 	function renderCards() {
 		return (
-			<div className="w-full md:w-3/12 flex flex-col sm:justify-evenly">
+			<div className="w-full sm:w-3/12 flex flex-col sm:justify-evenly">
 				{renderSurveysAnsweredCard()}
 				{renderCompleteSurveysCard()}
 			</div>
@@ -280,53 +284,63 @@ export default function SubscriptionDetail() {
 
 	function renderDetails() {
 		return (
-			<dl className="flex-1">
-				{renderSurveyRow()}
-				{subscription.website && (
-					<div className="p-2 border-b grid grid-cols-12">
+			<div className="flex-1">
+				<dl>
+					{renderSurveyRow()}
+					{subscription.website && (
+						<div className="p-2 border-b grid grid-cols-12">
+							<dt className="text-sm font-medium col-span-3">
+								{LANGUAGES[state.lang].subscription.details.info.website}
+							</dt>
+							<dd className="text-sm col-span-9">
+								<a href={subscription.website} target="_blank" rel="noreferrer">
+									{subscription.website}
+									<i className="bx bx-link-external ml-2" />
+								</a>
+							</dd>
+						</div>
+					)}
+					{subscription.email && (
+						<div className="p-2 border-b sm:grid grid-cols-12">
+							<dt className="text-sm font-medium col-span-3">
+								{LANGUAGES[state.lang].subscription.details.info.email}
+							</dt>
+							<dd className="text-sm col-span-9">
+								<a href={`mailto:${subscription.email}`} target="_blank" rel="noreferrer">
+									{subscription.email}
+									<i className="bx bx-envelope ml-2" />
+								</a>
+							</dd>
+						</div>
+					)}
+					<div className="p-2 border-b sm:grid grid-cols-12">
 						<dt className="text-sm font-medium col-span-3">
-							{LANGUAGES[state.lang].subscription.details.info.website}
+							{LANGUAGES[state.lang].subscription.details.info.address}
 						</dt>
-						<dd className="text-sm col-span-9">
-							<a href={subscription.website} target="_blank" rel="noreferrer">
-								{subscription.website}
-								<i className="bx bx-link-external ml-2" />
-							</a>
-						</dd>
+						<dd className="text-sm col-span-9">{formatAddress(subscription)}</dd>
 					</div>
-				)}
-				{subscription.email && (
-					<div className="p-2 border-b sm:grid grid-cols-12">
-						<dt className="text-sm font-medium col-span-3">{LANGUAGES[state.lang].subscription.details.info.email}</dt>
-						<dd className="text-sm col-span-9">
-							<a href={`mailto:${subscription.email}`} target="_blank" rel="noreferrer">
-								{subscription.email}
-								<i className="bx bx-envelope ml-2" />
-							</a>
-						</dd>
-					</div>
-				)}
-				<div className="p-2 border-b sm:grid grid-cols-12">
-					<dt className="text-sm font-medium col-span-3">{LANGUAGES[state.lang].subscription.details.info.address}</dt>
-					<dd className="text-sm col-span-9">{formatAddress(subscription)}</dd>
+					{subscription.partner && (
+						<div className="p-2 border-b sm:grid grid-cols-12">
+							<dt className="mt-2 text-sm font-medium col-span-3">
+								{LANGUAGES[state.lang].subscription.details.info.partner}
+							</dt>
+							<dd className="mt-2 text-sm col-span-9">{`${subscription.partner.name} | ${subscription.partner.referralCode}`}</dd>
+						</div>
+					)}
+				</dl>
+				<div className="w-full text-center my-4">
+					<button type="button" onClick={() => handleEdit()} className="px-6 py-1 bg-orange-300 border-orange-500 text-white rounded-lg">
+						{LANGUAGES[state.lang].subscription.details.edit}
+					</button>
 				</div>
-
-				{subscription.partner && (
-					<div className="p-2 border-b sm:grid grid-cols-12">
-						<dt className="mt-2 text-sm font-medium col-span-3">
-							{LANGUAGES[state.lang].subscription.details.info.partner}
-						</dt>
-						<dd className="mt-2 text-sm col-span-9">{`${subscription.partner.name} | ${subscription.partner.referralCode}`}</dd>
-					</div>
-				)}
-			</dl>
+			</div>
 		);
 	}
 
 	function renderMap() {
 		return (
 			<div className="p-4 flex-1 flex justify-center items-center">
-				<div className="w-6/12">
+				<div className="w-full sm:w-6/12">
 					<a href={map} target="_blank" rel="noreferrer">
 						<img alt="map" src={map} className="rounded-lg" />
 					</a>
@@ -341,13 +355,13 @@ export default function SubscriptionDetail() {
 			{success && <Alert type="success">{LANGUAGES[state.lang].subscription.details.success}</Alert>}
 			{!loading && subscription && (
 				<>
-					<div className="flex flex-col md:flex-row justify-between">
+					<div className="flex flex-col sm:flex-row justify-between">
 						{renderLogo()}
 						{renderCards()}
 						{renderDashboardCard()}
 						{renderQRCodeCard()}
 					</div>
-					<div className="shadow-md rounded-lg flex flex-col md:flex-row bg-white">
+					<div className="shadow-md rounded-lg flex flex-col sm:flex-row bg-white">
 						{renderDetails()}
 						{map && renderMap()}
 					</div>

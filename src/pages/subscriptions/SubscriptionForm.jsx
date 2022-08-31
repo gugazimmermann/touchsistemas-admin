@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState, useContext } from 'react';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { planByType, partnerByReferralCode } from '../../graphql/queries';
-import { createSubscriptions } from '../../graphql/mutations';
+import * as queries from '../../graphql/queries';
+import { createSubscriptions, updateSubscriptions } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { Loading, Alert, Title, Uploading } from '../../components';
 import { delay, getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers';
@@ -22,6 +24,7 @@ const initial = {
 };
 
 export default function SubscriptionForm() {
+	const params = useParams();
 	const navigate = useNavigate();
 	const [loadClient] = useOutletContext();
 	const { state } = useContext(AppContext);
@@ -110,8 +113,8 @@ export default function SubscriptionForm() {
 					state: formSubscription.state,
 					city: formSubscription.city,
 					street: formSubscription.street || null,
-					number: formSubscription.street || null,
-					complement: formSubscription.street || null,
+					number: formSubscription.number || null,
+					complement: formSubscription.complement || null,
 					active: 'TRUE',
 					PlanID: planID,
 					ClientID: client.id,
@@ -120,6 +123,32 @@ export default function SubscriptionForm() {
 			})
 		);
 		return data.createSubscriptions;
+	}
+
+	async function handleUpdateSubscription(partnerID, planID) {
+		console.debug('handleUpdateSubscription')
+		const { data } = await API.graphql(
+			graphqlOperation(updateSubscriptions, {
+				input: {
+					id: params.id,
+					referralCode: formSubscription.referralCode || null,
+					name: formSubscription.name,
+					website: formSubscription.website || null,
+					email: formSubscription.email || null,
+					zipCode: formSubscription.zipCode.replace(/\D/g, ''),
+					state: formSubscription.state,
+					city: formSubscription.city,
+					street: formSubscription.street || null,
+					number: formSubscription.number || null,
+					complement: formSubscription.complement || null,
+					active: 'TRUE',
+					PlanID: planID,
+					ClientID: client.id,
+					PartnerID: partnerID,
+				},
+			})
+		);
+		return data.updateSubscriptions;
 	}
 
 	async function addSubscriptionMap(newSubscription) {
@@ -147,7 +176,7 @@ export default function SubscriptionForm() {
 		setProgress(0);
 	}
 
-	async function handleAdd() {
+	async function handleSubmit() {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
@@ -200,23 +229,56 @@ export default function SubscriptionForm() {
 			return null;
 		}
 		const planID = getPlan.data.planByType.items[0].id;
-		const newSubscription = await handleCreateSubscription(partnerID, planID);
-		await addSubscriptionMap(newSubscription);
-		setLoading(false);
-		if (subscriptionLogo) await addSubscriptionLogo(newSubscription);
+		const newSubscription = !params?.id
+			? await handleCreateSubscription(partnerID, planID)
+			: await handleUpdateSubscription(partnerID, planID);
+		if (subscriptionLogo) await addSubscriptionLogo(newSubscription || formSubscription);
 		delay(3000);
+		await addSubscriptionMap(newSubscription || formSubscription);
 		loadClient(true);
 		setFormSubscription(initial);
-		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${newSubscription.id}`, { state: { success: true } });
+		setLoading(false);
+		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${(newSubscription?.id || params.id)}`, { state: { success: true } });
 		return true;
 	}
+
+	async function handleGetSubscription(id) {
+		setLoading(true);
+		const {
+			data: { getSubscriptions },
+		} = await API.graphql(graphqlOperation(queries.getSubscriptions, { id, active: 'TRUE' }));
+		if (getSubscriptions) {
+			setLoading(false);
+			setFormSubscription({
+				...formSubscription,
+				name: getSubscriptions.name || '',
+				website: getSubscriptions.website || '',
+				email: getSubscriptions.email || '',
+				zipCode: normalizeCEP(getSubscriptions.zipCode) || '',
+				state: getSubscriptions.state || '',
+				city: getSubscriptions.city || '',
+				street: getSubscriptions.street || '',
+				number: getSubscriptions.number || '',
+				complement: getSubscriptions.complement || '',
+				referralCode: getSubscriptions.referralCode || '',
+			});
+		} else {
+			navigate(ROUTES[state.lang].DASHBOARD);
+		}
+	}
+
+	useEffect(() => {
+		if (params.id) handleGetSubscription(params.id);
+	}, [params]);
 
 	return (
 		<>
 			{loading && <Loading />}
 			{!!progress && <Uploading progress={progress} />}
 			{error && <Alert type="danger">{errorMsg}</Alert>}
-			<Title text={LANGUAGES[state.lang].subscription.title} />
+			<Title
+				text={!params?.id ? LANGUAGES[state.lang].subscription.title : LANGUAGES[state.lang].subscription.titleEdit}
+			/>
 			<form className="flex flex-wrap bg-white p-4 mb-8 rounded-md shadow-md">
 				<div className="flex flex-wrap">
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
@@ -356,10 +418,10 @@ export default function SubscriptionForm() {
 					<div className="w-full flex justify-center">
 						<button
 							type="button"
-							onClick={() => handleAdd()}
+							onClick={() => handleSubmit()}
 							className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md transition duration-150 ease-in-out"
 						>
-							{LANGUAGES[state.lang].subscription.add}
+							{!params?.id ? LANGUAGES[state.lang].subscription.add : LANGUAGES[state.lang].subscription.titleEdit}
 						</button>
 					</div>
 				</div>

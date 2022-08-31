@@ -12,4 +12,5 @@ export default {
 	EDIT: '/editar',
 	SUBSCRIPTIONS: '/assinaturas',
 	EVENTS: '/eventos',
+	SURVEYS: '/pesquisas',
 };

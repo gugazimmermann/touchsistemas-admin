@@ -1749,10 +1749,11 @@ export const createEvents = /* GraphQL */ `
         items {
           id
           order
+          language
           type
+          required
           question
           answers
-          required
           EventsID
           Events {
             id
@@ -2144,10 +2145,11 @@ export const updateEvents = /* GraphQL */ `
         items {
           id
           order
+          language
           type
+          required
           question
           answers
-          required
           EventsID
           Events {
             id
@@ -2539,10 +2541,11 @@ export const deleteEvents = /* GraphQL */ `
         items {
           id
           order
+          language
           type
+          required
           question
           answers
-          required
           EventsID
           Events {
             id
@@ -2929,10 +2932,11 @@ export const createSubscriptions = /* GraphQL */ `
         items {
           id
           order
+          language
           type
+          required
           question
           answers
-          required
           EventsID
           Events {
             id
@@ -3319,10 +3323,11 @@ export const updateSubscriptions = /* GraphQL */ `
         items {
           id
           order
+          language
           type
+          required
           question
           answers
-          required
           EventsID
           Events {
             id
@@ -3709,10 +3714,11 @@ export const deleteSubscriptions = /* GraphQL */ `
         items {
           id
           order
+          language
           type
+          required
           question
           answers
-          required
           EventsID
           Events {
             id
@@ -4401,10 +4407,11 @@ export const createSurvey = /* GraphQL */ `
     createSurvey(input: $input, condition: $condition) {
       id
       order
+      language
       type
+      required
       question
       answers
-      required
       EventsID
       Events {
         id
@@ -4499,10 +4506,11 @@ export const createSurvey = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4629,10 +4637,11 @@ export const createSurvey = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4683,10 +4692,11 @@ export const updateSurvey = /* GraphQL */ `
     updateSurvey(input: $input, condition: $condition) {
       id
       order
+      language
       type
+      required
       question
       answers
-      required
       EventsID
       Events {
         id
@@ -4781,10 +4791,11 @@ export const updateSurvey = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4911,10 +4922,11 @@ export const updateSurvey = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4965,10 +4977,11 @@ export const deleteSurvey = /* GraphQL */ `
     deleteSurvey(input: $input, condition: $condition) {
       id
       order
+      language
       type
+      required
       question
       answers
-      required
       EventsID
       Events {
         id
@@ -5063,10 +5076,11 @@ export const deleteSurvey = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5193,10 +5207,11 @@ export const deleteSurvey = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5355,10 +5370,11 @@ export const createVisitor = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5485,10 +5501,11 @@ export const createVisitor = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5647,10 +5664,11 @@ export const updateVisitor = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5777,10 +5795,11 @@ export const updateVisitor = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5939,10 +5958,11 @@ export const deleteVisitor = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -6069,10 +6089,11 @@ export const deleteVisitor = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt

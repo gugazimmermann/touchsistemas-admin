@@ -3,6 +3,9 @@ export default {
 	no: 'No',
 	close: 'Close',
 	select: 'Select',
+	continue: 'Continue',
+	back: 'Back',
+	save: 'Save',
 	loading: 'Loading',
 	notFound: 'Page Not Found',
 	email: 'e-mail',
@@ -180,5 +183,8 @@ export default {
 		requiredEmail: 'E-Mail is Required!',
 		invalidZipCode: 'invalid Zip Code!',
 		invalidPartner: 'Partner not found!',
+	},
+	surveys: {
+		title: 'Survey',
 	},
 };

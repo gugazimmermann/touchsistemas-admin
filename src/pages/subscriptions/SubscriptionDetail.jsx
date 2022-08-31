@@ -280,9 +280,9 @@ export default function SubscriptionDetail() {
 				{!surveyQuestions && (
 					<dl className="text-sm col-span-5 text-right">
 						<button
-						type="button"
-						onClick={() => handleAddSurvey()}
-						className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg"
+							type="button"
+							onClick={() => handleAddSurvey()}
+							className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg"
 						>
 							{LANGUAGES[state.lang].subscriptions.details.survey.add}
 						</button>

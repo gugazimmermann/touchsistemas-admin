@@ -282,7 +282,7 @@ export default function SubscriptionForm() {
 				back={`${ROUTES[state.lang].SUBSCRIPTIONS}/${params.id}`}
 			/>
 			<form className="flex flex-wrap bg-white p-4 mb-8 rounded-md shadow-md">
-				<div className="flex flex-wrap">
+				<div className="w-full flex flex-wrap">
 					<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 						<input
 							value={formSubscription.name || ''}

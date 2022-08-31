@@ -27,6 +27,7 @@ const SubscriptionDetail = lazy(() => import('./pages/subscriptions/Subscription
 const SubscriptionForm = lazy(() => import('./pages/subscriptions/SubscriptionForm'));
 const Events = lazy(() => import('./pages/events/Events'));
 const EventDetail = lazy(() => import('./pages/events/EventDetail'));
+const Surveys = lazy(() => import('./pages/surveys/Surveys'));
 
 function App() {
 	const [searchParams] = useSearchParams();
@@ -70,6 +71,7 @@ function App() {
 						/>
 						<Route path={`${ROUTES[state.lang].EVENTS}`} element={<Events />} />
 						<Route path={`${ROUTES[state.lang].EVENTS}/:id`} element={<EventDetail />} />
+						<Route path={`${ROUTES[state.lang].SURVEYS}`} element={<Surveys />} />
 					</Route>
 				</Route>
 				<Route path="*" element={<NotFound />} />

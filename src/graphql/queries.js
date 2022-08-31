@@ -1424,10 +1424,11 @@ export const getEvents = /* GraphQL */ `
         items {
           id
           order
+          language
           type
+          required
           question
           answers
-          required
           EventsID
           Events {
             id
@@ -1665,10 +1666,11 @@ export const listEvents = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -1818,10 +1820,11 @@ export const eventsByState = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -1971,10 +1974,11 @@ export const eventsByPlanID = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -2124,10 +2128,11 @@ export const eventsByClientID = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -2277,10 +2282,11 @@ export const eventsByPartnerID = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -2568,10 +2574,11 @@ export const getSubscriptions = /* GraphQL */ `
         items {
           id
           order
+          language
           type
+          required
           question
           answers
-          required
           EventsID
           Events {
             id
@@ -2814,10 +2821,11 @@ export const listSubscriptions = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -2962,10 +2970,11 @@ export const subscriptionsByState = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -3110,10 +3119,11 @@ export const subscriptionsByActive = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -3258,10 +3268,11 @@ export const subscriptionsByPlanID = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -3406,10 +3417,11 @@ export const subscriptionsByClientID = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -3554,10 +3566,11 @@ export const subscriptionsByPartnerID = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4229,10 +4242,11 @@ export const getSurvey = /* GraphQL */ `
     getSurvey(id: $id, order: $order) {
       id
       order
+      language
       type
+      required
       question
       answers
-      required
       EventsID
       Events {
         id
@@ -4327,10 +4341,11 @@ export const getSurvey = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4457,10 +4472,11 @@ export const getSurvey = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4523,10 +4539,198 @@ export const listSurveys = /* GraphQL */ `
       items {
         id
         order
+        language
         type
+        required
         question
         answers
+        EventsID
+        Events {
+          id
+          referralCode
+          method
+          name
+          website
+          email
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          logo
+          dates
+          gift
+          giftDescription
+          prizeDraw
+          prizeDrawDescription
+          PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
+          ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            logo
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
+          PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          planEventsId
+          planEventsActive
+        }
+        SubscriptionsID
+        Subscriptions {
+          id
+          referralCode
+          name
+          website
+          email
+          zipCode
+          state
+          city
+          street
+          number
+          complement
+          logo
+          active
+          PlanID
+          Plan {
+            id
+            type
+            name
+            detail
+            price
+            frequency
+            active
+            createdAt
+            updatedAt
+          }
+          ClientID
+          Client {
+            id
+            name
+            phone
+            doctype
+            document
+            email
+            website
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            logo
+            eventsMap
+            subscriptionsMap
+            createdAt
+            updatedAt
+          }
+          PartnerID
+          Partner {
+            id
+            referralCode
+            name
+            contact
+            email
+            phone
+            zipCode
+            state
+            city
+            street
+            number
+            createdAt
+            updatedAt
+          }
+          Surveys {
+            nextToken
+          }
+          Visitors {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          planSubscriptionsId
+          planSubscriptionsActive
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const surveyByLanguage = /* GraphQL */ `
+  query SurveyByLanguage(
+    $language: String!
+    $eventsIDSubscriptionsID: ModelSurveyByLanguageCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSurveyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    surveyByLanguage(
+      language: $language
+      eventsIDSubscriptionsID: $eventsIDSubscriptionsID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        order
+        language
+        type
         required
+        question
+        answers
         EventsID
         Events {
           id
@@ -4707,10 +4911,11 @@ export const surveyByEventsID = /* GraphQL */ `
       items {
         id
         order
+        language
         type
+        required
         question
         answers
-        required
         EventsID
         Events {
           id
@@ -4891,10 +5096,11 @@ export const surveyBySubscriptionsID = /* GraphQL */ `
       items {
         id
         order
+        language
         type
+        required
         question
         answers
-        required
         EventsID
         Events {
           id
@@ -5170,10 +5376,11 @@ export const getVisitor = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5300,10 +5507,11 @@ export const getVisitor = /* GraphQL */ `
           items {
             id
             order
+            language
             type
+            required
             question
             answers
-            required
             EventsID
             SubscriptionsID
             createdAt

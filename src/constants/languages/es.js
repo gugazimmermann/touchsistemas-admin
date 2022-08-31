@@ -3,6 +3,9 @@ export default {
 	no: 'No',
 	close: 'Cerrar',
 	select: 'Selecciona',
+	continue: 'Continuar',
+	back: 'Espalda',
+	save: 'Guardar',
 	loading: 'Mantener',
 	notFound: 'Página no Encontrada',
 	email: 'e-mail',
@@ -180,5 +183,8 @@ export default {
 		requiredEmail: '¡E-Mail es requerido!!',
 		invalidZipCode: '¡Código postal Inválido!',
 		invalidPartner: '¡Socio de Referencia no Encontrado!',
+	},
+	surveys: {
+		title: 'Encuesta',
 	},
 };

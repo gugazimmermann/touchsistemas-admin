@@ -237,7 +237,9 @@ export default function SubscriptionForm() {
 		loadClient(true);
 		setFormSubscription(initial);
 		setLoading(false);
-		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${(newSubscription?.id || params.id)}`, { state: !params.id ? { success: true } : { edited: true } });
+		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${newSubscription?.id || params.id}`, {
+			state: !params.id ? { success: true } : { edited: true },
+		});
 		return true;
 	}
 

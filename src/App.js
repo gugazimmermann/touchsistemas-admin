@@ -64,7 +64,10 @@ function App() {
 						<Route path={`${ROUTES[state.lang].NEW}/:name`} element={<New />} />
 						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}`} element={<Subscriptions />} />
 						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}/:id`} element={<SubscriptionDetail />} />
-						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}/:id${ROUTES[state.lang].EDIT}`} element={<SubscriptionForm />} />
+						<Route
+							path={`${ROUTES[state.lang].SUBSCRIPTIONS}/:id${ROUTES[state.lang].EDIT}`}
+							element={<SubscriptionForm />}
+						/>
 						<Route path={`${ROUTES[state.lang].EVENTS}`} element={<Events />} />
 						<Route path={`${ROUTES[state.lang].EVENTS}/:id`} element={<EventDetail />} />
 					</Route>

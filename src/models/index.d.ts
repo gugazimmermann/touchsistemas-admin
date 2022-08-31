@@ -198,9 +198,9 @@ export declare class Survey {
   readonly type: SurveyTypes | keyof typeof SurveyTypes;
   readonly question: string;
   readonly answers: string;
-  readonly EventsID: string;
+  readonly EventsID?: string | null;
   readonly Events?: Events | null;
-  readonly SubscriptionsID: string;
+  readonly SubscriptionsID?: string | null;
   readonly Subscriptions?: Subscriptions | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

@@ -1325,7 +1325,7 @@ export const schema = {
                     "name": "EventsID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "Events": {
@@ -1345,7 +1345,7 @@ export const schema = {
                     "name": "SubscriptionsID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "Subscriptions": {
@@ -1717,5 +1717,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "5dc3bc5c4502c1bca47a425ef8e44f24"
+    "version": "0701a321dd4ad099d2b477b1feb56046"
 };

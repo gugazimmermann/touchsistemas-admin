@@ -331,7 +331,11 @@ export default function SubscriptionDetail() {
 					)}
 				</dl>
 				<div className="w-full text-center my-4">
-					<button type="button" onClick={() => handleEdit()} className="px-6 py-1 bg-orange-300 border-orange-500 text-white rounded-lg">
+					<button
+						type="button"
+						onClick={() => handleEdit()}
+						className="px-6 py-1 bg-orange-300 border-orange-500 text-white rounded-lg"
+					>
 						{LANGUAGES[state.lang].subscription.details.edit}
 					</button>
 				</div>

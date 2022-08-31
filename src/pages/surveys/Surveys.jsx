@@ -39,12 +39,12 @@ export default function Surveys() {
 			question: q.question,
 			answers: q.answers.map((a, ai) => ({
 				order: ai,
-				answer: a.answer
+				answer: a.answer,
 			})),
 			EventsID: event.id || null,
-			Subscriptions: subscription.id || null
+			Subscriptions: subscription.id || null,
 		}));
-		console.debug(s)
+		console.debug(s);
 	}
 
 	function handleBack() {
@@ -382,7 +382,7 @@ export default function Surveys() {
 						)}
 					</Droppable>
 				</DragDropContext>
-				{renderQuestionButtons() }
+				{renderQuestionButtons()}
 			</div>
 		);
 	}

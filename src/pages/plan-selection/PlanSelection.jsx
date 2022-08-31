@@ -33,7 +33,7 @@ export default function PlanSelection() {
 				};
 			});
 		});
-		console.debug(state)
+		console.debug(state);
 		setPlans(formatPlans);
 		setLoading(false);
 	}

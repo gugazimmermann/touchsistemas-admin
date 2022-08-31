@@ -56,7 +56,7 @@ export default function Layout() {
 
 	async function loadPlans() {
 		setLoading(true);
-		if (!state.plans) {
+		if (!state.plans.length) {
 			const {
 				data: {
 					planByActive: { items },
@@ -67,9 +67,13 @@ export default function Layout() {
 		setLoading(false);
 	}
 
+	async function loadData() {
+		await loadPlans();
+		await loadClient();
+	}
+
 	useEffect(() => {
-		loadClient();
-		loadPlans();
+		loadData();
 	}, []);
 
 	return (

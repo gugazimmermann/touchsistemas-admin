@@ -13,14 +13,17 @@ export default function Dashboard() {
 		if (state.alerts.lenght) navigate(ROUTES[state.lang].ALERTS);
 	}, []);
 
-	return (
-		<div className="grid gap-4">
-			<div>
-				<Subscriptions />
+	if (state.client) {
+		return (
+			<div className="grid gap-4">
+				<div>
+					<Subscriptions />
+				</div>
+				<div>
+					<Events />
+				</div>
 			</div>
-			<div>
-				<Events />
-			</div>
-		</div>
-	);
+		);
+	}
+	return null;
 }

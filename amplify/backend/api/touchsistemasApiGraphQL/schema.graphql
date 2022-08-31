@@ -138,9 +138,9 @@ type Survey @model @auth(rules: [{ allow: public }]) {
   type: SurveyTypes!
 	question: AWSJSON!
 	answers: AWSJSON!
-	EventsID: ID! @index(name: "byEvents", queryField: "surveyByEventsID")
+	EventsID: ID @index(name: "byEvents", queryField: "surveyByEventsID")
 	Events: Events @belongsTo
-	SubscriptionsID: ID! @index(name: "bySubscriptions", queryField: "surveyBySubscriptionsID")
+	SubscriptionsID: ID @index(name: "bySubscriptions", queryField: "surveyBySubscriptionsID")
 	Subscriptions: Subscriptions @belongsTo
 }
 

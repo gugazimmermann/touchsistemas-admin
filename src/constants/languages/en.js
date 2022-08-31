@@ -103,6 +103,7 @@ export default {
 		invalidPartner: 'Partner not found!',
 		details: {
 			success: 'Successfully Registered Subscription',
+			edited: 'Successfully Edited Subscription',
 			edit: 'Edit',
 			report: {
 				name: 'Name',

@@ -104,6 +104,7 @@ export default {
 		invalidPartner: 'Parceiro de Referência não encontrado!',
 		details: {
 			success: 'Assinatura Cadastrada com Sucesso',
+			edited: 'Assinatura Editada com Sucesso',
 			edit: 'Editar',
 			report: {
 				name: 'Nome',

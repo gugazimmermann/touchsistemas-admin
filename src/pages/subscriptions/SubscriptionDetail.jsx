@@ -6,6 +6,7 @@ import QRCode from 'qrcode';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { AppContext } from '../../context';
+import { normalizeCEP } from '../../helpers';
 import { Loading, Alert } from '../../components';
 import { ROUTES, LANGUAGES } from '../../constants';
 
@@ -15,6 +16,7 @@ export default function SubscriptionDetail() {
 	const navigate = useNavigate();
 	const { state } = useContext(AppContext);
 	const [success] = useState(location?.state?.success || null);
+	const [edited] = useState(location?.state?.edited || null);
 	const [loading, setLoading] = useState(false);
 	const [subscription, setSubscription] = useState();
 	const [visitors, setVisitors] = useState();
@@ -127,7 +129,7 @@ export default function SubscriptionDetail() {
 		let address = o.street;
 		if (o.number) address += `, ${o.number}`;
 		if (o.complement) address += ` (${o.complement})`;
-		address += ` - ${o.city} / ${o.state} | ${o.zipCode}`;
+		address += ` - ${o.city} / ${o.state} - ${normalizeCEP(o.zipCode)}`;
 		return address;
 	}
 
@@ -353,6 +355,7 @@ export default function SubscriptionDetail() {
 		<>
 			{loading && <Loading />}
 			{success && <Alert type="success">{LANGUAGES[state.lang].subscription.details.success}</Alert>}
+			{edited && <Alert type="info">{LANGUAGES[state.lang].subscription.details.edited}</Alert>}
 			{!loading && subscription && (
 				<>
 					<div className="flex flex-col sm:flex-row justify-between">

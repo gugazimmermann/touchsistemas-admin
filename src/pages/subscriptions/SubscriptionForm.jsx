@@ -126,7 +126,6 @@ export default function SubscriptionForm() {
 	}
 
 	async function handleUpdateSubscription(partnerID, planID) {
-		console.debug('handleUpdateSubscription')
 		const { data } = await API.graphql(
 			graphqlOperation(updateSubscriptions, {
 				input: {
@@ -238,7 +237,7 @@ export default function SubscriptionForm() {
 		loadClient(true);
 		setFormSubscription(initial);
 		setLoading(false);
-		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${(newSubscription?.id || params.id)}`, { state: { success: true } });
+		navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${(newSubscription?.id || params.id)}`, { state: !params.id ? { success: true } : { edited: true } });
 		return true;
 	}
 
@@ -278,6 +277,7 @@ export default function SubscriptionForm() {
 			{error && <Alert type="danger">{errorMsg}</Alert>}
 			<Title
 				text={!params?.id ? LANGUAGES[state.lang].subscription.title : LANGUAGES[state.lang].subscription.titleEdit}
+				back={`${ROUTES[state.lang].SUBSCRIPTIONS}/${params.id}`}
 			/>
 			<form className="flex flex-wrap bg-white p-4 mb-8 rounded-md shadow-md">
 				<div className="flex flex-wrap">

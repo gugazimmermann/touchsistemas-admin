@@ -103,6 +103,7 @@ export default {
 		invalidPartner: '¡Socio de Referencia no Encontrado!',
 		details: {
 			success: 'Suscripción Registrada Correctamente',
+			edited: 'Suscripción modificada correctamente',
 			edit: 'Editar',
 			report: {
 				name: 'Nombre',

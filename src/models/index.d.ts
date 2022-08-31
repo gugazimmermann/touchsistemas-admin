@@ -13,7 +13,9 @@ export enum PlansFrequency {
 
 export enum SurveyTypes {
   SINGLE = "SINGLE",
-  MULTIPLE = "MULTIPLE"
+  MULTIPLE = "MULTIPLE",
+  TEXT = "TEXT",
+  MULTILINE = "MULTILINE"
 }
 
 export enum MethodTypes {
@@ -197,7 +199,8 @@ export declare class Survey {
   readonly order: number;
   readonly type: SurveyTypes | keyof typeof SurveyTypes;
   readonly question: string;
-  readonly answers: string;
+  readonly answers?: string | null;
+  readonly required?: boolean | null;
   readonly EventsID?: string | null;
   readonly Events?: Events | null;
   readonly SubscriptionsID?: string | null;

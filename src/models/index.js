@@ -15,7 +15,9 @@ const PlansFrequency = {
 
 const SurveyTypes = {
   "SINGLE": "SINGLE",
-  "MULTIPLE": "MULTIPLE"
+  "MULTIPLE": "MULTIPLE",
+  "TEXT": "TEXT",
+  "MULTILINE": "MULTILINE"
 };
 
 const MethodTypes = {

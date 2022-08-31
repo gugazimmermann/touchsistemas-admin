@@ -1427,6 +1427,7 @@ export const getEvents = /* GraphQL */ `
           type
           question
           answers
+          required
           EventsID
           Events {
             id
@@ -1667,6 +1668,7 @@ export const listEvents = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -1819,6 +1821,7 @@ export const eventsByState = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -1971,6 +1974,7 @@ export const eventsByPlanID = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -2123,6 +2127,7 @@ export const eventsByClientID = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -2275,6 +2280,7 @@ export const eventsByPartnerID = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -2565,6 +2571,7 @@ export const getSubscriptions = /* GraphQL */ `
           type
           question
           answers
+          required
           EventsID
           Events {
             id
@@ -2810,6 +2817,7 @@ export const listSubscriptions = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -2957,6 +2965,7 @@ export const subscriptionsByState = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -3104,6 +3113,7 @@ export const subscriptionsByActive = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -3251,6 +3261,7 @@ export const subscriptionsByPlanID = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -3398,6 +3409,7 @@ export const subscriptionsByClientID = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -3545,6 +3557,7 @@ export const subscriptionsByPartnerID = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4219,6 +4232,7 @@ export const getSurvey = /* GraphQL */ `
       type
       question
       answers
+      required
       EventsID
       Events {
         id
@@ -4316,6 +4330,7 @@ export const getSurvey = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4445,6 +4460,7 @@ export const getSurvey = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4510,6 +4526,7 @@ export const listSurveys = /* GraphQL */ `
         type
         question
         answers
+        required
         EventsID
         Events {
           id
@@ -4693,6 +4710,7 @@ export const surveyByEventsID = /* GraphQL */ `
         type
         question
         answers
+        required
         EventsID
         Events {
           id
@@ -4876,6 +4894,7 @@ export const surveyBySubscriptionsID = /* GraphQL */ `
         type
         question
         answers
+        required
         EventsID
         Events {
           id
@@ -5154,6 +5173,7 @@ export const getVisitor = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5283,6 +5303,7 @@ export const getVisitor = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt

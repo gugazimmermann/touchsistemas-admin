@@ -12,6 +12,8 @@ enum PlansFrequency {
 enum SurveyTypes {
 	SINGLE
 	MULTIPLE
+	TEXT
+	MULTILINE
 }
 
 enum MethodTypes {
@@ -137,7 +139,8 @@ type Survey @model @auth(rules: [{ allow: public }]) {
 	order: Int!
   type: SurveyTypes!
 	question: AWSJSON!
-	answers: AWSJSON!
+	answers: AWSJSON
+	required: Boolean
 	EventsID: ID @index(name: "byEvents", queryField: "surveyByEventsID")
 	Events: Events @belongsTo
 	SubscriptionsID: ID @index(name: "bySubscriptions", queryField: "surveyBySubscriptionsID")

@@ -1722,6 +1722,7 @@ export const onCreateEvents = /* GraphQL */ `
           type
           question
           answers
+          required
           EventsID
           Events {
             id
@@ -2113,6 +2114,7 @@ export const onUpdateEvents = /* GraphQL */ `
           type
           question
           answers
+          required
           EventsID
           Events {
             id
@@ -2504,6 +2506,7 @@ export const onDeleteEvents = /* GraphQL */ `
           type
           question
           answers
+          required
           EventsID
           Events {
             id
@@ -2890,6 +2893,7 @@ export const onCreateSubscriptions = /* GraphQL */ `
           type
           question
           answers
+          required
           EventsID
           Events {
             id
@@ -3276,6 +3280,7 @@ export const onUpdateSubscriptions = /* GraphQL */ `
           type
           question
           answers
+          required
           EventsID
           Events {
             id
@@ -3662,6 +3667,7 @@ export const onDeleteSubscriptions = /* GraphQL */ `
           type
           question
           answers
+          required
           EventsID
           Events {
             id
@@ -4341,6 +4347,7 @@ export const onCreateSurvey = /* GraphQL */ `
       type
       question
       answers
+      required
       EventsID
       Events {
         id
@@ -4438,6 +4445,7 @@ export const onCreateSurvey = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4567,6 +4575,7 @@ export const onCreateSurvey = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4617,6 +4626,7 @@ export const onUpdateSurvey = /* GraphQL */ `
       type
       question
       answers
+      required
       EventsID
       Events {
         id
@@ -4714,6 +4724,7 @@ export const onUpdateSurvey = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4843,6 +4854,7 @@ export const onUpdateSurvey = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -4893,6 +4905,7 @@ export const onDeleteSurvey = /* GraphQL */ `
       type
       question
       answers
+      required
       EventsID
       Events {
         id
@@ -4990,6 +5003,7 @@ export const onDeleteSurvey = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5119,6 +5133,7 @@ export const onDeleteSurvey = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5277,6 +5292,7 @@ export const onCreateVisitor = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5406,6 +5422,7 @@ export const onCreateVisitor = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5564,6 +5581,7 @@ export const onUpdateVisitor = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5693,6 +5711,7 @@ export const onUpdateVisitor = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5851,6 +5870,7 @@ export const onDeleteVisitor = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt
@@ -5980,6 +6000,7 @@ export const onDeleteVisitor = /* GraphQL */ `
             type
             question
             answers
+            required
             EventsID
             SubscriptionsID
             createdAt

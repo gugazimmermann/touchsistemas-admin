@@ -1318,7 +1318,14 @@ export const schema = {
                     "name": "answers",
                     "isArray": false,
                     "type": "AWSJSON",
-                    "isRequired": true,
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "required": {
+                    "name": "required",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "EventsID": {
@@ -1704,7 +1711,9 @@ export const schema = {
             "name": "SurveyTypes",
             "values": [
                 "SINGLE",
-                "MULTIPLE"
+                "MULTIPLE",
+                "TEXT",
+                "MULTILINE"
             ]
         },
         "MethodTypes": {
@@ -1717,5 +1726,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "0701a321dd4ad099d2b477b1feb56046"
+    "version": "449c98aae6c1b53f372c34233e2e636a"
 };

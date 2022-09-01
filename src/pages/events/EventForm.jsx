@@ -115,7 +115,6 @@ export default function EventForm({ plan }) {
 	}
 
 	async function graphCreateEvent(partnerID, planID) {
-		console.debug(partnerID, planID);
 		// const { data } = await API.graphql(
 		// 	graphqlOperation(createEvents, {
 		// 		input: {

@@ -72,7 +72,6 @@ export default function Surveys() {
 	async function handleSaveSurvey() {
 		setLoading(true);
 		const formatedSurvey = formatSurveyToSave();
-		console.debug(formatedSurvey);
 		for (const s of formatedSurvey) await handleCreateSurvey(s);
 		loadClient(true);
 		setLoading(false);

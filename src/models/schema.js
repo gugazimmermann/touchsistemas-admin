@@ -1298,6 +1298,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "language": {
+                    "name": "language",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "type": {
                     "name": "type",
                     "isArray": false,
@@ -1307,10 +1314,17 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "required": {
+                    "name": "required",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "question": {
                     "name": "question",
                     "isArray": false,
-                    "type": "AWSJSON",
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -1318,13 +1332,6 @@ export const schema = {
                     "name": "answers",
                     "isArray": false,
                     "type": "AWSJSON",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "required": {
-                    "name": "required",
-                    "isArray": false,
-                    "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -1398,6 +1405,16 @@ export const schema = {
                         "fields": [
                             "id",
                             "order"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byLanguage",
+                        "queryField": "surveyByLanguage",
+                        "fields": [
+                            "language"
                         ]
                     }
                 },
@@ -1726,5 +1743,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "449c98aae6c1b53f372c34233e2e636a"
+    "version": "1cfc06f439d972e63120d297df7a6251"
 };

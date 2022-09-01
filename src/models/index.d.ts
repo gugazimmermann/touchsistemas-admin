@@ -197,10 +197,11 @@ export declare class Partner {
 export declare class Survey {
   readonly id: string;
   readonly order: number;
+  readonly language?: string | null;
   readonly type: SurveyTypes | keyof typeof SurveyTypes;
+  readonly required: boolean;
   readonly question: string;
   readonly answers?: string | null;
-  readonly required?: boolean | null;
   readonly EventsID?: string | null;
   readonly Events?: Events | null;
   readonly SubscriptionsID?: string | null;

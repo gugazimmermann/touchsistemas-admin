@@ -268,26 +268,37 @@ export default function SubscriptionDetail() {
 	}
 
 	function renderSurveyRow() {
-		const surveyQuestions = subscription.Surveys.items.length;
+		const questions = subscription.Surveys.items;
+		const languages = [...new Set(questions.map((q) => q.language))];
 		return (
 			<div className="p-2 border-b grid grid-cols-12">
 				<dt className="text-sm font-medium col-span-3">{LANGUAGES[state.lang].subscriptions.details.survey.title}:</dt>
 				<dl className="text-sm font-bold col-span-4">
-					{!surveyQuestions
+					{!questions.length
 						? LANGUAGES[state.lang].subscriptions.details.survey.noQuestions
-						: `${surveyQuestions} ${LANGUAGES[state.lang].subscriptions.details.survey.questions}`}
+						: `${questions.length} ${LANGUAGES[state.lang].subscriptions.details.survey.questions} / ${
+								languages.length
+						  } Idiomas`}
 				</dl>
-				{!surveyQuestions && (
-					<dl className="text-sm col-span-5 text-right">
+				<dl className="text-sm col-span-5 text-right">
+					{!questions.length ? (
 						<button
 							type="button"
 							onClick={() => handleAddSurvey()}
-							className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded-lg"
+							className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded"
 						>
 							{LANGUAGES[state.lang].subscriptions.details.survey.add}
 						</button>
-					</dl>
-				)}
+					) : (
+						<button
+							type="button"
+							onClick={() => handleAddSurvey()}
+							className="px-2 py-0.5 bg-orange-300 border-orange-500 text-white rounded"
+						>
+							Visualizar
+						</button>
+					)}
+				</dl>
 			</div>
 		);
 	}
@@ -342,7 +353,7 @@ export default function SubscriptionDetail() {
 					<button
 						type="button"
 						onClick={() => handleEdit()}
-						className="px-6 py-1 bg-orange-300 border-orange-500 text-white rounded-lg"
+						className="px-6 py-1 bg-orange-300 border-orange-500 text-white rounded"
 					>
 						{LANGUAGES[state.lang].subscriptions.details.edit}
 					</button>

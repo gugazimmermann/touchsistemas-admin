@@ -4709,7 +4709,6 @@ export const listSurveys = /* GraphQL */ `
 export const surveyByLanguage = /* GraphQL */ `
   query SurveyByLanguage(
     $language: String!
-    $eventsIDSubscriptionsID: ModelSurveyByLanguageCompositeKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelSurveyFilterInput
     $limit: Int
@@ -4717,7 +4716,6 @@ export const surveyByLanguage = /* GraphQL */ `
   ) {
     surveyByLanguage(
       language: $language
-      eventsIDSubscriptionsID: $eventsIDSubscriptionsID
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit

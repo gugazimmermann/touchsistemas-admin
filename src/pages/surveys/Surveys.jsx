@@ -1,9 +1,12 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState, useContext, memo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useOutletContext, useLocation, useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
+import { API, graphqlOperation } from 'aws-amplify';
+import { createSurvey } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { Loading, Alert, Title } from '../../components';
 import { LANGUAGES, PLANS, ROUTES, SURVEY } from '../../constants';
@@ -19,6 +22,7 @@ const initial = {
 export default function Surveys() {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const [loadClient] = useOutletContext();
 	const { state } = useContext(AppContext);
 	const [type] = useState(location?.state?.type || false);
 	const [subscription] = useState(location?.state?.subscription || false);
@@ -30,21 +34,50 @@ export default function Surveys() {
 	const [survey, setSurvey] = useState([]);
 	const [formSurvey, setFormSurvey] = useState(initial);
 
-	async function handleSaveSurvey() {
-		const s = survey.map((q, i) => ({
-			order: i,
+	async function handleCreateSurvey(s) {
+		const { data } = await API.graphql(
+			graphqlOperation(createSurvey, {
+				input: {
+					order: s.order,
+					language: s.language,
+					type: s.type,
+					required: s.required,
+					question: s.question,
+					answers: s.answers.length ? JSON.stringify(s.answers) : null,
+					EventsID: s.EventsID,
+					SubscriptionsID: s.SubscriptionsID,
+				},
+			})
+		);
+		return data.createSurvey;
+	}
+
+	function formatSurveyToSave() {
+		const formatedSurvey = survey.map((q, i) => ({
+			order: i + 1,
 			language,
 			type: q.type,
 			required: q.required,
 			question: q.question,
 			answers: q.answers.map((a, ai) => ({
-				order: ai,
+				order: ai + 1,
 				answer: a.answer,
 			})),
 			EventsID: event.id || null,
-			Subscriptions: subscription.id || null,
+			SubscriptionsID: subscription.id || null,
 		}));
-		console.debug(s);
+		return formatedSurvey;
+	}
+
+	async function handleSaveSurvey() {
+		setLoading(true);
+		const formatedSurvey = formatSurveyToSave();
+		console.debug(formatedSurvey);
+		for (const s of formatedSurvey) await handleCreateSurvey(s);
+		loadClient(true);
+		setLoading(false);
+		if (subscription) navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${subscription.id}`);
+		if (event) navigate(`${ROUTES[state.lang].EVENTS}/${event.id}`);
 	}
 
 	function handleBack() {

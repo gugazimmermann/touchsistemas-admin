@@ -137,10 +137,10 @@ type Partner @model @auth(rules: [{ allow: public }]) {
 type Survey @model @auth(rules: [{ allow: public }]) {
 	id: ID! @primaryKey(sortKeyFields: ["order"])
 	order: Int!
-	language: String @index(name: "byLanguage", sortKeyFields: ["EventsID", "SubscriptionsID"], queryField: "surveyByLanguage")
+	language: String @index(name: "byLanguage", queryField: "surveyByLanguage")
   type: SurveyTypes!
 	required: Boolean!
-	question: AWSJSON!
+	question: String!
 	answers: AWSJSON
 	EventsID: ID @index(name: "byEvents", queryField: "surveyByEventsID")
 	Events: Events @belongsTo

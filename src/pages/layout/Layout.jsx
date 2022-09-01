@@ -28,9 +28,8 @@ export default function Layout() {
 	}
 
 	async function handleLogo(clientID) {
-		// TODO: remove unused images from Storage Bucket and add new value logo in client DB
-		const list = await Storage.list(`logo/${clientID}`);
-		if (list?.length) return `${process.env.REACT_APP_IMAGES_URL}logo/${clientID}.png?${new Date().getTime()}`;
+		const logo = await Storage.list(`logo/${clientID}`);
+		if (logo?.length) return `${process.env.REACT_APP_IMAGES_URL}${logo[0].key}`;
 		return null;
 	}
 
@@ -42,6 +41,7 @@ export default function Layout() {
 				data: { getClient },
 			} = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
 			getClient.logo = await handleLogo(getClient.id);
+			console.debug(getClient.logo)
 			setClient(getClient);
 			dispatch({ type: 'UPDATE_CLIENT', payload: getClient });
 			Logger('Loading Client', getClient);

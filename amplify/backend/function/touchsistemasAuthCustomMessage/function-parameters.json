@@ -1,0 +1,35 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "touchsistemasAuth",
+  "functionName": "touchsistemasAuthCustomMessage",
+  "resourceName": "touchsistemasAuthCustomMessage",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/snapshot/repo/build/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/CustomMessage",
+  "triggerTemplate": "CustomMessage.json.ejs",
+  "triggerEventPath": "CustomMessage.event.json",
+  "roleName": "touchsistemasAuthCustomMessage",
+  "skipEdit": true,
+  "enableCors": false,
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "title",
+      "environmentVariableName": "TITLE"
+    },
+    {
+      "cloudFormationParameterName": "adminUrl",
+      "environmentVariableName": "ADMIN_URL"
+    },
+    {
+      "cloudFormationParameterName": "siteUrl",
+      "environmentVariableName": "SITE_URL"
+    },
+    {
+      "cloudFormationParameterName": "siteLogo",
+      "environmentVariableName": "SITE_LOGO"
+    }
+  ]
+}

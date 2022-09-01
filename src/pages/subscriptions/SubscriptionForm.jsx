@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { planByType, partnerByReferralCode } from '../../graphql/queries';
+import { planByActive, partnerByReferralCode } from '../../graphql/queries';
 import * as queries from '../../graphql/queries';
 import { createSubscriptions, updateSubscriptions } from '../../graphql/mutations';
 import { AppContext } from '../../context';
@@ -218,15 +218,15 @@ export default function SubscriptionForm() {
 			partnerID = getPartner.data.partnerByReferralCode.items[0].id;
 		}
 		const getPlan = await API.graphql(
-			graphqlOperation(planByType, { type: PLANS.SUBSCRIPTION, filter: { active: { eq: 'TRUE' } } })
+			graphqlOperation(planByActive, { type: PLANS.SUBSCRIPTION, filter: { active: { eq: 'TRUE' } } })
 		);
-		if (getPlan?.data?.planByType?.items.length <= 0) {
+		if (getPlan?.data?.planByActive?.items.length <= 0) {
 			setErrorMsg('Plano não encontrado!');
 			setError(true);
 			setLoading(false);
 			return null;
 		}
-		const planID = getPlan.data.planByType.items[0].id;
+		const planID = getPlan.data.planByActive.items[0].id;
 		const newSubscription = !params?.id
 			? await handleCreateSubscription(partnerID, planID)
 			: await handleUpdateSubscription(partnerID, planID);

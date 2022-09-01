@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import { useEffect, useState, useContext } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import moment from 'moment';
@@ -35,18 +34,9 @@ export default function Subscriptions() {
 		const res = await fetch(mapURL);
 		const blob = await res.blob();
 		const file = new File([blob], `subscriptions_${client.id}.png`);
-		await Storage.put(`maps/subscriptions_${client.id}.png`, file, {
-			contentType: 'image/png',
-		});
-		await API.graphql(
-			graphqlOperation(updateClient, {
-				input: {
-					id: client.id,
-					subscriptionsMap: e.length,
-				},
-			})
-		);
-		loadClient();
+		await Storage.put(`maps/subscriptions_${client.id}.png`, file, { contentType: 'image/png' });
+		await API.graphql(graphqlOperation(updateClient, { input: { id: client.id, subscriptionsMap: e.length } }));
+		loadClient(true);
 	}
 
 	// TODO: handle better the maps, not just when add new one, but when change address
@@ -66,11 +56,11 @@ export default function Subscriptions() {
 		const showSubscriptions = [];
 		if (cloneSubscriptions.length) {
 			const sortSubscriptions = cloneSubscriptions.sort((a, b) => moment(b.createdAt) - moment(a.createdAt));
-			for (const s of sortSubscriptions) {
+			sortSubscriptions.forEach(async (s) => {
 				const list = await Storage.list(`logo/${s.id}`);
 				if (list?.length) s.image = await Storage.get(list[0].key);
 				showSubscriptions.push(s);
-			}
+			});
 			setSubscriptions(showSubscriptions);
 			await handleMap(showSubscriptions);
 		}

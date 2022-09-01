@@ -46,7 +46,7 @@ export default function Events() {
 				},
 			})
 		);
-		loadClient();
+		loadClient(true);
 	}
 
 	async function handleMap(e) {

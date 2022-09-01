@@ -225,7 +225,7 @@ export default function EventForm({ plan }) {
 		const newEvent = await graphCreateEvent(partnerID);
 		if (eventLogo) await addEventLogo(newEvent);
 		await addEventMap(newEvent);
-		loadClient();
+		loadClient(true);
 		setFormEvent(initial);
 		setLoading(false);
 		navigate(`${ROUTES[state.lang].EVENTS}/${newEvent.id}`, { state: { success: true } });

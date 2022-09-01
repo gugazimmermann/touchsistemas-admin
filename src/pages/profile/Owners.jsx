@@ -72,7 +72,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 				},
 			})
 		);
-		loadClient();
+		loadClient(true);
 		setUpdate(false);
 		setOwner(initial);
 		setLoading(false);
@@ -90,7 +90,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 			})
 		);
 		setConfirmDelete(false);
-		loadClient();
+		loadClient(true);
 		setLoading(false);
 	}
 

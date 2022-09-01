@@ -3,14 +3,14 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { createOwner, updateOwner, deleteOwner } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { LANGUAGES } from '../../constants';
-import { normalizePhone, validateEmail } from '../../helpers';
+import { normalizePhone, normalizePhoneToShow, validateEmail } from '../../helpers';
 import { Title, ConfirmationDialog } from '../../components';
 
 const initial = { name: '', phone: '', email: '' };
 
 export default function Owners({ clientID, ownersList, setError, setErrorMsg, setLoading, loadClient }) {
 	const { state } = useContext(AppContext);
-	const [owner, setOwner] = useState(initial);
+	const [formOwner, setFormOwner] = useState(initial);
 	const [selected, setSelected] = useState();
 	const [confirmDelete, setConfirmDelete] = useState(false);
 	const [update, setUpdate] = useState(false);
@@ -19,84 +19,88 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 		if (!update && selected) setSelected(initial);
 	}, [update]);
 
-	async function handleAdd() {
-		setErrorMsg('');
-		setError(false);
-		setLoading(true);
-		if (!owner.email || !owner.name || !owner.phone) {
-			setErrorMsg(LANGUAGES[state.lang].profile.required);
-			setError(true);
-			setLoading(false);
-			return null;
-		}
-		if (owner.phone.length < 14) {
-			setErrorMsg(LANGUAGES[state.lang].profile.invalidPhone);
-			setError(true);
-			setLoading(false);
-			return null;
-		}
-		if (!validateEmail(owner.email)) {
-			setErrorMsg(LANGUAGES[state.lang].profile.requiredEmail);
-			setError(true);
-			setLoading(false);
-			return null;
-		}
+	async function handleCreateOwner(o) {
 		await API.graphql(
 			graphqlOperation(createOwner, {
 				input: {
-					name: owner.name,
-					phone: `+55 ${owner.phone}`,
-					email: owner.email,
+					name: o.name,
+					phone: `+55${o.phone.replace(/[^\d]/g, '')}`,
+					email: o.email,
 					ClientID: clientID,
 				},
 			})
 		);
+	}
+
+	async function handleUpdateOwner(o) {
+		console.debug(o)
+		await API.graphql(
+			graphqlOperation(updateOwner, {
+				input: {
+					id: o.id,
+					name: o.name,
+					phone: `+55${o.phone.replace(/[^\d]/g, '')}`,
+					email: o.email,
+				},
+			})
+		);
+	}
+
+	function validadeForm(f) {
+		if (!f.email || !f.name || !f.phone) {
+			setErrorMsg(LANGUAGES[state.lang].profile.required);
+			return false;
+		}
+		if (f.phone.length < 14) {
+			setErrorMsg(LANGUAGES[state.lang].profile.invalidPhone);
+			return false;
+		}
+		if (!validateEmail(f.email)) {
+			setErrorMsg(LANGUAGES[state.lang].profile.requiredEmail);
+			return false;
+		}
+		return true;
+	}
+
+	async function handleSubmitAdd() {
+		setErrorMsg('');
+		setError(false);
+		setLoading(true);
+		if (!validadeForm(formOwner)) {
+			setError(true);
+			setLoading(false);
+			return null;
+		}
+		await handleCreateOwner(formOwner);
 		loadClient(true);
-		setOwner(initial);
+		setFormOwner(initial);
 		setLoading(false);
 		return true;
 	}
 
-	async function handleUpdate() {
+	async function handleSubmitUpdate() {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
-		await API.graphql(
-			graphqlOperation(updateOwner, {
-				input: {
-					id: selected.id,
-					name: selected.name,
-					phone: selected.phone[0] !== '+' ? `+55 ${selected.phone}` : selected.phone,
-					email: selected.email,
-					ClientID: clientID,
-				},
-			})
-		);
+		if (!validadeForm(selected)) {
+			setError(true);
+			setLoading(false);
+			return null;
+		}
+		await handleUpdateOwner(selected);
 		loadClient(true);
 		setUpdate(false);
-		setOwner(initial);
+		setFormOwner(initial);
 		setLoading(false);
+		return true;
 	}
 
 	async function handleDelete() {
-		setErrorMsg('');
-		setError(false);
 		setLoading(true);
-		await API.graphql(
-			graphqlOperation(deleteOwner, {
-				input: {
-					id: selected.id,
-				},
-			})
-		);
+		await API.graphql(graphqlOperation(deleteOwner, { input: { id: selected.id }}));
 		setConfirmDelete(false);
 		loadClient(true);
 		setLoading(false);
-	}
-
-	function handleChangePhone(value) {
-		if (!update) setOwner({ ...owner, phone: normalizePhone(value) });
-		else setSelected({ ...selected, phone: normalizePhone(value) });
 	}
 
 	function renderForm() {
@@ -104,9 +108,9 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow-md">
 				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
-						value={!update ? owner?.name : selected?.name}
+						value={!update ? formOwner.name : selected.name}
 						onChange={(e) => {
-							if (!update) setOwner({ ...owner, name: e.target.value });
+							if (!update) setFormOwner({ ...formOwner, name: e.target.value });
 							else setSelected({ ...selected, name: e.target.value });
 						}}
 						type="text"
@@ -116,8 +120,11 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 				</div>
 				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
-						value={!update ? owner?.phone : selected?.phone[0] === '+' ? selected?.phone.slice(4) : selected?.phone}
-						onChange={(e) => handleChangePhone(e.target.value)}
+						value={!update ? formOwner.phone : selected.phone}
+						onChange={(e) => {
+							if (!update) setFormOwner({ ...formOwner, phone: normalizePhone(e.target.value) });
+							else setSelected({ ...selected, phone: normalizePhone(e.target.value) });
+						}}
 						type="text"
 						placeholder={`${LANGUAGES[state.lang].profile.phone} *`}
 						className="form-control block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -125,9 +132,9 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 				</div>
 				<div className="w-full md:w-4/12 mb-4">
 					<input
-						value={!update ? owner?.email : selected?.email}
+						value={!update ? formOwner.email : selected.email}
 						onChange={(e) => {
-							if (!update) setOwner({ ...owner, email: e.target.value });
+							if (!update) setFormOwner({ ...formOwner, email: e.target.value });
 							else setSelected({ ...selected, email: e.target.value });
 						}}
 						type="email"
@@ -140,8 +147,8 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 					<button
 						type="button"
 						onClick={() => {
-							if (!update) handleAdd();
-							else handleUpdate();
+							if (!update) handleSubmitAdd();
+							else handleSubmitUpdate();
 						}}
 						className={`${
 							!update ? 'bg-primary' : 'bg-warning'
@@ -184,7 +191,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 									{o.name}
 								</td>
 								<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
-									{o.phone.slice(4)}
+									{normalizePhoneToShow(o.phone)}
 								</td>
 								<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
 									{o.email}
@@ -192,7 +199,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 								<td
 									className="border-t border-gray-200 align-middle py-2 text-right cursor-pointer"
 									onClick={() => {
-										setSelected(o);
+										setSelected({...o, phone: normalizePhoneToShow(o.phone)});
 										setUpdate(!update);
 									}}
 								>

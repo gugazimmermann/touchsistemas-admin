@@ -5,7 +5,6 @@ import { updateClient } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
 import {
-	delay,
 	getAddressFromCEP,
 	normalizeCEP,
 	normalizeDocument,
@@ -43,26 +42,54 @@ export default function Profile() {
 	const [fileName, setFileName] = useState(LANGUAGES[state.lang].profile.logo);
 	const [progress, setProgress] = useState();
 
-	useEffect(() => {
-		if (client) {
-			setFormClient({
-				name: client.name,
-				phone: normalizePhoneToShow(client.phone),
-				docType: client.doctype,
-				document: normalizeDocument(client.doctype, client.document),
-				email: client.email,
-				website: client.website,
-				zipCode: normalizeCEP(client.zipCode),
-				city: client.city,
-				state: client.state,
-				street: client.street,
-				number: client.number,
-				complement: client.complement,
-			});
-		}
-	}, [client]);
+	function normalizeWebsite(w) {
+		if (w.charAt(0).toLocaleLowerCase() !== 'h') w = `http://${w}`;
+		if (w.charAt(w.length - 1) === '/') w = w.slice(0, -1);
+		return w;
+	}
 
-	async function addLogo(id, logo) {
+	async function handleUpdateClient(c) {
+		await API.graphql(
+			graphqlOperation(updateClient, {
+				input: {
+					id: client.id,
+					name: c.name,
+					phone: `+55${c.phone.replace(/[^\d]/g, '')}`,
+					doctype: c.docType,
+					document: c.document.replace(/[^\d]/g, ''),
+					website: normalizeWebsite(c.website),
+					zipCode: c.zipCode.replace(/[^\d]/g, ''),
+					city: c.city,
+					state: c.state,
+					street: c.street,
+					number: c.number,
+					complement: c.complement,
+				},
+			})
+		);
+	}
+
+	function validadeForm(f) {
+		if (!f.name || !f.phone || !f.docType || !f.document || !f.zipCode || !f.city || !f.state || !f.street) {
+			setErrorMsg(LANGUAGES[state.lang].profile.required);
+			return false;
+		}
+		if (f.phone.length < 14) {
+			setErrorMsg(LANGUAGES[state.lang].profile.invalidPhone);
+			return false;
+		}
+		if (f.zipCode.length < 10) {
+			setErrorMsg(LANGUAGES[state.lang].profile.invalidZipCode);
+			return false;
+		}
+		if ((f.docType === 'CPF' && f.document.length < 14) || (f.docType === 'CNPJ' && f.document.length < 18)) {
+			setErrorMsg(f.docType === 'CPF' ? 'CPF inválido!' : 'CNPJ inválido');
+			return false;
+		}
+		return true;
+	}
+
+	async function sendLogo(id, logo) {
 		setProgress(0);
 		await Storage.put(`logo/${id}.${logo.name.split('.').pop()}`, logo, {
 			contentType: logo.type,
@@ -73,86 +100,21 @@ export default function Profile() {
 		setProgress(0);
 	}
 
-	async function handleUpdate() {
+	async function handleSubmit() {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
-		if (
-			!formClient.name ||
-			!formClient.phone ||
-			!formClient.docType ||
-			!formClient.document ||
-			!formClient.zipCode ||
-			!formClient.city ||
-			!formClient.state ||
-			!formClient.street
-		) {
-			setErrorMsg(LANGUAGES[state.lang].profile.required);
+		if (!validadeForm(formClient)) {
 			setError(true);
 			setLoading(false);
 			return null;
 		}
-		if (formClient.phone.length < 14) {
-			setErrorMsg(LANGUAGES[state.lang].profile.invalidPhone);
-			setError(true);
-			setLoading(false);
-			return null;
-		}
-		if (formClient.zipCode.length < 10) {
-			setErrorMsg(LANGUAGES[state.lang].profile.invalidZipCode);
-			setError(true);
-			setLoading(false);
-			return null;
-		}
-		if (
-			(formClient.docType === 'CPF' && formClient.document.length < 14) ||
-			(formClient.docType === 'CNPJ' && formClient.document.length < 18)
-		) {
-			setErrorMsg(formClient.docType === 'CPF' ? 'CPF inválido!' : 'CNPJ inválido');
-			setError(true);
-			setLoading(false);
-			return null;
-		}
-		if (formClient.website) {
-			if (formClient.website.charAt(0).toLocaleLowerCase() !== 'h') {
-				formClient.website = `http://${formClient.website}`;
-			}
-			if (formClient.website.charAt(formClient.website.length - 1) === '/') {
-				formClient.website = formClient.website.slice(0, -1);
-			}
-		}
-		await API.graphql(
-			graphqlOperation(updateClient, {
-				input: {
-					id: client.id,
-					name: formClient.name,
-					phone: `+55${formClient.phone.replace(/[^\d]/g, '')}`,
-					doctype: formClient.docType,
-					document: formClient.document.replace(/[^\d]/g, ''),
-					website: formClient.website,
-					zipCode: formClient.zipCode.replace(/[^\d]/g, ''),
-					city: formClient.city,
-					state: formClient.state,
-					street: formClient.street,
-					number: formClient.number,
-					complement: formClient.complement,
-				},
-			})
-		);
-		if (clientLogo) await addLogo(client.id, clientLogo);
-		await delay(3000);
+		await handleUpdateClient(formClient);
+		if (clientLogo) await sendLogo(client.id, clientLogo);
 		loadClient(true);
-		navigate(ROUTES[state.lang].DASHBOARD);
 		setLoading(false);
+		navigate(ROUTES[state.lang].DASHBOARD);
 		return true;
-	}
-
-	function handleChangePhone(value) {
-		setFormClient({ ...formClient, phone: normalizePhone(value) });
-	}
-
-	function handleChangeCEP(value) {
-		setFormClient({ ...formClient, zipCode: normalizeCEP(value) });
 	}
 
 	async function getAddress() {
@@ -174,11 +136,7 @@ export default function Profile() {
 		setLoading(false);
 	}
 
-	useEffect(() => {
-		if (formClient?.zipCode?.length === 10) getAddress();
-	}, [formClient.zipCode]);
-
-	function handleFile(e) {
+	function validateFile(e) {
 		setErrorMsg('');
 		setError(false);
 		if (e.target.files && e.target.files.length) {
@@ -215,9 +173,28 @@ export default function Profile() {
 		return null;
 	}
 
-	function handleChangeDocument(value) {
-		setFormClient({ ...formClient, document: normalizeDocument(formClient.docType, value) });
-	}
+	useEffect(() => {
+		if (client) {
+			setFormClient({
+				name: client.name,
+				phone: normalizePhoneToShow(client.phone),
+				docType: client.doctype,
+				document: normalizeDocument(client.doctype, client.document),
+				email: client.email,
+				website: client.website,
+				zipCode: normalizeCEP(client.zipCode),
+				city: client.city,
+				state: client.state,
+				street: client.street,
+				number: client.number,
+				complement: client.complement,
+			});
+		}
+	}, [client]);
+
+	useEffect(() => {
+		if (formClient?.zipCode?.length === 10) getAddress();
+	}, [formClient.zipCode]);
 
 	return (
 		<>
@@ -238,7 +215,7 @@ export default function Profile() {
 				<div className="w-full md:w-3/12 sm:pr-4 mb-4">
 					<input
 						value={formClient.phone || ''}
-						onChange={(e) => handleChangePhone(e.target.value)}
+						onChange={(e) => setFormClient({ ...formClient, phone: normalizePhone(e.target.value) })}
 						type="text"
 						placeholder={LANGUAGES[state.lang].profile.phone}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -259,7 +236,9 @@ export default function Profile() {
 				<div className="w-full md:w-3/12 mb-4">
 					<input
 						value={formClient.document || ''}
-						onChange={(e) => handleChangeDocument(e.target.value)}
+						onChange={(e) =>
+							setFormClient({ ...formClient, document: normalizeDocument(formClient.docType, e.target.value) })
+						}
 						type="text"
 						placeholder={formClient.docType || LANGUAGES[state.lang].profile.selectDoc}
 						disabled={!formClient.docType}
@@ -287,7 +266,7 @@ export default function Profile() {
 				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
 						value={formClient.zipCode || ''}
-						onChange={(e) => handleChangeCEP(e.target.value)}
+						onChange={(e) => setFormClient({ ...formClient, zipCode: normalizeCEP(e.target.value) })}
 						type="text"
 						placeholder={LANGUAGES[state.lang].profile.zipCode}
 						className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
@@ -371,7 +350,7 @@ export default function Profile() {
 						type="file"
 						id="files"
 						className="hidden"
-						onChange={(e) => handleFile(e)}
+						onChange={(e) => validateFile(e)}
 						accept=".jpg,.jpeg,.png,image/png,image/jpeg"
 					/>
 					<label
@@ -385,7 +364,7 @@ export default function Profile() {
 				<div className="w-full flex justify-center">
 					<button
 						type="button"
-						onClick={() => handleUpdate()}
+						onClick={() => handleSubmit()}
 						className="bg-primary px-4 py-1.5 text-sm text-white font-semibold uppercase rounded shadow-md cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md transition duration-150 ease-in-out"
 					>
 						{LANGUAGES[state.lang].profile.update}

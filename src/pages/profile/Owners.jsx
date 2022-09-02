@@ -62,34 +62,19 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 		return true;
 	}
 
-	async function handleSubmitAdd() {
+	async function handleSubmit(u) {
 		setErrorMsg('');
 		setError(false);
 		setLoading(true);
-		if (!validadeForm(formOwner)) {
+		if (!validadeForm(!u ? formOwner : selected)) {
 			setError(true);
 			setLoading(false);
 			return null;
 		}
-		await handleCreateOwner(formOwner);
+		if (!u) await handleCreateOwner(formOwner);
+		else await handleUpdateOwner(selected);
+		setUpdate(false)
 		loadClient(true);
-		setFormOwner(initial);
-		setLoading(false);
-		return true;
-	}
-
-	async function handleSubmitUpdate() {
-		setErrorMsg('');
-		setError(false);
-		setLoading(true);
-		if (!validadeForm(selected)) {
-			setError(true);
-			setLoading(false);
-			return null;
-		}
-		await handleUpdateOwner(selected);
-		loadClient(true);
-		setUpdate(false);
 		setFormOwner(initial);
 		setLoading(false);
 		return true;
@@ -147,8 +132,8 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 					<button
 						type="button"
 						onClick={() => {
-							if (!update) handleSubmitAdd();
-							else handleSubmitUpdate();
+							if (!update) handleSubmit();
+							else handleSubmit(true);
 						}}
 						className={`${
 							!update ? 'bg-primary' : 'bg-warning'

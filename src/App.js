@@ -22,7 +22,6 @@ const Profile = lazy(() => import('./pages/profile/Profile'));
 const Payments = lazy(() => import('./pages/profile/payments/Payments'));
 const PlanSelection = lazy(() => import('./pages/plan-selection/PlanSelection'));
 const New = lazy(() => import('./pages/plan-selection/New'));
-const Subscriptions = lazy(() => import('./pages/subscriptions/Subscriptions'));
 const SubscriptionDetail = lazy(() => import('./pages/subscriptions/SubscriptionDetail'));
 const SubscriptionForm = lazy(() => import('./pages/subscriptions/SubscriptionForm'));
 const Events = lazy(() => import('./pages/events/Events'));
@@ -63,7 +62,6 @@ function App() {
 						<Route path={`${ROUTES[state.lang].PAYMENTS}`} element={<Payments />} />
 						<Route path={`${ROUTES[state.lang].NEW}`} element={<PlanSelection />} />
 						<Route path={`${ROUTES[state.lang].NEW}/:name`} element={<New />} />
-						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}`} element={<Subscriptions />} />
 						<Route path={`${ROUTES[state.lang].SUBSCRIPTIONS}/:id`} element={<SubscriptionDetail />} />
 						<Route
 							path={`${ROUTES[state.lang].SUBSCRIPTIONS}/:id${ROUTES[state.lang].EDIT}`}

@@ -1,12 +1,12 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context';
-import { ROUTES } from '../../constants';
-import Subscriptions from '../subscriptions/Subscriptions';
-import Events from '../events/Events';
+import { PLANS, ROUTES } from '../../constants';
+import DashboardRow from './DashboardRow';
 
 export default function Dashboard() {
 	const { state } = useContext(AppContext);
+	const { client } = state;
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -16,12 +16,8 @@ export default function Dashboard() {
 	if (state.client) {
 		return (
 			<div className="grid gap-4">
-				<div>
-					<Subscriptions />
-				</div>
-				<div>
-					<Events />
-				</div>
+				<DashboardRow type={PLANS.SUBSCRIPTION} content={client.Subscriptions?.items} />
+				<DashboardRow type={PLANS.ADVANCED} content={client.Events?.items} />
 			</div>
 		);
 	}

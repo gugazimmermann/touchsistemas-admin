@@ -3,9 +3,10 @@ import { useOutletContext, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
 import { updateClient, updateClientLogoAndMap } from '../../api/mutations';
-import { sendPublicFile, createMap } from '../../api/storage';
+import { sendPublicFile } from '../../api/storage';
 import { getAddressFromCEP, normalizeCEP, normalizeDocument, normalizePhone, validateFile } from '../../helpers/forms';
 import { Loading, Alert, Title, Form, Uploading } from '../../components';
+import { createMap } from '../../helpers/map';
 import Owners from './Owners';
 
 const initial = {

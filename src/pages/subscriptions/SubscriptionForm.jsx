@@ -4,8 +4,9 @@ import { AppContext } from '../../context';
 import { LANGUAGES, PLANS, ROUTES } from '../../constants';
 import { getActivePlanByType, getPartnerByReferralCode, getSubscriptionByID } from '../../api/queries';
 import { createSubscription, updateSubscription, updateSubscriptionLogoAndMap } from '../../api/mutations';
-import { createMap, sendPublicFile } from '../../api/storage';
+import {  sendPublicFile } from '../../api/storage';
 import { getAddressFromCEP, normalizeCEP, validateEmail, validateFile } from '../../helpers/forms';
+import { createMap } from '../../helpers/map';
 import { Loading, Alert, Title, Form, Uploading } from '../../components';
 
 const initial = {
@@ -99,10 +100,7 @@ export default function SubscriptionForm() {
 	async function handleLogoAndMap(newSubscription) {
 		let mapURL = subscription?.map;
 		let logoURL = subscription?.logo;
-		console.debug(newSubscription)
-		console.debug(subscription)
 		if (newSubscription.name !== subscription?.name || newSubscription.street !== subscription?.street || newSubscription.number !== subscription?.number ||  newSubscription.city !== subscription?.city || newSubscription.state !== subscription?.state || newSubscription.zipCode.replace(/[^\d]/g, '') !== subscription?.zipCode) {
-			console.debug('create')
 			const map = await createMap('subscription', newSubscription.id, newSubscription.name, newSubscription.street, newSubscription.number, newSubscription.city, newSubscription.state, newSubscription.zipCode)
 			await sendPublicFile('map', newSubscription.id, map, setProgress);
 			mapURL = `${process.env.REACT_APP_IMAGES_URL}map/${map.name}`;

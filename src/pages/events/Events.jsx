@@ -80,7 +80,7 @@ export default function Events() {
 
 	if (loading) return <Loading />;
 	return (
-		<>
+		<div>
 			<Title text="Eventos" />
 			{events.length === 0 ? (
 				<h1 className="font-bold text-lg text-center mt-4">{LANGUAGES[state.lang].noRecords}</h1>
@@ -92,6 +92,6 @@ export default function Events() {
 					{map && <MapCard map={map} />}
 				</Grid>
 			)}
-		</>
+		</div>
 	);
 }

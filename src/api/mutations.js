@@ -1,4 +1,5 @@
 import { API, graphqlOperation } from 'aws-amplify';
+import { PLANS } from '../constants';
 import * as mutations from '../graphql/mutations';
 import { normalizeWebsite } from '../helpers/forms';
 
@@ -26,6 +27,12 @@ export async function updateClient(id, client) {
 
 export async function updateClientLogoAndMap(id, logo, map) {
 	const { data } = await API.graphql(graphqlOperation(mutations.updateClient, { input: { id, logo, map } }));
+	return data.updateClient;
+}
+
+export async function updateClientContentMap(id, type, qtd) {
+	const input = type === PLANS.SUBSCRIPTION ? { id, subscriptionsMap: qtd } : { id, eventssMap: qtd }
+	const { data } = await API.graphql(graphqlOperation(mutations.updateClient, { input }));
 	return data.updateClient;
 }
 

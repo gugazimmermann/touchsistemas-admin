@@ -25,6 +25,7 @@ export const onCreatePlan = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -54,6 +55,7 @@ export const onCreatePlan = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -136,6 +138,7 @@ export const onCreatePlan = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -199,6 +202,7 @@ export const onUpdatePlan = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -228,6 +232,7 @@ export const onUpdatePlan = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -310,6 +315,7 @@ export const onUpdatePlan = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -373,6 +379,7 @@ export const onDeletePlan = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -402,6 +409,7 @@ export const onDeletePlan = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -484,6 +492,7 @@ export const onDeletePlan = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -540,6 +549,7 @@ export const onCreateClient = /* GraphQL */ `
       number
       complement
       logo
+      map
       eventsMap
       subscriptionsMap
       Owners {
@@ -564,6 +574,7 @@ export const onCreateClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -622,6 +633,7 @@ export const onCreateClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -670,6 +682,7 @@ export const onCreateClient = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -699,6 +712,7 @@ export const onCreateClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -755,6 +769,7 @@ export const onUpdateClient = /* GraphQL */ `
       number
       complement
       logo
+      map
       eventsMap
       subscriptionsMap
       Owners {
@@ -779,6 +794,7 @@ export const onUpdateClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -837,6 +853,7 @@ export const onUpdateClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -885,6 +902,7 @@ export const onUpdateClient = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -914,6 +932,7 @@ export const onUpdateClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -970,6 +989,7 @@ export const onDeleteClient = /* GraphQL */ `
       number
       complement
       logo
+      map
       eventsMap
       subscriptionsMap
       Owners {
@@ -994,6 +1014,7 @@ export const onDeleteClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -1052,6 +1073,7 @@ export const onDeleteClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -1100,6 +1122,7 @@ export const onDeleteClient = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -1129,6 +1152,7 @@ export const onDeleteClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -1191,6 +1215,7 @@ export const onCreateOwner = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -1249,6 +1274,7 @@ export const onCreateOwner = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1291,6 +1317,7 @@ export const onUpdateOwner = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -1349,6 +1376,7 @@ export const onUpdateOwner = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1391,6 +1419,7 @@ export const onDeleteOwner = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -1449,6 +1478,7 @@ export const onDeleteOwner = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1512,6 +1542,7 @@ export const onCreateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1572,6 +1603,7 @@ export const onCreateEvents = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -1630,6 +1662,7 @@ export const onCreateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1701,6 +1734,7 @@ export const onCreateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1766,6 +1800,7 @@ export const onCreateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1840,6 +1875,7 @@ export const onCreateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1905,6 +1941,7 @@ export const onUpdateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1965,6 +2002,7 @@ export const onUpdateEvents = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -2023,6 +2061,7 @@ export const onUpdateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2094,6 +2133,7 @@ export const onUpdateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2159,6 +2199,7 @@ export const onUpdateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2233,6 +2274,7 @@ export const onUpdateEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2298,6 +2340,7 @@ export const onDeleteEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2358,6 +2401,7 @@ export const onDeleteEvents = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -2416,6 +2460,7 @@ export const onDeleteEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2487,6 +2532,7 @@ export const onDeleteEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2552,6 +2598,7 @@ export const onDeleteEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2626,6 +2673,7 @@ export const onDeleteEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2662,6 +2710,7 @@ export const onCreateSubscriptions = /* GraphQL */ `
       number
       complement
       logo
+      map
       active
       PlanID
       Plan {
@@ -2686,6 +2735,7 @@ export const onCreateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2746,6 +2796,7 @@ export const onCreateSubscriptions = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -2804,6 +2855,7 @@ export const onCreateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2875,6 +2927,7 @@ export const onCreateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2940,6 +2993,7 @@ export const onCreateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3014,6 +3068,7 @@ export const onCreateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3050,6 +3105,7 @@ export const onUpdateSubscriptions = /* GraphQL */ `
       number
       complement
       logo
+      map
       active
       PlanID
       Plan {
@@ -3074,6 +3130,7 @@ export const onUpdateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3134,6 +3191,7 @@ export const onUpdateSubscriptions = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -3192,6 +3250,7 @@ export const onUpdateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3263,6 +3322,7 @@ export const onUpdateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3328,6 +3388,7 @@ export const onUpdateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3402,6 +3463,7 @@ export const onUpdateSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3438,6 +3500,7 @@ export const onDeleteSubscriptions = /* GraphQL */ `
       number
       complement
       logo
+      map
       active
       PlanID
       Plan {
@@ -3462,6 +3525,7 @@ export const onDeleteSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3522,6 +3586,7 @@ export const onDeleteSubscriptions = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -3580,6 +3645,7 @@ export const onDeleteSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3651,6 +3717,7 @@ export const onDeleteSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3716,6 +3783,7 @@ export const onDeleteSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3790,6 +3858,7 @@ export const onDeleteSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3873,6 +3942,7 @@ export const onCreatePartner = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -3921,6 +3991,7 @@ export const onCreatePartner = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -3950,6 +4021,7 @@ export const onCreatePartner = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4051,6 +4123,7 @@ export const onUpdatePartner = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4099,6 +4172,7 @@ export const onUpdatePartner = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -4128,6 +4202,7 @@ export const onUpdatePartner = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4229,6 +4304,7 @@ export const onDeletePartner = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4277,6 +4353,7 @@ export const onDeletePartner = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -4306,6 +4383,7 @@ export const onDeletePartner = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4409,6 +4487,7 @@ export const onCreateSurvey = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -4505,6 +4584,7 @@ export const onCreateSurvey = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -4540,6 +4620,7 @@ export const onCreateSurvey = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -4691,6 +4772,7 @@ export const onUpdateSurvey = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -4787,6 +4869,7 @@ export const onUpdateSurvey = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -4822,6 +4905,7 @@ export const onUpdateSurvey = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -4973,6 +5057,7 @@ export const onDeleteSurvey = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -5069,6 +5154,7 @@ export const onDeleteSurvey = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -5104,6 +5190,7 @@ export const onDeleteSurvey = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -5264,6 +5351,7 @@ export const onCreateVisitor = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -5360,6 +5448,7 @@ export const onCreateVisitor = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -5395,6 +5484,7 @@ export const onCreateVisitor = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -5555,6 +5645,7 @@ export const onUpdateVisitor = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -5651,6 +5742,7 @@ export const onUpdateVisitor = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -5686,6 +5778,7 @@ export const onUpdateVisitor = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -5846,6 +5939,7 @@ export const onDeleteVisitor = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -5942,6 +6036,7 @@ export const onDeleteVisitor = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -5977,6 +6072,7 @@ export const onDeleteVisitor = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {

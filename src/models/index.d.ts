@@ -87,6 +87,7 @@ export declare class Subscriptions {
   readonly number?: string | null;
   readonly complement?: string | null;
   readonly logo?: string | null;
+  readonly map?: string | null;
   readonly active: string;
   readonly PlanID: string;
   readonly Plan?: Plan | null;
@@ -117,6 +118,7 @@ export declare class Client {
   readonly number?: string | null;
   readonly complement?: string | null;
   readonly logo?: string | null;
+  readonly map?: string | null;
   readonly eventsMap?: (string | null)[] | null;
   readonly subscriptionsMap?: (string | null)[] | null;
   readonly Owners?: (Owner | null)[] | null;

@@ -120,6 +120,16 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
+                        "name": "byType",
+                        "queryField": "planByType",
+                        "fields": [
+                            "type"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
                         "name": "byActive",
                         "queryField": "planByActive",
                         "fields": [
@@ -227,6 +237,13 @@ export const schema = {
                 },
                 "logo": {
                     "name": "logo",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "map": {
+                    "name": "map",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -514,6 +531,13 @@ export const schema = {
                 },
                 "logo": {
                     "name": "logo",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "map": {
+                    "name": "map",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -1613,5 +1637,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "1cfc06f439d972e63120d297df7a6251"
+    "version": "b24dfa8a8e2fed86e4817d3e0afe29d7"
 };

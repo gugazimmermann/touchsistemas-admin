@@ -24,7 +24,7 @@ enum MethodTypes {
 
 type Plan @model @auth(rules: [{ allow: public }]) {
 	id: ID! @primaryKey(sortKeyFields: ["active"])
-	type: PlansTypes!
+	type: PlansTypes! @index(name: "byType", queryField: "planByType")
 	name: AWSJSON!
 	detail: AWSJSON!
 	price: AWSJSON!
@@ -49,6 +49,7 @@ type Client @model @auth(rules: [{ allow: public }]) {
 	number: String
 	complement: String
 	logo: String
+	map: String
 	eventsMap: [String]
 	subscriptionsMap: [String]
 	Owners: [Owner] @hasMany(indexName: "byClient", fields: ["id"])
@@ -107,6 +108,7 @@ type Subscriptions @model @auth(rules: [{ allow: public }]) {
 	number: String
 	complement: String
 	logo: String
+	map: String
   active: String! @index(name: "byActive", queryField: "subscriptionsByActive")
 	PlanID: ID! @index(name: "byPlanID", queryField: "subscriptionsByPlanID")
   Plan: Plan @belongsTo

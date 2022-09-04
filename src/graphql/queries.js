@@ -25,6 +25,7 @@ export const getPlan = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -54,6 +55,7 @@ export const getPlan = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -136,6 +138,7 @@ export const getPlan = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -214,6 +217,93 @@ export const listPlans = /* GraphQL */ `
             number
             complement
             logo
+            map
+            active
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planSubscriptionsId
+            planSubscriptionsActive
+          }
+          nextToken
+        }
+        Events {
+          items {
+            id
+            referralCode
+            method
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            logo
+            dates
+            gift
+            giftDescription
+            prizeDraw
+            prizeDrawDescription
+            PlanID
+            ClientID
+            PartnerID
+            createdAt
+            updatedAt
+            planEventsId
+            planEventsActive
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const planByType = /* GraphQL */ `
+  query PlanByType(
+    $type: PlansTypes!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPlanFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    planByType(
+      type: $type
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        name
+        detail
+        price
+        frequency
+        active
+        Subscriptions {
+          items {
+            id
+            referralCode
+            name
+            website
+            email
+            zipCode
+            state
+            city
+            street
+            number
+            complement
+            logo
+            map
             active
             PlanID
             ClientID
@@ -299,6 +389,7 @@ export const planByActive = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -364,6 +455,7 @@ export const getClient = /* GraphQL */ `
       number
       complement
       logo
+      map
       eventsMap
       subscriptionsMap
       Owners {
@@ -388,6 +480,7 @@ export const getClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -446,6 +539,7 @@ export const getClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -494,6 +588,7 @@ export const getClient = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -523,6 +618,7 @@ export const getClient = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -584,6 +680,7 @@ export const listClients = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -642,6 +739,7 @@ export const listClients = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -690,6 +788,7 @@ export const clientByEmail = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -748,6 +847,7 @@ export const clientByEmail = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -789,6 +889,7 @@ export const getOwner = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -847,6 +948,7 @@ export const getOwner = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -894,6 +996,7 @@ export const listOwners = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -959,6 +1062,7 @@ export const getEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1019,6 +1123,7 @@ export const getEvents = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -1077,6 +1182,7 @@ export const getEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1148,6 +1254,7 @@ export const getEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1213,6 +1320,7 @@ export const getEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1287,6 +1395,7 @@ export const getEvents = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -1368,6 +1477,7 @@ export const listEvents = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -1522,6 +1632,7 @@ export const eventsByPlanID = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -1676,6 +1787,7 @@ export const eventsByClientID = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -1830,6 +1942,7 @@ export const eventsByPartnerID = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -1931,6 +2044,7 @@ export const getSubscriptions = /* GraphQL */ `
       number
       complement
       logo
+      map
       active
       PlanID
       Plan {
@@ -1955,6 +2069,7 @@ export const getSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2015,6 +2130,7 @@ export const getSubscriptions = /* GraphQL */ `
         number
         complement
         logo
+        map
         eventsMap
         subscriptionsMap
         Owners {
@@ -2073,6 +2189,7 @@ export const getSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2144,6 +2261,7 @@ export const getSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2209,6 +2327,7 @@ export const getSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2283,6 +2402,7 @@ export const getSubscriptions = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -2334,6 +2454,7 @@ export const listSubscriptions = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -2369,6 +2490,7 @@ export const listSubscriptions = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -2483,6 +2605,7 @@ export const subscriptionsByActive = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -2518,6 +2641,7 @@ export const subscriptionsByActive = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -2632,6 +2756,7 @@ export const subscriptionsByPlanID = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -2667,6 +2792,7 @@ export const subscriptionsByPlanID = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -2781,6 +2907,7 @@ export const subscriptionsByClientID = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -2816,6 +2943,7 @@ export const subscriptionsByClientID = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -2930,6 +3058,7 @@ export const subscriptionsByPartnerID = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -2965,6 +3094,7 @@ export const subscriptionsByPartnerID = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -3113,6 +3243,7 @@ export const getPartner = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -3161,6 +3292,7 @@ export const getPartner = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -3190,6 +3322,7 @@ export const getPartner = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -3292,6 +3425,7 @@ export const listPartners = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3381,6 +3515,7 @@ export const partnerByReferralCode = /* GraphQL */ `
             number
             complement
             logo
+            map
             active
             PlanID
             ClientID
@@ -3463,6 +3598,7 @@ export const getSurvey = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -3559,6 +3695,7 @@ export const getSurvey = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -3594,6 +3731,7 @@ export const getSurvey = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -3744,6 +3882,7 @@ export const listSurveys = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -3790,6 +3929,7 @@ export const listSurveys = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -3819,6 +3959,7 @@ export const listSurveys = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -3929,6 +4070,7 @@ export const surveyByLanguage = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -3975,6 +4117,7 @@ export const surveyByLanguage = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -4004,6 +4147,7 @@ export const surveyByLanguage = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4114,6 +4258,7 @@ export const surveyByEventsID = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4160,6 +4305,7 @@ export const surveyByEventsID = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -4189,6 +4335,7 @@ export const surveyByEventsID = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4299,6 +4446,7 @@ export const surveyBySubscriptionsID = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4345,6 +4493,7 @@ export const surveyBySubscriptionsID = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -4374,6 +4523,7 @@ export const surveyBySubscriptionsID = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4486,6 +4636,7 @@ export const getVisitor = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -4582,6 +4733,7 @@ export const getVisitor = /* GraphQL */ `
         number
         complement
         logo
+        map
         active
         PlanID
         Plan {
@@ -4617,6 +4769,7 @@ export const getVisitor = /* GraphQL */ `
           number
           complement
           logo
+          map
           eventsMap
           subscriptionsMap
           Owners {
@@ -4776,6 +4929,7 @@ export const listVisitors = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4822,6 +4976,7 @@ export const listVisitors = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -4851,6 +5006,7 @@ export const listVisitors = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -4972,6 +5128,7 @@ export const visitorByPhone = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -5018,6 +5175,7 @@ export const visitorByPhone = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -5047,6 +5205,7 @@ export const visitorByPhone = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -5166,6 +5325,7 @@ export const visitorByEventsID = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -5212,6 +5372,7 @@ export const visitorByEventsID = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -5241,6 +5402,7 @@ export const visitorByEventsID = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -5360,6 +5522,7 @@ export const visitorBySubscriptionsID = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt
@@ -5406,6 +5569,7 @@ export const visitorBySubscriptionsID = /* GraphQL */ `
           number
           complement
           logo
+          map
           active
           PlanID
           Plan {
@@ -5435,6 +5599,7 @@ export const visitorBySubscriptionsID = /* GraphQL */ `
             number
             complement
             logo
+            map
             eventsMap
             subscriptionsMap
             createdAt

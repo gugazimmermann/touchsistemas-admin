@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { decodeCookie } from '../../helpers/cookies';
 import Logger from '../../helpers/logger';
@@ -27,12 +27,7 @@ export default function Layout() {
 		navigate(ROUTES[state.lang].HOME);
 	}
 
-	async function handleLogo(clientID) {
-		const logo = await Storage.list(`logo/${clientID}`);
-		if (logo?.length) return `${process.env.REACT_APP_IMAGES_URL}${logo[0].key}`;
-		return null;
-	}
-
+	// set force = true to reload
 	async function loadClient(force) {
 		setLoading(true);
 		if (!state.client || force) {
@@ -40,8 +35,6 @@ export default function Layout() {
 			const {
 				data: { getClient },
 			} = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
-			getClient.logo = await handleLogo(getClient.id);
-			console.debug(getClient.logo)
 			setClient(getClient);
 			dispatch({ type: 'UPDATE_CLIENT', payload: getClient });
 			Logger('Loading Client', getClient);

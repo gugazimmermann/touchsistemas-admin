@@ -1,10 +1,9 @@
 import { useEffect, useState, useContext } from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
-import { createOwner, updateOwner, deleteOwner } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { LANGUAGES } from '../../constants';
-import { normalizePhone, normalizePhoneToShow, validateEmail } from '../../helpers';
-import { Title, ConfirmationDialog } from '../../components';
+import { createOwner, deleteOwner, updateOwner } from '../../api/mutations';
+import { normalizePhone, validateEmail } from '../../helpers/forms';
+import { Title, Form, Table, ConfirmationDialog } from '../../components';
 
 const initial = { name: '', phone: '', email: '' };
 
@@ -18,33 +17,6 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 	useEffect(() => {
 		if (!update && selected) setSelected(initial);
 	}, [update]);
-
-	async function handleCreateOwner(o) {
-		await API.graphql(
-			graphqlOperation(createOwner, {
-				input: {
-					name: o.name,
-					phone: `+55${o.phone.replace(/[^\d]/g, '')}`,
-					email: o.email,
-					ClientID: clientID,
-				},
-			})
-		);
-	}
-
-	async function handleUpdateOwner(o) {
-		console.debug(o)
-		await API.graphql(
-			graphqlOperation(updateOwner, {
-				input: {
-					id: o.id,
-					name: o.name,
-					phone: `+55${o.phone.replace(/[^\d]/g, '')}`,
-					email: o.email,
-				},
-			})
-		);
-	}
 
 	function validadeForm(f) {
 		if (!f.email || !f.name || !f.phone) {
@@ -71,9 +43,9 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 			setLoading(false);
 			return null;
 		}
-		if (!u) await handleCreateOwner(formOwner);
-		else await handleUpdateOwner(selected);
-		setUpdate(false)
+		if (!u) await createOwner(formOwner, clientID);
+		else await updateOwner(selected);
+		setUpdate(false);
 		loadClient(true);
 		setFormOwner(initial);
 		setLoading(false);
@@ -82,7 +54,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	async function handleDelete() {
 		setLoading(true);
-		await API.graphql(graphqlOperation(deleteOwner, { input: { id: selected.id }}));
+		await deleteOwner(selected.id);
 		setConfirmDelete(false);
 		loadClient(true);
 		setLoading(false);
@@ -90,7 +62,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 
 	function renderForm() {
 		return (
-			<form className="flex flex-wrap bg-white p-4 mb-4 rounded-md shadow-md">
+			<Form>
 				<div className="w-full md:w-4/12 sm:pr-4 mb-4">
 					<input
 						value={!update ? formOwner.name : selected.name}
@@ -144,71 +116,66 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 						}`}
 					</button>
 				</div>
-			</form>
+			</Form>
 		);
 	}
 
-	function renderTable() {
+	function header() {
 		return (
-			<div className="overflow-x-auto">
-				<table className="items-center w-full rounded-md bg-white shadow border-collapse mb-4">
-					<thead>
-						<tr>
-							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-								{LANGUAGES[state.lang].profile.name}
-							</th>
-							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-								{LANGUAGES[state.lang].profile.phone}
-							</th>
-							<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
-								{LANGUAGES[state.lang].profile.email}
-							</th>
-							<th
-								colSpan={2}
-								className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left"
-							/>
-						</tr>
-					</thead>
-					<tbody>
-						{ownersList.map((o) => (
-							<tr key={o.email}>
-								<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 pl-2 text-left">
-									{o.name}
-								</td>
-								<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
-									{normalizePhoneToShow(o.phone)}
-								</td>
-								<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
-									{o.email}
-								</td>
-								<td
-									className="border-t border-gray-200 align-middle py-2 text-right cursor-pointer"
-									onClick={() => {
-										setSelected({...o, phone: normalizePhoneToShow(o.phone)});
-										setUpdate(!update);
-									}}
-								>
-									{!update ? (
-										<i className="bx bx-message-square-edit text-xl text-primary" />
-									) : (
-										<i className="bx bx-message-square-minus text-xl text-warning" />
-									)}
-								</td>
-								<td
-									className="border-t border-gray-200 align-middle py-2 pr-2 text-right cursor-pointer"
-									onClick={() => {
-										setSelected(o);
-										setConfirmDelete(true);
-									}}
-								>
-									<i className="bx bx-message-square-x text-xl text-primary" />
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
+			<tr>
+				<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
+					{LANGUAGES[state.lang].profile.name}
+				</th>
+				<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
+					{LANGUAGES[state.lang].profile.phone}
+				</th>
+				<th className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left">
+					{LANGUAGES[state.lang].profile.email}
+				</th>
+				<th
+					colSpan={2}
+					className="p-2 text-sm font-normal text-secondary border-b border-solid border-secondary whitespace-nowrap text-left"
+				/>
+			</tr>
 		);
+	}
+
+	function body() {
+		return ownersList.map((o) => (
+			<tr key={o.email}>
+				<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 pl-2 text-left">
+					{o.name}
+				</td>
+				<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
+					{normalizePhone(o.phone, true)}
+				</td>
+				<td className="border-t text-sm border-gray-200 align-middle font-light whitespace-nowrap py-2 text-left">
+					{o.email}
+				</td>
+				<td
+					className="border-t border-gray-200 align-middle py-2 text-right cursor-pointer"
+					onClick={() => {
+						setSelected({ ...o, phone: normalizePhone(o.phone, true) });
+						setUpdate(!update);
+					}}
+				>
+					{!update ? (
+						<i className="bx bx-message-square-edit text-xl text-primary" />
+					) : (
+						<i className="bx bx-message-square-minus text-xl text-warning" />
+					)}
+				</td>
+				<td
+					className="border-t border-gray-200 align-middle py-2 pr-2 text-right cursor-pointer"
+					onClick={() => {
+						setSelected(o);
+						setConfirmDelete(true);
+					}}
+				>
+					<i className="bx bx-message-square-x text-xl text-primary" />
+				</td>
+			</tr>
+		));
 	}
 
 	function renderDeleteDialog() {
@@ -234,7 +201,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 				color={update && 'text-warning'}
 			/>
 			{renderForm()}
-			{ownersList.length > 0 && renderTable()}
+			{ownersList.length > 0 && <Table header={header()} body={body()} />}
 			{renderDeleteDialog()}
 		</>
 	);

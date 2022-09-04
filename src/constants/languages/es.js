@@ -43,7 +43,7 @@ export default {
 		title: 'Mi Perfil',
 		name: 'Nombre',
 		phone: 'Teléfono',
-		docType: 'Tipo de Documento',
+		docType: 'Documento',
 		selectDoc: 'Seleccione el Tipo de Documento',
 		email: 'e-mail',
 		website: 'website',
@@ -85,6 +85,7 @@ export default {
 	subscriptions: {
 		category: 'Suscripciones',
 		title: 'Nueva Suscripción',
+		titleEdit: 'Editar Suscripción',
 		name: 'Nombre',
 		website: 'website',
 		email: 'e-mail',

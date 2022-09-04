@@ -8,7 +8,7 @@ import { partnerByReferralCode } from '../../graphql/queries';
 import { createEvents } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { Loading, Alert, Title, Uploading } from '../../components';
-import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers';
+import { getAddressFromCEP, normalizeCEP, validateEmail } from '../../helpers/forms';
 import { ROUTES, LANGUAGES } from '../../constants';
 
 const initial = {

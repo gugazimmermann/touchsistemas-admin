@@ -8,7 +8,6 @@ import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { getEvents, partnerByReferralCode, visitorByEventsID } from '../../graphql/queries';
 import { AppContext } from '../../context';
 import { Loading, Alert, LoadingIcon } from '../../components';
-import { translatePlan } from '../../helpers';
 import { ROUTES } from '../../constants';
 
 export default function EventDetail() {
@@ -410,7 +409,7 @@ export default function EventDetail() {
 							</div>
 							<div className="p-2 border-b sm:grid sm:grid-cols-12">
 								<dt className="text-sm font-medium sm:col-span-2">Plano</dt>
-								<dd className="text-sm sm:col-span-10">{translatePlan(event.plan)}</dd>
+								<dd className="text-sm sm:col-span-10">{event.plan}</dd>
 								{event.partner && (
 									<>
 										<dt className="mt-2 text-sm font-medium sm:col-span-2">Parceiro</dt>

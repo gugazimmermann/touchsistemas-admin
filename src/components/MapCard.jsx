@@ -4,10 +4,7 @@ export default function MapCard({ map }) {
 			<div className="w-full bg-gray-200 rounded-t-lg overflow-hidden">
 				<img alt="map" src={map} className="w-full h-full object-center object-cover" />
 			</div>
-			<div className="p-4 text-center">
-				<h3>Localização</h3>
-				<p className="text-sm">Clique para ampliar</p>
-			</div>
+			<h3 className="p-4 text-center">Localização</h3>
 		</a>
 	);
 }

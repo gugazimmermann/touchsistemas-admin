@@ -3,11 +3,11 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import slugify from 'slugify';
 import { CSVLink } from 'react-csv';
 import QRCode from 'qrcode';
-import { Storage, API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { AppContext } from '../../context';
-import { normalizeCEP } from '../../helpers';
-import { Loading, Alert } from '../../components';
+import { normalizeCEP } from '../../helpers/forms';
+import { Loading, Alert, Logo, SurveyCard } from '../../components';
 import { ROUTES, LANGUAGES, PLANS } from '../../constants';
 
 export default function SubscriptionDetail() {
@@ -20,8 +20,6 @@ export default function SubscriptionDetail() {
 	const [loading, setLoading] = useState(false);
 	const [subscription, setSubscription] = useState();
 	const [visitors, setVisitors] = useState();
-	const [logo, setLogo] = useState();
-	const [map, setMap] = useState();
 	const [headers, setHeaders] = useState();
 	const [data, setData] = useState();
 	const [qr, setQr] = useState('');
@@ -34,18 +32,6 @@ export default function SubscriptionDetail() {
 		} catch (err) {
 			console.error(err);
 		}
-	}
-
-	// TODO: remove unused images from Storage Bucket and add new value logo in subscriptions DB
-	async function handleLogo(id) {
-		const list = await Storage.list(`logo/${id}`);
-		if (list?.length) setLogo(`${process.env.REACT_APP_IMAGES_URL}logo/${id}.png?${new Date().getTime()}`);
-	}
-
-	// TODO: remove unused images from Storage Bucket and add new value logo in subscriptions DB
-	async function handleMap(id) {
-		const list = await Storage.list(`maps/${id}`);
-		if (list?.length) setMap(`${process.env.REACT_APP_IMAGES_URL}maps/${id}.png?${new Date().getTime()}`);
 	}
 
 	function createReport(v) {
@@ -112,8 +98,6 @@ export default function SubscriptionDetail() {
 			setLoading(false);
 			generateQRCode();
 			setSubscription(getSubscriptions);
-			handleLogo(getSubscriptions.id);
-			handleMap(getSubscriptions.id);
 			handleVisitors(getSubscriptions);
 		} else {
 			navigate(ROUTES[state.lang].DASHBOARD);
@@ -145,80 +129,21 @@ export default function SubscriptionDetail() {
 		if (params.id) handleGetSubscription(params.id);
 	}, [params]);
 
-	function renderLogo() {
-		return (
-			<div className="w-6/12 sm:w-3/12 mb-4 flex justify-center items-center mx-auto sm:mx-0">
-				<div className="bg-white shadow-md overflow-hidden rounded-lg">
-					{logo ? (
-						<img src={logo} alt="logo" className="object-cover w-full rounded-t-md" />
-					) : (
-						<img
-							src="/image-placeholder.png"
-							alt="logo"
-							className="object-scale-down w-full rounded-t-md opacity-10  group-hover:opacity-5"
-						/>
-					)}
-					<div className="my-2 text-center">
-						<h3 className="font-bold">{subscription.name}</h3>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
-	function renderSurveysAnsweredCard() {
-		return (
-			<div className="mt-4 mb-4">
-				<div className="relative bg-white py-2 px-4 rounded-lg shadow-md">
-					<div className="text-white flex sm:hidden md:flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-fuchsia-500 right-4 -top-4">
-						<i className="bx bxs-select-multiple" />
-					</div>
-					<div>
-						<p className="text-lg font-bold">{LANGUAGES[state.lang].subscriptions.details.cards.answered}</p>
-						<div className="border-t-2 mb-2" />
-						<div className="flex justify-between">
-							<div className="w-full text-center">
-								<p>Total</p>
-							</div>
-							<div className="w-full flex justify-center items-end">
-								<p>{subscription?.visitorsInfo?.surveysAnswered || 0}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
-	function renderCompleteSurveysCard() {
-		return (
-			<div className="mt-4 mb-4">
-				<div className="relative bg-white py-2 px-4 rounded-lg shadow-md">
-					<div className="text-white flex sm:hidden md:flex items-center absolute rounded-full shadow-md text-3xl p-2 bg-violet-500 right-4 -top-4">
-						<i className="bx bxs-bar-chart-square" />
-					</div>
-					<div>
-						<p className="text-xl font-bold">{LANGUAGES[state.lang].subscriptions.details.cards.complete}</p>
-						<div className="border-t-2 mb-2" />
-						<div className="flex justify-between">
-							<div className="w-full text-center">
-								<p>Total</p>
-							</div>
-							<div className="w-full flex justify-center items-end">
-								<p>{subscription?.visitorsInfo?.surveysPersonalData || 0}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
 	function renderCards() {
 		return (
 			<div className="w-full sm:w-3/12 flex flex-col sm:justify-evenly">
-				{renderSurveysAnsweredCard()}
-				{renderCompleteSurveysCard()}
+				<SurveyCard
+					title={LANGUAGES[state.lang].subscriptions.details.cards.answered}
+					value={subscription?.visitorsInfo?.surveysAnswered}
+					color="bg-fuchsia-500"
+					icon={<i className="bx bxs-select-multiple" />}
+				/>
+				<SurveyCard
+					title={LANGUAGES[state.lang].subscriptions.details.cards.complete}
+					value={subscription?.visitorsInfo?.surveysPersonalData}
+					color="bg-violet-500"
+					icon={<i className="bx bxs-bar-chart-square" />}
+				/>
 			</div>
 		);
 	}
@@ -365,11 +290,9 @@ export default function SubscriptionDetail() {
 	function renderMap() {
 		return (
 			<div className="p-4 flex-1 flex justify-center items-center">
-				<div className="w-full sm:w-6/12">
-					<a href={map} target="_blank" rel="noreferrer">
-						<img alt="map" src={map} className="rounded-lg" />
-					</a>
-				</div>
+				<a href={subscription.map} target="_blank" rel="noreferrer" className="w-full sm:w-6/12">
+					<img alt="map" src={subscription.map} className="rounded-lg" />
+				</a>
 			</div>
 		);
 	}
@@ -382,14 +305,14 @@ export default function SubscriptionDetail() {
 			{!loading && subscription && (
 				<>
 					<div className="flex flex-col sm:flex-row justify-between">
-						{renderLogo()}
+						<Logo logo={subscription.logo} name={subscription.name} />
 						{renderCards()}
 						{renderDashboardCard()}
 						{renderQRCodeCard()}
 					</div>
 					<div className="shadow-md rounded-lg flex flex-col sm:flex-row bg-white">
 						{renderDetails()}
-						{map && renderMap()}
+						{subscription.map && renderMap()}
 					</div>
 				</>
 			)}

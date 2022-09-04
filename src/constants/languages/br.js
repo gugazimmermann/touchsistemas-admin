@@ -43,7 +43,7 @@ export default {
 		title: 'Meu Perfil',
 		name: 'Nome',
 		phone: 'Telefone',
-		docType: 'Tipo do Documento',
+		docType: 'Documento',
 		selectDoc: 'Selecione o Tipo do Documento',
 		email: 'e-mail',
 		website: 'website',

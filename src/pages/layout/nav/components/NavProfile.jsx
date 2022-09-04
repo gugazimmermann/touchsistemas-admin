@@ -5,7 +5,7 @@ import { LANGUAGES, ROUTES } from '../../../../constants';
 import useCloseMenu from '../../../../helpers/useCloseMenu';
 import AvatarIcon from '../../../../images/AvatarIcon';
 import Arrow from '../../../../images/Arrow';
-import { showLink } from '../../../../helpers';
+import { showLink } from '../../../../helpers/general';
 
 export default function NavProfile({ signout, alerts }) {
 	const { state } = useContext(AppContext);

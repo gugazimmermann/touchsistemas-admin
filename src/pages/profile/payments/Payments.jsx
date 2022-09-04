@@ -3,7 +3,7 @@ import moment from 'moment';
 import { AppContext } from '../../../context';
 import { LANGUAGES } from '../../../constants';
 import { Title } from '../../../components';
-import { orderEventsByLastDay, plansValues, translatePlan } from '../../../helpers';
+import { orderEventsByLastDay } from '../../../helpers/general';
 
 export default function Payments() {
 	const { state } = useContext(AppContext);
@@ -33,9 +33,9 @@ export default function Payments() {
 			orderEvents.forEach((event) => {
 				eventsPayments.push({
 					name: event.name,
-					plan: translatePlan(event.plan),
+					plan: event.plan,
 					date: event.dates.map((d) => moment(d, 'YYYY-MM-DD').format('DD/MM/YYYY')).join(', '),
-					value: plansValues(event.plan),
+					value: event.plan,
 					status: moment(event.lastDay, 'YYYY-MM-DD').unix() > moment().unix() ? 'waiting' : 'paid',
 				});
 			});

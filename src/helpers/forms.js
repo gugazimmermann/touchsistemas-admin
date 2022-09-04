@@ -1,25 +1,7 @@
-import moment from 'moment';
-import { PLANS } from '../constants';
-
-// eslint-disable-next-line no-promise-executor-return
-export const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
-export const showLink = (state) => !state.alerts.filter((a) => a.type === 'register' || a.type === 'owner').length;
-
 export function validateEmail(email) {
 	const re =
 		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(String(email).toLowerCase());
-}
-
-export function Capitalize(str) {
-	return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-export function CapitalizePhrase(phrase) {
-	const arr = phrase.split(' ');
-	for (let i = 0; i < arr.length; i += 1) arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
-	return arr.join(' ');
 }
 
 export function normalizeCEP(cep) {
@@ -49,9 +31,9 @@ export async function getAddressFromCEP(zipCode) {
 	return null;
 }
 
-export function normalizePhone(phone) {
+export function normalizePhone(phone, show) {
 	if (!phone) return phone;
-	const currentValue = phone.replace(/[^\d]/g, '');
+	const currentValue = !show ? phone.replace(/[^\d]/g, '') : phone.replace(/[^\d]/g, '').slice(2);
 	const cvLength = currentValue.length;
 	if (cvLength < 3) return currentValue;
 	if (cvLength < 6) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2)}`;
@@ -59,17 +41,7 @@ export function normalizePhone(phone) {
 	return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 7)}-${currentValue.slice(7, 11)}`;
 }
 
-export function normalizePhoneToShow(phone) {
-	if (!phone) return phone;
-	const currentValue = phone.replace(/[^\d]/g, '').slice(2);
-	const cvLength = currentValue.length;
-	if (cvLength < 3) return currentValue;
-	if (cvLength < 7) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2)}`;
-	if (cvLength < 11) return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 6)}-${currentValue.slice(6, 10)}`;
-	return `(${currentValue.slice(0, 2)}) ${currentValue.slice(2, 7)}-${currentValue.slice(7, 11)}`;
-}
-
-function normalizeCPF(value) {
+export function normalizeCPF(value) {
 	const cvLength = value.length;
 	if (cvLength < 3) return value;
 	if (cvLength < 6) return `${value.slice(0, 3)}.${value.slice(3)}`;
@@ -77,7 +49,7 @@ function normalizeCPF(value) {
 	return `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9, 11)}`;
 }
 
-function normalizeCNPJ(value) {
+export function normalizeCNPJ(value) {
 	const cvLength = value.length;
 	if (cvLength < 3) return value;
 	if (cvLength < 5) return `${value.slice(0, 2)}.${value.slice(2)}`;
@@ -93,24 +65,20 @@ export function normalizeDocument(type, document) {
 	return doc;
 }
 
-export function orderEventsByLastDay(events, sort = 'DESC') {
-	const eventsWithLastDay = events.map((i) => ({
-		...i,
-		lastDay: i.dates.sort((a, b) => moment(b) - moment(a))[0],
-	}));
-	const orderEvents =
-		sort === 'ASC'
-			? eventsWithLastDay.sort((a, b) => moment(a.lastDay) - moment(b.lastDay))
-			: eventsWithLastDay.sort((a, b) => moment(b.lastDay) - moment(a.lastDay));
-	return orderEvents;
+export function validateFile(files) {
+	if (files && files.length) {
+		const file = files[0];
+		if (file.size > 2 * 1024 * 1024) return 'imageSize';
+		if (!['image/png', 'image/jpeg'].includes(file.type)) return 'imageType';
+		if (!['jpg', 'jpeg', 'png'].includes(file.name.split('.').pop())) return 'imageType';
+		return file
+	}
+	return null;
 }
 
-// TODO: handle better the plans
-export function translatePlan(plan) {
-	return plan === PLANS.BASIC ? 'Básico' : plan === PLANS.ADVANCED ? 'Avançado' : 'Assinatura';
-}
-
-// TODO: handle better the plans
-export function plansValues(plan) {
-	return plan === PLANS.BASIC ? 250 : plan === PLANS.ADVANCED ? 500 : 250;
+export function normalizeWebsite(w) {
+	if (!w) return null;
+	if (w.charAt(0).toLocaleLowerCase() !== 'h') w = `http://${w}`;
+	if (w.charAt(w.length - 1) === '/') w = w.slice(0, -1);
+	return w;
 }

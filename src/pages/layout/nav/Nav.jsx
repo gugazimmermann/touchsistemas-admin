@@ -4,7 +4,7 @@ import { AppContext } from '../../../context';
 import LogoIcon from '../../../images/LogoIcon';
 import { ROUTES } from '../../../constants';
 import { NavAlert, NavInfo, NavLanguage, NavProfile } from './components';
-import { showLink } from '../../../helpers';
+import { showLink } from '../../../helpers/general';
 
 export default function Nav({ signout }) {
 	const { state } = useContext(AppContext);

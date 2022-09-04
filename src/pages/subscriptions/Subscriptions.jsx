@@ -2,10 +2,11 @@ import { useEffect, useState, useContext } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import moment from 'moment';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
+import { getImage } from '../../api/storage';
 import { updateClient } from '../../graphql/mutations';
 import { AppContext } from '../../context';
-import { LANGUAGES } from '../../constants';
-import { Loading, Grid, MapCard, Title, SubscriptionCard } from '../../components';
+import { LANGUAGES, PLANS } from '../../constants';
+import { Loading, Grid, MapCard, Title, DashboardCard } from '../../components';
 
 export default function Subscriptions() {
 	const [loadClient] = useOutletContext();
@@ -39,30 +40,20 @@ export default function Subscriptions() {
 		loadClient(true);
 	}
 
-	// TODO: handle better the maps, not just when add new one, but when change address
 	async function handleMap(e) {
-		if (((client?.subscriptionsMap?.length && client?.subscriptionsMap[0]) || 0) !== (e?.length || 0))
-			await createMap(e);
-		const mapsList = await Storage.list(`maps/subscriptions_${client.id}`);
-		if (mapsList.length !== 0) {
-			const getUrl = await Storage.get(mapsList[0].key);
-			setMap(getUrl);
-		}
+		const clientHasMap = +((client?.subscriptionsMap?.length && client?.subscriptionsMap[0]) || 0)
+		if (clientHasMap !== +(e?.length || 0)) await createMap(e);
+		const key = await getImage(`maps/subscriptions_${client.id}`)
+		if (key) setMap(`${process.env.REACT_APP_IMAGES_URL}${key}`);
 	}
 
 	async function orderSubscriptions() {
 		const cloneSubscriptions = client.Subscriptions?.items.map((s) => s);
 		setLoading(true);
-		const showSubscriptions = [];
 		if (cloneSubscriptions.length) {
 			const sortSubscriptions = cloneSubscriptions.sort((a, b) => moment(b.createdAt) - moment(a.createdAt));
-			sortSubscriptions.forEach(async (s) => {
-				const list = await Storage.list(`logo/${s.id}`);
-				if (list?.length) s.image = await Storage.get(list[0].key);
-				showSubscriptions.push(s);
-			});
-			setSubscriptions(showSubscriptions);
-			await handleMap(showSubscriptions);
+			setSubscriptions(sortSubscriptions);
+			await handleMap(sortSubscriptions);
 		}
 		setLoading(false);
 	}
@@ -80,7 +71,7 @@ export default function Subscriptions() {
 			) : (
 				<Grid>
 					{subscriptions.map((subscription) => (
-						<SubscriptionCard key={subscription.id} event={subscription} />
+						<DashboardCard key={subscription.id} type={PLANS.SUBSCRIPTION} content={subscription} />
 					))}
 					{map && <MapCard map={map} />}
 				</Grid>

@@ -6,7 +6,7 @@ import { updateClient } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { LANGUAGES } from '../../constants';
 import { Loading, Grid, EventCard, MapCard, Title } from '../../components';
-import { orderEventsByLastDay } from '../../helpers';
+import { orderEventsByLastDay } from '../../helpers/general';
 
 export default function Events() {
 	const [loadClient] = useOutletContext();

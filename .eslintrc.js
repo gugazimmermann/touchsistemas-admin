@@ -52,6 +52,7 @@ module.exports = {
 		'jsx-a11y/click-events-have-key-events': 'off',
 		'no-nested-ternary': 'off',
 		'no-await-in-loop': 'off',
-		'react/no-array-index-key': 'off'
+		'react/no-array-index-key': 'off',
+		 'no-restricted-syntax': 'off'
 	},
 };

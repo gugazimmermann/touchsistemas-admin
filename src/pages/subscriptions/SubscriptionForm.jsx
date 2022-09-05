@@ -6,7 +6,7 @@ import { getActivePlanByType, getPartnerByReferralCode, getSubscriptionByID } fr
 import { createSubscription, updateSubscription, updateSubscriptionLogoAndMap } from '../../api/mutations';
 import {  sendPublicFile } from '../../api/storage';
 import { getAddressFromCEP, normalizeCEP, validateEmail, validateFile } from '../../helpers/forms';
-import { createMap } from '../../helpers/map';
+import { createContentMap, createMap } from '../../helpers/map';
 import { Loading, Alert, Title, Form, Uploading } from '../../components';
 
 const initial = {
@@ -103,11 +103,17 @@ export default function SubscriptionForm() {
 		if (newSubscription.name !== subscription?.name || newSubscription.street !== subscription?.street || newSubscription.number !== subscription?.number ||  newSubscription.city !== subscription?.city || newSubscription.state !== subscription?.state || newSubscription.zipCode.replace(/[^\d]/g, '') !== subscription?.zipCode) {
 			const map = await createMap('subscription', newSubscription.id, newSubscription.name, newSubscription.street, newSubscription.number, newSubscription.city, newSubscription.state, newSubscription.zipCode)
 			await sendPublicFile('map', newSubscription.id, map, setProgress);
-			mapURL = `${process.env.REACT_APP_IMAGES_URL}map/${map.name}`;
+			mapURL = `${process.env.REACT_APP_IMAGES_URL}map/${map.name}?${Date.now()}`;
+			const content = (client.Subscriptions?.items || []).map((i) => {
+				if (i.id === newSubscription.id) return newSubscription
+				return i
+			})
+			if (!params.id) content.push(newSubscription);
+			createContentMap(PLANS.SUBSCRIPTION, client, content)
 		}
 		if (logo) {
 			await sendPublicFile('logo', newSubscription.id, logo, setProgress);
-			logoURL = logo ? `${process.env.REACT_APP_IMAGES_URL}logo/${newSubscription.id}.${logo.name.split('.').pop()}` : null
+			logoURL = logo ? `${process.env.REACT_APP_IMAGES_URL}logo/${newSubscription.id}.${logo.name.split('.').pop()}?${Date.now()}` : null
 		}
 		await updateSubscriptionLogoAndMap(newSubscription.id, logoURL, mapURL);
 	}
@@ -182,6 +188,7 @@ export default function SubscriptionForm() {
 	}, [params]);
 
 	return (
+		
 		<>
 			{loading && <Loading />}
 			{!!progress && <Uploading progress={progress} />}

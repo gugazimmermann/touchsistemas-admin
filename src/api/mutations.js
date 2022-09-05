@@ -30,8 +30,8 @@ export async function updateClientLogoAndMap(id, logo, map) {
 	return data.updateClient;
 }
 
-export async function updateClientContentMap(id, type, qtd) {
-	const input = type === PLANS.SUBSCRIPTION ? { id, subscriptionsMap: qtd } : { id, eventssMap: qtd }
+export async function updateClientContentMap(id, type, mapName) {
+	const input = type === PLANS.SUBSCRIPTION ? { id, subscriptionsMap: mapName } : { id, eventssMap: mapName }
 	const { data } = await API.graphql(graphqlOperation(mutations.updateClient, { input }));
 	return data.updateClient;
 }

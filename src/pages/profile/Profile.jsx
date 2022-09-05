@@ -107,11 +107,11 @@ export default function Profile() {
 		if (form.name !== client.name || form.street !== client.street || form.number !== client.number ||  form.city !== client.city || form.state !== client.state || form.zipCode.replace(/[^\d]/g, '') !== client.zipCode) {
 			const map = await createMap('client', client.id, form.name, form.street, form.number, form.city, form.state, form.zipCode)
 			await sendPublicFile('map', client.id, map, setProgress);
-			mapURL = `${process.env.REACT_APP_IMAGES_URL}map/${map.name}`;
+			mapURL = `${process.env.REACT_APP_IMAGES_URL}map/${map.name}?${Date.now()}`;
 		}
 		if (logo) {
 			await sendPublicFile('logo', client.id, logo, setProgress);
-			logoURL = logo ? `${process.env.REACT_APP_IMAGES_URL}logo/${client.id}.${logo.name.split('.').pop()}` : null
+			logoURL = logo ? `${process.env.REACT_APP_IMAGES_URL}logo/${client.id}.${logo.name.split('.').pop()}?${Date.now()}` : null
 		}
 		await updateClientLogoAndMap(client.id, logoURL, mapURL);
 	}

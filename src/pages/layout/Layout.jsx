@@ -46,16 +46,18 @@ export default function Layout() {
 		}
 		setLoading(false);
 	}
-
-	async function loadPlans() {
+	
+	// set force = true to reload
+	async function loadPlans(force) {
 		setLoading(true);
-		if (!state.plans.length) {
+		if (!state.plans.length || force) {
 			const {
 				data: {
 					planByActive: { items },
 				},
 			} = await API.graphql(graphqlOperation(queries.planByActive, { active: 'TRUE' }));
 			dispatch({ type: 'UPDATE_PLANS', payload: items });
+			Logger('Loading Plans', items);
 		}
 		setLoading(false);
 	}

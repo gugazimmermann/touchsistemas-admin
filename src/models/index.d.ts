@@ -119,8 +119,8 @@ export declare class Client {
   readonly complement?: string | null;
   readonly logo?: string | null;
   readonly map?: string | null;
-  readonly eventsMap?: (string | null)[] | null;
-  readonly subscriptionsMap?: (string | null)[] | null;
+  readonly eventsMap?: string | null;
+  readonly subscriptionsMap?: string | null;
   readonly Owners?: (Owner | null)[] | null;
   readonly Events?: (Events | null)[] | null;
   readonly Subscriptions?: (Subscriptions | null)[] | null;

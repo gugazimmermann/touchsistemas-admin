@@ -50,8 +50,8 @@ type Client @model @auth(rules: [{ allow: public }]) {
 	complement: String
 	logo: String
 	map: String
-	eventsMap: [String]
-	subscriptionsMap: [String]
+	eventsMap: String
+	subscriptionsMap: String
 	Owners: [Owner] @hasMany(indexName: "byClient", fields: ["id"])
 	Events: [Events] @hasMany(indexName: "byClient", fields: ["id"])
 	Subscriptions: [Subscriptions] @hasMany(indexName: "byClient", fields: ["id"])

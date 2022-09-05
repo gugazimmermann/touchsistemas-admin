@@ -6,7 +6,6 @@ const encode = (e) => encodeURIComponent(`${e.street}, ${e.number} - ${e.city} -
 const googleURL = 'https://maps.googleapis.com/maps/api/staticmap?center';
 const size = '1280x1280';
 
-// TODO: handle better to change when a content changes address
 export async function createContentMap(type, client, content) {
 	const color = type === PLANS.SUBSCRIPTION ? '0xa855f7' : '0x10b981';
 	const path = type === PLANS.SUBSCRIPTION ? 'subscriptions_' : 'events_';
@@ -22,8 +21,8 @@ export async function createContentMap(type, client, content) {
 	const res = await fetch(mapURL);
 	const blob = await res.blob();
 	const file = new File([blob], mapName);
-	await sendPublicFile('map', mapName, file);
-	await updateClientContentMap(client.id, type, content.length);
+	await sendPublicFile('map', `${path}${client.id}`, file);
+	await updateClientContentMap(client.id, type, `${process.env.REACT_APP_IMAGES_URL}map/${mapName}?${Date.now()}`);
 }
 
 export async function createMap(type, id, name, street, number, city, state, zipCode) {

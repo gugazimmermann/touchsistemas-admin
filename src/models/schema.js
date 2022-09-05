@@ -545,19 +545,17 @@ export const schema = {
                 },
                 "eventsMap": {
                     "name": "eventsMap",
-                    "isArray": true,
+                    "isArray": false,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "subscriptionsMap": {
                     "name": "subscriptionsMap",
-                    "isArray": true,
+                    "isArray": false,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "Owners": {
                     "name": "Owners",
@@ -1637,5 +1635,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "b24dfa8a8e2fed86e4817d3e0afe29d7"
+    "version": "766e7486a8d002ff48a68a4318a49047"
 };

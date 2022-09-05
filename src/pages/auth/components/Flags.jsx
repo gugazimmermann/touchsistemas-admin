@@ -16,16 +16,9 @@ export default function Flags() {
 	const ref = useCloseMenu(open, setOpen);
 
 	function showFlag(lang) {
-		switch (lang) {
-			case 'br':
-				return <img src={BR} alt="Português" className="w-6 h-6" />;
-			case 'en':
-				return <img src={EN} alt="English" className="w-6 h-6" />;
-			case 'es':
-				return <img src={ES} alt="Español" className="w-6 h-6" />;
-			default:
-				return <img src={BR} alt="Português" className="w-6 h-6" />;
-		}
+		if (lang === 'br') return <img src={BR} alt="Português" className="w-6 h-6" />;
+		if (lang === 'en') return <img src={EN} alt="English" className="w-6 h-6" />;
+		return <img src={ES} alt="Español" className="w-6 h-6" />;
 	}
 
 	function handleChangeLanguage(language) {

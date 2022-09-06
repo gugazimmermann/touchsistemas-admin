@@ -21,7 +21,7 @@ const initial = {
 export default function Surveys() {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const [loadClient] = useOutletContext();
+	const { loadClient } = useOutletContext();
 	const { state } = useContext(AppContext);
 	const [type] = useState(location?.state?.type || false);
 	const [subscription] = useState(location?.state?.subscription || false);

@@ -32,7 +32,7 @@ const initial = {
 
 export default function EventForm({ plan }) {
 	const navigate = useNavigate();
-	const [loadClient] = useOutletContext();
+	const { loadClient } = useOutletContext();
 	const { state } = useContext(AppContext);
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');

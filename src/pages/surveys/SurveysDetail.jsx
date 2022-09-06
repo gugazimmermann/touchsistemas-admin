@@ -16,7 +16,7 @@ const initial = {
 export default function SurveysDetail() {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const [loadClient] = useOutletContext();
+	const { loadClient } = useOutletContext();
 	const { state } = useContext(AppContext);
 	const [type] = useState(location?.state?.type || false);
 	const [subscription] = useState(location?.state?.subscription || false);
@@ -47,9 +47,6 @@ export default function SurveysDetail() {
 					}
 				/>
 			</div>
-			<Form>
-				<div className="w-full">dasd</div>
-			</Form>
 		</>
 	);
 }

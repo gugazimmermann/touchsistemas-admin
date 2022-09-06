@@ -55,7 +55,7 @@ export default function Layout() {
 			{loading && <Loading />}
 			<Nav signout={signOut} />
 			<div className="mx-auto max-w-screen-lg p-4">
-				<Outlet context={[loadClient]} />
+				<Outlet context={{ loadClient }} />
 			</div>
 		</main>
 	);

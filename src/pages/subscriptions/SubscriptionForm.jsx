@@ -25,7 +25,7 @@ const initial = {
 export default function SubscriptionForm() {
 	const params = useParams();
 	const navigate = useNavigate();
-	const [loadClient] = useOutletContext();
+	const { loadClient } = useOutletContext();
 	const { state } = useContext(AppContext);
 	const { client } = state;
 	const [error, setError] = useState(false);

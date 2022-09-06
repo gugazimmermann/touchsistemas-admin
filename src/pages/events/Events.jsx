@@ -9,7 +9,7 @@ import { Loading, Grid, EventCard, MapCard, Title } from '../../components';
 import { orderEventsByLastDay } from '../../helpers/general';
 
 export default function Events() {
-	const [loadClient] = useOutletContext();
+	const { loadClient } = useOutletContext();
 	const { state } = useContext(AppContext);
 	const { client } = state;
 	const [loading, setLoading] = useState(false);

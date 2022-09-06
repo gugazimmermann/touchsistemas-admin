@@ -1,66 +1,45 @@
-import { useContext, useState } from 'react';
-import { useOutletContext, Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
+import { AuthBackButton, AuthButton, Input } from './components';
+import SignUpImage from '../../images/auth/SignUp.svg';
 
 export default function SignUp() {
 	const { state } = useContext(AppContext);
-	const [signUp] = useOutletContext();
+	const { setImg, signUp } = useOutletContext();
 	const [email, setEmail] = useState('');
 	const [pwd, setPwd] = useState('');
 	const [repeat, setRepeat] = useState('');
+
+	useEffect(() => {
+		setImg(SignUpImage);
+	}, []);
 
 	const disabled = () => email === '' || pwd === '' || repeat === '';
 
 	return (
 		<form>
 			<div className="mb-4">
-				<input
-					type="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-					placeholder={LANGUAGES[state.lang].email}
-				/>
+				<Input type="email" placeholder={LANGUAGES[state.lang].email} value={email} handler={setEmail} />
 			</div>
 			<div className="mb-4">
-				<input
-					type="password"
-					value={pwd}
-					onChange={(e) => setPwd(e.target.value)}
-					className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-					placeholder={LANGUAGES[state.lang].password}
-				/>
+				<Input type="password" placeholder={LANGUAGES[state.lang].password} value={pwd} handler={setPwd} />
 			</div>
 			<div className="mb-4">
-				<input
+				<Input
 					type="password"
-					value={repeat}
-					onChange={(e) => setRepeat(e.target.value)}
-					className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
 					placeholder={LANGUAGES[state.lang].auth.repeatPassword}
+					value={repeat}
+					handler={setRepeat}
 				/>
 			</div>
-			<button
-				type="button"
-				onClick={() => signUp(email, pwd, repeat)}
+			<AuthButton
+				text={LANGUAGES[state.lang].auth.register}
 				disabled={disabled()}
-				className={`${
-					disabled()
-						? 'bg-gray-600 cursor-not-allowed'
-						: 'bg-primary cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md'
-				} inline-block px-2 py-2 text-white font-medium uppercase rounded shadow-md transition duration-150 ease-in-out w-full`}
-			>
-				{LANGUAGES[state.lang].auth.register}
-			</button>
-			<div className="w-full text-center mt-6">
-				<Link
-					to={ROUTES[state.lang].HOME}
-					className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out"
-				>
-					{LANGUAGES[state.lang].auth.backToSignIn}
-				</Link>
-			</div>
+				handler={() => signUp(email, pwd, repeat)}
+			/>
+			<AuthBackButton text={LANGUAGES[state.lang].auth.backToSignIn} to={ROUTES[state.lang].HOME} />
 		</form>
 	);
 }

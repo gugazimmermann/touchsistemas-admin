@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AppContext } from '../../../context';
 import { LANGUAGES } from '../../../constants';
 
-export default function LoginSocial() {
+export default function SignInSocial() {
 	const { state } = useContext(AppContext);
 	return (
 		<>

@@ -10,7 +10,6 @@ import { AppContext } from '../../context';
 import { ROUTES } from '../../constants';
 import { Loading } from '../../components';
 import { Alert, Flags, LogoAuth } from './components';
-import SignInImage from '../../images/auth/SignIn.svg';
 
 export default function AuthLayout() {
 	const navigate = useNavigate();
@@ -18,6 +17,7 @@ export default function AuthLayout() {
 	const [, setCookie] = useCookies(['touchsistemas']);
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const [img, setImg] = useState();
 
 	async function signUp(email, pwd, repeat) {
 		setLoading(true);
@@ -133,27 +133,31 @@ export default function AuthLayout() {
 		return null;
 	}
 
+	function showImage(i) {
+		if (i) return <img src={i} alt="SignUp" className="w-full" />;
+		return null;
+	}
+
 	return (
 		<section className="h-screen mx-auto bg-white">
 			{loading && <Loading />}
 			<div className="container h-full fixed">
 				{Flags()}
 				<div className="h-full flex flex-col-reverse md:flex-row items-center justify-evenly">
-					<div className="w-10/12 md:w-6/12 lg:w-4/12 md:mb-0">
-						<img src={SignInImage} alt="SignIn" className="w-full" />
-					</div>
+					<div className="w-10/12 md:w-6/12 lg:w-4/12 md:mb-0">{img && showImage(img)}</div>
 					<div className="w-10/12 md:w-5/12 lg:w-4/12">
 						<LogoAuth styles="mb-5 text-primary" />
 						<Alert error={error} />
 						<Outlet
-							context={[
+							context={{
+								setImg,
 								signUp,
 								resendConfirmationCode,
 								confirmSignUp,
 								signIn,
 								sendForgotPasswordCode,
 								redefinePassword,
-							]}
+							}}
 						/>
 					</div>
 				</div>

@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import { useOutletContext, Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useOutletContext, useLocation, useSearchParams } from 'react-router-dom';
 import { AppContext } from '../../context';
 import { LANGUAGES, ROUTES } from '../../constants';
-import { Alert } from './components';
+import { Alert, AuthBackButton, AuthButton, Input } from './components';
+import ConfirmationCode from '../../images/auth/ConfirmationCode.svg';
 
 export default function ConfirmSignUp() {
-	const [, resendConfirmationCode, confirmSignUp] = useOutletContext();
+	const { setImg, resendConfirmationCode, confirmSignUp } = useOutletContext();
 	const location = useLocation();
 	const [searchParams] = useSearchParams();
 	const { state } = useContext(AppContext);
@@ -19,6 +20,10 @@ export default function ConfirmSignUp() {
 		if (searchParams.get('code')) setCode(searchParams.get('code'));
 	}, []);
 
+	useEffect(() => {
+		setImg(ConfirmationCode);
+	}, []);
+
 	const disabledReSend = () => email === '';
 
 	const disabled = () => email === '' || code === '';
@@ -28,22 +33,10 @@ export default function ConfirmSignUp() {
 			<Alert error={exists} type={exists} text={LANGUAGES[state.lang].auth.exist} />
 			<Alert error={reSent} type={reSent} text={LANGUAGES[state.lang].auth.checkEmail} />
 			<div className="mb-4">
-				<input
-					type="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-					placeholder={LANGUAGES[state.lang].email}
-				/>
+				<Input type="email" placeholder={LANGUAGES[state.lang].email} value={email} handler={setEmail} />
 			</div>
 			<div className="mb-4">
-				<input
-					type="text"
-					value={code}
-					onChange={(e) => setCode(e.target.value)}
-					className=" block w-full px-4 py-2 font-normal border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-primary focus:outline-none"
-					placeholder={LANGUAGES[state.lang].auth.code}
-				/>
+				<Input type="text" placeholder={LANGUAGES[state.lang].auth.code} value={code} handler={setCode} />
 			</div>
 			<div className="flex justify-end mb-4">
 				<button
@@ -57,26 +50,12 @@ export default function ConfirmSignUp() {
 					{LANGUAGES[state.lang].auth.reSendCode}
 				</button>
 			</div>
-			<button
-				type="button"
-				onClick={() => confirmSignUp(email, code)}
+			<AuthButton
+				text={LANGUAGES[state.lang].confirm}
 				disabled={disabled()}
-				className={`${
-					disabled()
-						? 'bg-gray-600 cursor-not-allowed'
-						: 'bg-primary cursor-pointer hover:bg-secondary hover:shadow-md focus:bg-secondary focus:shadow-md focus:outline-none focus:ring-0 active:bg-secondary active:shadow-md'
-				} inline-block px-2 py-2 text-white font-medium uppercase rounded shadow-md transition duration-150 ease-in-out w-full`}
-			>
-				{LANGUAGES[state.lang].confirm}
-			</button>
-			<div className="w-full text-center mt-6">
-				<Link
-					to={ROUTES[state.lang].HOME}
-					className="text-xl text-primary hover:text-secondary duration-200 transition ease-in-out"
-				>
-					{LANGUAGES[state.lang].auth.backToSignIn}
-				</Link>
-			</div>
+				handler={() => confirmSignUp(email, code)}
+			/>
+			<AuthBackButton text={LANGUAGES[state.lang].auth.backToSignIn} to={ROUTES[state.lang].HOME} />
 		</form>
 	);
 }

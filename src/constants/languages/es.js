@@ -1,6 +1,7 @@
 export default {
 	yes: 'Sí',
 	no: 'No',
+	or: 'O',
 	close: 'Cerrar',
 	select: 'Selecciona',
 	continue: 'Continuar',

@@ -1,6 +1,7 @@
 export default {
 	yes: 'Yes',
 	no: 'No',
+	or: 'Or',
 	close: 'Close',
 	select: 'Select',
 	continue: 'Continue',

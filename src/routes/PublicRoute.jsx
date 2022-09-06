@@ -3,7 +3,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { useCookies } from 'react-cookie';
 import { AppContext } from '../context';
-import { decodeCookie } from '../helpers/cookies';
+import Cookies from '../helpers/cookies';
 import { ROUTES } from '../constants';
 
 export default function PublicRoute() {
@@ -19,7 +19,7 @@ export default function PublicRoute() {
 		}
 	};
 
-	if (decodeCookie(cookies?.touchsistemas)?.client && seeUser())
+	if (Cookies.decode(cookies?.touchsistemas)?.client && seeUser())
 		return <Navigate to={ROUTES[state.lang].DASHBOARD} replace />;
 	return <Outlet />;
 }

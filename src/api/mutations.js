@@ -3,6 +3,10 @@ import { PLANS } from '../constants';
 import * as mutations from '../graphql/mutations';
 import { normalizeWebsite } from '../helpers/forms';
 
+const createClient = async (email) => {
+	await API.graphql(graphqlOperation(mutations.createClient, { input: { email } }));
+};
+
 export async function updateClient(id, client) {
 	const { data } = await API.graphql(
 		graphqlOperation(mutations.updateClient, {
@@ -142,3 +146,7 @@ export async function createSurvey(survey) {
 	);
 	return data.createSurvey;
 }
+
+const Mutations = { createClient };
+
+export default Mutations;

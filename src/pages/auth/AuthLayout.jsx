@@ -1,11 +1,8 @@
 import { useContext, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { Auth, API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import * as mutations from '../../graphql/mutations';
-import { encodeCookie } from '../../helpers/cookies';
-import Logger from '../../helpers/logger';
+import Cookies from '../../helpers/cookies';
+import Auth from '../../api/auth';
 import { AppContext } from '../../context';
 import { ROUTES } from '../../constants';
 import { Loading } from '../../components';
@@ -19,123 +16,113 @@ export default function AuthLayout() {
 	const [loading, setLoading] = useState(false);
 	const [img, setImg] = useState();
 
-	async function signUp(email, pwd, repeat) {
+	const showImage = (i) => {
+		if (i) return <img src={i} alt="SignUp" className="w-full" />;
+		return null;
+	}
+
+	const startLoading = () => {
 		setLoading(true);
 		setError(false);
-		if (pwd !== repeat) {
-			setError(true);
-			setLoading(false);
-			return;
-		}
+	};
+
+	const stopLoading = () => {
+		setError(false);
+		setLoading(false);
+	};
+
+	const showError = () => {
+		setError(true);
+		setLoading(false);
+		return false;
+	};
+
+	const signUp = async (email, pwd, repeat) => {
+		startLoading();
+		if (pwd !== repeat) return showError();
 		try {
-			await Auth.signUp({ username: email, password: pwd, attributes: { email, locale: state.lang } });
-			await API.graphql(graphqlOperation(mutations.createClient, { input: { email } }));
-			setError(false);
-			setLoading(false);
+			await Auth.SignUp(email, pwd, state.lang);
+			stopLoading();
 			navigate(ROUTES[state.lang].CONFIRM_REGISTRATION, { state: { email } });
 		} catch (err) {
 			if (err.message === 'An account with the given email already exists.') {
+				stopLoading();
 				navigate(ROUTES[state.lang].CONFIRM_REGISTRATION, { state: { email, exists: true } });
-				setError(false);
-				setLoading(false);
 			} else {
-				setError(true);
-				setLoading(false);
+				return showError();
 			}
 		}
+		return true;
 	}
 
-	async function resendConfirmationCode(email) {
+	const resendConfirmationCode = async (email) => {
+		startLoading();
 		try {
-			await Auth.resendSignUp(email);
+			await Auth.ReSendSignUp(email);
+			stopLoading();
 			navigate(ROUTES[state.lang].CONFIRM_REGISTRATION, { state: { email, resent: true } });
 		} catch (err) {
-			setError(true);
-			setLoading(false);
+			return showError();
 		}
+		return true;
 	}
 
-	async function confirmSignUp(email, code) {
-		setLoading(true);
-		setError(false);
+	const confirmSignUp = async (email, code) => {
+		startLoading();
 		try {
-			await Auth.confirmSignUp(email, code);
-			setError(false);
-			setLoading(false);
+			await Auth.ConfirmSignUp(email, code);
+			stopLoading();
 			navigate(ROUTES[state.lang].HOME, { state: { email } });
 		} catch (err) {
-			setError(true);
-			setLoading(false);
+			return showError();
 		}
-		return null;
+		return true;
 	}
 
-	async function signIn(email, pwd, remember) {
-		setLoading(true);
-		setError(false);
+	const setClientCookie = (username, email, clientID) => {
+		const encodedContent = Cookies.encode(JSON.stringify({ uuid: username, email, client: clientID }));
+		const date = new Date();
+		date.setDate(date.getDate() + 365);
+		setCookie('touchsistemas', encodedContent, { expires: date, path: '/' });
+	}
+
+	const signIn = async (email, pwd, remember) => {
+		startLoading();
 		try {
-			const auth = await Auth.signIn(email, pwd);
-			Logger('Auth', auth);
-			if (auth.challengeName === 'NEW_PASSWORD_REQUIRED') await Auth.completeNewPassword(auth, pwd);
-			if (remember) await Auth.rememberDevice();
-			else await Auth.forgetDevice();
-			const {
-				data: {
-					clientByEmail: { items },
-				},
-			} = await API.graphql(graphqlOperation(queries.clientByEmail, { email: auth.attributes.email }));
-			if (!items.length) throw new Error('Client not found');
-			const encodedContent = encodeCookie(JSON.stringify({ uuid: auth.username, email, client: items[0].id }));
-			const date = new Date();
-			date.setDate(date.getDate() + 365);
-			setCookie('touchsistemas', encodedContent, { expires: date, path: '/' });
-			setError(false);
-			setLoading(false);
+			const { username, clientID } = await Auth.SignIn(email, pwd, remember);
+			setClientCookie(username, email, clientID)
+			stopLoading();
 			navigate(ROUTES[state.lang].DASHBOARD);
 		} catch (err) {
-			Logger('Auth Error', err);
-			setError(true);
-			setLoading(false);
+			return showError();
 		}
+		return true;
 	}
 
-	async function sendForgotPasswordCode(email) {
-		setLoading(true);
-		setError(false);
+	const sendForgotPasswordCode = async (email) => {
+		startLoading();
 		try {
-			await Auth.forgotPassword(email);
-			setError(false);
-			setLoading(false);
+			await Auth.ForgotPassword(email)
+			stopLoading();
 			navigate(ROUTES[state.lang].REDIFINE_PASSWORD, { state: { email } });
 		} catch (err) {
-			setError(true);
-			setLoading(false);
+			return showError();
 		}
+		return true;
 	}
 
-	async function redefinePassword(email, code, pwd, repeat) {
-		setLoading(true);
-		setError(false);
-		if (pwd !== repeat) {
-			setError(true);
-			setLoading(false);
-			return null;
-		}
+	const redefinePassword = async (email, code, pwd, repeat) => {
+		console.debug(email, code, pwd, repeat)
+		startLoading();
+		if (pwd !== repeat) return showError();
 		try {
-			await Auth.forgotPasswordSubmit(email, code, pwd);
-			setError(false);
-			setLoading(false);
+			await Auth.ForgotPasswordSubmit(email, code, pwd)
+			stopLoading();
 			navigate(ROUTES[state.lang].HOME);
 		} catch (err) {
-			setError(true);
-			setLoading(false);
+			return showError();
 		}
-		return null;
-	}
-
-	function showImage(i) {
-		if (i) return <img src={i} alt="SignUp" className="w-full" />;
-		return null;
+		return true;
 	}
 
 	return (

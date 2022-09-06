@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Auth } from 'aws-amplify';
-import { decodeCookie } from '../../helpers/cookies';
+import Cookies from '../../helpers/cookies';
 import Logger from '../../helpers/logger';
 import { AppContext } from '../../context';
 import { ROUTES } from '../../constants';
@@ -31,7 +31,7 @@ export default function Layout() {
 	async function loadClient(force) {
 		setLoading(true);
 		if (!state.client || force) {
-			const clientID = decodeCookie(cookies?.touchsistemas)?.client;
+			const clientID = Cookies.decode(cookies?.touchsistemas)?.client;
 			const client = await getClient(clientID);
 			setClient(client);
 			dispatch({ type: 'UPDATE_CLIENT', payload: client });

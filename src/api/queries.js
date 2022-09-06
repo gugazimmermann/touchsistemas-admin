@@ -1,6 +1,15 @@
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../graphql/queries';
 
+const clientByEmail = async (email) => {
+	const {
+		data: {
+			clientByEmail: { items },
+		},
+	} = await API.graphql(graphqlOperation(queries.clientByEmail, { email }));
+	return items.length ? items[0] : null;
+};
+
 export async function getClient(id) {
 	const { data } = await API.graphql(graphqlOperation(queries.getClient, { id }));
 	if (!data.getClient) return null;
@@ -78,3 +87,7 @@ export async function getVisitorsBySubscriptionID(SubscriptionsID) {
 	} while (token);
 	return visitors;
 }
+
+const Queries = { clientByEmail };
+
+export default Queries;

@@ -48,7 +48,7 @@ export default function RedefinePwd() {
 			<AuthButton
 				text={LANGUAGES[state.lang].auth.redefine}
 				disabled={disabled()}
-				handle={() => redefinePassword(email, code, pwd, repeat)}
+				handler={() => redefinePassword(email, code, pwd, repeat)}
 			/>
 			<AuthBackButton text={LANGUAGES[state.lang].auth.backToSignIn} to={ROUTES[state.lang].HOME} />
 		</form>

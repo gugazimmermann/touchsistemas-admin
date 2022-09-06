@@ -3,7 +3,6 @@ import AppReducer from './reducers';
 
 const initialState = {
 	lang: 'br',
-	plans: [],
 	client: undefined,
 	alerts: [],
 };

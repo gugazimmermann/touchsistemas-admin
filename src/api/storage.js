@@ -9,9 +9,9 @@ export const sendPublicFile = async (type, id, file, progress) => {
 		},
 	});
 	if (progress) progress(0);
-}
+};
 
 export const getImage = async (img) => {
 	const [data] = await Storage.list(img);
 	return data?.key || null;
-}
+};

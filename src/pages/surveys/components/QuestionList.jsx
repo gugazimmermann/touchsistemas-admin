@@ -2,12 +2,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useContext, memo } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { AppContext } from '../../context';
-import { LANGUAGES } from '../../constants';
+import { AppContext } from '../../../context';
+import { LANGUAGES } from '../../../constants';
 
-export default function QuestionList({survey, setForm}) {
-  const { state } = useContext(AppContext);
-  
+export default function QuestionList({ survey, setForm }) {
+	const { state } = useContext(AppContext);
+
 	const reorderQuestions = (l, s, e) => {
 		const res = Array.from(l);
 		const [removed] = res.splice(s, 1);
@@ -15,18 +15,18 @@ export default function QuestionList({survey, setForm}) {
 		return res;
 	};
 
-  function onDragQuestionEnd(r) {
+	function onDragQuestionEnd(r) {
 		if (!r.destination) return;
 		if (r.destination.index === r.source.index) return;
 		const questions = reorderQuestions(survey, r.source.index, r.destination.index);
 		setForm(questions);
 	}
 
-  function handleRemoveQuestion(question) {
+	function handleRemoveQuestion(question) {
 		setForm(survey.filter((q) => q.id !== question.id));
 	}
 
-  function Question({ question, index }) {
+	function Question({ question, index }) {
 		return (
 			<Draggable draggableId={question.id} index={index}>
 				{(provided) => (
@@ -69,18 +69,18 @@ export default function QuestionList({survey, setForm}) {
 		questions.map((q, i) => <Question question={q} index={i} key={q.id} />)
 	);
 
-  return (
-    <div className="flex flex-wrap bg-white p-4 mb-8 rounded-md shadow-md">
-      <DragDropContext onDragEnd={onDragQuestionEnd}>
-        <Droppable droppableId="questionsList">
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps} className="w-full">
-              <QuestionsList questions={survey} />
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    </div>
-  );
+	return (
+		<div className="flex flex-wrap bg-white p-4 mb-8 rounded-md shadow-md">
+			<DragDropContext onDragEnd={onDragQuestionEnd}>
+				<Droppable droppableId="questionsList">
+					{(provided) => (
+						<div ref={provided.innerRef} {...provided.droppableProps} className="w-full">
+							<QuestionsList questions={survey} />
+							{provided.placeholder}
+						</div>
+					)}
+				</Droppable>
+			</DragDropContext>
+		</div>
+	);
 }

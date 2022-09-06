@@ -8,12 +8,6 @@ function updateLang(state, payload) {
 	return newState;
 }
 
-function updatePlans(state, payload) {
-	const newState = { ...state, plans: payload };
-	saveState(newState);
-	return newState;
-}
-
 function updateClient(state, payload) {
 	const newState = { ...state, client: payload };
 	saveState(newState);
@@ -30,8 +24,6 @@ export default function AppReducer(state, { type, payload }) {
 	switch (type) {
 		case 'UPDATE_LANG':
 			return updateLang(state, payload);
-		case 'UPDATE_PLANS':
-			return updatePlans(state, payload);
 		case 'UPDATE_CLIENT':
 			return updateClient(state, payload);
 		case 'UPDATE_ALERT':

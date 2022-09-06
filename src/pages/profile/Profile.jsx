@@ -63,7 +63,7 @@ export default function Profile() {
 	function handleFile(e) {
 		setErrorMsg('');
 		setError(false);
-		const file = validateFile(e.target.files)
+		const file = validateFile(e.target.files);
 		if (!file) return;
 		if (typeof file === 'string' && file === 'imageSize') {
 			setErrorMsg(LANGUAGES[state.lang].subscriptions.imageSize);
@@ -104,14 +104,32 @@ export default function Profile() {
 	async function handleLogoAndMap() {
 		let mapURL = client.map;
 		let logoURL = client.logo;
-		if (form.name !== client.name || form.street !== client.street || form.number !== client.number ||  form.city !== client.city || form.state !== client.state || form.zipCode.replace(/[^\d]/g, '') !== client.zipCode) {
-			const map = await createMap('client', client.id, form.name, form.street, form.number, form.city, form.state, form.zipCode)
+		if (
+			form.name !== client.name ||
+			form.street !== client.street ||
+			form.number !== client.number ||
+			form.city !== client.city ||
+			form.state !== client.state ||
+			form.zipCode.replace(/[^\d]/g, '') !== client.zipCode
+		) {
+			const map = await createMap(
+				'client',
+				client.id,
+				form.name,
+				form.street,
+				form.number,
+				form.city,
+				form.state,
+				form.zipCode
+			);
 			await sendPublicFile('map', client.id, map, setProgress);
 			mapURL = `${process.env.REACT_APP_IMAGES_URL}map/${map.name}?${Date.now()}`;
 		}
 		if (logo) {
 			await sendPublicFile('logo', client.id, logo, setProgress);
-			logoURL = logo ? `${process.env.REACT_APP_IMAGES_URL}logo/${client.id}.${logo.name.split('.').pop()}?${Date.now()}` : null
+			logoURL = logo
+				? `${process.env.REACT_APP_IMAGES_URL}logo/${client.id}.${logo.name.split('.').pop()}?${Date.now()}`
+				: null;
 		}
 		await updateClientLogoAndMap(client.id, logoURL, mapURL);
 	}
@@ -151,7 +169,7 @@ export default function Profile() {
 	}
 
 	useEffect(() => {
-		if (client) setClient(client)
+		if (client) setClient(client);
 	}, [client]);
 
 	return (
@@ -194,9 +212,7 @@ export default function Profile() {
 				<div className="w-full md:w-3/12 mb-4">
 					<input
 						value={form.document || ''}
-						onChange={(e) =>
-							setForm({ ...form, document: normalizeDocument(form.docType, e.target.value) })
-						}
+						onChange={(e) => setForm({ ...form, document: normalizeDocument(form.docType, e.target.value) })}
 						type="text"
 						placeholder={form.docType || LANGUAGES[state.lang].profile.selectDoc}
 						disabled={!form.docType}

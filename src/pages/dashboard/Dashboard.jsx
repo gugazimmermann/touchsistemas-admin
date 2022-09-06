@@ -6,20 +6,16 @@ import DashboardRow from './DashboardRow';
 
 export default function Dashboard() {
 	const { state } = useContext(AppContext);
-	const { client } = state;
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (state.alerts.lenght) navigate(ROUTES[state.lang].ALERTS);
 	}, []);
 
-	if (state.client) {
-		return (
-			<div className="grid gap-4">
-				<DashboardRow type={PLANS.SUBSCRIPTION} content={client.Subscriptions?.items} />
-				<DashboardRow type={PLANS.ADVANCED} content={client.Events?.items} />
-			</div>
-		);
-	}
-	return null;
+	return (
+		<div className="grid gap-4">
+			<DashboardRow type={PLANS.SUBSCRIPTION} />
+			<DashboardRow type={PLANS.ADVANCED} />
+		</div>
+	);
 }

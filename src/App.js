@@ -27,17 +27,14 @@ const SubscriptionForm = lazy(() => import('./pages/subscriptions/SubscriptionFo
 const Events = lazy(() => import('./pages/events/Events'));
 const EventDetail = lazy(() => import('./pages/events/EventDetail'));
 const Surveys = lazy(() => import('./pages/surveys/Surveys'));
+const SurveysDetail = lazy(() => import('./pages/surveys/SurveysDetail'));
 
 function App() {
 	const [searchParams] = useSearchParams();
 	const { state, dispatch } = useContext(AppContext);
-	// const language = window.navigator.userLanguage || window.navigator.language;
-	// Logger('Navigator:', language);
 
 	useEffect(() => {
-		if (searchParams.get('lang')) {
-			dispatch({ type: 'UPDATE_LANG', payload: searchParams.get('lang') });
-		}
+		if (searchParams.get('lang')) dispatch({ type: 'UPDATE_LANG', payload: searchParams.get('lang') });
 		Logger('Language:', state.lang);
 	}, []);
 
@@ -70,6 +67,7 @@ function App() {
 						<Route path={`${ROUTES[state.lang].EVENTS}`} element={<Events />} />
 						<Route path={`${ROUTES[state.lang].EVENTS}/:id`} element={<EventDetail />} />
 						<Route path={`${ROUTES[state.lang].SURVEYS}`} element={<Surveys />} />
+						<Route path={`${ROUTES[state.lang].SURVEYS}/:id`} element={<SurveysDetail />} />
 					</Route>
 				</Route>
 				<Route path="*" element={<NotFound />} />

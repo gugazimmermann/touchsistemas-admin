@@ -11,7 +11,7 @@ export const capitalizePhrase = (phrase) => {
 	const arr = phrase.split(' ');
 	for (let i = 0; i < arr.length; i += 1) arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
 	return arr.join(' ');
-}
+};
 
 export function orderEventsByLastDay(events, sort = 'DESC') {
 	const eventsWithLastDay = events.map((i) => ({

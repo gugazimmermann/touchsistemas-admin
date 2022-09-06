@@ -1,14 +1,14 @@
 import { useEffect, useState, useContext } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { Auth, API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
+import { Auth } from 'aws-amplify';
 import { decodeCookie } from '../../helpers/cookies';
 import Logger from '../../helpers/logger';
 import { AppContext } from '../../context';
 import { ROUTES } from '../../constants';
 import { Loading } from '../../components';
 import Nav from './nav/Nav';
+import { getClient, listOwners } from '../../api/queries';
 
 export default function Layout() {
 	const navigate = useNavigate();
@@ -32,43 +32,22 @@ export default function Layout() {
 		setLoading(true);
 		if (!state.client || force) {
 			const clientID = decodeCookie(cookies?.touchsistemas)?.client;
-			const {
-				data: { getClient },
-			} = await API.graphql(graphqlOperation(queries.getClient, { id: clientID }));
-			setClient(getClient);
-			dispatch({ type: 'UPDATE_CLIENT', payload: getClient });
-			Logger('Loading Client', getClient);
+			const client = await getClient(clientID);
+			setClient(client);
+			dispatch({ type: 'UPDATE_CLIENT', payload: client });
+			Logger('Loading Client', client);
 			const alerts = [];
-			if (!getClient?.phone) alerts.push({ type: 'register' });
-			if (!getClient?.Owners?.items.length) alerts.push({ type: 'owner' });
+			if (!client?.phone) alerts.push({ type: 'register' });
+			const owners = await listOwners(clientID);
+			if (!owners) alerts.push({ type: 'owner' });
 			dispatch({ type: 'UPDATE_ALERT', payload: alerts });
 			if (alerts.length) navigate(ROUTES[state.lang].ALERTS);
 		}
 		setLoading(false);
 	}
-	
-	// set force = true to reload
-	async function loadPlans(force) {
-		setLoading(true);
-		if (!state.plans.length || force) {
-			const {
-				data: {
-					planByActive: { items },
-				},
-			} = await API.graphql(graphqlOperation(queries.planByActive, { active: 'TRUE' }));
-			dispatch({ type: 'UPDATE_PLANS', payload: items });
-			Logger('Loading Plans', items);
-		}
-		setLoading(false);
-	}
-
-	async function loadData() {
-		await loadPlans();
-		await loadClient();
-	}
 
 	useEffect(() => {
-		loadData();
+		loadClient();
 	}, []);
 
 	return (

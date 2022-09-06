@@ -9,6 +9,8 @@ export { default as Loading } from './Loading';
 export { default as LoadingIcon } from './LoadingIcon';
 export { default as Logo } from './Logo';
 export { default as MapCard } from './MapCard';
+export { default as QRCodeCard } from './QRCodeCard';
+export { default as ReportCard } from './ReportCard';
 export { default as DashboardCard } from './DashboardCard';
 export { default as SurveyCard } from './SurveyCard';
 export { default as Title } from './Title';

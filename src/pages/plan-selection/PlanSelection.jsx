@@ -5,6 +5,7 @@ import { PLANS, LANGUAGES, ROUTES } from '../../constants';
 import { AppContext } from '../../context';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
 import { Loading } from '../../components';
+import { listPlans } from '../../api/queries';
 
 export default function PlanSelection() {
 	const navigate = useNavigate();
@@ -16,11 +17,12 @@ export default function PlanSelection() {
 
 	async function getPlans() {
 		setLoading(true);
+		const activeplans = await listPlans();
 		const languages = Object.keys(LANGUAGES);
 		const formatPlans = {};
 		languages.forEach((l) => {
 			formatPlans[`${l}`] = {};
-			state.plans.forEach((p) => {
+			activeplans.forEach((p) => {
 				formatPlans[`${l}`][`${p.type}`] = {
 					id: p.id,
 					type: p.type,

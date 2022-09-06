@@ -5,18 +5,14 @@ import { PLANS, ROUTES } from '../constants';
 
 export default function DashboardCard({ type, content }) {
 	const { state } = useContext(AppContext);
-	
+
 	const route = () => {
-		if (type === PLANS.SUBSCRIPTION) return `${ROUTES[state.lang].SUBSCRIPTIONS}/${content.id}`
-		return `${ROUTES[state.lang].EVENTS}/${content.id}`
-	}
+		if (type === PLANS.SUBSCRIPTION) return `${ROUTES[state.lang].SUBSCRIPTIONS}/${content.id}`;
+		return `${ROUTES[state.lang].EVENTS}/${content.id}`;
+	};
 
 	return (
-		<Link
-			to={route()}
-			key={content.id}
-			className="flex flex-col justify-between shadow-md rounded-lg"
-		>
+		<Link to={route()} key={content.id} className="flex flex-col justify-between shadow-md rounded-lg">
 			<div className="w-full bg-gray-200 rounded-t-lg overflow-hidden">
 				{content.logo ? (
 					<img

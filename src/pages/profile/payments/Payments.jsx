@@ -3,7 +3,7 @@ import moment from 'moment';
 import { AppContext } from '../../../context';
 import { LANGUAGES } from '../../../constants';
 import { Title } from '../../../components';
-import { orderEventsByLastDay } from '../../../helpers/general';
+import { listEvents, listSubscriptions, listOwners } from '../../../api/queries';
 
 export default function Payments() {
 	const { state } = useContext(AppContext);
@@ -14,7 +14,6 @@ export default function Payments() {
 	const titles = [
 		LANGUAGES[state.lang].payments.name,
 		LANGUAGES[state.lang].payments.plan,
-		LANGUAGES[state.lang].payments.date,
 		LANGUAGES[state.lang].payments.value,
 		LANGUAGES[state.lang].payments.status,
 	];
@@ -25,22 +24,25 @@ export default function Payments() {
 		return <i className="bx bx-check-circle text-secondary text-xl mr-2" />;
 	};
 
-	useEffect(() => {
-		if (client) {
-			setCardOwner(client.Owners.items[0].name);
-			const orderEvents = orderEventsByLastDay(client.Events.items, 'DESC');
-			const eventsPayments = [];
-			orderEvents.forEach((event) => {
-				eventsPayments.push({
-					name: event.name,
-					plan: event.plan,
-					date: event.dates.map((d) => moment(d, 'YYYY-MM-DD').format('DD/MM/YYYY')).join(', '),
-					value: event.plan,
-					status: moment(event.lastDay, 'YYYY-MM-DD').unix() > moment().unix() ? 'waiting' : 'paid',
-				});
+	async function formatPayments() {
+		const owners = await listOwners(client.id);
+		setCardOwner(owners[0].name);
+		const events = (await listEvents(client.id)) || [];
+		const subscriptions = (await listSubscriptions(client.id)) || [];
+		const contentPayments = [];
+		[...events, ...subscriptions].forEach((event) => {
+			contentPayments.push({
+				name: event.name,
+				plan: event.plan,
+				value: event.plan,
+				status: moment(event.lastDay, 'YYYY-MM-DD').unix() > moment().unix() ? 'waiting' : 'paid',
 			});
-			setPayments(eventsPayments);
-		}
+		});
+		setPayments(contentPayments);
+	}
+
+	useEffect(() => {
+		if (client) formatPayments();
 	}, [client]);
 
 	function renderPayments() {
@@ -70,9 +72,6 @@ export default function Payments() {
 										</th>
 										<th className="border-t border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
 											{c.plan}
-										</th>
-										<th className="border-t border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
-											{c.date}
 										</th>
 										<th className="border-t border-gray-200 align-middle text-sm font-light whitespace-nowrap px-2 py-4 text-left">
 											R$ {c.value}

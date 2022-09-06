@@ -1,15 +1,14 @@
 import { useEffect, useState, useContext } from 'react';
 import { useOutletContext, useLocation, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { API, graphqlOperation } from 'aws-amplify';
-import { createSurvey } from '../../graphql/mutations';
 import { AppContext } from '../../context';
 import { Loading, Alert, Title, Form } from '../../components';
 import { LANGUAGES, PLANS, ROUTES, SURVEY } from '../../constants';
-import LanguageSelection from './LanguageSelection';
-import QuestionForm from './QuestionForm';
-import AnswerForm from './AnswerForm';
-import QuestionList from './QuestionList';
+import LanguageSelection from './components/LanguageSelection';
+import QuestionForm from './components/QuestionForm';
+import AnswerForm from './components/AnswerForm';
+import QuestionList from './components/QuestionList';
+import { createSurvey } from '../../api/mutations';
 
 const initial = {
 	type: '',
@@ -34,22 +33,10 @@ export default function Surveys() {
 	const [survey, setSurvey] = useState([]);
 	const [formSurvey, setFormSurvey] = useState(initial);
 
-	async function handleCreateSurvey(s) {
-		const { data } = await API.graphql(
-			graphqlOperation(createSurvey, {
-				input: {
-					order: s.order,
-					language: s.language,
-					type: s.type,
-					required: s.required,
-					question: s.question,
-					answers: s.answers.length ? JSON.stringify(s.answers) : null,
-					EventsID: s.EventsID,
-					SubscriptionsID: s.SubscriptionsID,
-				},
-			})
-		);
-		return data.createSurvey;
+	function handleBack() {
+		setLanguage(null);
+		setFormSurvey(initial);
+		setSurvey([]);
 	}
 
 	function formatSurveyToSave() {
@@ -72,40 +59,33 @@ export default function Surveys() {
 	async function handleSaveSurvey() {
 		setLoading(true);
 		const formatedSurvey = formatSurveyToSave();
-		for (const s of formatedSurvey) await handleCreateSurvey(s);
+		for (const s of formatedSurvey) await createSurvey(s);
 		loadClient(true);
 		setLoading(false);
 		if (subscription) navigate(`${ROUTES[state.lang].SUBSCRIPTIONS}/${subscription.id}`);
 		if (event) navigate(`${ROUTES[state.lang].EVENTS}/${event.id}`);
 	}
 
-	function handleBack() {
-		setLanguage(null);
-		setFormSurvey(initial);
-		setSurvey([]);
-	}
-
-	async function handleSaveQuestion() {
-		setLoading(true);
-		setErrorMsg('');
-		setError(false);
+	function validadeForm() {
 		if (!formSurvey.type || !formSurvey.question) {
 			setErrorMsg(LANGUAGES[state.lang].subscriptions.required);
-			setError(true);
-			setLoading(false);
-			return null;
+			return false;
 		}
 		if (
 			(formSurvey.type === SURVEY.SINGLE || formSurvey.type === SURVEY.MULTIPLE) &&
 			(!formSurvey.answers || !formSurvey.answers.length)
 		) {
 			setErrorMsg(LANGUAGES[state.lang].subscriptions.required);
-			setError(true);
-			setLoading(false);
-			return null;
+			return false;
 		}
-		setLoading(false);
-		setFormSurvey(initial);
+		return true;
+	}
+
+	async function handleSaveQuestion() {
+		setLoading(true);
+		setErrorMsg('');
+		setError(false);
+		if (!validadeForm()) setError(true);
 		setSurvey([
 			...survey,
 			{
@@ -116,6 +96,8 @@ export default function Surveys() {
 				answers: formSurvey.answers.map((a, i) => ({ order: i, answer: a.answer })),
 			},
 		]);
+		setFormSurvey(initial);
+		setLoading(false);
 		return true;
 	}
 

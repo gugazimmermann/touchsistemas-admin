@@ -71,7 +71,7 @@ export function validateFile(files) {
 		if (file.size > 2 * 1024 * 1024) return 'imageSize';
 		if (!['image/png', 'image/jpeg'].includes(file.type)) return 'imageType';
 		if (!['jpg', 'jpeg', 'png'].includes(file.name.split('.').pop())) return 'imageType';
-		return file
+		return file;
 	}
 	return null;
 }
@@ -81,4 +81,12 @@ export function normalizeWebsite(w) {
 	if (w.charAt(0).toLocaleLowerCase() !== 'h') w = `http://${w}`;
 	if (w.charAt(w.length - 1) === '/') w = w.slice(0, -1);
 	return w;
+}
+
+export function formatAddress(o) {
+	let address = o.street;
+	if (o.number) address += `, ${o.number}`;
+	if (o.complement) address += ` (${o.complement})`;
+	address += ` - ${o.city} / ${o.state} - ${normalizeCEP(o.zipCode)}`;
+	return address;
 }

@@ -4,15 +4,25 @@ import { LANGUAGES } from '../../constants';
 import { createOwner, deleteOwner, updateOwner } from '../../api/mutations';
 import { normalizePhone, validateEmail } from '../../helpers/forms';
 import { Title, Form, Table, ConfirmationDialog } from '../../components';
+import { listOwners } from '../../api/queries';
 
 const initial = { name: '', phone: '', email: '' };
 
-export default function Owners({ clientID, ownersList, setError, setErrorMsg, setLoading, loadClient }) {
+export default function Owners({ clientID, setError, setErrorMsg, setLoading, loadClient }) {
 	const { state } = useContext(AppContext);
+	const [ownersList, setOwnersList] = useState([]);
 	const [formOwner, setFormOwner] = useState(initial);
 	const [selected, setSelected] = useState();
 	const [confirmDelete, setConfirmDelete] = useState(false);
 	const [update, setUpdate] = useState(false);
+
+	async function getOwnersList() {
+		setOwnersList(await listOwners(clientID));
+	}
+
+	useEffect(() => {
+		getOwnersList();
+	}, []);
 
 	useEffect(() => {
 		if (!update && selected) setSelected(initial);
@@ -201,7 +211,7 @@ export default function Owners({ clientID, ownersList, setError, setErrorMsg, se
 				color={update && 'text-warning'}
 			/>
 			{renderForm()}
-			{ownersList.length > 0 && <Table header={header()} body={body()} />}
+			{ownersList && ownersList.length > 0 && <Table header={header()} body={body()} />}
 			{renderDeleteDialog()}
 		</>
 	);

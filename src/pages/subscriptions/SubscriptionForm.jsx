@@ -4,7 +4,7 @@ import { AppContext } from '../../context';
 import { LANGUAGES, PLANS, ROUTES } from '../../constants';
 import { getActivePlanByType, getPartnerByReferralCode, getSubscriptionByID } from '../../api/queries';
 import { createSubscription, updateSubscription, updateSubscriptionLogoAndMap } from '../../api/mutations';
-import {  sendPublicFile } from '../../api/storage';
+import { sendPublicFile } from '../../api/storage';
 import { getAddressFromCEP, normalizeCEP, validateEmail, validateFile } from '../../helpers/forms';
 import { createContentMap, createMap } from '../../helpers/map';
 import { Loading, Alert, Title, Form, Uploading } from '../../components';
@@ -31,7 +31,7 @@ export default function SubscriptionForm() {
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [subscription, setSubscription] = useState()
+	const [subscription, setSubscription] = useState();
 	const [form, setForm] = useState(initial);
 	const [logo, setLogo] = useState();
 	const [fileName, setFileName] = useState(LANGUAGES[state.lang].subscriptions.logo);
@@ -100,20 +100,38 @@ export default function SubscriptionForm() {
 	async function handleLogoAndMap(newSubscription) {
 		let mapURL = subscription?.map;
 		let logoURL = subscription?.logo;
-		if (newSubscription.name !== subscription?.name || newSubscription.street !== subscription?.street || newSubscription.number !== subscription?.number ||  newSubscription.city !== subscription?.city || newSubscription.state !== subscription?.state || newSubscription.zipCode.replace(/[^\d]/g, '') !== subscription?.zipCode) {
-			const map = await createMap('subscription', newSubscription.id, newSubscription.name, newSubscription.street, newSubscription.number, newSubscription.city, newSubscription.state, newSubscription.zipCode)
+		if (
+			newSubscription.name !== subscription?.name ||
+			newSubscription.street !== subscription?.street ||
+			newSubscription.number !== subscription?.number ||
+			newSubscription.city !== subscription?.city ||
+			newSubscription.state !== subscription?.state ||
+			newSubscription.zipCode.replace(/[^\d]/g, '') !== subscription?.zipCode
+		) {
+			const map = await createMap(
+				'subscription',
+				newSubscription.id,
+				newSubscription.name,
+				newSubscription.street,
+				newSubscription.number,
+				newSubscription.city,
+				newSubscription.state,
+				newSubscription.zipCode
+			);
 			await sendPublicFile('map', newSubscription.id, map, setProgress);
 			mapURL = `${process.env.REACT_APP_IMAGES_URL}map/${map.name}?${Date.now()}`;
 			const content = (client.Subscriptions?.items || []).map((i) => {
-				if (i.id === newSubscription.id) return newSubscription
-				return i
-			})
+				if (i.id === newSubscription.id) return newSubscription;
+				return i;
+			});
 			if (!params.id) content.push(newSubscription);
-			createContentMap(PLANS.SUBSCRIPTION, client, content)
+			createContentMap(PLANS.SUBSCRIPTION, client, content);
 		}
 		if (logo) {
 			await sendPublicFile('logo', newSubscription.id, logo, setProgress);
-			logoURL = logo ? `${process.env.REACT_APP_IMAGES_URL}logo/${newSubscription.id}.${logo.name.split('.').pop()}?${Date.now()}` : null
+			logoURL = logo
+				? `${process.env.REACT_APP_IMAGES_URL}logo/${newSubscription.id}.${logo.name.split('.').pop()}?${Date.now()}`
+				: null;
 		}
 		await updateSubscriptionLogoAndMap(newSubscription.id, logoURL, mapURL);
 	}
@@ -144,7 +162,7 @@ export default function SubscriptionForm() {
 		const newSubscription = !subscription?.id
 			? await createSubscription(form, client.id, plan?.id, partner?.id)
 			: await updateSubscription(params.id, form, client.id, plan?.id, partner?.id);
-		await handleLogoAndMap(newSubscription)
+		await handleLogoAndMap(newSubscription);
 		loadClient(true);
 		setForm(initial);
 		setLoading(false);
@@ -176,8 +194,7 @@ export default function SubscriptionForm() {
 		if (getSubscription) {
 			setSubscriptionForm(getSubscription);
 			setSubscription(getSubscription);
-		}
-		else {
+		} else {
 			navigate(ROUTES[state.lang].DASHBOARD);
 		}
 		setLoading(false);
@@ -188,7 +205,6 @@ export default function SubscriptionForm() {
 	}, [params]);
 
 	return (
-		
 		<>
 			{loading && <Loading />}
 			{!!progress && <Uploading progress={progress} />}

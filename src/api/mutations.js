@@ -31,7 +31,7 @@ export async function updateClientLogoAndMap(id, logo, map) {
 }
 
 export async function updateClientContentMap(id, type, mapName) {
-	const input = type === PLANS.SUBSCRIPTION ? { id, subscriptionsMap: mapName } : { id, eventssMap: mapName }
+	const input = type === PLANS.SUBSCRIPTION ? { id, subscriptionsMap: mapName } : { id, eventssMap: mapName };
 	const { data } = await API.graphql(graphqlOperation(mutations.updateClient, { input }));
 	return data.updateClient;
 }
@@ -119,6 +119,26 @@ export async function updateSubscription(id, subscription, ClientID, PlanID, Par
 }
 
 export async function updateSubscriptionLogoAndMap(id, logo, map) {
-	const { data } = await API.graphql(graphqlOperation(mutations.updateSubscriptions, { input: { id, active: 'TRUE', logo, map } }));
+	const { data } = await API.graphql(
+		graphqlOperation(mutations.updateSubscriptions, { input: { id, active: 'TRUE', logo, map } })
+	);
 	return data.updateSubscriptions;
+}
+
+export async function createSurvey(survey) {
+	const { data } = await API.graphql(
+		graphqlOperation(mutations.createSurvey, {
+			input: {
+				order: survey.order,
+				language: survey.language,
+				type: survey.type,
+				required: survey.required,
+				question: survey.question,
+				answers: survey.answers.length ? JSON.stringify(survey.answers) : null,
+				EventsID: survey.EventsID,
+				SubscriptionsID: survey.SubscriptionsID,
+			},
+		})
+	);
+	return data.createSurvey;
 }

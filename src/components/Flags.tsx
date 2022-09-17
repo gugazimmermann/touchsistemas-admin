@@ -16,7 +16,7 @@ const Flags = () => {
   const [open, setOpen] = useState(false);
   const ref = useCloseModal(open, setOpen);
 
-  function showFlag(l: LANGUAGES) {
+  const showFlag = (l: LANGUAGES) => {
     if (l === LANGUAGES.EN)
       return <img src={EN} alt="English" className="w-6 h-6" />;
     if (l === LANGUAGES.ES)
@@ -24,7 +24,7 @@ const Flags = () => {
     return <img src={BR} alt="Português" className="w-6 h-6" />;
   }
 
-  function handleChangeLanguage(l: LANGUAGES) {
+  const handleChangeLanguage = (l: LANGUAGES) => {
     const nextRoute = Object.values(ROUTES[l])[
       Object.values(ROUTES[state.lang])
         .map((x) => x)

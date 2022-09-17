@@ -12,6 +12,7 @@
 /build
 .env
 /amplify_copy
+/.history
 
 # misc
 .DS_Store

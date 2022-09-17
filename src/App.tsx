@@ -1,9 +1,9 @@
 import { lazy, Suspense, useContext, useEffect } from "react";
-import { Routes, Route, useSearchParams } from "react-router-dom";
-import { AppContext } from "./context";
-import { Loading } from "./components";
+import { Routes, Route, useSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { CONTEXT, LANGUAGES } from './ts/enums';
-import { ROUTES } from './languages/index';
+import { AppContext } from "./context";
+import { ROUTES } from './languages';
+import { Loading } from "./components";
 
 const NotFound = lazy(() => import("./pages/not-found/NotFound"));
 const AuthLayout = lazy(() => import("./pages/auth/AuthLayout"));
@@ -14,13 +14,23 @@ const SignUp = lazy(() => import("./pages/auth/SignUp"));
 const ConfirmSignUp = lazy(() => import("./pages/auth/ConfirmSignUp"));
 
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 	const { state, dispatch } = useContext(AppContext);
 
 	useEffect(() => {
-    const lang = searchParams.get('lang');
-		if (lang) dispatch({ type: CONTEXT.UPDATE_LANGUAGE, payload: lang.toLocaleUpperCase() as unknown as LANGUAGES});
-	}, [dispatch, searchParams]);
+    const lang = (searchParams.get('lang') || "").toLocaleUpperCase();
+    if (lang) {
+      dispatch({ type: CONTEXT.UPDATE_LANGUAGE, payload: lang as LANGUAGES});
+      const nextRoute = Object.values(ROUTES[lang as LANGUAGES])[
+        Object.values(ROUTES[state.lang])
+          .map((x) => x)
+          .indexOf(location.pathname)
+      ];
+      navigate(`${nextRoute}${location.search}`);
+    }
+	}, [dispatch, location.pathname, location.search, navigate, searchParams, state.lang]);
   
   return (
     <Suspense fallback={<Loading />}>

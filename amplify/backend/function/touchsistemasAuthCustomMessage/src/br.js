@@ -17,7 +17,7 @@ async function forgotPassword(event, generateEmailBody) {
 		emailMessage: generateEmailBody(`
       <p>Seu código de recuperação de senha é: ${event.request.codeParameter}</p>
       <br />
-      <p>Digite seu código no campo informado ou clique aqui: <a>${process.env.ADMIN_URL}redefinir-senha?lang=${event.request.userAttributes.locale}</a></p>
+      <p>Digite seu código no campo informado ou clique aqui: <a href="${process.env.ADMIN_URL}redefinir-senha&email=${event.request.userAttributes.email}&code=${event.request.codeParameter}">clique aqui</a>.</p>
       `),
 	};
 	return event;

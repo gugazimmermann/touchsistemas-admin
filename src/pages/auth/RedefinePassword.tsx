@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useOutletContext, useLocation } from "react-router-dom";
+import { useOutletContext, useLocation, useSearchParams } from "react-router-dom";
 import { AlertType, useOutletContextProps, LocationType } from '../../ts/types';
 import { LANG, ROUTES } from '../../languages/index';
 import { AppContext } from '../../context';
@@ -11,6 +11,7 @@ export default function RedefinePassword() {
   const { state } = useContext(AppContext);
   const location: LocationType = useLocation();
   const { setAlert, setImage, setTitle, redefinePassword }: useOutletContextProps = useOutletContext();
+  const [searchParams] = useSearchParams();
   const [email, setEmail] = useState(location.state?.email || "");
   const [code, setCode] = useState("");
   const [pwd, setPwd] = useState("");
@@ -22,6 +23,11 @@ export default function RedefinePassword() {
   );
   useEffect(() => setImage(Image), [setImage]);
   useEffect(() => setTitle(LANG[state.lang].auth.redefine), [setTitle, state.lang]);
+
+  useEffect(() => {
+		if (searchParams.get('email')) setEmail(searchParams.get('email') || "");
+		if (searchParams.get('code')) setCode(searchParams.get('code') || "");
+	}, [searchParams]);
 
   const disabled = () =>
     email === "" ||

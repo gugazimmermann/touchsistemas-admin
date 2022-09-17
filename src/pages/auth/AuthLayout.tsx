@@ -160,14 +160,14 @@ export default function AuthLayout() {
             <Flags />
           </div>
           <div className="w-10/12 md:w-6/12 lg:w-4/12 md:mb-0 flex justify-center items-center">
-            <img src={image} alt="auth" className="h-auto w-auto" />
+            <img src={image} alt="auth" className="h-96 w-96 md:h-auto md:w-auto" />
           </div>
           <div className="w-10/12 md:w-5/12 lg:w-4/12">
             <div className="flex flex-col gap-2">
               <img
                 src="./android-chrome-192x192.png"
                 alt="auth"
-                className="h-28 object-contain"
+                className="hidden md:flex h-28 object-contain"
               />
               <Title
                 text={projectName}

@@ -1,22 +1,22 @@
-import { useContext, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LANGUAGES, CONTEXT } from "../ts/enums";
 import { AppContext } from "../context";
 import { useCloseModal } from "../helpers";
 import { ROUTES } from "../languages";
+import ArrowIcon from "../images/ArrowIcon";
 import BR from "../images/flags/br.svg";
 import EN from "../images/flags/en.svg";
 import ES from "../images/flags/es.svg";
-import ArrowIcon from "../images/ArrowIcon";
 
-const Flags = () => {
+const Flags = (): ReactElement => {
   const location = useLocation();
   const navigate = useNavigate();
   const { state, dispatch } = useContext(AppContext);
   const [open, setOpen] = useState(false);
   const ref = useCloseModal(open, setOpen);
 
-  function showFlag(l: LANGUAGES) {
+  const showFlag = (l: LANGUAGES) => {
     if (l === LANGUAGES.EN)
       return <img src={EN} alt="English" className="w-6 h-6" />;
     if (l === LANGUAGES.ES)
@@ -24,7 +24,7 @@ const Flags = () => {
     return <img src={BR} alt="Português" className="w-6 h-6" />;
   }
 
-  function handleChangeLanguage(l: LANGUAGES) {
+  const handleChangeLanguage = (l: LANGUAGES) => {
     const nextRoute = Object.values(ROUTES[l])[
       Object.values(ROUTES[state.lang])
         .map((x) => x)

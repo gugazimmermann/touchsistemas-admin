@@ -23,7 +23,7 @@
           "siteUrl": "https://www.touchsistemas.com.br/",
           "siteLogo": "https://s3.amazonaws.com/touchsistemas.com.br/android-chrome-192x192.png",
           "deploymentBucketName": "amplify-touchsistemas-dev-180242-deployment",
-          "s3Key": "amplify-builds/touchsistemasAuthCustomMessage-6c51326b766735526861-build.zip"
+          "s3Key": "amplify-builds/touchsistemasAuthCustomMessage-777351573234316e3561-build.zip"
         },
         "touchsistemasListPlans": {
           "deploymentBucketName": "amplify-touchsistemas-dev-180242-deployment",

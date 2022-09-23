@@ -1,11 +1,14 @@
+import { ReactElement } from "react";
+
 type AuthButtonProps = {
   text: string;
   disabled?: boolean;
   handler: () => void;
-  full?: boolean
+  full?: boolean;
+  update?: boolean;
 };
 
-const AuthButton = ({ text, disabled, handler, full }: AuthButtonProps) => (
+const AuthButton = ({ text, disabled, handler, full, update }: AuthButtonProps): ReactElement => (
   <button
     type="button"
     onClick={handler}
@@ -13,7 +16,7 @@ const AuthButton = ({ text, disabled, handler, full }: AuthButtonProps) => (
     className={`${
       disabled
         ? "bg-gray-600 cursor-not-allowed"
-        : "bg-primary cursor-pointer hover:bg-secondary"
+        : `${!update ? 'bg-primary' : 'bg-warning'} cursor-pointer hover:bg-secondary`
     } px-2 py-2 text-white font-medium uppercase rounded-md shadow-md transition duration-150 ease-in-out ${full && 'inline-block w-full'}`}
   >
     {text}

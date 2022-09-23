@@ -1,12 +1,13 @@
-import { useContext } from 'react';
+import { ReactElement, useContext } from 'react';
 import { AppContext } from '../context';
 import { LANG } from '../languages/index';
+
 type RememberMeType = {
   remember: boolean;
   setRemember: (remember: boolean) => void;
 };
 
-const RememberMe = ({ remember, setRemember }: RememberMeType) => {
+const RememberMe = ({ remember, setRemember }: RememberMeType): ReactElement => {
   const { state } = useContext(AppContext);
 
   return (

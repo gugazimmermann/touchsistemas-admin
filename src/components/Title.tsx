@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 
 type TitleProps = {
@@ -6,7 +7,7 @@ type TitleProps = {
   back?: string;
 };
 
-const Title = ({ text, className, back }: TitleProps) => {
+const Title = ({ text, className, back }: TitleProps): ReactElement => {
   return (
     <div className="flex">
       {back && (

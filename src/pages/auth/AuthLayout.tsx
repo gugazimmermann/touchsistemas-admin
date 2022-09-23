@@ -1,15 +1,20 @@
-import { useContext, useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import Auth from '../../api/auth';
-import { AlertType } from "../../ts/types";
-import { ALERT } from "../../ts/enums";
-import { Alert, Flags, Loading, Title } from "../../components";
+import { useContext, useState, useCallback, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate, Outlet } from "react-router-dom";
+import Auth from "../../api/auth";
+import { Loading, Flags, Title, Alert } from "../../components";
 import { AppContext } from "../../context";
-import { LANG, ROUTES } from '../../languages/index';
+import { COOKIES, Logger } from "../../helpers";
+import { ROUTES, LANG } from "../../languages";
+import { ALERT } from "../../ts/enums";
+import { AlertType } from "../../ts/types";
+import LogoIcon from "../../images/LogoIcon";
+import Mutations from "../../api/mutations";
 
 export default function AuthLayout() {
-  const { state } = useContext(AppContext);
   const navigate = useNavigate();
+  const { state } = useContext(AppContext);
+  const [cookies, setCookie] = useCookies([COOKIES.NAME]);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState<AlertType>({});
   const [image, setImage] = useState<string>("");
@@ -27,15 +32,26 @@ export default function AuthLayout() {
     setAlert({});
   };
 
+  const setClientCookie = (email: string, sub: string) => {
+    const encodedContent = COOKIES.Encode(JSON.stringify({ email, sub }));
+    const date = new Date();
+    date.setDate(date.getDate() + 365);
+    setCookie(COOKIES.NAME, encodedContent, { expires: date, path: "/" });
+  };
+
   const signIn = async (email: string, pwd: string, remember: boolean) => {
     startLoading();
     try {
-      await Auth.SignIn(email, pwd, remember);
+      const attributes = await Auth.SignIn(email, pwd, remember);
+      setClientCookie(attributes.email, attributes.sub);
       stopLoading();
       navigate(ROUTES[state.lang].DASHBOARD);
     } catch (err) {
       stopLoading();
-      setAlert({ type: ALERT.ERROR, text: LANG[state.lang].auth.authMsg.unableToLogin });
+      setAlert({
+        type: ALERT.ERROR,
+        text: LANG[state.lang].auth.authMsg.unableToLogin,
+      });
     }
   };
 
@@ -45,7 +61,13 @@ export default function AuthLayout() {
       await Auth.ForgotPassword(email);
       stopLoading();
       navigate(ROUTES[state.lang].REDIFINE_PASSWORD, {
-        state: { email, alert: { type: ALERT.INFO, text: LANG[state.lang].auth.authMsg.checkEmail } },
+        state: {
+          email,
+          alert: {
+            type: ALERT.INFO,
+            text: LANG[state.lang].auth.authMsg.checkEmail,
+          },
+        },
       });
     } catch (err) {
       stopLoading();
@@ -83,9 +105,16 @@ export default function AuthLayout() {
     startLoading();
     try {
       await Auth.SignUp(email, pwd, state.lang);
+      await Mutations.createClient(email);
       stopLoading();
       navigate(ROUTES[state.lang].CONFIRM_REGISTRATION, {
-        state: { email, alert: { type: ALERT.INFO, text: LANG[state.lang].auth.authMsg.checkEmail } },
+        state: {
+          email,
+          alert: {
+            type: ALERT.INFO,
+            text: LANG[state.lang].auth.authMsg.checkEmail,
+          },
+        },
       });
     } catch (err) {
       stopLoading();
@@ -104,7 +133,10 @@ export default function AuthLayout() {
       navigate(ROUTES[state.lang].CONFIRM_REGISTRATION, {
         state: {
           email,
-          alert: { type: ALERT.SUCCESS, text: LANG[state.lang].auth.authMsg.codeResent },
+          alert: {
+            type: ALERT.SUCCESS,
+            text: LANG[state.lang].auth.authMsg.codeResent,
+          },
         },
       });
     } catch (err) {
@@ -124,7 +156,10 @@ export default function AuthLayout() {
       navigate(ROUTES[state.lang].HOME, {
         state: {
           email,
-          alert: { type: ALERT.SUCCESS, text: LANG[state.lang].auth.authMsg.confirmationSuccess },
+          alert: {
+            type: ALERT.SUCCESS,
+            text: LANG[state.lang].auth.authMsg.confirmationSuccess,
+          },
         },
       });
     } catch (err) {
@@ -136,20 +171,28 @@ export default function AuthLayout() {
     }
   };
 
-  useEffect(() => {
-    const loadUser = async () => {
-      setLoading(true);
+  const loadUser = useCallback(async () => {
+    Logger("AuthLayout", 'loadUser');
+    setLoading(true);
+    const getCookie = COOKIES.Decode(cookies[COOKIES.NAME]);
+    Logger("AuthLayout getCookie", getCookie);
+    if (getCookie?.email) {
       try {
-        await Auth.GetUser();
+        const getUser = await Auth.GetUser();
+        Logger("AuthLayout getUser", getUser);
+        if (getUser.sub === getCookie.sub) navigate(ROUTES[state.lang].DASHBOARD);
         setLoading(false);
-        navigate(ROUTES[state.lang].DASHBOARD);
-      } catch (error) {
+      } catch (error: any) {
+        Logger("AuthLayout error", error.message);
         setLoading(false);
       }
-    };
+    }
+    setLoading(false);
+  }, [cookies, navigate, state.lang]);
 
+  useEffect(() => {
     loadUser();
-  }, [navigate, state.lang]);
+  }, [loadUser]);
 
   return (
     <main className="h-screen mx-auto">
@@ -160,15 +203,15 @@ export default function AuthLayout() {
             <Flags />
           </div>
           <div className="w-10/12 md:w-6/12 lg:w-4/12 md:mb-0 flex justify-center items-center">
-            <img src={image} alt="auth" className="h-auto w-auto" />
+            <img
+              src={image}
+              alt="auth"
+              className="h-96 w-96 md:h-auto md:w-auto"
+            />
           </div>
           <div className="w-10/12 md:w-5/12 lg:w-4/12">
-            <div className="flex flex-col gap-2">
-              <img
-                src="./android-chrome-192x192.png"
-                alt="auth"
-                className="h-28 object-contain"
-              />
+            <div className="hidden md:flex flex-col justify-center items-center text-primary gap-2">
+              <LogoIcon styles="h-28 w-28" />
               <Title
                 text={projectName}
                 className="text-2xl font-bold text-center mb-4 text-primary"

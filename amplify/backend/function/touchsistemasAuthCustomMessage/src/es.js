@@ -5,7 +5,7 @@ async function signUpMessage(event, generateEmailBody) {
       <p>Bienvenido a ${process.env.TITLE},</p>
       <p>Tu email registrado es ${event.request.userAttributes.email} y tu código de verificación es: ${event.request.codeParameter}</p>
       <br />
-      <p>Introduzca su código en el campo proporcionado o <a href="${process.env.ADMIN_URL}confirmar-registro?lang=${event.request.userAttributes.locale}&email=${event.request.userAttributes.email}&code=${event.request.codeParameter}">clic aquí</a>.</p>
+      <p>Introduzca su código en el campo proporcionado o <a href="${process.env.ADMIN_URL}confirmar-registro?lang=${event.request.userAttributes.locale.toLocaleLowerCase()}&email=${event.request.userAttributes.email}&code=${event.request.codeParameter}">clic aquí</a>.</p>
       `),
 	};
 	return event;
@@ -17,7 +17,7 @@ async function forgotPassword(event, generateEmailBody) {
 		emailMessage: generateEmailBody(`
       <p>Su código de recuperación de contraseña es: ${event.request.codeParameter}</p>
       <br />
-      <p>Introduzca su código en el campo proporcionado o <a href="${process.env.ADMIN_URL}redefinir-contrasena?lang=${event.request.userAttributes.locale}&email=${event.request.userAttributes.email}&code=${event.request.codeParameter}">clic aquí</a>.</p>
+      <p>Introduzca su código en el campo proporcionado o <a href="${process.env.ADMIN_URL}redefinir-contrasena?lang=${event.request.userAttributes.locale.toLocaleLowerCase()}&email=${event.request.userAttributes.email}&code=${event.request.codeParameter}">clic aquí</a>.</p>
       `),
 	};
 	return event;

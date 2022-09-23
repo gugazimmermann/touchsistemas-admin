@@ -1,8 +1,8 @@
-import { useContext } from 'react';
+import { ReactElement, useContext } from 'react';
 import { AppContext } from '../context';
 import { LANG } from '../languages/index';
 
-const Loading = () => {
+const Loading = (): ReactElement => {
   const { state } = useContext(AppContext);
 
   return (

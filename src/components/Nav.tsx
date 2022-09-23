@@ -46,8 +46,7 @@ const Nav = ({ handleSignOut }: NavProps): ReactElement => {
 						<i className="bx bx-message-alt-x text-3xl" />
 					)}
 					<NavInfo qtd={0} />
-					{/* {state.alerts.length > 0 && <NavAlert alerts={state.alerts.length} />} */}
-					<NavAlert />
+					{!!state.alerts.length && <NavAlert />}
 					<NavProfile handleSignOut={handleSignOut} qtd={0} />
 				</div>
 			</div>

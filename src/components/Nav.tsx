@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, ReactElement } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { AppContext } from "../context";
 import { showLink } from "../helpers";
@@ -12,7 +12,7 @@ type NavProps = {
   handleSignOut: () => void;
 }
 
-const Nav = ({ handleSignOut }: NavProps) => {
+const Nav = ({ handleSignOut }: NavProps): ReactElement => {
 	const { state } = useContext(AppContext);
 	const location = useLocation();
 

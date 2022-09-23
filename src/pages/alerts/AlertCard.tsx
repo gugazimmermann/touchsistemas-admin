@@ -7,7 +7,7 @@ type AlertCardProps = {
 	children: ReactElement
 }
 
-export default function AlertCard({ index, type, children }: AlertCardProps): ReactElement {
+const AlertCard = ({ index, type, children }: AlertCardProps): ReactElement => {
 
 	const seeType = (t: ALERT) => {
 		if (t === ALERT.ERROR) return 'bg-red-100 border border-red-300 text-red-500';
@@ -18,9 +18,11 @@ export default function AlertCard({ index, type, children }: AlertCardProps): Re
 	};
 
 	return (
-		<div className={`${seeType(type)} relative mb-2 rounded-lg p-1.5 flex items-center shadow-md`} role="alert">
+		<div key={index} className={`${seeType(type)} relative mb-2 rounded-lg p-1.5 flex items-center shadow-md`} role="alert">
 			<i className="bx bxs-error-circle text-2xl pr-2" />
 			{children}
 		</div>
 	);
 }
+
+export default AlertCard;

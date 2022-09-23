@@ -7,7 +7,7 @@ type SelectProps = {
   children: ReactElement;
 };
 
-const Select = ({ placeholder, value, handler, children }: SelectProps) => (
+const Select = ({ placeholder, value, handler, children }: SelectProps): ReactElement => (
   <select
     placeholder={placeholder}
     value={value}

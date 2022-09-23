@@ -1,11 +1,11 @@
-import { FormEvent } from "react";
+import { FormEvent, ReactElement } from 'react';
 
 type InputFileProps = {
   fileName: string;
   handler: (e: FormEvent<HTMLInputElement>) => void;
 };
 
-const InputFile = ({ fileName, handler }: InputFileProps) => (
+const InputFile = ({ fileName, handler }: InputFileProps): ReactElement => (
   <>
     <input
       type="file"

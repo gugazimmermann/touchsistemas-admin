@@ -1,8 +1,9 @@
+import { ReactElement } from 'react';
 type AvatarIconProps = {
   styles: string;
 };
 
-export default function AvatarIcon({ styles }: AvatarIconProps) {
+export default function AvatarIcon({ styles }: AvatarIconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,8 +1,9 @@
+import { ReactElement } from 'react';
 type ArrowIconProps = {
   styles: string;
 };
 
-export default function ArrowIcon({ styles }: ArrowIconProps) {
+export default function ArrowIcon({ styles }: ArrowIconProps): ReactElement {
   return (
     <svg
       aria-hidden="true"

@@ -118,7 +118,7 @@ export function normalizeWebsite(w: string): string | null {
   return w;
 }
 
-export function formatAddress(a: FormatAddressType) {
+export function formatAddress(a: FormatAddressType): string {
   let address = a.street;
   if (a.number) address += `, ${a.number}`;
   if (a.complement) address += ` (${a.complement})`;

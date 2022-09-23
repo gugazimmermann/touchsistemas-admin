@@ -1,7 +1,7 @@
 import { PlansTypes } from '../API';
 import { CreateMapType } from "../ts/types";
 
-export async function createMap({type, id, name, street, number, city, state, zipCode}: CreateMapType) {
+export async function createMap({type, id, name, street, number, city, state, zipCode}: CreateMapType): Promise<File> {
 	const color = type === PlansTypes.SUBSCRIPTION ? '0xa855f7' : (type === PlansTypes.BASIC || type === PlansTypes.ADVANCED) ? '0x10b981' : '0xf59e0b';
 	const address = encodeURIComponent(`${street}, ${number} - ${city} - ${state}, ${zipCode}`);
 	const marker = `markers=color:${color}%7Clabel:${name}%7C${address}`;

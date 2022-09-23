@@ -1,8 +1,9 @@
+import { ReactElement } from 'react';
 type LogoIconProps = {
   styles: string;
 };
 
-export default function LogoIcon({ styles }: LogoIconProps) {
+export default function LogoIcon({ styles }: LogoIconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

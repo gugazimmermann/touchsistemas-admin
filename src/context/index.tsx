@@ -8,6 +8,7 @@ const initial: ContextStateType = {
   lang: LocalStorage.GetItem("state", true)?.lang || LANGUAGES.BR,
   client: LocalStorage.GetItem("state", true)?.client ||  {} as ContextClientType,
   alerts: [] as AlertType[],
+  info: [] as AlertType[],
 };
 
 type AppContextType = {

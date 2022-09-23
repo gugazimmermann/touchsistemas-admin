@@ -33,6 +33,7 @@ export type ContextStateType = {
   lang: LANGUAGES;
   client: ContextClientType;
   alerts: AlertType[];
+  info: AlertType[];
 };
 
 export type ContextClientType = {

@@ -1,4 +1,4 @@
-import { Client, Owner } from "../../models"
+import { Client, Owner, Plan } from "../../models"
 
 export type ClientByEmailRespose = {
   data: {
@@ -12,6 +12,14 @@ export type ListOwnersRespose = {
   data: {
     ownersByClientID: {
       items: Owner[]
+    }
+  }
+}
+
+export type ListPlansRespose = {
+  data: {
+    planByActive: {
+      items: Plan[]
     }
   }
 }

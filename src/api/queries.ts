@@ -1,7 +1,7 @@
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../graphql/queries';
-import { Client, Owner } from '../models';
-import { ClientByEmailRespose, ListOwnersRespose } from '../ts/types';
+import { Client, Owner, Plan } from '../models';
+import { ClientByEmailRespose, ListOwnersRespose, ListPlansRespose } from '../ts/types';
 
 const ClientByEmail = async (email: string): Promise<Client | null> => {
 	const { data: { clientByEmail: { items } } } = await (API.graphql(graphqlOperation(queries.clientByEmail, { email })) as Promise<ClientByEmailRespose>);
@@ -14,6 +14,12 @@ export async function listOwners(ClientID: string): Promise<Owner[] | null> {
 	return items;
 }
 
-const Queries = { ClientByEmail, listOwners };
+export async function listPlans(): Promise<Plan[] | null> {
+	const { data: { planByActive: { items } } } = await (API.graphql(graphqlOperation(queries.planByActive, { active: 'TRUE' })) as Promise<ListPlansRespose>);
+	if (!items.length) return null;
+	return items;
+}
+
+const Queries = { ClientByEmail, listOwners, listPlans };
 
 export default Queries;

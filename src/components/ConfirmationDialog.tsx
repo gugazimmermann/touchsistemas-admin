@@ -3,7 +3,7 @@ type ConfirmationDialogProps = {
 	open: boolean;
 	setOpen: (open: boolean) => void;
 	handleConfirm: () => void;
-	icon?: string;
+	icon?: ReactElement;
 	cancelText: string
 	confirmText: string
 	confirmColor?: string;
@@ -46,9 +46,7 @@ export default function ConfirmationDialog({
 								</button>
 								<button
 									type="button"
-									className={`text-white bg-${
-										confirmColor || 'danger'
-									} font-bold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center`}
+									className={`text-white ${confirmColor || 'bg-danger'} font-bold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center`}
 									onClick={() => handleConfirm()}
 								>
 									{confirmText}

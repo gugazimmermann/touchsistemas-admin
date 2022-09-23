@@ -12,51 +12,21 @@ import { AppContext } from "../../context";
 import { LANGUAGES } from "../../ts/enums";
 import { PlansTypes } from "../../models/index";
 import { LANG, ROUTES } from "../../languages";
-import { useOutletContextProfileProps } from "../../ts/types";
+import {
+  FormatPlansContentType,
+  FormatPlansLangType,
+  FormatPlansType,
+  PlansCardInfoType,
+  PlansModalType,
+  useOutletContextProfileProps,
+} from "../../ts/types";
 import { ConfirmationDialog } from "../../components";
-
-type FormatPlansType = {
-  [key in LANGUAGES]: FormatPlansLangType;
-};
-
-type FormatPlansLangType = {
-  [key in PlansTypes]: FormatPlansContentType;
-};
-
-type FormatPlansContentType = {
-  id: string;
-  type: PlansTypes;
-  name?: string;
-  detail?: string[];
-  price?: number;
-  currency?: string;
-};
-
-type FormatPlansContentNameType = {
-  language: LANGUAGES;
-  name: string;
-};
-
-type FormatPlansContentDetailType = {
-  language: string;
-  detail: string[];
-};
-
-type FormatPlansContentPriceType = {
-  language: string;
-  currency: string;
-  price: number;
-};
-
-type PlansCardInfoType = {
-  color: string;
-  icon: ReactElement;
-};
-
-type PlansModalType = {
-  plan: FormatPlansContentType;
-  info: PlansCardInfoType;
-};
+import {
+  extractPlanName,
+  extractPlanDetails,
+  extractPlanPrice,
+  extractPlanCurrency,
+} from "../../helpers";
 
 export default function PlanSelection() {
   const navigate = useNavigate();
@@ -68,31 +38,6 @@ export default function PlanSelection() {
 
   const getPlans = useCallback(async (): Promise<void> => {
     setLoading(true);
-
-    const extractPlanName = (name: string, l: LANGUAGES): string => {
-      const parsed = JSON.parse(name) as FormatPlansContentNameType[];
-      const parsedLang = parsed.find((p) => p.language === l);
-      return parsedLang ? parsedLang.name : "";
-    };
-
-    const extractPlanDetails = (details: string, l: LANGUAGES): string[] => {
-      const parsed = JSON.parse(details) as FormatPlansContentDetailType[];
-      const parsedLang = parsed.find((p) => p.language === l);
-      return parsedLang ? parsedLang.detail : [];
-    };
-
-    const extractPlanPrice = (price: string, l: LANGUAGES): number => {
-      const parsed = JSON.parse(price) as FormatPlansContentPriceType[];
-      const parsedLang = parsed.find((p) => p.language === l);
-      return parsedLang ? parsedLang.price : 0;
-    };
-
-    const extractPlanCurrency = (price: string, l: LANGUAGES): string => {
-      const parsed = JSON.parse(price) as FormatPlansContentPriceType[];
-      const parsedLang = parsed.find((p) => p.language === l);
-      return parsedLang ? parsedLang.currency : "";
-    };
-
     const activeplans = await Queries.listPlans();
     const languages = Object.values(LANGUAGES);
     const formatPlans = {} as FormatPlansType;
@@ -170,7 +115,7 @@ export default function PlanSelection() {
         <button
           type="button"
           onClick={() => choosePlan(p.name)}
-          className={`p-8 hover:text-${cardInfo.color.split('bg-')[1]}`}
+          className={`p-8 hover:text-${cardInfo.color.split("bg-")[1]}`}
         >
           {cardInfo.icon}
           <h1 className="text-lg font-bold">{p.name}</h1>
@@ -179,7 +124,11 @@ export default function PlanSelection() {
     );
   };
 
-  const renderPlanPrice = (price: number, currency: string, type: PlansTypes): string => {
+  const renderPlanPrice = (
+    price: number,
+    currency: string,
+    type: PlansTypes
+  ): string => {
     let res = currency === "brl" ? `R$ ${price},00` : `USD$ ${price},00`;
     res +=
       type === PlansTypes.SUBSCRIPTION
@@ -188,7 +137,7 @@ export default function PlanSelection() {
         ? ` ${LANG[state.lang].payments.type.byEvent}`
         : `* ${LANG[state.lang].payments.type.byEvent}`;
     return res;
-  }
+  };
 
   const renderInfoModal = (p: FormatPlansContentType): ReactElement => {
     if (p) {
@@ -202,13 +151,13 @@ export default function PlanSelection() {
               </p>
             ))}
           <h2 className="font-bold mt-4">
-            {renderPlanPrice(p.price || 0, p.currency || 'brl', p.type)}
+            {renderPlanPrice(p.price || 0, p.currency || "brl", p.type)}
           </h2>
         </>
       );
     }
     return <></>;
-  }
+  };
 
   return (
     <div className="grid sm:grid-cols-3 gap-4">

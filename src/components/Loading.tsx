@@ -2,6 +2,7 @@ import { ReactElement, useContext } from 'react';
 import { AppContext } from '../context';
 import { LANG } from '../languages/index';
 
+// TODO: review loading
 const Loading = (): ReactElement => {
   const { state } = useContext(AppContext);
 

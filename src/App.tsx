@@ -25,6 +25,7 @@ const Alerts = lazy(() => import("./pages/alerts/Alerts"));
 const Profile = lazy(() => import("./pages/profile/Profile"));
 const ProfileCognito = lazy(() => import("./pages/profile/ProfileCognito"));
 const PlanSelection = lazy(() => import("./pages/plan-selection/PlanSelection"));
+const New = lazy(() => import("./pages/plan-selection/New"));
 
 function App() {
   const location = useLocation();
@@ -75,6 +76,7 @@ function App() {
           <Route path={ROUTES[state.lang].PROFILE} element={<Profile />} />
           <Route path={ROUTES[state.lang].PROFILEADVANCED} element={<ProfileCognito />} />
           <Route path={`${ROUTES[state.lang].NEW}`} element={<PlanSelection />} />
+          <Route path={`${ROUTES[state.lang].NEW}/:name`} element={<New />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -33,13 +33,13 @@
 function handleTranslation(locale) {
 	let lang = undefined;
 	switch (locale) {
-		case 'br':
+		case 'BR':
 			lang = require('./br');
 			return lang;
-		case 'en':
+		case 'EN':
 			lang = require('./en');
 			return lang;
-		case 'es':
+		case 'ES':
 			lang = require('./es');
 			return lang;
 		default:

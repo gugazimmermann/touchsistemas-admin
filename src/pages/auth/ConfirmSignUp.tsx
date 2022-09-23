@@ -1,16 +1,26 @@
-import { useEffect, useState, useContext } from 'react';
-import { useOutletContext, useLocation, useSearchParams } from "react-router-dom";
-import { AlertType, useOutletContextProps, LocationType } from '../../ts/types';
-import { LANG, ROUTES } from '../../languages/index';
-import { AppContext } from '../../context';
-import { isValidEmail } from "../../helpers";
-import { Button, Input, Link } from "../../components";
-import Image from '../../images/auth/ConfirmSignUp.svg';
+import { useContext, useState, useEffect } from "react";
+import {
+  useLocation,
+  useOutletContext,
+  useSearchParams,
+} from "react-router-dom";
+import { Input, Button, Link } from "../../components";
+import { AppContext } from "../../context";
+import { validateEmail } from "../../helpers";
+import { LANG, ROUTES } from "../../languages";
+import { LocationType, AlertType, useOutletContextProps } from "../../ts/types";
+import Image from "../../images/auth/ConfirmSignUp.svg";
 
 export default function ConfirmSignUp() {
   const { state } = useContext(AppContext);
   const location: LocationType = useLocation();
-  const { setAlert, setImage, setTitle, resendConfirmationCode, confirmSignUp }: useOutletContextProps = useOutletContext();
+  const {
+    setAlert,
+    setImage,
+    setTitle,
+    resendConfirmationCode,
+    confirmSignUp,
+  }: useOutletContextProps = useOutletContext();
   const [searchParams] = useSearchParams();
   const [email, setEmail] = useState(location.state?.email || "");
   const [code, setCode] = useState("");
@@ -20,15 +30,18 @@ export default function ConfirmSignUp() {
     [location.state?.alert, setAlert]
   );
   useEffect(() => setImage(Image), [setImage]);
-  useEffect(() => setTitle(LANG[state.lang].auth.ConfirmSignUp), [setTitle, state.lang]);
+  useEffect(
+    () => setTitle(LANG[state.lang].auth.ConfirmSignUp),
+    [setTitle, state.lang]
+  );
 
   useEffect(() => {
-		if (searchParams.get('email')) setEmail(searchParams.get('email') || "");
-		if (searchParams.get('code')) setCode(searchParams.get('code') || "");
-	}, [searchParams]);
+    if (searchParams.get("email")) setEmail(searchParams.get("email") || "");
+    if (searchParams.get("code")) setCode(searchParams.get("code") || "");
+  }, [searchParams]);
 
   const disabled = () =>
-    email === "" || !isValidEmail(email) || code === "" || code.length < 6;
+    email === "" || !validateEmail(email) || code === "" || code.length < 6;
 
   return (
     <form>
@@ -37,11 +50,16 @@ export default function ConfirmSignUp() {
           type="email"
           placeholder={LANG[state.lang].email}
           value={email}
-          handler={setEmail}
+          handler={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className="mb-4">
-        <Input type="text" placeholder={LANG[state.lang].code} value={code} handler={setCode} />
+        <Input
+          type="text"
+          placeholder={LANG[state.lang].code}
+          value={code}
+          handler={(e) => setCode(e.target.value)}
+        />
       </div>
       <div className="mb-4 flex justify-end duration-200 transition ease-in-out">
         <button type="button" onClick={() => resendConfirmationCode(email)}>
@@ -57,7 +75,11 @@ export default function ConfirmSignUp() {
         />
       </div>
       <div className="w-full text-center mt-4">
-        <Link to={ROUTES[state.lang].HOME} text={LANG[state.lang].auth.backToSignIn} className="text-xl font-bold" />
+        <Link
+          to={ROUTES[state.lang].HOME}
+          text={LANG[state.lang].auth.backToSignIn}
+          className="text-xl font-bold"
+        />
       </div>
     </form>
   );

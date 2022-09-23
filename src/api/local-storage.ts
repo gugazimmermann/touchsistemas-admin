@@ -30,9 +30,6 @@ const Save = (name: string, obj: GenericObject | GenericObject[], cryto?: boolea
   localStorage.setItem(ls, JSON.stringify({ ...storage }))
 }
 
-const LocalStorage = {
-  Save,
-  GetItem
-}
+const LocalStorage = { Save, GetItem }
 
 export default LocalStorage;

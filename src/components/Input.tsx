@@ -1,4 +1,4 @@
-import { useState, Dispatch, useContext } from 'react';
+import { useState, useContext, ReactElement } from 'react';
 import { AppContext } from '../context';
 import { LANG } from '../languages';
 
@@ -6,7 +6,8 @@ type InputProps = {
   type: "password" | "email" | "text";
   placeholder: string;
   value: string | number;
-  handler: Dispatch<any>;
+  handler?: (e: { target: HTMLInputElement }) => void;
+  disabled?: boolean;
   showTooltip?: boolean;
 };
 
@@ -15,8 +16,9 @@ const Input = ({
   placeholder,
   value,
   handler,
+  disabled,
   showTooltip,
-}: InputProps) => {
+}: InputProps): ReactElement => {
   const { state } = useContext(AppContext);
   const [inputType, setInputType] = useState(type);
   const [tooltip, setTooltip] = useState(false);
@@ -31,9 +33,10 @@ const Input = ({
       <input
         type={inputType}
         value={value}
-        onChange={(e) => handler(e.target.value)}
+        onChange={handler}
         className="block w-full px-4 py-2 font-normal text-slate-700 bg-stone-100 border border-stone-400 rounded-md m-0"
         placeholder={placeholder}
+        disabled={disabled}
       />
       {type === "password" && (
         <button

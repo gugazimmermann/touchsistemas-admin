@@ -1,16 +1,13 @@
-import {
-  createContext,
-  Dispatch,
-  ReactElement,
-  ReactNode,
-  useReducer,
-} from "react";
+import { Dispatch, createContext, ReactNode, ReactElement, useReducer } from "react";
+import LocalStorage from "../api/local-storage";
 import { LANGUAGES } from "../ts/enums";
-import { ContextActions, ContextStateType } from "../ts/types";
+import { AlertType, ContextActions, ContextClientType, ContextStateType } from "../ts/types";
 import { ContextReducer } from "./reducers";
 
-const initial = {
-  lang: LANGUAGES.BR,
+const initial: ContextStateType = {
+  lang: LocalStorage.GetItem("state", true)?.lang || LANGUAGES.BR,
+  client: LocalStorage.GetItem("state", true)?.client ||  {} as ContextClientType,
+  alerts: [] as AlertType[],
 };
 
 type AppContextType = {

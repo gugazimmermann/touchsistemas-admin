@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 type LinkProps = {
@@ -6,7 +7,7 @@ type LinkProps = {
   className?: string;
 };
 
-const Link = ({ to, text, className }: LinkProps) => (
+const Link = ({ to, text, className }: LinkProps): ReactElement => (
   <RouterLink
     to={to}
     className={`hover:text-primary duration-200 transition ease-in-out ${

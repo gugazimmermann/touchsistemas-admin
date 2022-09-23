@@ -1,15 +1,15 @@
-import { useContext, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LANGUAGES, CONTEXT } from "../ts/enums";
 import { AppContext } from "../context";
 import { useCloseModal } from "../helpers";
 import { ROUTES } from "../languages";
+import ArrowIcon from "../images/ArrowIcon";
 import BR from "../images/flags/br.svg";
 import EN from "../images/flags/en.svg";
 import ES from "../images/flags/es.svg";
-import ArrowIcon from "../images/ArrowIcon";
 
-const Flags = () => {
+const Flags = (): ReactElement => {
   const location = useLocation();
   const navigate = useNavigate();
   const { state, dispatch } = useContext(AppContext);

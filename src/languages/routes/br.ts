@@ -7,6 +7,7 @@ const br = {
 	DASHBOARD: '/painel-de-controle',
 	ALERTS: '/alertas',
 	PROFILE: '/perfil',
+	PROFILEADVANCED: '/perfil/avancado',
 	PAYMENTS: '/pagamentos',
 	NEW: '/cadastrar',
 	EDIT: '/editar',

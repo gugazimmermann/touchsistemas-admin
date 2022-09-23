@@ -37,7 +37,7 @@ const en = {
 			checkEmail: "Check your Email",
 			unableSendCode: "Unable to send code, email is correct?",
 			passwordSuccess: "Password changed successfully!",
-			unableRedefinePassword: "Unable to redifine password, email, code or new password are wrong!",
+			unableRedefinePassword: "Unable to redefine password, email, code or new password are wrong!",
 			unableRegister: "Unable to Register, email, code or new password are wrong!",
 			codeResent: "Code Resent, Check your Email",
 			confirmationSuccess: "Confirmation successful!",
@@ -80,7 +80,25 @@ const en = {
 		owner: 'Responsible',
 		addOwner: 'Add',
 		updateOwner: 'Update',
+		advanced: {
+			title: "My Profile - Advanced",
+			language: "Change Language",
+			changeEmail: "Change Email",
+			changeEmailSuccess: "Email changed successfully!",
+			changeEmailCode: "Please, check your email and send the code.",
+			sendCode: 'Send Code',
+			currentPassword: "Current Password",
+			newPassword: "New Password",
+			repeatNewPassword: "Repeat New Password",
+			changePassword: "Change Password",
+			changePasswordSuccess: "Password changed successfully!",
+		}
 	},
+	languages: {
+		"BR": "Portuguese",
+    "EN": "English",
+    "ES": "Spanish",
+  },
 	payments: {
 		type: {
 			monthly: 'Monthly',

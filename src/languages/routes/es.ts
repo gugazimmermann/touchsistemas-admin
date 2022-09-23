@@ -7,6 +7,7 @@ const es = {
 	DASHBOARD: '/panel-de-control',
 	ALERTS: '/alertas',
 	PROFILE: '/perfil',
+	PROFILEADVANCED: '/perfil/avanzado',
 	PAYMENTS: '/pagos',
 	NEW: '/nuevo',
 	EDIT: '/editar',

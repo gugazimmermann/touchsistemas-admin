@@ -39,6 +39,10 @@ export async function updateClient(
   return items;
 }
 
+export async function updateClientEmail(id: string, email: string): Promise<void> {
+  await API.graphql(graphqlOperation(mutations.updateClient, { input: { id, email } }));
+}
+
 export async function updateClientLogoAndMap(
   id: string,
   logo: string | null | undefined,
@@ -90,6 +94,7 @@ export async function deleteOwner(id: string): Promise<void> {
 const Mutations = {
   createClient,
   updateClient,
+  updateClientEmail,
   updateClientLogoAndMap,
   createOwner,
   updateOwner,

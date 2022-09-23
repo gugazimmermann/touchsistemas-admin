@@ -39,6 +39,11 @@ const SignOut = async (): Promise<void> => {
   await AmplifyAuth.signOut({ global: true });
 };
 
+const ChangeLanguage = async (locale: string): Promise<void> => {
+  const user = await AmplifyAuth.currentAuthenticatedUser();
+  await AmplifyAuth.updateUserAttributes(user, { locale });
+};
+
 const ChangeEmail = async (email: string): Promise<void> => {
   const user = await AmplifyAuth.currentAuthenticatedUser();
   await AmplifyAuth.updateUserAttributes(user, { email: email });
@@ -62,6 +67,7 @@ const Auth = {
   RedefinePassword,
   GetUser,
   SignOut,
+  ChangeLanguage,
   ChangeEmail,
   ConfirmChangeEmail,
   ChangePassword,

@@ -23,6 +23,7 @@ const Layout = lazy(() => import("./pages/layout/Layout"));
 const Home = lazy(() => import("./pages/home/Home"));
 const Alerts = lazy(() => import("./pages/alerts/Alerts"));
 const Profile = lazy(() => import("./pages/profile/Profile"));
+const ProfileCognito = lazy(() => import("./pages/profile/ProfileCognito"));
 
 function App() {
   const location = useLocation();
@@ -71,6 +72,7 @@ function App() {
           <Route path={ROUTES[state.lang].DASHBOARD} element={<Home />} />
           <Route path={ROUTES[state.lang].ALERTS} element={<Alerts />} />
           <Route path={ROUTES[state.lang].PROFILE} element={<Profile />} />
+          <Route path={ROUTES[state.lang].PROFILEADVANCED} element={<ProfileCognito />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

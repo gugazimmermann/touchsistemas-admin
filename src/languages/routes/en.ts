@@ -7,6 +7,7 @@ const en = {
 	DASHBOARD: '/dashboard',
 	ALERTS: '/alerts',
 	PROFILE: '/profile',
+	PROFILEADVANCED: '/perfil/advanced',
 	PAYMENTS: '/payments',
 	NEW: '/new',
 	EDIT: '/edit',

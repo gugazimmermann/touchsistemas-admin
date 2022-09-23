@@ -233,6 +233,7 @@ export default function Profile() {
       <Title
         text={LANG[state.lang].profile.title}
         back={ROUTES[state.lang].DASHBOARD}
+        advanced={ROUTES[state.lang].PROFILEADVANCED}
         className="font-bold text-center"
       />
       {error && <Alert type={ALERT.ERROR} text={errorMsg} />}
